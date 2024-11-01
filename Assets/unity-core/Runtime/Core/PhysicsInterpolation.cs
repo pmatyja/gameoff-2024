@@ -15,7 +15,7 @@ public static class PhysicsInterpolation
 
     public static void AccelerateTo(this Rigidbody body, Vector3 targetVelocity, float maxAccel)
     {
-        var deltaV = targetVelocity - body.velocity;
+        var deltaV = targetVelocity - body.linearVelocity;
         var accel = deltaV / Time.deltaTime;
 
         if (accel.sqrMagnitude > maxAccel * maxAccel)
@@ -26,7 +26,7 @@ public static class PhysicsInterpolation
 
     public static void AccelerateTo(this Rigidbody2D body, Vector2 targetVelocity, float maxAccel)
     {
-        var deltaV = targetVelocity - body.velocity;
+        var deltaV = targetVelocity - body.linearVelocity;
         var accel = deltaV;
 
         if (accel.sqrMagnitude > maxAccel * maxAccel)

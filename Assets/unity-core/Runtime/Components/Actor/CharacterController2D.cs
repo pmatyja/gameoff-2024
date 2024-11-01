@@ -223,7 +223,7 @@ public class CharacterController2D : MonoBehaviour
 
     public void VelocityChange(Vector2 force)
     {
-        this.PhysicsBody.velocity = force;
+        this.PhysicsBody.linearVelocity = force;
     }
 
     public void Jump(bool isPressed)
@@ -253,9 +253,9 @@ public class CharacterController2D : MonoBehaviour
             this.Jumped?.Invoke();
 // END_DIVERGENCE | owen
             
-            this.PhysicsBody.velocity = new Vector2
+            this.PhysicsBody.linearVelocity = new Vector2
             (
-                this.PhysicsBody.velocity.x,
+                this.PhysicsBody.linearVelocity.x,
                 PhysicsInterpolation.GetJumpForceWeight(this.jumpForce)
             );
 
@@ -333,10 +333,10 @@ public class CharacterController2D : MonoBehaviour
             {
                 if (this.velocity.y > 0.0f)
                 {
-                    this.PhysicsBody.velocity = new Vector2
+                    this.PhysicsBody.linearVelocity = new Vector2
                     (
-                        this.PhysicsBody.velocity.x,
-                        this.PhysicsBody.velocity.y - this.fallingForce * Mathf.Pow(Physics2D.gravity.y, 2) * Time.fixedDeltaTime
+                        this.PhysicsBody.linearVelocity.x,
+                        this.PhysicsBody.linearVelocity.y - this.fallingForce * Mathf.Pow(Physics2D.gravity.y, 2) * Time.fixedDeltaTime
                     );
                 }
             }
@@ -384,13 +384,13 @@ public class CharacterController2D : MonoBehaviour
 
         // Velocity limits
 
-        this.PhysicsBody.velocity = new Vector2
+        this.PhysicsBody.linearVelocity = new Vector2
         (
-            Mathf.Clamp(this.PhysicsBody.velocity.x, -this.maxHorizontalVelocity, this.maxHorizontalVelocity),
-            Mathf.Clamp(this.PhysicsBody.velocity.y, -this.maxVerticalVelocity, this.maxVerticalVelocity)
+            Mathf.Clamp(this.PhysicsBody.linearVelocity.x, -this.maxHorizontalVelocity, this.maxHorizontalVelocity),
+            Mathf.Clamp(this.PhysicsBody.linearVelocity.y, -this.maxVerticalVelocity, this.maxVerticalVelocity)
         );
 
-        this.velocity = this.PhysicsBody.velocity;
+        this.velocity = this.PhysicsBody.linearVelocity;
 
         // Apply animation properties
 
