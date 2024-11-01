@@ -13,7 +13,7 @@ public class ParalaxEffect : MonoBehaviour
     {
         if (this.cameraObject == null)
         {
-            this.cameraObject       = UnityEngine.GameObject.FindObjectOfType<Camera>();
+            this.cameraObject       = UnityEngine.GameObject.FindAnyObjectByType<Camera>();
             this.lastCameraPosition = this.cameraObject.transform.position;
 
         }
