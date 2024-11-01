@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efb6b92b965572249a543c79430e2855, type: 3}
+  m_Name: AMB Ambient Day
+  m_EditorClassIdentifier: 
+  priority: 0
+  Resource:
+    rid: 431543619418324992
+  references:
+    version: 2
+    RefIds:
+    - rid: 431543619418324992
+      type: {class: UnityAudioResource, ns: , asm: Lavgine.Core}
+      data:
+        Clip: {fileID: 8300000, guid: f2abe7f89e1dc3c4bb08bcf9e5bb58e1, type: 3}

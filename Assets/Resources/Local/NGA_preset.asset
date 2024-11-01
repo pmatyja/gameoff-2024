@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa4d7493c3ae7d43a4af2db03e9c6b8, type: 3}
+  m_Name: NGA_preset
+  m_EditorClassIdentifier: 
+  AllowDiagonal: 1
+  WalkableLayers:
+    serializedVersion: 2
+    m_Bits: 17
+  minHeight: 1
+  maxDropHeight: 2
+  firstDropCostModifier: 1
+  dropCostModifier: 1.1
+  maxClimbHeight: 1
+  firstClimbCostModifier: 1.1
+  climbCostModifier: 2
+  maxJumpDistance: 2
+  jumpCostModifier: 1.5
+  distanceWeight: 1
+  costWeight: 0.35

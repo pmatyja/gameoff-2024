@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:GroupBox name="Choice" class="choice">
+        <ui:Label text="\ue836 Choice" display-tooltip-when-elided="true" name="Content" enable-rich-text="true" class="choice-text" />
+    </ui:GroupBox>
+</ui:UXML>

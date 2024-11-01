@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1805428c3a4a21c42b25ab3ca8d41788, type: 3}
+  m_Name: TRA_English
+  m_EditorClassIdentifier: 
+  Translations:
+  - name: player
+    value: Player
+  - name: notification_location_discovered
+    value: Location Discovered
+  - name: notification_objective_activate
+    value: New Objective
+  - name: notification_objective_failed
+    value: Objective Failed
+  - name: notification_objective_succeeded
+    value: Objective Finished
+  - name: notification_quest_failed
+    value: Quest Failed
+  - name: notification_quest_start
+    value: New Quest
+  - name: notification_quest_succeeded
+    value: Quest Finished
+  - name: quest_test
+    value: Main quest

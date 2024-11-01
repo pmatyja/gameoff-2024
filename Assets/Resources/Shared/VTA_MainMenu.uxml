@@ -1,0 +1,56 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/Shared/STS_MainMenu.uss?fileID=7433441132597879392&amp;guid=1489d76e612f6364f84f7672c2ec9b1a&amp;type=3#STS_MainMenu" />
+    <ui:VisualElement name="Root" style="width: 100%; height: 100%; background-image: resource(&apos;Local/Game Splash Art 1080x1920&apos;); -unity-font-definition: resource(&apos;Shared/FNA_base&apos;); -unity-background-scale-mode: scale-and-crop;">
+        <ui:VisualElement name="Background" class="background" style="opacity: 0; background-image: none;" />
+        <ui:VisualElement name="Logo" class="logo" style="background-image: url(&quot;project://database/Assets/Art/scalerunner%20title.png?fileID=2800000&amp;guid=3769666eb92ecd6488bf64a05a451f87&amp;type=3#scalerunner title&quot;); width: 375px; height: 85px; left: 5%; position: absolute; bottom: 5%;" />
+        <ui:VisualElement name="MainMenu" style="flex-grow: 1;">
+            <ui:GroupBox name="LogoAnchor" class="logo-anchor" style="margin-left: -70%; margin-bottom: -10%; margin-top: 40%;">
+                <ui:Label text="Metal Bear Liquid" display-tooltip-when-elided="true" style="-unity-font: none; font-size: 64px; -unity-text-align: middle-center; left: -50%; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-font-definition: resource(&apos;Fonts/Robot9000-MVxZx SDF 1&apos;); text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);" />
+            </ui:GroupBox>
+            <ui:GroupBox name="Page" class="root">
+                <ui:GroupBox name="Main" class="subpage page" style="-unity-background-scale-mode: stretch-to-fill; visibility: visible;">
+                    <ui:GroupBox name="Menu" class="menu page-menu">
+                        <ui:GroupBox name="Menu-Start" class="button button-start">
+                            <ui:Label text="Start" display-tooltip-when-elided="true" />
+                        </ui:GroupBox>
+                        <ui:GroupBox name="Menu-Credits" class="button button-credits">
+                            <ui:Label text="Credits" display-tooltip-when-elided="true" />
+                        </ui:GroupBox>
+                        <ui:GroupBox name="Menu-Exit" class="button button-exit">
+                            <ui:Label text="Exit" display-tooltip-when-elided="true" />
+                        </ui:GroupBox>
+                    </ui:GroupBox>
+                </ui:GroupBox>
+                <ui:GroupBox name="Credits" focusable="true" class="subpage page" style="opacity: 1; display: none; background-color: rgba(0, 0, 0, 0.9);">
+                    <ui:GroupBox name="Content" class="page-content credits-section" style="display: flex;">
+                        <ui:GroupBox name="Item" class="credits-item">
+                            <ui:Label text="Lead Programmer&#10;AI Programmer" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                            <ui:Label text="Piotr Matyja" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                        </ui:GroupBox>
+                        <ui:GroupBox name="Item" class="credits-item">
+                            <ui:Label text="Sound Designer&#10;Programmer&#10;Level Designer" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                            <ui:Label text="Owen Cooper" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                        </ui:GroupBox>
+                        <ui:GroupBox name="Item" class="credits-item">
+                            <ui:Label text="Music Composer&#10;Sound Designer" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                            <ui:Label text="Catherine Bevan" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                        </ui:GroupBox>
+                        <ui:GroupBox name="Item" class="credits-item">
+                            <ui:Label text="Artist" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                            <ui:Label text="Liana Del Castillo" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                        </ui:GroupBox>
+                        <ui:GroupBox name="Item" class="credits-item">
+                            <ui:Label text="Artist" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                            <ui:Label text="Moss" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                        </ui:GroupBox>
+                    </ui:GroupBox>
+                    <ui:GroupBox name="Menu" class="menu page-menu">
+                        <ui:GroupBox name="Menu-Back" class="button button-back button-selected">
+                            <ui:Label text="Back" display-tooltip-when-elided="true" />
+                        </ui:GroupBox>
+                    </ui:GroupBox>
+                </ui:GroupBox>
+            </ui:GroupBox>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

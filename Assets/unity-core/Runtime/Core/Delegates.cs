@@ -1,0 +1,1 @@
+﻿public delegate bool TryParseDelegate<TInput, TOutput>(TInput input, out TOutput output);

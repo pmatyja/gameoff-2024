@@ -1,0 +1,237 @@
+* {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    font-size: 12px;
+    -unity-text-outline-color: black;
+    -unity-font-definition: resource("Shared/FNA_base");
+}
+
+:root {
+    --text-color:                           rgb(255, 255, 255);
+    --text-disabled-color:                  rgb(125, 125, 125);
+    --background-color:                     rgba(0, 0, 0, 0.8);
+    --border-radius:                        2px;
+
+    --primary-text-color:                   black;
+    --primary-color:                        rgb(255, 202, 0);
+    
+    --bold-font:                            resource("Shared/FNA_extra_bold");
+
+    --quest-text-color:                     rgb(255, 202, 0);
+    /*--quest-background-color:               rgba(0, 0, 0, 0.8);*/
+    --quest-outline:                        0.5px;
+    --quest-style:                          bold;
+    --objective-outline:                    0.5px;
+    --objective-style:                      bold;
+    
+    --binding-text-color:                   black;
+    --binding-background-color:             rgb(255, 202, 0);
+    
+    --choice-primary-text-color:            black;
+    --choice-primary-background-color:      rgb(255, 202, 0);
+
+    --choice-secondary-text-color:          black;
+    --choice-secondary-background-color:    rgb(255, 255, 255);
+
+    --choice-text-color:                    rgb(255, 255, 255);
+    --choice-text-locked-color:             rgb(128, 128, 128);
+    --choice-background-color:              rgba(0, 0, 0, 0.8);
+}
+
+/*
+    Input bindings
+*/
+
+.bindings {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    flex-direction: row;
+}
+
+.binding {
+    margin: 4px;
+}
+
+.binding-input {
+    padding: 2px 4px;
+    font-size: 80%;
+    -unity-font-style: bold;
+    color: var(--primary-text-color);
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius) 0px 0px var(--border-radius);
+}
+
+.binding-label {
+    padding: 0 8px;
+    font-size: 80%;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border-radius: 0px var(--border-radius) var(--border-radius) 0px;
+}
+
+/*
+    Quest Tracker
+*/
+
+.quest-tracker {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
+.quest-tracker-quest {
+    max-width: 256px;
+    margin-bottom: 4px;
+
+    padding: 0px 5px 3px 5px;
+    border-radius: var(--border-radius);
+    background-color: var(--quest-background-color);
+}
+
+.quest-tracker-quest-header {
+    margin-bottom: 1px;
+    font-size: 110%;
+    color: var(--quest-text-color);
+    -unity-font-style: var(--quest-style);
+    -unity-text-outline-width: var(--quest-outline);
+    text-shadow: 0.5px 0.5px 0px black;
+}
+
+.quest-tracker-objective {
+    margin-top: -3px;
+    margin-left: 16.5px;
+    font-size: 90%;
+    color: var(--text-color);
+    -unity-font-style: var(--objective-style);
+    -unity-text-outline-width: var(--objective-outline);
+    text-shadow: 0.5px 0.5px 0px black;
+}
+
+/*
+    Dialog System
+*/
+
+.dialog-system {
+    position: relative;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.dialog {
+    align-items: center;
+    margin-bottom: 50px;
+    max-width: 800px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+}
+
+.dialog-text {
+    max-width: 100%;
+    white-space: normal;
+    -unity-text-align: upper-center;
+}
+
+/*
+    Choices
+*/
+
+.choices {
+    margin-bottom: 6px;
+    width: 500px;
+    min-width: 500px;
+    max-width: 500px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    /* forces choice to be in 1 horizontal column */
+    /*flex-direction: column;*/
+}
+
+.choice {
+    width: 244px;
+    margin: 2px;
+    padding: 3px 6px 3px 6px;
+    flex-direction: row;
+    color: var(--choice-text-color);
+    background-color: var(--choice-background-color);
+    border-radius: var(--border-radius);
+}
+
+.choice-text {
+    -unity-text-align: middle-left;
+}
+
+.choice-selected {
+}
+
+.choice-locked {
+    color: var(--choice-text-locked-color);
+}
+
+.choice.choice-selected {
+    color: var(--choice-secondary-text-color);
+    background-color: var(--choice-secondary-background-color);
+}
+
+.choice-primary {
+    color: var(--choice-primary-background-color);
+}
+
+.choice-primary.choice-selected {
+    color: var(--choice-primary-text-color);
+    background-color: var(--choice-primary-background-color);
+}
+
+/*
+    Notification System
+*/
+
+.notification-system {
+    top: 64px;
+    align-items: center;
+}
+
+.notification {
+    width: 480px;
+    align-items: center;
+    -unity-text-align: upper-center;
+}
+
+.notification-title {
+    width: 100%;
+    margin-bottom: -6px;
+    font-size: 130%;
+    white-space: normal;
+    color: var(--text-color);
+    -unity-font-definition: var(--bold-font);
+    -unity-font-style: bold;
+    -unity-text-outline-width: 1px;
+    text-shadow: 0.8px 0.8px 0px black;
+}
+
+.notification-content {
+    width: 100%;
+    font-size: 220%;
+    white-space: normal;
+    color: var(--primary-color);
+    -unity-font-definition: var(--bold-font);
+    -unity-font-style: bold;
+    -unity-text-outline-width: 1px;
+    text-shadow: 0.8px 0.8px 0px black;
+}

@@ -1,0 +1,63 @@
+###
+# Unity folders and files
+###
+[Aa]ssets/AssetStoreTools*
+[Bb]uild/
+[Ll]ibrary/
+[Ll]ogs/
+[Tt]emp/
+[Ll]ocal[Cc]ache/
+[Oo]bj/
+[Uu]ser[Ss]ettings/
+[Bb]uilds
+.vs/
+
+# package specific ignores
+Assembly-CSharp-Editor.csproj.meta
+Assembly-CSharp-Editor.csproj.user.meta
+Assembly-CSharp.csproj.meta
+Assembly-CSharp.csproj.user.meta
+Assembly-CSharp.Player.csproj.meta
+Assembly-CSharp.Player.csproj.user.meta
+Lavgine.sln
+Lavgine.sln.meta
+
+[Uu]nityGenerated/
+# file on crash reports
+sysinfo.txt
+# Unity3D generated meta files
+*.pidb.meta
+*.wlt
+
+###
+# VS/MD solution and project files
+###
+[Ee]xportedObj/
+[Tt]emp/
+obj/
+*.booproj
+*.sln
+*.csproj
+*.sln
+*.sln.meta
+*.suo
+*.svd
+*.unityproj
+*.user
+*.userprefs
+*.pidb
+.DS_Store
+
+###
+# OS generated
+###
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+.idea
+.vscode

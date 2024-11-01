@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/Shared/STS_Gameplay.uss?fileID=7433441132597879392&amp;guid=047b32b19f0516141810f549058bab38&amp;type=3#STS_Gameplay" />
+    <ui:VisualElement name="Quest" class="quest-tracker-quest">
+        <ui:Label text="GamGam House" display-tooltip-when-elided="true" name="Content" class="quest-tracker-quest-header" />
+    </ui:VisualElement>
+</ui:UXML>

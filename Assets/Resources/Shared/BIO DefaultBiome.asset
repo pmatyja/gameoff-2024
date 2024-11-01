@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a231c571288998449036a63a3bb1a86, type: 3}
+  m_Name: BIO DefaultBiome
+  m_EditorClassIdentifier: 
+  AmbientDay: {fileID: 11400000, guid: ae46fdfa1cdbb1140ace064467202bf8, type: 2}
+  AmbientNight: {fileID: 11400000, guid: d77db5dd81159b44d9013f354e65208f, type: 2}
+  Temperature:
+    TemperatureCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 4
+        outSlope: 4
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.5
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.5
+        outWeight: 0.67
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -4
+        outSlope: -4
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    dailyTemperatureRange: 20
+    yearlyMinTemperature: -20
+    yearlyMaxTemperature: 15
+    temperatureDeviationFrequency: 20
+    temperatureDeviationRange: 10
+  Evaporation:
+    evaporationMultiplier: 1
+    temperatureEvaporationMultiplier: 1
+    humidityEvaporationMultiplier: 0.1
+    windIntensityEvaporationMultiplier: 0.1
+    transpiration: 0.1
+  Wind:
+    windIntensityFrequency: 20
+    windIntensityMultiplier: 1
+    windDirectionFrequency: 10

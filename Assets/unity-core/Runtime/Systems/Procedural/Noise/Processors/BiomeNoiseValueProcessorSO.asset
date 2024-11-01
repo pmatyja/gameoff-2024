@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f1e22733abeca44591510654408dc6d, type: 3}
+  m_Name: BiomeNoiseValueProcessorSO
+  m_EditorClassIdentifier: 
+  Processor:
+    ElevationGroup1: 0.1
+    Ocean: 0
+    ElevationGroup2: 0.12
+    Beach: 1
+    ElevationGroup3: 0.8
+    Scorched: 2
+    Bare: 3
+    Tundra: 4
+    Snow: 5
+    ElevationGroup4: 0.6
+    TemperateDesert: 6
+    Shrubland: 7
+    Taiga: 8
+    ElevationGroup5: 0.3
+    Grassland: 9
+    TemperateDeciduousForset: 10
+    TemperateRainForest: 11
+    SubtropicalDesert: 12
+    TropicalSeasonalForest: 13
+    TropicalRainForest: 14

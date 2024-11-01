@@ -1,0 +1,26 @@
+{
+  "name": "com.lavgine.lavgine",
+  "version": "10.0.0",
+  "displayName": "Lavgine",
+  "description": "Lavgine Unity Core",
+  "unity": "2021.3",
+  "unityRelease": "11f1",
+  "documentationUrl": "https://github.com/pmatyja/unity-core/blob/master/README.md",
+  "changelogUrl": "https://github.com/pmatyja/unity-core/blob/master/CHANGELOG.md",
+  "licensesUrl": "https://github.com/pmatyja/unity-core/blob/master/LICENSE",
+  "dependencies": {
+    "com.unity.editorcoroutines": "1.0.0",
+    "com.unity.inputsystem": "1.4.3",
+    "com.unity.ai.navigation": "1.1.1"
+  },
+  "keywords": [
+    "lavgine",
+    "unity",
+    "core"
+  ],
+  "author": {
+    "name": "Piotr Matyja",
+    "email": "peter.matyja@gmail.com",
+    "url": "https://github.com/pmatyja"
+  }
+}

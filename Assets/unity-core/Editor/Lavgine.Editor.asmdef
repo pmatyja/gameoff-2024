@@ -1,0 +1,20 @@
+{
+    "name": "Lavgine.Editor",
+    "rootNamespace": "Lavgine",
+    "references": [
+        "Unity.EditorCoroutines.Editor",
+        "Unity.InputSystem",
+        "Lavgine.Core"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

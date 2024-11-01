@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/Shared/STS_PauseMenu.uss?fileID=7433441132597879392&amp;guid=71b523341c5ed8b47b5ea92cd85d8ee1&amp;type=3#PauseMenu" />
+    <ui:VisualElement name="Root" class="background">
+        <ui:GroupBox name="Center" class="page" style="position: absolute;">
+            <ui:GroupBox name="Modal" class="modal">
+                <ui:VisualElement name="Content" />
+                <ui:GroupBox name="MainMenu" focusable="true" class="button button-exit">
+                    <ui:Label text="Back to Main Menu" display-tooltip-when-elided="true" />
+                </ui:GroupBox>
+                <ui:GroupBox name="Close" focusable="true" class="button button-exit">
+                    <ui:Label text="Close" display-tooltip-when-elided="true" />
+                </ui:GroupBox>
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

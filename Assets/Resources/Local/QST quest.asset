@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45c9e18e96327b4f9f485d27884926a, type: 3}
+  m_Name: QST quest
+  m_EditorClassIdentifier: 
+  Name: 
+  Description: '{{player}}'
+  FinishOnLastObjective: 1
+  Objectives:
+  - {fileID: 11400000, guid: 798b4ab00dffe8f4886d5bb3f953c386, type: 2}
+  - {fileID: 11400000, guid: fbe694f5f51fc5447b12acc406713fe1, type: 2}
+  OnSuccess:
+    rid: 431543516134637585
+  OnFail:
+    rid: 431543516134637592
+  references:
+    version: 2
+    RefIds:
+    - rid: 431543516134637585
+      type: {class: NodeGraph, ns: , asm: Lavgine.Core}
+      data:
+        id: fc4e2a88-7fd8-4281-932c-0aea90e93342
+        editorPosition: {x: 0, y: 0, z: 0}
+        editorScale: {x: 1, y: 1, z: 1}
+        nodes:
+        - Id: 5f9a6fa6-b9c0-4490-a8ff-198622c60820
+          Position: {x: 32, y: 32}
+          Type: 
+          Properties:
+            rid: 431543589102157854
+        connections: []
+    - rid: 431543516134637592
+      type: {class: NodeGraph, ns: , asm: Lavgine.Core}
+      data:
+        id: 8a7cc9db-9bad-40d3-842c-5e9be8ea8b61
+        editorPosition: {x: 0, y: 0, z: 0}
+        editorScale: {x: 1, y: 1, z: 1}
+        nodes:
+        - Id: 9cbf83a6-8a88-4b48-ab91-3263d3994cab
+          Position: {x: 32, y: 32}
+          Type: 
+          Properties:
+            rid: 431543589102157855
+        connections: []
+    - rid: 431543589102157854
+      type: {class: StartNode, ns: , asm: Lavgine.Core}
+      data:
+        IsCutscene: 0
+    - rid: 431543589102157855
+      type: {class: StartNode, ns: , asm: Lavgine.Core}
+      data:
+        IsCutscene: 0

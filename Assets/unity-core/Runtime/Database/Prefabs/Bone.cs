@@ -1,0 +1,25 @@
+public enum Bone
+{
+    Parent,
+    Root,
+        Hips,
+        Spine_01,
+            UpperLeg_L,
+                LowerLeg_L,
+                    Ankle_L,
+            UpperLeg_R,
+                LowerLeg_R,
+                    Ankle_R,
+        Spine_02,
+            Spine_03,
+                Clavicle_L,
+                    Shoulder_L,
+                        Elbow_L,
+                            Hand_L,
+                Clavicle_R,
+                    Shoulder_R,
+                        Elbow_R,
+                            Hand_R,
+                Neck,
+                    Head
+}
