@@ -52,7 +52,13 @@ namespace OCSFX.Generics
         {
             if (_instance) return _instance;
             
-            var existingInstance = FindObjectOfType<T>();
+            var existingInstance = 
+#if UNITY_6000_0_OR_NEWER
+                FindFirstObjectByType<T>();
+#else
+                FindObjectOfType<T>();
+#endif
+            
             if (existingInstance)
             {
                 _instance = existingInstance;

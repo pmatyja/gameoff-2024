@@ -57,7 +57,13 @@ namespace OCSFX.FMOD
             eventDesc.is3D(out var is3D);
             if (is3D)
             {
-                var listener3dAttributes = Object.FindObjectOfType<StudioListener>().transform.To3DAttributes();
+                var listener3dAttributes = 
+#if UNITY_6000_0_OR_NEWER
+                    Object.FindFirstObjectByType<StudioListener>().transform.To3DAttributes();
+#else
+                    Object.FindObjectOfType<StudioListener>().transform.To3DAttributes();
+#endif
+                
                 newInstance.set3DAttributes(listener3dAttributes);
             }
 
