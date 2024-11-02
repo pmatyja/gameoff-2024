@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{a83918e5-cb3b-4271-bbbd-3aa70fe5c86b}">
+		<property name="name">
+			<value>Volume_AMB</value>
+		</property>
+		<relationship name="folder">
+			<destination>{235cc5b9-c5fa-464a-8b92-7e43e5a65d23}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{c93ef448-8d04-4cac-a010-1702b0958e0e}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{c93ef448-8d04-4cac-a010-1702b0958e0e}">
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>1</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

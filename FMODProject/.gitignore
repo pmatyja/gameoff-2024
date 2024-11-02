@@ -1,0 +1,10 @@
+# Don't ignore the Build folder in the FMOD project.
+!/**/Build/
+
+# Ignore .cache, .user and .unsaved folders in FMOD project.
+/**/.cache
+/**/.unsaved
+/**/.user
+
+# Ignore Profiler Sessions
+/**/Metadata/ProfilerSession/

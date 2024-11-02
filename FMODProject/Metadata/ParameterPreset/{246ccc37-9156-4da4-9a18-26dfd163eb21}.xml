@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{246ccc37-9156-4da4-9a18-26dfd163eb21}">
+		<property name="name">
+			<value>mx_placeholder_vertical</value>
+		</property>
+		<relationship name="folder">
+			<destination>{2b524020-c6cf-4cef-ac1e-2cf90630316f}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{3925c972-e62f-4297-a345-24a866f1e55b}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{3925c972-e62f-4297-a345-24a866f1e55b}">
+		<property name="minimum">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>1</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{df8e8cb6-016f-4a60-964d-21e28d5e893c}">
+		<property name="name">
+			<value>mx_placeholder_horizontal</value>
+		</property>
+		<relationship name="folder">
+			<destination>{2b524020-c6cf-4cef-ac1e-2cf90630316f}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{398bfa5d-7b86-40b8-b1f7-28846d6eaf3a}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{398bfa5d-7b86-40b8-b1f7-28846d6eaf3a}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>6</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Int1</value>
+			<value>Int2</value>
+			<value>Int3</value>
+			<value>Int4</value>
+			<value>Int5</value>
+			<value>Int5_transition</value>
+		</property>
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>4</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

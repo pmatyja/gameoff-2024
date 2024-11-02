@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{1bec6a11-e2ea-4092-9d49-15dd1d0e5407}">
+		<property name="name">
+			<value>MX_SafeRoom</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{7178ab31-7e46-4fc5-afa9-6373a234747a}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{55506e9e-3901-4d73-84cb-7e2394805646}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{783853e1-6e27-4790-a3d2-998f040ced92}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{7178ab31-7e46-4fc5-afa9-6373a234747a}">
+		<relationship name="effects">
+			<destination>{4196cd35-9323-4f49-8ff5-2ea09bec57e3}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{55506e9e-3901-4d73-84cb-7e2394805646}" />
+	<object class="MixerBusFader" id="{4196cd35-9323-4f49-8ff5-2ea09bec57e3}" />
+</objects>

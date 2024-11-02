@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{de2456ce-7e88-4570-bd95-b7fb1332b177}">
+		<property name="name">
+			<value>SafeRoomMix</value>
+		</property>
+		<relationship name="folder">
+			<destination>{2b524020-c6cf-4cef-ac1e-2cf90630316f}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{4fd75a75-364b-4b0f-9664-75d0d009383d}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{4fd75a75-364b-4b0f-9664-75d0d009383d}">
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
