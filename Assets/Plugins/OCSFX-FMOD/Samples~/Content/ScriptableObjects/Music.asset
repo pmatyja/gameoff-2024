@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6153644263a388342993177a753225c7, type: 3}
+  m_Name: Music
+  m_EditorClassIdentifier: 
+  _musicMainMenu:
+    Guid:
+      Data1: -1459801491
+      Data2: 1271157110
+      Data3: -1944096345
+      Data4: -1029435953
+    Path: event:/MX/_MAIN/mx_mainMenu
+  _musicGameplay:
+    Guid:
+      Data1: -1419141024
+      Data2: 1129934530
+      Data3: -1999025502
+      Data4: 1998744233
+    Path: event:/MX/_MAIN/mx_gameplay_quest
+  _musicEndScreen:
+    Guid:
+      Data1: -795787501
+      Data2: 1339841917
+      Data3: -1033739117
+      Data4: -1671737137
+    Path: event:/MX/_MAIN/mx_endScreen
+  _musicPlaceholder:
+    Guid:
+      Data1: -700122644
+      Data2: 1281049843
+      Data3: -1537756747
+      Data4: -1144654302
+    Path: event:/MX/z_temp/mx_character_twins
+  _musicPlaceholderHorizontalParam: mx_placeholder_horizontal
+  _musicPlaceholderVerticalParam: mx_placeholder_vertical

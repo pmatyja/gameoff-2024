@@ -1,0 +1,207 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5097742136684402603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8836575119708586795}
+  - component: {fileID: 7011063476094992024}
+  - component: {fileID: 4959973056717919816}
+  - component: {fileID: 4295568687500488408}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8836575119708586795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5097742136684402603}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7011063476094992024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5097742136684402603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40da3cae231ace8458dfa82f666d116e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dontDestroyOnLoad: 1
+  _volumeSettings: {fileID: 11400000, guid: c5c1f4b9ada19e541955fe769b3e795f, type: 2}
+  _banksAudioData: {fileID: 11400000, guid: 585b915202ba5c74e917951cb404763c, type: 2}
+  _snapshotsAudioData: {fileID: 11400000, guid: bda21a91b70cb5b4394796f544c52b23, type: 2}
+  _ambienceAudioData: {fileID: 11400000, guid: 483bd773922f2544992fd3c6352c5991, type: 2}
+  _musicAudioData: {fileID: 11400000, guid: e350e6e231b82354c8640cb991054e29, type: 2}
+  _dialogueAudioData: {fileID: 11400000, guid: 639f64ba4e769af45b8777b28ed0eb05, type: 2}
+  _uiAudioData: {fileID: 11400000, guid: f9357b3952d9e204a99932ce5ee8090d, type: 2}
+  _testGameObject: {fileID: 5097742136684402603}
+  _testEventRef:
+    Guid:
+      Data1: -241617314
+      Data2: 1240376142
+      Data3: -236158022
+      Data4: 77835046
+    Path: event:/Debug/sx_debug_mixTest_pinkNoise
+  _playTestEventOnStart: 0
+  _showDebug: 1
+--- !u!114 &4959973056717919816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5097742136684402603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25efd0fd807ecd449bd94690b30ca25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _musicAudioData: {fileID: 11400000, guid: e350e6e231b82354c8640cb991054e29, type: 2}
+  _volumeSettings: {fileID: 11400000, guid: c5c1f4b9ada19e541955fe769b3e795f, type: 2}
+  _musicVolumeParamName: Volume_MX
+  _resetParametersOnEnable: 1
+  _mute: 0
+  _onStartupBanksLoaded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: e350e6e231b82354c8640cb991054e29, type: 2}
+        m_TargetAssemblyTypeName: OCSFX.FMOD.AudioData.MusicAudioDataSO, OCSFX.FMOD
+        m_MethodName: MusicEventPlay
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainMenu
+          m_BoolArgument: 0
+        m_CallState: 2
+  _sceneUnityEvents:
+  - _sceneName: MainMenu
+    _onSceneLoaded:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: e350e6e231b82354c8640cb991054e29, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.FMOD.Components.MusicPlayer, OCSFX.FMOD
+          m_MethodName: MusicEventPlay
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: MainMenu
+            m_BoolArgument: 0
+          m_CallState: 2
+    _onSceneUnloaded:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: e350e6e231b82354c8640cb991054e29, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.FMOD.AudioData.MusicAudioDataSO, OCSFX.FMOD
+          m_MethodName: MusicEventStop
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: MainMenu
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _sceneName: Game
+    _onSceneLoaded:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: e350e6e231b82354c8640cb991054e29, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.FMOD.Components.MusicPlayer, OCSFX.FMOD
+          m_MethodName: MusicEventPlay
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Game
+            m_BoolArgument: 0
+          m_CallState: 2
+    _onSceneUnloaded:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: e350e6e231b82354c8640cb991054e29, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.FMOD.AudioData.MusicAudioDataSO, OCSFX.FMOD
+          m_MethodName: MusicEventStop
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Game
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _sceneName: Ending
+    _onSceneLoaded:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: e350e6e231b82354c8640cb991054e29, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.FMOD.Components.MusicPlayer, OCSFX.FMOD
+          m_MethodName: MusicEventPlay
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Ending
+            m_BoolArgument: 0
+          m_CallState: 2
+    _onSceneUnloaded:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: e350e6e231b82354c8640cb991054e29, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.FMOD.AudioData.MusicAudioDataSO, OCSFX.FMOD
+          m_MethodName: MusicEventStop
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Ending
+            m_BoolArgument: 0
+          m_CallState: 2
+  _showDebug: 0
+--- !u!114 &4295568687500488408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5097742136684402603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43c6b9f617325b5428fb6fc76146ea42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tensionParam: {fileID: 11400000, guid: 756e216cb866c674ebde3f2a244200a1, type: 2}
+  _healthParam: {fileID: 11400000, guid: 549bee6f0d973084399a826cfad680b2, type: 2}

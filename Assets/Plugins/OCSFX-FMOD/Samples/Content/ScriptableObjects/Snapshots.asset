@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a998586c805fe1f4697bca60ed32fb97, type: 3}
+  m_Name: Snapshots
+  m_EditorClassIdentifier: 
+  _onStartupBanksLoaded:
+    m_PersistentCalls:
+      m_Calls: []
+  _showDebug: 0
+  _states:
+  - _name: None
+    _eventRef:
+      Guid:
+        Data1: -1095542441
+        Data2: 1136431929
+        Data3: -353398356
+        Data4: 1181245032
+      Path: snapshot:/Main
+  - _name: Silence
+    _eventRef:
+      Guid:
+        Data1: -301274574
+        Data2: 1130587539
+        Data3: -819447655
+        Data4: -1866421122
+      Path: snapshot:/Silence
+  - _name: Dialog
+    _eventRef:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+  - _name: PauseMenu
+    _eventRef:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+  - _name: MainMenu
+    _eventRef:
+      Guid:
+        Data1: 434582551
+        Data2: 1102255093
+        Data3: -994659923
+        Data4: 383923625
+      Path: snapshot:/MainMenu
+  - _name: Narration
+    _eventRef:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+  _reverbs:
+  - _name: None
+    _eventRef:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+  - _name: Interior_SmallRoom
+    _eventRef:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+  - _name: Interior_MediumRoom
+    _eventRef:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+  - _name: Interior_LargeRoom
+    _eventRef:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+  - _name: Interior_Hallway
+    _eventRef:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+  - _name: Exterior
+    _eventRef:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 

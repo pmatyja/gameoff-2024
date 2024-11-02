@@ -1,0 +1,36 @@
+{
+  "name": "com.owencoopersfx.ocsfx-fmod",
+  "version": "1.4.5",
+  "displayName": "OCSFX FMOD",
+  "description": "OwenCooperSFX templates for FMOD integration tools and extensions.\nRequires FMOD integration.\nCreated using Unity 2021.3.8 and FMODUnity package 2.02.07.",
+  "unity": "2021.3",
+  "unityRelease": "8f1",
+  "keywords": [
+    "owencoopersound",
+    "owen",
+    "cooper",
+    "ocsfx",
+    "ocsfx-fmod",
+    "fmod",
+    "sound",
+    "audio"
+  ],
+  "author": {
+    "name": "Owen Cooper",
+    "email": "owencoopersfx@gmail.com",
+    "url": "https://www.owencoopersound.com"
+  },
+  "type": "library",
+  "samples": [
+    {
+      "displayName": "Scripts",
+      "description": "Scripts",
+      "path": "Samples~/Scripts"
+    },
+    {
+      "displayName": "Content",
+      "description": "Prefabs, ScriptableObjects",
+      "path": "Samples~/Content"
+    }
+  ]
+}

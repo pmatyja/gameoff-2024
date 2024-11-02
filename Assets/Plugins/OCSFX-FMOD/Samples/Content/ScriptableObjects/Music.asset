@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6153644263a388342993177a753225c7, type: 3}
+  m_Name: Music
+  m_EditorClassIdentifier: 
+  _onStartupBanksLoaded:
+    m_PersistentCalls:
+      m_Calls: []
+  _showDebug: 0
+  _events:
+  - _name: MainMenu
+    _eventRef:
+      Guid:
+        Data1: -180729414
+        Data2: 1139879076
+        Data3: 1143118268
+        Data4: -1731621912
+      Path: event:/MX/mx_prepRoom
+  - _name: Game
+    _eventRef:
+      Guid:
+        Data1: 484486457
+        Data2: 1325990064
+        Data3: -1513834865
+        Data4: 880199816
+      Path: event:/MX/mx_main
+  - _name: SafeRoom
+    _eventRef:
+      Guid:
+        Data1: -180729414
+        Data2: 1139879076
+        Data3: 1143118268
+        Data4: -1731621912
+      Path: event:/MX/mx_prepRoom
+  - _name: GameOver
+    _eventRef:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
+  - _name: Ending
+    _eventRef:
+      Guid:
+        Data1: -180729414
+        Data2: 1139879076
+        Data3: 1143118268
+        Data4: -1731621912
+      Path: event:/MX/mx_prepRoom
+  _globalParameters:
+  - _parameter: MusicParamVertical
+    _value: 0
+  - _parameter: MusicParamHorizontal
+    _value: 0
