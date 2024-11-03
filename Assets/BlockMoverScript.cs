@@ -142,6 +142,8 @@ public class BlockMoverScript : MonoBehaviour
             yield return null;
         }
 
+        EventBus.Raise<OnBlockMoveFinishedEventParameters>(this, default);
+
         this.direction = NegateDirection(this.direction);
         this.coroutine = null;
     }
