@@ -86,6 +86,31 @@ public class IsometricCameraController : BaseCamera
     [Range(0.0f, 1.0f)]
     private float zoomSmoothness = 0.015625f;
 
+    [Header("Input")]
+
+    [SerializeField]
+    public bool enableInput = true;
+
+    [SerializeField]
+    [InputActionMap]
+    private string inputMove;
+
+    [SerializeField]
+    [InputActionMap]
+    private string inputAction;
+
+    [SerializeField]
+    [InputActionMap]
+    private string inputRotateLeft;
+
+    [SerializeField]
+    [InputActionMap]
+    private string inputRotateRight;
+
+    [SerializeField]
+    [InputActionMap]
+    private string inputZoom;
+
     [Header("Shakes")]
 
     [SerializeField]
@@ -177,6 +202,7 @@ public class IsometricCameraController : BaseCamera
 
     private void Update()
     {
+        this.OnInput();
         this.OnUpdate();
         this.OnUpdateEffects();
     }
@@ -186,6 +212,30 @@ public class IsometricCameraController : BaseCamera
         this.cameraObject = this.GetComponentInChildren<Camera>();
 
         this.OnUpdate();
+    }
+
+    private void OnInput()
+    {
+        if (this.enableInput == false)
+        {
+            return;
+        }
+
+        var direction = InputManager.Linear(this.inputMove);
+
+        this.Move(new Vector3(direction.x, 0, direction.y));
+
+        if (InputManager.Released(this.inputRotateLeft))
+        {
+            this.RotateLeft();
+        }
+
+        if (InputManager.Released(this.inputRotateRight))
+        {
+            this.RotateRight();
+        }
+
+        //var scroll = InputManager.Scroll();
     }
 
     [ContextMenu("Update")]
