@@ -9,7 +9,7 @@
                     "name": "Up",
                     "type": "Button",
                     "id": "f1c32b62-d1c9-4089-a89c-41b5f4e3cd7a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -287,7 +287,7 @@
                     "name": "RightTrigger",
                     "type": "Button",
                     "id": "621485d7-fe86-466f-9d8c-20bd8eebef6a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -341,25 +341,25 @@
                     "name": "North",
                     "type": "Button",
                     "id": "82507ee3-7f97-4fc2-b2c6-9d15e1686ff1",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CycleAbility_Gamepad",
-                    "type": "PassThrough",
-                    "id": "0b32227e-54f3-48f3-8f2a-64d6f16bc1e8",
-                    "expectedControlType": "Vector2",
+                    "name": "LeftShoulder/Q",
+                    "type": "Button",
+                    "id": "ec7848ba-7d33-4525-a842-f3ae3d13f1a4",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CycleAbility_Mouse",
-                    "type": "PassThrough",
-                    "id": "0f542f68-28dc-46e9-9bc7-d1b626481c65",
-                    "expectedControlType": "Vector2",
+                    "name": "RightShoulder/E",
+                    "type": "Button",
+                    "id": "cd2fa9c2-ad14-4dc1-b12b-3c3ff1873209",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -665,6 +665,50 @@
                 },
                 {
                     "name": "",
+                    "id": "f14ce8c3-11b6-45b5-bf91-1aa41a35d859",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftShoulder/Q",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9fa2c321-91dd-46ea-93cf-e84f87051b31",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftShoulder/Q",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f66c7843-42ec-41af-a448-7f2fc844b2b2",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightShoulder/E",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "398e1de9-94e5-4555-864d-289ec05b085d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightShoulder/E",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d2d06029-412e-48cf-9f24-fe944b2f0c07",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
@@ -684,61 +728,6 @@
                     "action": "West",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "Gamepad",
-                    "id": "f5d91fe5-6f47-428c-9da8-b9744c975f89",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CycleAbility_Gamepad",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "c5e811ab-08a3-4dc1-97a5-43f4df5bae2c",
-                    "path": "<Gamepad>/dpad/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CycleAbility_Gamepad",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "3c021b88-3084-4997-ab56-b974ad413549",
-                    "path": "<Gamepad>/dpad/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CycleAbility_Gamepad",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "e0f6333a-067f-4ed0-be50-36a282d40520",
-                    "path": "<Gamepad>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CycleAbility_Gamepad",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "0b2213a6-8ca6-47f4-a54d-48cf47b2726d",
-                    "path": "<Gamepad>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CycleAbility_Gamepad",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -783,61 +772,6 @@
                     "action": "RightTrigger",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "Mouse",
-                    "id": "e0fb21fc-448c-41e1-a940-81ee9f438d50",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CycleAbility_Mouse",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "down",
-                    "id": "7d756bf6-b539-4fc4-b5e7-f0883eabd044",
-                    "path": "<Mouse>/scroll/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CycleAbility_Mouse",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "up",
-                    "id": "fc264a91-13b8-44af-a9b6-e115e9324d77",
-                    "path": "<Mouse>/scroll/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CycleAbility_Mouse",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Left",
-                    "id": "241660e6-3d89-4c50-9e2b-1a30f21647d4",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CycleAbility_Mouse",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Right",
-                    "id": "94a31ef5-3f95-41d8-b639-180cecceb052",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CycleAbility_Mouse",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         },
