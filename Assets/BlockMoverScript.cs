@@ -124,6 +124,8 @@ public class BlockMoverScript : MonoBehaviour
 
     private IEnumerator OnUpdate()
     {
+        EventBus.Raise<OnBlockMoveEventParameters>(this, default);
+
         var destination = this.GetDestination();
 
         while (this.isActiveAndEnabled)
