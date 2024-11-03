@@ -18,7 +18,9 @@ public class BlockMoverScript : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField]
-    private bool debug;
+    private bool drawGizmos;
+    [SerializeField]
+    private bool drawGizmosSelected = true;
 
     [SerializeField]
     private bool manualTrigger;
@@ -47,13 +49,21 @@ public class BlockMoverScript : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (this.debug)
+        if (this.drawGizmos)
         {
-            this.OnDrawGizmosSelected();
+            this.DrawGizmos();
         }
     }
 
     private void OnDrawGizmosSelected()
+    {
+        if (this.drawGizmosSelected)
+        {
+            this.DrawGizmos();
+        }
+    }
+    
+    private void DrawGizmos()
     {
         Debug.DrawLine(this.pointA, this.pointB, Color.yellow);
 

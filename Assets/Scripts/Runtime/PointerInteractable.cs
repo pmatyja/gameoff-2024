@@ -1,14 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class PointerInteractable : MonoBehaviour
 {
-    [field: SerializeField] public UnityEvent OnClick { get; set; }
+    [field: SerializeField] public UnityEvent OnClick { get; private set; } = new UnityEvent();
     
-    private void OnMouseDown()
-    {
-        Debug.Log("Clicked on " + name, this);
-        
-        OnClick.Invoke();
-    }
+    private void OnMouseDown() => OnClick?.Invoke();
 }
