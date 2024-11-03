@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BlockMoverScript : MonoBehaviour
@@ -17,16 +16,18 @@ public class BlockMoverScript : MonoBehaviour
     private BlockDirection direction = BlockDirection.PositiveY;
 
     [Header("Debug")]
+
     [SerializeField]
-    private bool drawGizmos;
+    private bool isDebugEnabled;
+
     [SerializeField]
-    private bool drawGizmosSelected = true;
+    private bool showIndividualBlocks = true;
 
     [SerializeField]
     private bool manualTrigger;
 
     private Coroutine coroutine;
-    private Vector3 rootPosition;
+    private Vector3 offset;
     private Vector3 pointA;
     private Vector3 pointB;
 
@@ -42,37 +43,64 @@ public class BlockMoverScript : MonoBehaviour
 
     private void Start()
     {
-        this.rootPosition = this.transform.position;
         this.pointA = this.transform.position;
         this.pointB = this.GetDestination();
     }
 
     private void OnDrawGizmos()
     {
-        if (this.drawGizmos)
+        if (this.isDebugEnabled == false)
         {
-            this.DrawGizmos();
+            return;
         }
-    }
 
-    private void OnDrawGizmosSelected()
-    {
-        if (this.drawGizmosSelected)
-        {
-            this.DrawGizmos();
-        }
-    }
-    
-    private void DrawGizmos()
-    {
         Debug.DrawLine(this.pointA, this.pointB, Color.yellow);
 
-        var offset = this.transform.position - this.rootPosition;
+        var boundsA = new Bounds();
+        var boundsB = new Bounds();
 
         foreach (Transform child in this.transform)
         {
-            DebugExtension.DrawBounds(new Bounds(this.pointA + (child.transform.position - offset), Vector3.one), Color.cyan);
-            DebugExtension.DrawBounds(new Bounds(this.pointB + (child.transform.position - offset), Vector3.one), Color.cyan);
+            if (child.gameObject.activeInHierarchy == false)
+            {
+                continue;
+            }
+
+            var localBounds = new Bounds();
+
+            if (child.TryGetComponent<BoxCollider>(out var boxCollider))
+            {
+                localBounds = boxCollider.bounds;
+            }
+            else if (child.TryGetComponent<MeshCollider>(out var meshCollider))
+            {
+                localBounds = meshCollider.bounds;
+            }
+
+            var localOffset = 
+                Vector3.zero 
+                + child.transform.localPosition
+                - child.transform.position
+                + localBounds.center
+            ;
+
+            boundsA.Encapsulate(new Bounds(this.pointA + localOffset, localBounds.size));
+            boundsB.Encapsulate(new Bounds(this.pointB + localOffset, localBounds.size));
+
+            if (this.showIndividualBlocks)
+            {
+                DebugExtension.DrawBounds(new Bounds(this.pointA + localOffset, localBounds.size), Color.cyan);
+                DebugExtension.DrawBounds(new Bounds(this.pointB + localOffset, localBounds.size), Color.green);
+            }
+        }
+
+        if (this.showIndividualBlocks == false)
+        {
+            var bounds = this.gameObject.getColliderBounds();
+            var destination = GetDirection(this.direction) * this.distance;
+
+            DebugExtension.DrawBounds(new Bounds(bounds.center, bounds.size), Color.cyan);
+            DebugExtension.DrawBounds(new Bounds(bounds.center + destination, bounds.size), Color.green);
         }
     }
 
@@ -80,7 +108,6 @@ public class BlockMoverScript : MonoBehaviour
     {
         if (Application.isPlaying == false)
         {
-            this.rootPosition = this.transform.position;
             this.pointA = this.transform.position;
             this.pointB = this.GetDestination();
             return;
@@ -102,6 +129,7 @@ public class BlockMoverScript : MonoBehaviour
         while (this.isActiveAndEnabled)
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, destination, this.speedPerUnit * Time.deltaTime);
+            this.offset = this.pointA - this.transform.position;
 
             if (Vector3.Distance(this.transform.position, destination) < 0.01f)
             {
