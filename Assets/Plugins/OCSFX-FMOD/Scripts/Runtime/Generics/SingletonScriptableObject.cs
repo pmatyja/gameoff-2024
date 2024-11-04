@@ -10,7 +10,7 @@ namespace OCSFX.Generics
     {
         /*===========================================================*/
     
-        private static T _instance;
+        protected static T _instance;
         private static readonly string RESOURCE_PATH = typeof(T).Name + "/" + typeof(T).Name;
 
         public static T Get()
@@ -45,5 +45,5 @@ namespace OCSFX.Generics
 
             return assetInstance;
         }
-        }
+    }
 }
