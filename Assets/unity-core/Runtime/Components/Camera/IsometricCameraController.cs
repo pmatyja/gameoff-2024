@@ -235,7 +235,10 @@ public class IsometricCameraController : BaseCamera
             this.RotateRight();
         }
 
-        //var scroll = InputManager.Scroll();
+        //var scroll = Mathf.Abs(InputManager.Linear(this.inputZoom).y);
+        var scroll = InputManager.Linear(this.inputZoom).y;
+
+        this.OnZoom(scroll);
     }
 
     [ContextMenu("Update")]

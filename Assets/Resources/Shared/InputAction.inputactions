@@ -278,7 +278,7 @@
                     "name": "LeftTrigger",
                     "type": "Button",
                     "id": "24b3d8f3-244b-4921-9d98-f5ea99087e55",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -296,7 +296,7 @@
                     "name": "Start",
                     "type": "Button",
                     "id": "d8ce5ea8-bdc6-4737-a687-b4659573ee69",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -305,6 +305,15 @@
                     "name": "Aim",
                     "type": "PassThrough",
                     "id": "ef7af919-10de-4e25-b744-e1465eb9bdb2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Zoom",
+                    "type": "PassThrough",
+                    "id": "95adb598-863f-4377-bb10-0eee1ff0519e",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -347,7 +356,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LeftShoulder/Q",
+                    "name": "LeftShoulder",
                     "type": "Button",
                     "id": "ec7848ba-7d33-4525-a842-f3ae3d13f1a4",
                     "expectedControlType": "",
@@ -356,7 +365,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RightShoulder/E",
+                    "name": "RightShoulder",
                     "type": "Button",
                     "id": "cd2fa9c2-ad14-4dc1-b12b-3c3ff1873209",
                     "expectedControlType": "",
@@ -599,6 +608,72 @@
                 },
                 {
                     "name": "",
+                    "id": "a5b61129-deea-4654-84e0-04053ad0d63f",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Gamepad",
+                    "id": "d4a21963-ad99-4bc9-8f0f-8a0927419886",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "2d6b00fd-c3d9-4df2-81b1-57b91e865436",
+                    "path": "<Gamepad>/rightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "9bf35a6a-4ab9-4f1d-bf4c-37683e3d22ca",
+                    "path": "<Gamepad>/rightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "ddaefa29-c09e-406c-8a84-0434f22e8394",
+                    "path": "<Gamepad>/rightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "1ab48cfa-ffd3-4b1a-a44d-506a18de513d",
+                    "path": "<Gamepad>/rightStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
                     "id": "b221cd66-b143-4403-8356-682280fa918c",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -670,7 +745,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftShoulder/Q",
+                    "action": "LeftShoulder",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -681,7 +756,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftShoulder/Q",
+                    "action": "LeftShoulder",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -692,7 +767,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightShoulder/E",
+                    "action": "RightShoulder",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -703,7 +778,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightShoulder/E",
+                    "action": "RightShoulder",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
