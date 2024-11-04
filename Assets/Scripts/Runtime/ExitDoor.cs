@@ -15,8 +15,6 @@ public class ExitDoor : InteractableDoor
         {
             OCSFXLogger.LogError($"{nameof(BlockMoverScript)} not found on {nameof(ExitDoor)} GameObject ({name})", this, _showDebug);
         }
-        
-        Lock();
     }
 
     protected override void Open()

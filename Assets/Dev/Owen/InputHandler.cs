@@ -27,7 +27,7 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     [RuntimeInitializeOnLoadMethod]
     private static void Initialize()
     {
-        Get();
+        Get().InputActions.Enable();
         
         SetEventBindings(true);
         
@@ -39,6 +39,8 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         if (!Get()) return;
         
         SetEventBindings(false);
+        
+        Get().InputActions.Disable();
     }
     
     private static void SetEventBindings(bool bind)

@@ -1,13 +1,17 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Runtime
 {
     public class CharacterInteractionBehavior : MonoBehaviour
     {
-        [SerializeField] private int _overlapCountLimit = 10;
+        [SerializeField] private float _interactionRadius = 1f;
+        [SerializeField] private int _overlapCountLimit = 4;
         private Collider[] _overlapResults;
         private ICharacterInteractable _targetInteractable;
+        private bool CanInteract => _targetInteractable != null;
+        
+        [Header("Debug")]
+        [SerializeField] private bool _showDebug;
         
         private void Awake()
         {
@@ -16,35 +20,29 @@ namespace Runtime
         
         private void Update()
         {
-            // Do a sphere overlap check for ICharacterInteractable objects
-            // If the object is interactable, cache it for interaction
-            // If there are multiple in the sphere, prioritize the closest one
+            var size = Physics.OverlapSphereNonAlloc(transform.position, _interactionRadius, _overlapResults);
             
-            // If the player presses the interact button, call the Interact method on the cached object
-
-            var size = Physics.OverlapSphereNonAlloc(transform.position, 1f, _overlapResults);
-            
+            ICharacterInteractable newTargetInteractable = null;
             for (var i = 0; i < size; i++)
             {
-                // filter out non-interactable objects, then prioritize the closest one
                 var interactable = _overlapResults[i].GetComponent<ICharacterInteractable>();
                 if (interactable == null || !interactable.CanInteract) continue;
-                
-                if (_targetInteractable == null)
+
+                if (newTargetInteractable == null || 
+                    Vector3.Distance(transform.position, interactable.transform.position) < 
+                    Vector3.Distance(transform.position, newTargetInteractable.transform.position))
                 {
-                    _targetInteractable = interactable;
-                }
-                else
-                {
-                    var currentDistance = Vector3.Distance(transform.position, _targetInteractable.transform.position);
-                    var newDistance = Vector3.Distance(transform.position, interactable.transform.position);
-                    
-                    if (newDistance < currentDistance)
-                    {
-                        _targetInteractable = interactable;
-                    }
+                    newTargetInteractable = interactable;
                 }
             }
+            
+            if (_targetInteractable != newTargetInteractable)
+            {
+                _targetInteractable?.ShowInteractionPrompt(false);
+            }
+            
+            _targetInteractable = newTargetInteractable;
+            _targetInteractable?.ShowInteractionPrompt(true);
         }
 
         private void OnValidate()
@@ -53,6 +51,14 @@ namespace Runtime
             {
                 _overlapResults = new Collider[_overlapCountLimit];
             }
+        }
+        
+        private void OnDrawGizmosSelected()
+        {
+            if (!_showDebug) return;
+            
+            Gizmos.color = CanInteract ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(transform.position, _interactionRadius);
         }
     }
 }

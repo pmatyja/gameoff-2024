@@ -8,16 +8,19 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _turnSpeed = 1f;
     [SerializeField] private float _gravityScale = 1f;
-    
-    [Header("Debug")]
-    [SerializeField] private bool _showDebug;
+    [SerializeField] private GroundCheck _groundCheck;
     
     private CharacterController _characterController;
     private InputHandler _inputHandler;
     private Vector2 _moveInputDirection;
     private Vector3 _moveDirection;
+    private float _fallTime;
 
     private const float _IMPLICIT_ROTATION_SPEED = 1080f;
+    
+    [Header("Debug")]
+    [SerializeField] private bool _showDebug;
+    [SerializeField, Readonly] private bool _isGrounded;
     
     private void Awake()
     {
@@ -41,14 +44,10 @@ public class PlayerCharacterController : MonoBehaviour
         _inputHandler.OnMoveInput -= OnMoveInput;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         HandleGravity();
         Move();
-    }
-
-    private void Update()
-    {
         RotateToFaceMoveDirection();
     }
     
@@ -82,22 +81,42 @@ public class PlayerCharacterController : MonoBehaviour
     {
         if (_moveInputDirection == Vector2.zero)
         {
+            _moveDirection = Vector3.zero;
             return;
         }
         
         _moveDirection = GetCameraRelativeMoveDirection(_moveInputDirection);
         
-        var moveDelta = _moveDirection * _moveSpeed * Time.deltaTime;
+        var moveDelta = _moveDirection * (_moveSpeed * Time.deltaTime);
         
         _characterController.Move(moveDelta);
     }
     
     private void HandleGravity()
     {
-        if (!_characterController.isGrounded)
+        _isGrounded = IsGrounded();
+        
+        if (_isGrounded)
         {
-            _characterController.Move(Physics.gravity * (_gravityScale * Time.deltaTime));
+            // We need to check that the character controller is also grounded
+            if (_characterController.isGrounded)
+            {
+                _fallTime = 0f;
+                return;
+            }
         }
+        
+        _fallTime += Time.deltaTime;
+
+        var gravity = Physics.gravity * _gravityScale;
+        var fallDelta = gravity * (_fallTime * Time.deltaTime);
+        
+        _characterController.Move(fallDelta);
+    }
+    
+    private bool IsGrounded()
+    {
+        return _groundCheck ? _groundCheck.IsGrounded : _characterController.isGrounded;
     }
     
     private void RotateToFaceMoveDirection()

@@ -20,6 +20,8 @@ namespace Runtime
         {
             if (IsShowing == show) return;
             AnimateShow(show);
+            
+            IsShowing = show;
         }
         
         public void Show(bool show, bool instant)

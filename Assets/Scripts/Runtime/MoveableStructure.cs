@@ -1,4 +1,5 @@
-﻿using OCSFX.Utility.Debug;
+﻿using System.Collections.Generic;
+using OCSFX.Utility.Debug;
 using UnityEngine;
 
 namespace Runtime
@@ -7,48 +8,32 @@ namespace Runtime
     {
         [Header("Debug")]
         [SerializeField] private bool _showDebug;
+        
+        private readonly Dictionary<Transform /*child*/, Transform /*parent*/> _attachedChildren 
+            = new Dictionary<Transform, Transform>();
 
-        private Transform _previousParent;
-        private Transform _playerTransform;
-
-        private void Awake()
+        public void Attach(Transform child)
         {
-            _playerTransform = GetPlayerTransform();
+            _attachedChildren.Add(child, child.parent);
+            
+            child.SetParent(transform);
+            
+            OCSFXLogger.Log($"Attached {child.name} to {name}", this, _showDebug);
         }
         
-        private Transform GetPlayerTransform()
+        public void Detach(Transform child)
         {
-            return GameObject.FindGameObjectWithTag(GameOff2024GameSettings.Get().PlayerTag)?.transform;
-        }
-
-        private bool IsPlayerOccupying()
-        {
-            return _playerTransform && _playerTransform.parent == transform;
-        }
-        
-        private void OnPlayerEnter(Collider other)
-        {
-            OCSFXLogger.Log($"Player entered {name}", this, _showDebug);
-            
-            if (IsPlayerOccupying()) return;
-            
-            if (other.CompareTag(GameOff2024GameSettings.Get().PlayerTag))
+            if (!_attachedChildren.TryGetValue(child, out var attachedChild))
             {
-                _previousParent = other.transform.parent;
-                other.transform.SetParent(transform);
+                OCSFXLogger.LogWarning($"{child.name} is not attached to {name}", this, _showDebug);
+                return;
             }
-        }
-        
-        private void OnPlayerExit(Collider other)
-        {
-            OCSFXLogger.Log($"Player exited {name}", this, _showDebug);
             
-            if (!IsPlayerOccupying()) return;
+            child.SetParent(attachedChild);
             
-            if (other.CompareTag(GameOff2024GameSettings.Get().PlayerTag))
-            {
-                other.transform.SetParent(_previousParent);
-            }
+            _attachedChildren.Remove(child);
+            
+            OCSFXLogger.Log($"Detached {child.name} from {name}", this, _showDebug);
         }
     }
 }
