@@ -9,6 +9,7 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] private float _turnSpeed = 1f;
     [SerializeField] private float _gravityScale = 1f;
     [SerializeField] private GroundCheck _groundCheck;
+    [SerializeField] private FallProbe _fallProbe;
     
     private CharacterController _characterController;
     private InputHandler _inputHandler;
@@ -47,8 +48,8 @@ public class PlayerCharacterController : MonoBehaviour
     private void Update()
     {
         HandleGravity();
-        Move();
         RotateToFaceMoveDirection();
+        Move();
     }
     
     private static Camera _mainCamera;
@@ -88,6 +89,8 @@ public class PlayerCharacterController : MonoBehaviour
         _moveDirection = GetCameraRelativeMoveDirection(_moveInputDirection);
         
         var moveDelta = _moveDirection * (_moveSpeed * Time.deltaTime);
+
+        if (_fallProbe && _fallProbe.IsFallZone) return;
         
         _characterController.Move(moveDelta);
     }

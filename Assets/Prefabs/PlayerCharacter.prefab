@@ -82,6 +82,7 @@ Transform:
   m_Children:
   - {fileID: 2435056975286820915}
   - {fileID: 8591427880042101519}
+  - {fileID: 6119469227085012823}
   m_Father: {fileID: 4717044681802395932}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7902788266983474004
@@ -223,6 +224,55 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7578441260688388865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6119469227085012823}
+  - component: {fileID: 2535956929720902731}
+  m_Layer: 0
+  m_Name: FallProbe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6119469227085012823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7578441260688388865}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1348202193636930554}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2535956929720902731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7578441260688388865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539e52eea66241a0ad9a64b05b565013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProbeDistance: 10
+  GroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _showDebug: 1
 --- !u!1 &7820239384906179311
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,6 +349,7 @@ MonoBehaviour:
   _turnSpeed: 1
   _gravityScale: 1
   _groundCheck: {fileID: 7584625086345691357}
+  _fallProbe: {fileID: 2535956929720902731}
   _showDebug: 1
   _isGrounded: 0
 --- !u!114 &4852455097023837208
