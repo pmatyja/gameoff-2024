@@ -56,7 +56,7 @@ public class AudioSensor2D : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        DebugExtension.DrawWireSphere(this.transform.position, Color.cyan, this.range);
+        DebugExtension.DrawWireSphere(this.transform.position, this.range, Color.cyan);
     }
 
     private void OnDrawGizmos()

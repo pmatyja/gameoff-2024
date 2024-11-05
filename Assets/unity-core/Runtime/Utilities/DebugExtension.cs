@@ -249,24 +249,24 @@ public static class DebugExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void DrawCircle(Vector3 position, Color color, float radius = 1.0f)
+    public static void DrawCircle(Vector3 position, float radius, Color color)
 	{
 		DrawCircle(position, Vector3.up, color, radius);
 	}
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void DrawCircle(Vector3 position, Vector3 up, float radius = 1.0f)
+    public static void DrawCircle(Vector3 position, Vector3 up, float radius)
 	{
 		DrawCircle(position, up, Color.white, radius);
 	}
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void DrawCircle(Vector3 position, float radius = 1.0f)
+    public static void DrawCircle(Vector3 position, float radius)
 	{
 		DrawCircle(position, Vector3.up, Color.white, radius);
 	}
 
-	public static void DrawWireSphere(Vector3 position, Color color, float radius = 1.0f)
+	public static void DrawWireSphere(Vector3 position, float radius, Color color)
 	{
 		var angle = 10.0f;
 		
@@ -299,12 +299,12 @@ public static class DebugExtension
 	}
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void DrawWireSphere(Vector3 position, float radius = 1.0f)
+    public static void DrawWireSphere(Vector3 position, float radius)
 	{
-		DrawWireSphere(position, Color.white, radius);
+		DrawWireSphere(position, radius, Color.white);
 	}
 	
-	public static void DrawCylinder(Vector3 start, Vector3 end, Color color, float radius = 1)
+	public static void DrawCylinder(Vector3 start, Vector3 end, float radius, Color color)
 	{
 		var up = (end-start).normalized*radius;
 		var forward = Vector3.Slerp(up, -up, 0.5f);
@@ -335,12 +335,12 @@ public static class DebugExtension
 	}
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void DrawCylinder(Vector3 start, Vector3 end, float radius = 1)
+    public static void DrawCylinder(Vector3 start, Vector3 end, float radius)
 	{
-		DrawCylinder(start, end, Color.white, radius);
+		DrawCylinder(start, end, radius, Color.white);
 	}
 	
-	public static void DrawCone(Vector3 position, Vector3 direction, Color color, float angle = 45)
+	public static void DrawCone(Vector3 position, Vector3 direction, float angle, Color color)
 	{
 		var length = direction.magnitude;
 		
@@ -371,24 +371,24 @@ public static class DebugExtension
 	}
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void DrawCone(Vector3 position, Vector3 direction, float angle = 45)
+    public static void DrawCone(Vector3 position, Vector3 direction, float angle)
 	{
-		DrawCone(position, direction, Color.white, angle);
+		DrawCone(position, direction, angle, Color.white);
 	}
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void DrawCone(Vector3 position, Color color, float angle = 45)
+    public static void DrawCone(Vector3 position, Color color, float angle)
 	{
-		DrawCone(position, Vector3.up, color, angle);
+		DrawCone(position, Vector3.up, angle, color);
 	}
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void DrawCone(Vector3 position, float angle = 45)
+    public static void DrawCone(Vector3 position, float angle)
 	{
-		DrawCone(position, Vector3.up, Color.white, angle);
+		DrawCone(position, Vector3.up, angle, Color.white);
 	}
 	
-	public static void DrawCapsule(Vector3 start, Vector3 end, Color color, float radius = 1)
+	public static void DrawCapsule(Vector3 start, Vector3 end, float radius, Color color)
 	{
 		var up = (end-start).normalized*radius;
 		var forward = Vector3.Slerp(up, -up, 0.5f);
@@ -434,13 +434,13 @@ public static class DebugExtension
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void DrawCapsule(Vector3 center, float height, float radius, Color color)
 	{
-		DrawCapsule(new Vector3(center.x, center.y + height / 2.0f, center.z), new Vector3(center.x, center.y - height / 2.0f, center.z), color, radius);
+		DrawCapsule(new Vector3(center.x, center.y + height / 2.0f, center.z), new Vector3(center.x, center.y - height / 2.0f, center.z), radius, color);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void DrawCapsule(Vector3 start, Vector3 end, float radius = 1)
+    public static void DrawCapsule(Vector3 start, Vector3 end, float radius)
 	{
-		DrawCapsule(start, end, Color.white, radius);
+		DrawCapsule(start, end, radius, Color.white);
     }
 
     public static void DrawArrow(Vector3 position, Vector3 direction, float arrowHeadLength = 0.25f)
