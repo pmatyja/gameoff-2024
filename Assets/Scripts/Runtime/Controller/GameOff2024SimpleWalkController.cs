@@ -7,7 +7,7 @@ namespace Runtime.Controller
     {
         // Modified version of CMF SimpleWalkController
 
-        [SerializeField] private Mover _mover;
+        [SerializeField] private GameOff2024Mover _mover;
         [SerializeField] private FallProbe _fallProbe;
 
         [field: Space]
@@ -41,8 +41,8 @@ namespace Runtime.Controller
             {
                 if (!TryGetComponent(out _mover))
                 {
-                    Debug.LogWarning($"{nameof(GameOff2024SimpleWalkController)} requires a {nameof(Mover)} component to function. Adding one now.");
-                    _mover = gameObject.AddComponent<Mover>();
+                    Debug.LogWarning($"{nameof(GameOff2024SimpleWalkController)} requires a {nameof(GameOff2024Mover)} component to function. Adding one now.");
+                    _mover = gameObject.AddComponent<GameOff2024Mover>();
                 }   
             }
 
