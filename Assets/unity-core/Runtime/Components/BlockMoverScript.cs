@@ -38,7 +38,7 @@ public class BlockMoverScript : MonoBehaviour
             return;
         }
 
-        this.coroutine = this.StartCoroutine(this.OnUpdate());
+        this.coroutine = this.StartCoroutine(this.LateFixedUpdate());
     }
 
     private void Start()
@@ -122,12 +122,15 @@ public class BlockMoverScript : MonoBehaviour
         this.manualTrigger = false;
     }
 
-    private IEnumerator OnUpdate()
+    private IEnumerator LateFixedUpdate()
     {
+        var waitInstruction = new WaitForFixedUpdate();
+        yield return waitInstruction;
+        
         EventBus.Raise<OnBlockMoveEventParameters>(this, default);
-
+        
         var destination = this.GetDestination();
-
+        
         while (this.isActiveAndEnabled)
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, destination, this.speedPerUnit * Time.deltaTime);
@@ -138,10 +141,10 @@ public class BlockMoverScript : MonoBehaviour
                 this.transform.position = destination;
                 break;
             }
-
-            yield return null;
+            
+            yield return waitInstruction;
         }
-
+        
         EventBus.Raise<OnBlockMoveFinishedEventParameters>(this, default);
 
         this.direction = NegateDirection(this.direction);
