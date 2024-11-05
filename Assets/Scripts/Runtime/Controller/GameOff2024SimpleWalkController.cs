@@ -72,10 +72,23 @@ namespace Runtime.Controller
             
             _moveDirection = Vector3.MoveTowards(_moveDirection, targetVelocity, accelerationFactor * Time.deltaTime);
             
-            var velocity = 
-                _fallProbe && _fallProbe.IsFallZone 
-                    ? Vector3.zero 
-                    : _moveDirection;
+            //Calculate velocity;
+            var velocity = _moveDirection;
+            
+            //Use the fall probe to check whether the player should be allowed to walk off a ledge;
+            if (_fallProbe && !_fallProbe.IsSafeFall)
+            {
+                if (_fallProbe.TryGetSafeAlternativePosition(out var safeAlternativePosition))
+                {
+                    var safeAlternativeDirection = (safeAlternativePosition - _transform.position).normalized;
+                    velocity = Vector3.Lerp(_currentVelocity, safeAlternativeDirection * (_moveDirection.magnitude),
+                        accelerationFactor * Time.deltaTime);
+                }
+                else
+                {
+                    velocity = Vector3.zero;
+                }
+            }
             
             RotateToFaceMoveDirection();
             HandleGravity();

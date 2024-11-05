@@ -90,7 +90,7 @@ public class PlayerCharacterController : MonoBehaviour
         
         var moveDelta = _moveDirection * (_moveSpeed * Time.deltaTime);
 
-        if (_fallProbe && _fallProbe.IsFallZone) return;
+        if (_fallProbe && _fallProbe.IsSafeFall) return;
         
         _characterController.Move(moveDelta);
     }
