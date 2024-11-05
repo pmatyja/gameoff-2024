@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Runtime.Controller
 {
-    public abstract class ControllerBase : MonoBehaviour
+    public abstract class GameOff2024ControllerBase : MonoBehaviour
     {
         public abstract Vector3 GetVelocity();
         public abstract Vector3 GetMovementVelocity();
         public abstract bool IsGrounded();
         
-        public event Action<Vector3> OnJump;
-        public event Action<Vector3> OnLand;
+        public Action<Vector3> OnJump { get; protected set; }
+        public Action<Vector3> OnLand { get; protected set; }
     }
 }
