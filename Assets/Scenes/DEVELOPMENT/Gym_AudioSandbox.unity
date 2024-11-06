@@ -15256,9 +15256,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 942340627}
-  - component: {fileID: 942340630}
+  - component: {fileID: 942340634}
   - component: {fileID: 942340629}
   - component: {fileID: 942340631}
+  - component: {fileID: 942340633}
+  - component: {fileID: 942340632}
   m_Layer: 0
   m_Name: Wobbling Item
   m_TagString: Untagged
@@ -15305,23 +15307,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &942340630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942340626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4463000df569b949bd8ab78ccea6755, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  channel: {fileID: 0}
-  picker:
-    serializedVersion: 2
-    m_Bits: 8
-  showDebug: 1
 --- !u!54 &942340631
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15349,6 +15334,87 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &942340632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942340626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5980b2dc224145029023daaf48c21c00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _logType: 3
+  _message: Picked up Wobbling Item!
+  _print: 1
+  _textColor: {r: 0.57924527, g: 0.98695916, b: 1, a: 1}
+--- !u!114 &942340633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942340626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ba252ff55f44b9390e54367ca9f307e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 9
+  CollisionTagFilter: []
+  <TriggerEvents>k__BackingField:
+    <OnTriggerEnterEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 942340632}
+          m_TargetAssemblyTypeName: Runtime.Utility.DebugLoggerComponent, Assembly-CSharp
+          m_MethodName: Log
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    <OnTriggerStayEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+    <OnTriggerExitEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+  <CollisionEvents>k__BackingField:
+    <OnCollisionEnterEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+    <OnCollisionStayEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+    <OnCollisionExitEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &942340634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942340626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4463000df569b949bd8ab78ccea6755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  channel: {fileID: 0}
+  picker:
+    serializedVersion: 2
+    m_Bits: 8
+  showDebug: 1
 --- !u!43 &968647361
 Mesh:
   m_ObjectHideFlags: 0

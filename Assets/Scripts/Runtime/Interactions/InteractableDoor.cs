@@ -27,9 +27,12 @@ namespace Runtime.Interactions
 
         public virtual void ShowInteractionPrompt(bool show)
         {
-            if (_interactionPrompt) _interactionPrompt.Show(show);
+            if (!_interactionPrompt) return;
+            if (_interactionPrompt.IsShowing == show) return;
             
-            OCSFXLogger.Log($"Show interaction prompt: {show}", this, _showDebug);
+            _interactionPrompt.Show(show);
+            
+            OCSFXLogger.Log($"[{name} ({GetType().Name})] Show interaction prompt: {show}", this, _showDebug);
         }
         
         public void Unlock() => CanInteract = true;
