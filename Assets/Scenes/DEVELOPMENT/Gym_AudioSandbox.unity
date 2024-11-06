@@ -15407,14 +15407,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 942340626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4463000df569b949bd8ab78ccea6755, type: 3}
+  m_Script: {fileID: 11500000, guid: c494c6daab1b471e9f0f2108399a3076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   channel: {fileID: 0}
   picker:
     serializedVersion: 2
     m_Bits: 8
-  showDebug: 1
+  showDebug: 0
+  _data: {fileID: 11400000, guid: 535c8780f50856d4a9c7a7bd98e0bea9, type: 2}
+  <OnCollect>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!43 &968647361
 Mesh:
   m_ObjectHideFlags: 0
@@ -30850,7 +30854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1973241670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30858,7 +30862,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973241669}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 

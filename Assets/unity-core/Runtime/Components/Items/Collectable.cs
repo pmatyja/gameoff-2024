@@ -31,7 +31,7 @@ public class Collectable : MonoBehaviour
         this.OnPickUp(collision.gameObject);
     }
 
-    private void OnPickUp(GameObject pickerObject)
+    protected virtual void OnPickUp(GameObject pickerObject)
     {
         EventBus.Raise(this, this.channel, new CollectableEventParameters
         {

@@ -9,6 +9,9 @@ namespace Runtime
         private static Camera _mainCamera;
         private static readonly Dictionary<float, WaitForSeconds> _waitForSeconds = new Dictionary<float, WaitForSeconds>();
         
+        public const string PROJECT_NAME = "GameOff2024";
+        public const string MENU_ROOT = PROJECT_NAME + "/";
+        
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize()
         {
