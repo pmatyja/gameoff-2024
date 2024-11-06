@@ -1,20 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Runtime.Utility
 {
     public class FallProbe : MonoBehaviour
     {
         public float ProbeDistance = 10f;
-
-        [FormerlySerializedAs("PositiveLayerMask")]
+        
         [Tooltip("Layers that are considered safe ground for a fall.")]
-        [FormerlySerializedAs("GroundLayerMask")]
         public LayerMask PositiveLayers;
-        [FormerlySerializedAs("NegativeLayerMask")]
         [Tooltip("Layers that are considered dangerous ground for a fall.")]
-        [FormerlySerializedAs("KillZoneLayerMask")] public LayerMask NegativeLayers;
+        public LayerMask NegativeLayers;
         
         [Space]
         public int SafeAlternativePositionProbeCount = 6;
@@ -30,7 +26,7 @@ namespace Runtime.Utility
         
         private void Update()
         {
-            if (!GetProbeResult(transform.position, out var hit)) return;
+            GetProbeResult(transform.position, out var hit);
             
             IsSafeFall = IsSafeProbeResult(hit);
         }
@@ -83,8 +79,17 @@ namespace Runtime.Utility
             
             var hitGameObjectLayer = hitCollider.gameObject.layer;
             
-            return PositiveLayers.ContainsLayer(hitGameObjectLayer)
-                   && !NegativeLayers.ContainsLayer(hitGameObjectLayer);
+            if (PositiveLayers == (PositiveLayers | (1 << hitGameObjectLayer)))
+            {
+                return true;
+            }
+            
+            if (NegativeLayers == (NegativeLayers | (1 << hitGameObjectLayer)))
+            {
+                return false;
+            }
+            
+            return false;
         }
         
         private void OnDrawGizmosSelected()
@@ -94,7 +99,11 @@ namespace Runtime.Utility
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(transform.position, .1f);
             
-            Gizmos.color = IsSafeFall ? Color.clear : Color.red;
+            GetProbeResult(transform.position, out var hit);
+            
+            var safeFall = IsSafeProbeResult(hit);
+            
+            Gizmos.color = safeFall ? Color.clear : Color.red;
             Gizmos.DrawLine(transform.position, transform.position + Vector3.down * ProbeDistance);
             
             Gizmos.color = Color.black * .5f;

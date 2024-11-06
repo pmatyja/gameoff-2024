@@ -52206,6 +52206,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1152669177150566814, guid: fd610ab05588f2040baf0be9cf381cf8, type: 3}
+      propertyPath: PositiveLayers.m_Bits
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 2977464065436162598, guid: fd610ab05588f2040baf0be9cf381cf8, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
