@@ -3,7 +3,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace GameOff2024.Editor
+namespace Editor
 {
     public class EditorPrefabReplacerWindow : EditorWindow
     {

@@ -1,8 +1,7 @@
 using UnityEngine;
-using GameOff2024.Input;
-using GameOff2024.Utility;
+using CMF;
 
-namespace GameOff2024.Controller
+namespace Runtime.Controller
 {
     public class GameOff2024SimpleWalkController: GameOff2024ControllerBase
     {
