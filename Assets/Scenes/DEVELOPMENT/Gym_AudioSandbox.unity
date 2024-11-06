@@ -25127,6 +25127,8 @@ GameObject:
   m_Component:
   - component: {fileID: 942340627}
   - component: {fileID: 942340628}
+  - component: {fileID: 942340630}
+  - component: {fileID: 942340629}
   m_Layer: 0
   m_Name: Wobbling Item
   m_TagString: Untagged
@@ -25194,6 +25196,45 @@ MonoBehaviour:
       m_RotationOrder: 4
   distance: 0.25
   duration: 1
+--- !u!136 &942340629
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942340626}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &942340630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942340626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4463000df569b949bd8ab78ccea6755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  channel: {fileID: 0}
+  picker:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!43 &968647361
 Mesh:
   m_ObjectHideFlags: 0
