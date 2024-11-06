@@ -31,6 +31,8 @@ public class BlockMoverScript : MonoBehaviour
     private Vector3 pointA;
     private Vector3 pointB;
 
+    private WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
+
     public void Activate()
     {
         if (this.coroutine != null)
@@ -124,8 +126,7 @@ public class BlockMoverScript : MonoBehaviour
 
     private IEnumerator LateFixedUpdate()
     {
-        var waitInstruction = new WaitForFixedUpdate();
-        yield return waitInstruction;
+        yield return waitForFixedUpdate;
         
         EventBus.Raise<OnBlockMoveEventParameters>(this, default);
         
@@ -142,7 +143,7 @@ public class BlockMoverScript : MonoBehaviour
                 break;
             }
             
-            yield return waitInstruction;
+            yield return waitForFixedUpdate;
         }
         
         EventBus.Raise<OnBlockMoveFinishedEventParameters>(this, default);
