@@ -1,9 +1,10 @@
-﻿using Runtime;
+﻿using GameOff2024;
+using GameOff2024.Interactions;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Editor
+namespace GameOff2024.Editor
 {
     [CustomEditor(typeof(PointerInteractableParent))]
     public class PointerInteractableParentEditor : UnityEditor.Editor

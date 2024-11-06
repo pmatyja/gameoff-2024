@@ -2,7 +2,7 @@ using UnityEngine;
 using Sensor = CMF.Sensor;
 using UnityEngine.Serialization;
 
-namespace Runtime.Controller
+namespace GameOff2024.Controller
 {
 	// Modified version of the CMF Mover script;
 	

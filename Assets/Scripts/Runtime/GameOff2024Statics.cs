@@ -1,13 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Camera = UnityEngine.Camera;
 
-namespace Runtime
+namespace GameOff2024
 {
     public static class GameOff2024Statics
     {
         private static GameObject _playerGameObject;
         private static Camera _mainCamera;
         private static readonly Dictionary<float, WaitForSeconds> _waitForSeconds = new Dictionary<float, WaitForSeconds>();
+        
+        public const string MENU_NAME_BASE = "GameOff2024/";
         
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize()
