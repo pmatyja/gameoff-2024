@@ -12,12 +12,12 @@ public class Tween
     public Func<float, float> Method = Easing.SmoothStep;
 
     [SerializeField]
-    [Range(1, int.MaxValue / 10)]
+    [Range(1, 214748364)]
     protected int loopCount = 1;
     public int LoopCount
     {
         get => this.loopCount;
-        set => this.loopCount = Mathf.Clamp(value, 1, int.MaxValue / 10);
+        set => this.loopCount = Mathf.Clamp(value, 1, 214748364);
     }
 
     [SerializeField]
