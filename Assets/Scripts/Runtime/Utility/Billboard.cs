@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Runtime
+namespace Runtime.Utility
 {
     public class Billboard : MonoBehaviour
     {

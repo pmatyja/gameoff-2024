@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Runtime.Controller
+namespace Runtime.Controllers
 {
     public abstract class GameOff2024ControllerBase : MonoBehaviour
     {

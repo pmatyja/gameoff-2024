@@ -1,8 +1,6 @@
 using UnityEngine;
-using Sensor = CMF.Sensor;
-using UnityEngine.Serialization;
 
-namespace Runtime.Controller
+namespace Runtime.Controllers
 {
 	// Modified version of the CMF Mover script;
 	

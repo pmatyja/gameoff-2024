@@ -1,11 +1,15 @@
-﻿using UnityEngine;
+﻿using OCSFX.Utility.Debug;
+using UnityEngine;
 using UnityEngine.Events;
 
-namespace Runtime
+namespace Runtime.Interactions
 {
     public class PointerInteractableParent : MonoBehaviour
     {
         [field: SerializeField] public UnityEvent OnClick { get; private set; } = new UnityEvent();
+        
+        [Header("Debug")]
+        [SerializeField] private bool _showDebug;
         
         private void OnEnable()
         {
@@ -30,7 +34,7 @@ namespace Runtime
             {
                 if (!child.TryGetComponent<Collider>(out _))
                 {
-                    Debug.Log($"{child.name} (child of {name}) does not have a Collider component. Skipping.", this);
+                    OCSFXLogger.Log($"{child.name} (child of {name}) does not have a Collider component. Skipping.", this, _showDebug);
                     continue;
                 }
 

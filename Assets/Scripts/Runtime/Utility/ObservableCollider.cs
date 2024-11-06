@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Runtime
+namespace Runtime.Utility
 {
     public class ObservableCollider : MonoBehaviour
     {

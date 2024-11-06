@@ -1,7 +1,7 @@
+using Runtime.Utility;
 using UnityEngine;
-using CMF;
 
-namespace Runtime.Controller
+namespace Runtime.Controllers
 {
     public class GameOff2024SimpleWalkController: GameOff2024ControllerBase
     {

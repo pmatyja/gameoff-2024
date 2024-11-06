@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Runtime
+namespace Runtime.Interactions
 {
     public interface ICharacterInteractable
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Runtime
+namespace Runtime.Interactions
 {
     public class InteractionPrompt : MonoBehaviour
     {

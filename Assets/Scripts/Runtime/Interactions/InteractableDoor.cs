@@ -1,7 +1,7 @@
 ﻿using OCSFX.Utility.Debug;
 using UnityEngine;
 
-namespace Runtime
+namespace Runtime.Interactions
 {
     public class InteractableDoor : MonoBehaviour, ICharacterInteractable
     {
