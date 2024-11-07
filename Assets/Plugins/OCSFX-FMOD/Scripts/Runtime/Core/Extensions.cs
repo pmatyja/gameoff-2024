@@ -35,7 +35,8 @@ namespace OCSFX.FMOD
             RuntimeManager.PlayOneShotAttached(eventRef, soundSource);
         }
 
-        public static EventInstance Play(this EventReference eventRef, GameObject sourceObject, string parameter = default, float value = default)
+        public static EventInstance Play(this EventReference eventRef, GameObject sourceObject, 
+            string parameter = default, float value = default, bool stopWhenSourceIsDestroyed = true)
         {
             if (!sourceObject) return _INVALID_FMOD_EVENT_INSTANCE;
 
@@ -45,7 +46,8 @@ namespace OCSFX.FMOD
             return parameter != default ? fmodGameObject.PlayEvent(eventRef, parameter, value) : fmodGameObject.PlayEvent(eventRef);
         }
 
-        public static EventInstance Play2D(this EventReference eventRef, string parameter = default, float value = default)
+        public static EventInstance Play2D(this EventReference eventRef, 
+            string parameter = default, float value = default)
         {
             if (!RuntimeManager.IsInitialized) return _INVALID_FMOD_EVENT_INSTANCE;
             

@@ -9,6 +9,11 @@ namespace Runtime.Interactions
         [SerializeField, Expandable] private CollectableData _data;
         [field: SerializeField] public UnityEvent OnCollect { get; protected set; }
 
+        protected override void OnSpawn()
+        {
+            if (_data) _data.OnSpawn(transform);
+        }
+
         protected override void OnPickUp(GameObject pickerObject)
         {
             OnCollect?.Invoke();

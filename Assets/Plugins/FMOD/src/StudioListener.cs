@@ -11,6 +11,12 @@ namespace FMODUnity
 
         [SerializeField]
         private GameObject attenuationObject = null;
+        
+// BEGIN OCSFX Custom
+        public GameObject AttenuationObject => attenuationObject;
+        public void SetAttenuationObject(GameObject newAttenuationObject) => attenuationObject = newAttenuationObject;
+        public void ClearAttenuationObject() => attenuationObject = null;
+// END OCSFX Custom
 
         private Vector3 lastFramePosition = Vector3.zero;
 

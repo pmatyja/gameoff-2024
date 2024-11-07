@@ -1,4 +1,6 @@
 using FMODUnity;
+using OCSFX.FMOD;
+using OCSFX.Utility;
 using UnityEngine;
 
 namespace Runtime.Interactions
@@ -15,6 +17,15 @@ namespace Runtime.Interactions
         [field: SerializeField] public GameObject OnCollectVfx { get; private set; }
         [field: SerializeField] public float OnCollectVfxLifetime { get; private set; } = 2f;
         [field: SerializeField] public EventReference OnCollectSfx { get; private set; }
+        [field: SerializeField] public EventReference LoopSfx { get; private set; }
+        
+        public void OnSpawn(Transform spawnTransform)
+        {
+            if (!LoopSfx.IsNull)
+            {
+                LoopSfx.Play(spawnTransform.gameObject);
+            }
+        }
 
         public void OnCollect(Transform collectableTransform)
         {
@@ -26,7 +37,12 @@ namespace Runtime.Interactions
 
             if (!OnCollectSfx.IsNull)
             {
-                RuntimeManager.PlayOneShot(OnCollectSfx, collectableTransform.position);
+                OnCollectSfx.PlayOneShot(collectableTransform.position);
+            }
+            
+            if (!LoopSfx.IsNull)
+            {
+                LoopSfx.Stop(collectableTransform.gameObject);
             }
         }
     }

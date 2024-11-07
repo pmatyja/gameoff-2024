@@ -60,24 +60,23 @@ namespace OCSFX.FMOD
             return newInstance;
         }
 
-        public void StopEvent(EventReference eventPath, bool allowFadeout = true)
+        public void StopEvent(EventReference eventRef, bool allowFadeout = true)
         {
-            if (eventPath.IsNull) return;
-            
-            var eventDesc = RuntimeManager.GetEventDescription(eventPath);
-            
+            if (eventRef.IsNull) return;
+
+            var eventDesc = RuntimeManager.GetEventDescription(eventRef);
             eventDesc.getInstanceList(out var instanceList);
 
-            if (instanceList.Length < 1) return; 
-            
+            if (instanceList.Length < 1) return;
+
             var invalidInstances = new List<EventInstance>();
-            
-            var instance = new EventInstance();
+            EventInstance instance = default;
+
             foreach (var eventInstance in instanceList)
             {
                 if (!_attachedInstances.Contains(eventInstance)) return;
                 if (!eventInstance.isValid()) continue;
-                
+
                 eventInstance.getPlaybackState(out var playbackState);
                 if (playbackState is PLAYBACK_STATE.STOPPED or PLAYBACK_STATE.STOPPING) continue;
 
@@ -89,31 +88,29 @@ namespace OCSFX.FMOD
                 if (!eventInstance.isValid()) invalidInstances.Add(eventInstance);
 
             foreach (var eventInstance in invalidInstances)
-                if (_attachedInstances.Contains(eventInstance)) _attachedInstances.Remove(eventInstance);
-            
+                _attachedInstances.Remove(eventInstance);
+
             _attachedInstances.TrimExcess();
-            
             instance.Stop(allowFadeout);
         }
         
         public void StopEvent(string eventPath, bool allowFadeout = true)
         {
             if (string.IsNullOrWhiteSpace(eventPath)) return;
-            
+
             var eventDesc = RuntimeManager.GetEventDescription(eventPath);
-            
             eventDesc.getInstanceList(out var instanceList);
 
-            if (instanceList.Length < 1) return; 
-            
+            if (instanceList.Length < 1) return;
+
             var invalidInstances = new List<EventInstance>();
-            
-            var instance = new EventInstance();
+            EventInstance instance = default;
+
             foreach (var eventInstance in instanceList)
             {
                 if (!_attachedInstances.Contains(eventInstance)) return;
                 if (!eventInstance.isValid()) continue;
-                
+
                 eventInstance.getPlaybackState(out var playbackState);
                 if (playbackState is PLAYBACK_STATE.STOPPED or PLAYBACK_STATE.STOPPING) continue;
 
@@ -125,10 +122,9 @@ namespace OCSFX.FMOD
                 if (!eventInstance.isValid()) invalidInstances.Add(eventInstance);
 
             foreach (var eventInstance in invalidInstances)
-                if (_attachedInstances.Contains(eventInstance)) _attachedInstances.Remove(eventInstance);
-            
+                _attachedInstances.Remove(eventInstance);
+
             _attachedInstances.TrimExcess();
-            
             instance.Stop(allowFadeout);
         }
 

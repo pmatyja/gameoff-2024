@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Collectable : MonoBehaviour
@@ -10,6 +11,11 @@ public class Collectable : MonoBehaviour
     
     [SerializeField]
     private bool showDebug;
+
+    protected virtual void Start()
+    {
+        OnSpawn();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -46,6 +52,10 @@ public class Collectable : MonoBehaviour
         }
 
         GameObject.Destroy(gameObject);
+    }
+    
+    protected virtual void OnSpawn()
+    {
     }
     
     private bool IsValidPicker(GameObject pickerObject) => picker.ContainsLayer(pickerObject.layer);
