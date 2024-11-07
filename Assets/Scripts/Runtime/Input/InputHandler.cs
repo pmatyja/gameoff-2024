@@ -15,6 +15,7 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     [SerializeField] private bool _showDebug;
 
     public event Action<Vector2> OnMoveInput;
+    public event Action<bool> OnDragCameraInput;
 
 #if UNITY_EDITOR
     [UnityEditor.InitializeOnLoadMethod]
@@ -50,12 +51,18 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
             Get().InputActions.FindAction("Move").performed += OnMoveInputPerformed;
             Get().InputActions.FindAction("Move").canceled += OnMoveInputPerformed;
             
+            Get().InputActions.FindAction("DragCamera").performed += OnDragCameraInputPerformed;
+            Get().InputActions.FindAction("DragCamera").canceled += OnDragCameraInputPerformed;
+            
             Application.quitting += Deinitialize;
         }
         else
         {
             Get().InputActions.FindAction("Move").performed -= OnMoveInputPerformed;
             Get().InputActions.FindAction("Move").canceled -= OnMoveInputPerformed;
+            
+            Get().InputActions.FindAction("DragCamera").performed -= OnDragCameraInputPerformed;
+            Get().InputActions.FindAction("DragCamera").canceled -= OnDragCameraInputPerformed;
             
             Application.quitting -= Deinitialize;
         }
@@ -67,5 +74,13 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         
         var normalized = context.ReadValue<Vector2>().normalized;
         Get().OnMoveInput?.Invoke(normalized);
+    }
+    
+    private static void OnDragCameraInputPerformed(InputAction.CallbackContext context)
+    {
+        var pressed = context.performed;
+        OCSFXLogger.Log($"Drag camera input performed ({pressed})", Get(), Get()._showDebug);
+        
+        Get().OnDragCameraInput?.Invoke(pressed);
     }
 }
