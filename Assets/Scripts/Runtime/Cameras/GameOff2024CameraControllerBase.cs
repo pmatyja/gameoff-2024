@@ -16,7 +16,7 @@ namespace Runtime.Cameras
         protected CinemachineOrbitalFollow _orbitalFollow;
         protected CinemachineRotationComposer _rotationComposer;
         
-        [SerializeField, Range(1, 20)] private float _zoomDeltaMultiplier = 1f;
+        [SerializeField, Range(0.1f, 10)] private float _zoomDeltaMultiplier = 1f;
         [SerializeField, Range(0,2)] protected float _zoomSmoothTime = 0.2f;
 
         protected abstract Vector2 GetZoomRange();
