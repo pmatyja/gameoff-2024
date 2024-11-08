@@ -45,14 +45,13 @@ namespace Runtime.Cameras
         
         private void OnZoomInput(float delta)
         {
-            var currentSize = _cinemachineCamera.Lens.OrthographicSize;
-            _targetZoomValue = Mathf.Clamp(currentSize - delta, _zoomRange.x, _zoomRange.y);
+            _targetZoomValue = Mathf.Clamp(_targetZoomValue - delta, _zoomRange.x, _zoomRange.y);
         }
 
         private void UpdateZoom()
         {
             var currentSize = _cinemachineCamera.Lens.OrthographicSize;
-            _cinemachineCamera.Lens.OrthographicSize = Mathf.SmoothDamp(currentSize, _targetZoomValue, ref _zoomVelocity, _zoomSmoothTime);
+            _cinemachineCamera.Lens.OrthographicSize = Mathf.SmoothDamp(currentSize, _targetZoomValue, ref _zoomVelocity, _zoomSmoothTime, Mathf.Infinity, Time.deltaTime);
         }
 
         private void Update()

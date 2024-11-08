@@ -16,6 +16,9 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     [field: SerializeField] public InputActionReference MoveActionRef { get; private set; }
     [field: SerializeField] public InputActionReference CameraDragActionRef { get; private set; }
     [field: SerializeField] public InputActionReference CameraZoomActionRef { get; private set; }
+
+    [field: Header("Settings")]
+    [field: SerializeField, Range(0.1f, 1f)] public float CameraZoomSensitivity { get; private set; } = 1f;
     
     [Header("Debug")]
     [SerializeField] private bool _showDebug;
@@ -101,9 +104,10 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         
         var value = context.ReadValue<float>();
         if (Mathf.Approximately(value, 0)) return;
+        var scaledValue = value * Get().CameraZoomSensitivity;
         
-        OCSFXLogger.Log($"Zoom input performed ({value})", Get(), Get()._showDebug);
+        OCSFXLogger.Log($"Zoom input performed ({value}). Scaled value: ({scaledValue})", Get(), Get()._showDebug);
         
-        Get().OnZoomInput?.Invoke(value);
+        Get().OnZoomInput?.Invoke(scaledValue);
     }
 }
