@@ -102,7 +102,7 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     {
         if (context.canceled) return;
         
-        var value = context.ReadValue<float>();
+        var value = Mathf.Clamp(context.ReadValue<float>(), -1, 1);
         if (Mathf.Approximately(value, 0)) return;
         var scaledValue = value * Get().CameraZoomSensitivity;
         
