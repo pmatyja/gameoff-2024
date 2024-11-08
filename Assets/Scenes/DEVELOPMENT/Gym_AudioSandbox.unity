@@ -4435,7 +4435,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215527427}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89875cdc57c54474a8a74efd9b2a3b5d, type: 3}
   m_Name: 
@@ -4467,7 +4467,7 @@ MonoBehaviour:
         LegacyInput: Mouse Y
         LegacyGain: -200
         CancelDeltaTime: 0
-      InputValue: 0
+      InputValue: -0
       Driver:
         AccelTime: 0.2
         DecelTime: 0.2
@@ -4534,22 +4534,22 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  OrbitStyle: 1
-  Radius: 0.19
+  OrbitStyle: 0
+  Radius: 50
   Orbits:
     Top:
-      Radius: 2
+      Radius: 5
       Height: 2
     Center:
-      Radius: 4
+      Radius: 10
       Height: 2.25
     Bottom:
-      Radius: 2.5
+      Radius: 5
       Height: 0.5
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
-    Value: 0
+    Value: -60
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -4561,7 +4561,7 @@ MonoBehaviour:
   VerticalAxis:
     Value: 17.5
     Center: 17.5
-    Range: {x: -10, y: 45}
+    Range: {x: -6, y: 45}
     Wrap: 0
     Recentering:
       Enabled: 0
@@ -4602,12 +4602,12 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 6
     OrthographicSize: 3
-    NearClipPlane: -30
+    NearClipPlane: 0.01
     FarClipPlane: 1000
     Dutch: 0
-    ModeOverride: 1
+    ModeOverride: 2
     PhysicalProperties:
       GateFit: 2
       SensorSize: {x: 21.946, y: 16.002}
@@ -4629,13 +4629,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215527427}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22441493, y: -0.04778691, z: 0.0110187465, w: 0.973259}
-  m_LocalPosition: {x: 0, y: 9.979, z: 1.96}
+  m_LocalRotation: {x: 0.12947647, y: -0.4966388, z: 0.07521319, w: 0.8549437}
+  m_LocalPosition: {x: 41.297157, y: 22.76429, z: -17.882923}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 36.7, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.07, y: -0.305, z: 0}
 --- !u!114 &215527434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4645,14 +4645,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 215527427}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2bb69fd84c38ae43b2126eec3ecbbdb, type: 3}
+  m_Script: {fileID: 11500000, guid: 5afc689e51b4463ea1d37db28782c80d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputAxisController: {fileID: 215527428}
-  _cinemachineCamera: {fileID: 215527432}
-  _zoomRange: {x: 2, y: 6}
-  _zoomSmoothTime: 0.25
-  _showDebug: 1
+  _zoomDeltaMultiplier: 20
+  _zoomSmoothTime: 1
+  _showDebug: 0
+  _zoomRange: {x: 40, y: 100}
+  _fov: 6
 --- !u!43 &223342410
 Mesh:
   m_ObjectHideFlags: 0
@@ -7307,11 +7307,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60.000004
-  orthographic: 1
-  orthographic size: 8
+  field of view: 6
+  orthographic: 0
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -7335,8 +7335,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1150751, y: -0.8811196, z: 0.27781588, w: 0.36497167}
-  m_LocalPosition: {x: 5, y: 12, z: 15}
+  m_LocalRotation: {x: 0.12947647, y: -0.49663883, z: 0.075213194, w: 0.8549437}
+  m_LocalPosition: {x: 41.297157, y: 22.76429, z: -17.882923}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19099,7 +19099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1056888934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34189,7 +34189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Source>k__BackingField: {fileID: 330585548}
   <Target>k__BackingField: {fileID: 1712831622}
-  TargetWeight: 0.6
+  TargetWeight: 0.9
   TargetOffset: {x: 0, y: 1, z: 0}
   _showDebug: 1
   _debugSettings:
@@ -34205,8 +34205,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896025009}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1150751, y: -0.8811196, z: 0.27781588, w: 0.36497167}
-  m_LocalPosition: {x: 1.9999999, y: 10.0374, z: 9.576}
+  m_LocalRotation: {x: 0.14973651, y: -0.0026298848, z: 0.00039828144, w: 0.9887224}
+  m_LocalPosition: {x: 0, y: 9.831823, z: 2.1451313}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

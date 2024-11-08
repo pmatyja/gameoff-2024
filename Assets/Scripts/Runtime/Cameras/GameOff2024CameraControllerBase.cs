@@ -1,14 +1,22 @@
 using OCSFX.Utility;
-using OCSFX.Utility.Attributes;
 using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Runtime.Cameras
 {
+    [RequireComponent(typeof(CinemachineCamera))]
+    [RequireComponent(typeof(CinemachineOrbitalFollow))]
+    [RequireComponent(typeof(CinemachineInputAxisController))]
+    [RequireComponent(typeof(CinemachineRotationComposer))]
+    [DisallowMultipleComponent]
     public abstract class GameOff2024CameraControllerBase : MonoBehaviour
     {
-        [SerializeField] protected CinemachineInputAxisController _inputAxisController;
-        [SerializeField] protected CinemachineCamera _cinemachineCamera;
+        protected CinemachineInputAxisController _inputAxisController;
+        protected CinemachineCamera _cinemachineCamera;
+        protected CinemachineOrbitalFollow _orbitalFollow;
+        protected CinemachineRotationComposer _rotationComposer;
+        
+        [SerializeField, Range(1, 20)] private float _zoomDeltaMultiplier = 1f;
         [SerializeField, Range(0,2)] protected float _zoomSmoothTime = 0.2f;
 
         protected abstract Vector2 GetZoomRange();
@@ -24,7 +32,7 @@ namespace Runtime.Cameras
         protected virtual void Awake()
         {
             ResolveDependencies();
-            InitializeCameraZoom();
+            InitializeZoom();
             
             _inputAxisController.enabled = false;
         }
@@ -53,18 +61,13 @@ namespace Runtime.Cameras
         protected virtual void OnZoomInput(float delta)
         {
             var _zoomRange = GetZoomRange();
+            
+            delta *= _zoomDeltaMultiplier;
+            
             _targetZoomValue = Mathf.Clamp(_targetZoomValue - delta, _zoomRange.x, _zoomRange.y);
         }
-        
-        protected void InitializeCameraZoom()
-        {
-            _targetZoomValue = _lensMode switch
-            {
-                LensSettings.OverrideModes.Orthographic => _cinemachineCamera.Lens.OrthographicSize,
-                LensSettings.OverrideModes.Perspective => _cinemachineCamera.Lens.FieldOfView,
-                _ => _targetZoomValue
-            };
-        }
+
+        protected abstract void InitializeZoom();
 
         protected abstract void UpdateZoom();
 
@@ -75,8 +78,11 @@ namespace Runtime.Cameras
 
         protected virtual bool ResolveDependencies()
         {
-            var validComponentRefs = gameObject.TryResolveComponent(ref _inputAxisController)
-                   && gameObject.TryResolveComponent(ref _cinemachineCamera);
+            var validComponentRefs 
+                = gameObject.TryResolveComponent(ref _inputAxisController)
+                && gameObject.TryResolveComponent(ref _cinemachineCamera)
+                && gameObject.TryResolveComponent(ref _orbitalFollow)
+                && gameObject.TryResolveComponent(ref _rotationComposer);
 
             if (!validComponentRefs) return false;
 

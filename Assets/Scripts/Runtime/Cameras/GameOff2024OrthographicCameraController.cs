@@ -13,7 +13,12 @@ namespace Runtime.Cameras
 
         protected override Vector2 GetZoomRange() => _zoomRange;
         protected override LensSettings.OverrideModes _lensMode => LensSettings.OverrideModes.Orthographic;
-        
+
+        protected override void InitializeZoom()
+        {
+            _targetZoomValue = _cinemachineCamera.Lens.OrthographicSize;
+        }
+
         protected override void UpdateZoom()
         {
             var currentSize = _cinemachineCamera.Lens.OrthographicSize;
