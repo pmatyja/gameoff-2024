@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using OCSFX.FMOD;
+using OCSFX.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 

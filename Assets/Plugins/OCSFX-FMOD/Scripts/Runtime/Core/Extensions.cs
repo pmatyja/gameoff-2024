@@ -12,14 +12,6 @@ namespace OCSFX.FMOD
     {
         // Helper
         private static readonly EventInstance _INVALID_FMOD_EVENT_INSTANCE = default;
-
-        public static T GetOrAdd<T>(this GameObject attachGameObject) where T : Component
-        {
-            if (!attachGameObject.TryGetComponent<T>(out var component))
-                component = attachGameObject.AddComponent<T>();
-
-            return component;
-        }
         
         public static void PlayOneShot(this EventReference eventRef, Vector3 position = default)
         {

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace OCSFX.FMOD
+namespace OCSFX.Utility
 {
     public class CoroutineRunner: MonoBehaviour
     {

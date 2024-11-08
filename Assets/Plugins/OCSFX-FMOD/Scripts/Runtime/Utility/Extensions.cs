@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using OCSFX.Utility.Debug;
 using UnityEngine;
 
 namespace OCSFX.Utility
@@ -50,6 +51,35 @@ namespace OCSFX.Utility
 
             // Ensure the mapped value is within the target range
             return Mathf.Clamp(mappedValue, toMin, toMax);
+        }
+        
+        public static float Map01(this float value, float fromMin, float fromMax)
+        {
+            return (value - fromMin) / (fromMax - fromMin);
+        }
+        
+        public static T GetOrAdd<T>(this GameObject attachGameObject) where T : Component
+        {
+            if (!attachGameObject.TryGetComponent<T>(out var component))
+                component = attachGameObject.AddComponent<T>();
+
+            return component;
+        }
+        
+        public static bool TryResolveComponent<T>(this GameObject gameObject, ref T component) where T : Component
+        {
+            if (component != null)
+            {
+                return true;
+            }
+
+            if (gameObject.TryGetComponent(out component))
+            {
+                return true;
+            }
+
+            OCSFXLogger.LogError($"No {typeof(T).Name} found on " + gameObject.name, gameObject);
+            return false;
         }
     }
 }

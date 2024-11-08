@@ -3,7 +3,7 @@ using OCSFX.FMOD;
 using OCSFX.Utility;
 using UnityEngine;
 
-namespace Runtime.Interactions
+namespace Runtime.Collectables
 {
     [CreateAssetMenu(menuName = GameOff2024Statics.MENU_ROOT + nameof(CollectableData))]
     public class CollectableData : ScriptableObject

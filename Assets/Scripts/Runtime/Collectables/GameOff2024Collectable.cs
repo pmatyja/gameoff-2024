@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Runtime.Interactions
+namespace Runtime.Collectables
 {
     // Derived from Lavgine Collectable
     public class GameOff2024Collectable : Collectable

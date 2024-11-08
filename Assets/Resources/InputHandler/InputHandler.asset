@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: InputHandler
   m_EditorClassIdentifier: 
   <InputActions>k__BackingField: {fileID: -944628639613478452, guid: 64a922b153190654682e9702dfa308b2, type: 3}
-  _showDebug: 0
+  <MoveActionRef>k__BackingField: {fileID: -3477496464877089287, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+  <CameraDragActionRef>k__BackingField: {fileID: 7267231072281116439, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+  <CameraZoomActionRef>k__BackingField: {fileID: 5587239334537673649, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+  _showDebug: 1

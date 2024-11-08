@@ -21,11 +21,22 @@ namespace OCSFXEditor.Attributes
 
         private float _clampRatio;
 
-        private const float _sliderPadding = 4f;
+        private const float _SLIDER_PADDING = 6f;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            MinMaxRangeAttribute minMaxRangeAttribute = (MinMaxRangeAttribute)attribute;
+            if (property.propertyType != SerializedPropertyType.Vector2)
+            {
+                EditorGUILayout.BeginHorizontal();
+                
+                EditorGUI.LabelField(position, label);
+                EditorGUILayout.HelpBox("MinMaxRange attribute can only be used with Vector2", MessageType.Error);
+                
+                EditorGUILayout.EndHorizontal();
+                return;
+            }
+            
+            var minMaxRangeAttribute = (MinMaxRangeAttribute)attribute;
 
             _minLimit = minMaxRangeAttribute.MinLimit;
             _maxLimit = minMaxRangeAttribute.MaxLimit;
@@ -74,12 +85,12 @@ namespace OCSFXEditor.Attributes
                    + (EditorGUI.indentLevel < 1
                        ? EditorGUIUtility.fieldWidth
                        : EditorGUIUtility.fieldWidth - (EditorGUI.indentLevel * EditorGUIUtility.fieldWidth * 0.3f))
-                   + (_sliderPadding + 2f);
+                   + (_SLIDER_PADDING);
             yPos = position.yMin;
             width = position.width
                     - 2 * EditorGUIUtility.fieldWidth
                     - (EditorGUIUtility.labelWidth - (EditorGUI.indentLevel * 15f))
-                    - 2 * (_sliderPadding + 2f);
+                    - 2 * (_SLIDER_PADDING);
             height = EditorGUIUtility.singleLineHeight;
             
             var sliderDrawArea = new Rect(xPos, yPos, width, height);
@@ -145,8 +156,8 @@ namespace OCSFXEditor.Attributes
 
         private float GetMinFloatFieldMinX()
         {
-            return EditorGUIUtility.labelWidth
-                - (EditorGUI.indentLevel * EditorGUIUtility.singleLineHeight * 0.6f)
+            return EditorGUIUtility.labelWidth + EditorGUIUtility.fieldWidth * 0.38f
+                - (EditorGUI.indentLevel * EditorGUIUtility.singleLineHeight)
                 + (EditorGUI.indentLevel > 0 ? 0 : 2f);
         }
 

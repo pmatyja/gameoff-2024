@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using OCSFX.FMOD.Types;
+using OCSFX.Utility;
 using OCSFX.Utility.Debug;
 
 namespace OCSFX.FMOD.AudioData

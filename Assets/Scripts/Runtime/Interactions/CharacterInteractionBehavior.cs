@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using Runtime.Interactions;
 
-namespace Runtime.Interactions
+namespace Runtime.Collectables
 {
     public class CharacterInteractionBehavior : MonoBehaviour
     {

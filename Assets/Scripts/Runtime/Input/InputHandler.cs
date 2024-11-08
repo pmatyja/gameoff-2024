@@ -12,10 +12,17 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
 {
     [field: SerializeField] public InputActionAsset InputActions { get; private set; }
     
+    [field: Header("Gameplay Actions")]
+    [field: SerializeField] public InputActionReference MoveActionRef { get; private set; }
+    [field: SerializeField] public InputActionReference CameraDragActionRef { get; private set; }
+    [field: SerializeField] public InputActionReference CameraZoomActionRef { get; private set; }
+    
+    [Header("Debug")]
     [SerializeField] private bool _showDebug;
 
     public event Action<Vector2> OnMoveInput;
     public event Action<bool> OnDragCameraInput;
+    public event Action<float> OnZoomInput; 
 
 #if UNITY_EDITOR
     [UnityEditor.InitializeOnLoadMethod]
@@ -48,21 +55,25 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     {
         if (bind)
         {
-            Get().InputActions.FindAction("Move").performed += OnMoveInputPerformed;
-            Get().InputActions.FindAction("Move").canceled += OnMoveInputPerformed;
+            Get().MoveActionRef.action.performed += OnMoveInputPerformed;
+            Get().MoveActionRef.action.canceled += OnMoveInputPerformed;
             
-            Get().InputActions.FindAction("DragCamera").performed += OnDragCameraInputPerformed;
-            Get().InputActions.FindAction("DragCamera").canceled += OnDragCameraInputPerformed;
+            Get().CameraDragActionRef.action.performed += OnDragCameraInputPerformed;
+            Get().CameraDragActionRef.action.canceled += OnDragCameraInputPerformed;
+            
+            Get().CameraZoomActionRef.action.performed += OnZoomInputPerformed;
             
             Application.quitting += Deinitialize;
         }
         else
         {
-            Get().InputActions.FindAction("Move").performed -= OnMoveInputPerformed;
-            Get().InputActions.FindAction("Move").canceled -= OnMoveInputPerformed;
+            Get().MoveActionRef.action.performed -= OnMoveInputPerformed;
+            Get().MoveActionRef.action.canceled -= OnMoveInputPerformed;
             
-            Get().InputActions.FindAction("DragCamera").performed -= OnDragCameraInputPerformed;
-            Get().InputActions.FindAction("DragCamera").canceled -= OnDragCameraInputPerformed;
+            Get().CameraDragActionRef.action.performed -= OnDragCameraInputPerformed;
+            Get().CameraDragActionRef.action.canceled -= OnDragCameraInputPerformed;
+            
+            Get().CameraZoomActionRef.action.performed -= OnZoomInputPerformed;
             
             Application.quitting -= Deinitialize;
         }
@@ -82,5 +93,17 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         OCSFXLogger.Log($"Drag camera input performed ({pressed})", Get(), Get()._showDebug);
         
         Get().OnDragCameraInput?.Invoke(pressed);
+    }
+    
+    private static void OnZoomInputPerformed(InputAction.CallbackContext context)
+    {
+        if (context.canceled) return;
+        
+        var value = context.ReadValue<float>();
+        if (Mathf.Approximately(value, 0)) return;
+        
+        OCSFXLogger.Log($"Zoom input performed ({value})", Get(), Get()._showDebug);
+        
+        Get().OnZoomInput?.Invoke(value);
     }
 }

@@ -4419,7 +4419,6 @@ GameObject:
   - component: {fileID: 215527432}
   - component: {fileID: 215527431}
   - component: {fileID: 215527430}
-  - component: {fileID: 215527429}
   - component: {fileID: 215527428}
   - component: {fileID: 215527434}
   m_Layer: 0
@@ -4487,22 +4486,6 @@ MonoBehaviour:
         DecelTime: 0
   PlayerIndex: -1
   AutoEnableInputs: 1
---- !u!114 &215527429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 215527427}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a076c17fe76165e4f8ed21498b877bf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Modifiers: []
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &215527430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4526,7 +4509,7 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 1, y: 1}
+  Damping: {x: 1, y: 3}
   Lookahead:
     Enabled: 1
     Time: 0.1
@@ -4646,7 +4629,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215527427}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22441478, y: -0.047797043, z: 0.011021084, w: 0.97325844}
+  m_LocalRotation: {x: 0.22441493, y: -0.04778691, z: 0.0110187465, w: 0.973259}
   m_LocalPosition: {x: 0, y: 9.979, z: 1.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4666,6 +4649,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputAxisController: {fileID: 215527428}
+  _cinemachineCamera: {fileID: 215527432}
+  _zoomRange: {x: 2, y: 6}
+  _zoomSmoothTime: 0.16
   _showDebug: 1
 --- !u!43 &223342410
 Mesh:
@@ -36240,6 +36226,10 @@ PrefabInstance:
     - target: {fileID: 1152669177150566814, guid: fd610ab05588f2040baf0be9cf381cf8, type: 3}
       propertyPath: SafeAlternativePositionProbeRadius
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1273788100474644320, guid: fd610ab05588f2040baf0be9cf381cf8, type: 3}
+      propertyPath: m_Interpolate
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2977464065436162598, guid: fd610ab05588f2040baf0be9cf381cf8, type: 3}
       propertyPath: m_Name

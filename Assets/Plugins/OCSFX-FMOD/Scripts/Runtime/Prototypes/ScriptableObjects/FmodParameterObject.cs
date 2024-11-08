@@ -1,4 +1,5 @@
 using OCSFX.FMOD.Types;
+using OCSFX.Utility;
 using FMODUnity;
 using OCSFX.FMOD.Prototype;
 using UnityEngine;
