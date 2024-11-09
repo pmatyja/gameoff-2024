@@ -18,7 +18,7 @@ namespace OCSFX.FMOD.Components
 
         private void OnDisable()
         {
-            if (!GetListener()) return;
+            if (!Source) return;
             
             SetAsListenerAttenuationObject(false);
         }
@@ -26,6 +26,7 @@ namespace OCSFX.FMOD.Components
         private StudioListener GetListener()
         {
             if (Source) return Source;
+            
 #if UNITY_6000_0_OR_NEWER
             Source = FindFirstObjectByType<StudioListener>();
 #else
