@@ -40,6 +40,14 @@ namespace OCSFX.Utility
         {
             return array[Random.Range(0, array.Length)];
         }
+        
+        public static void AddUnique<T>(this List<T> list, T item)
+        {
+            if (!list.Contains(item))
+            {
+                list.Add(item);
+            }
+        }
 
         public static float Map(this float value, float fromMin, float fromMax, float toMin, float toMax)
         {

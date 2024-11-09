@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
+using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 namespace OCSFX.FMOD
 {
@@ -83,15 +84,16 @@ namespace OCSFX.FMOD
                 instance = eventInstance;
                 break;
             }
+            
+            instance.Stop(allowFadeout);
 
             foreach (var eventInstance in _attachedInstances)
                 if (!eventInstance.isValid()) invalidInstances.Add(eventInstance);
 
             foreach (var eventInstance in invalidInstances)
                 _attachedInstances.Remove(eventInstance);
-
+            
             _attachedInstances.TrimExcess();
-            instance.Stop(allowFadeout);
         }
         
         public void StopEvent(string eventPath, bool allowFadeout = true)
@@ -117,6 +119,8 @@ namespace OCSFX.FMOD
                 instance = eventInstance;
                 break;
             }
+            
+            instance.Stop(allowFadeout);
 
             foreach (var eventInstance in _attachedInstances)
                 if (!eventInstance.isValid()) invalidInstances.Add(eventInstance);
@@ -125,7 +129,17 @@ namespace OCSFX.FMOD
                 _attachedInstances.Remove(eventInstance);
 
             _attachedInstances.TrimExcess();
-            instance.Stop(allowFadeout);
+        }
+
+        public void Stop(bool allowFadeout = false)
+        {
+            foreach (var eventInstance in _attachedInstances)
+            {
+                var stopMode = allowFadeout ? STOP_MODE.ALLOWFADEOUT : STOP_MODE.IMMEDIATE;
+                
+                eventInstance.stop(stopMode);
+                eventInstance.release();
+            }
         }
 
         public void SetParameter(EventReference eventRef, string parameterName, float value)
