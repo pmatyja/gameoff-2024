@@ -17,6 +17,8 @@ namespace OCSFX.FMOD
         [SerializeField] [ParamRef] private string _surfaceParameter;
         [Space(5)]
         [SerializeField] private AudioSurface _surface;
+        
+        private Rigidbody _sourceRigidbody;
 
         public bool ShouldPlay
         {
@@ -26,6 +28,19 @@ namespace OCSFX.FMOD
 
         private void Update()
         {
+            if (_sourceObject)
+            {
+                if (!_sourceRigidbody)
+                {
+                    if (!_sourceObject.TryGetComponent(out _sourceRigidbody))
+                    {
+                        return;
+                    }
+                }
+                
+                _shouldPlay = _sourceRigidbody.linearVelocity.sqrMagnitude > 0.1f;
+            }
+            
             if (!_shouldPlay) return;
 
             if (_footstepIntervalTimer < _interval)
