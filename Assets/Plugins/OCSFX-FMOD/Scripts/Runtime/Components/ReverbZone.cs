@@ -36,5 +36,13 @@ namespace OCSFX.FMOD.Components
                 colliderComp.isTrigger = true;
             }
         }
+        
+        private void Reset()
+        {
+            if (!TryGetComponent<Collider>(out _))
+            {
+                gameObject.AddComponent<BoxCollider>();
+            }
+        }
     }   
 }

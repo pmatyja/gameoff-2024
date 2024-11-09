@@ -1,3 +1,4 @@
+using OCSFX.Utility.Debug;
 using UnityEngine;
 
 namespace OCSFX.FMOD.Components
@@ -26,11 +27,27 @@ namespace OCSFX.FMOD.Components
         {
             var colliders = GetComponents<Collider>();
 
-            if (colliders.Length <= 0) return;
+            if (colliders.Length <= 0)
+            {
+                OCSFXLogger.LogWarning(
+                    $"No {nameof(Collider)} components found on {name}." +
+                    $"{nameof(AmbientZone)} requires Trigger {nameof(Collider)}s to work.", this);
+                return;
+            }
 
             foreach (var colliderComp in colliders)
             {
                 colliderComp.isTrigger = true;
+            }
+        }
+
+        protected override void Reset()
+        {
+            base.Reset();
+            
+            if (!TryGetComponent<Collider>(out _))
+            {
+                gameObject.AddComponent<BoxCollider>();
             }
         }
     }   
