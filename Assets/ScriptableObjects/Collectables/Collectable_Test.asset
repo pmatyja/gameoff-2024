@@ -16,6 +16,8 @@ MonoBehaviour:
   <Description>k__BackingField: Test for Collectable Data
   <Prefab>k__BackingField: {fileID: 0}
   <Icon>k__BackingField: {fileID: 0}
+  <IsUnique>k__BackingField: 0
+  <IsTransient>k__BackingField: 0
   <OnCollectVfx>k__BackingField: {fileID: 7308132404632923821, guid: caf9b7102b297dd4db4d659ee78b794a, type: 3}
   <OnCollectVfxLifetime>k__BackingField: 2
   <OnCollectSfx>k__BackingField:
@@ -27,8 +29,8 @@ MonoBehaviour:
     Path: event:/Placeholders/3D/sx_robotvoice_number_3d_02
   <LoopSfx>k__BackingField:
     Guid:
-      Data1: -764259681
-      Data2: 1140266445
-      Data3: -55903324
-      Data4: 383746484
-    Path: event:/SX/ENV/sx_env_waterFountain_loop
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 

@@ -12,11 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad1c87cc17b326843806f1aa107a9f3e, type: 3}
   m_Name: GameOff2024Ambience
   m_EditorClassIdentifier: 
+  _showDebug: 0
   _ambDefault:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  _levelAmbs: []
+      Data1: -1378094460
+      Data2: 1221297378
+      Data3: -464404818
+      Data4: 1790380397
+    Path: event:/SX/AMB/sx_amb_gameplay_base
+  _autoPlayAmbDefault: 0
+  _events:
+  - _name: Default
+    _eventRef:
+      Guid:
+        Data1: -1378094460
+        Data2: 1221297378
+        Data3: -464404818
+        Data4: 1790380397
+      Path: event:/SX/AMB/sx_amb_gameplay_base
