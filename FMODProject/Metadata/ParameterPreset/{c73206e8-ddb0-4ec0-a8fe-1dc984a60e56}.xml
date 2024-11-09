@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="ParameterPreset" id="{de2456ce-7e88-4570-bd95-b7fb1332b177}">
+	<object class="ParameterPreset" id="{c73206e8-ddb0-4ec0-a8fe-1dc984a60e56}">
 		<property name="name">
-			<value>SafeRoomMix</value>
+			<value>Item_Collect</value>
 		</property>
 		<relationship name="folder">
-			<destination>{2b524020-c6cf-4cef-ac1e-2cf90630316f}</destination>
+			<destination>{552289e6-d485-4e07-a054-7d56b9d0a01c}</destination>
 		</relationship>
 		<relationship name="parameter">
-			<destination>{4fd75a75-364b-4b0f-9664-75d0d009383d}</destination>
+			<destination>{95e5bce3-0a3e-4cb6-9c27-db6ff5e86eee}</destination>
 		</relationship>
 	</object>
-	<object class="GameParameter" id="{4fd75a75-364b-4b0f-9664-75d0d009383d}">
+	<object class="GameParameter" id="{95e5bce3-0a3e-4cb6-9c27-db6ff5e86eee}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
 		<property name="isGlobal">
 			<value>true</value>
 		</property>

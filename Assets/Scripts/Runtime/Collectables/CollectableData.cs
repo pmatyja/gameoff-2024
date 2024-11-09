@@ -1,6 +1,5 @@
 using FMODUnity;
 using OCSFX.FMOD;
-using OCSFX.Utility;
 using UnityEngine;
 
 namespace Runtime.Collectables

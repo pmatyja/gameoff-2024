@@ -118,7 +118,7 @@ namespace OCSFX.FMOD
 #if UNITY_EDITOR
             if (Application.isPlaying)
                 SetGlobalValue(_fmodParameter.Value);
-#endif
+#endif //UNITY_EDITOR
         }
 
         private void OnValidate()
@@ -127,7 +127,7 @@ namespace OCSFX.FMOD
 #if UNITY_EDITOR
             if (Application.isPlaying)
                 SetGlobalValue(_fmodParameter.Value);
-#endif
+#endif //UNITY_EDITOR
             _fmodParameter.Value = Mathf.Clamp(_fmodParameter.Value, _data.MinValue, _data.MaxValue);
         }
 
@@ -137,7 +137,7 @@ namespace OCSFX.FMOD
 #if UNITY_EDITOR
             if (Application.isPlaying)
                 SetGlobalValue(_fmodParameter.Value);
-#endif
+#endif //UNITY_EDITOR
         }
     }
 }

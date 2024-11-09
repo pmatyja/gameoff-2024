@@ -18,7 +18,7 @@ namespace OCSFX.Generics
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize()
         {
-            _instance = null;
+            Application.quitting += () => _instance = null;
         }
 
         protected virtual void Awake() => SetupSingleton();
