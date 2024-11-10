@@ -7,8 +7,9 @@ namespace Lavgine
     {
         public Bounds bounds = new Bounds(Vector3.zero, new Vector3(6, 6, 6));
 
+        [Header("Debug")]
         [SerializeField]
-        private bool clippingPreview;
+        private bool showClippingPreview;
 
         private void Start()
         {
@@ -21,7 +22,7 @@ namespace Lavgine
 
         private void OnDrawGizmos()
         {
-            if (this.clippingPreview)
+            if (this.showClippingPreview)
             {
                 Gizmos.color = Color.cyan;
                 Gizmos.DrawCube(this.transform.position + this.bounds.center, this.bounds.extents);
