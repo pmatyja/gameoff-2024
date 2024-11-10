@@ -11,19 +11,22 @@ namespace OCSFX.Generics
 
         public static T Instance
         {
-            get => _instance;
-            protected set => _instance = value;
+            get
+            {
+                if (Application.isPlaying && !_instance) _instance = LazyLoadInstance();
+                return _instance;
+            }
         }
 
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize()
         {
-            Application.quitting += () => _instance = null;
+            Application.quitting += () => _instance?.ClearSelfAsInstance();
         }
 
         protected virtual void Awake() => SetupSingleton();
-        protected virtual void OnDestroy() => ClearSelfAsInstance();
-        protected virtual void OnApplicationQuit() => ClearSelfAsInstance();
+        protected virtual void OnDestroy() => _instance?.ClearSelfAsInstance();
+        protected virtual void OnApplicationQuit() => _instance?.ClearSelfAsInstance();
         
         private void ClearSelfAsInstance()
         {

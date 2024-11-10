@@ -57,7 +57,13 @@ namespace Runtime.Collectables
         }
         #endregion // IList Interface
 
-        public void AddUnique(CollectableData item) => _items.AddUnique(item);
+        public void AddUnique(CollectableData item)
+        {
+            if (!_items.Contains(item))
+            {
+                _items.Add(item);
+            }
+        }
         public List<CollectableData> GetItems() => _items;
         
         [RuntimeInitializeOnLoadMethod]
@@ -118,7 +124,18 @@ namespace Runtime.Collectables
 
         public bool ContainsAll(List<CollectableData> requiredCollectables)
         {
-            return requiredCollectables.All(_items.Contains);
+            foreach (var collectable in requiredCollectables)
+            {
+                if (!Contains(collectable))
+                {
+                    OCSFXLogger.Log($"[{nameof(ItemInventory)}] Missing {collectable.name} from inventory", _instance, _showDebug);
+                    return false;
+                }
+            }
+            
+            OCSFXLogger.Log($"[{nameof(ItemInventory)}] Contains all required collectables", _instance, _showDebug);
+
+            return true;
         }
     }   
 }

@@ -35,6 +35,8 @@ namespace Runtime.Interactions
 
         private void OnItemAdded(CollectableData addedItem)
         {
+            OCSFXLogger.Log($"[{name}] Item added: {addedItem.name}", this, _showDebug);
+            
             CanInteract = ItemInventory.Instance.ContainsAll(_requiredCollectables);
 
             if (CanInteract)

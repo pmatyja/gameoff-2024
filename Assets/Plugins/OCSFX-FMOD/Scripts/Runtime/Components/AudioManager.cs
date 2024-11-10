@@ -43,6 +43,9 @@ namespace OCSFX.FMOD.Components
             base.Awake();
             
             ValidateListener();
+            
+            if (!Application.isPlaying) return;
+            
             _banksAudioData.LoadStartupBanks();
             _volumeSettings.LoadFromPlayerPrefs();
         }
@@ -57,8 +60,8 @@ namespace OCSFX.FMOD.Components
 
         public static void StopTestEvent()
         {
-            if (!Instance || !Instance._testEventInstance.isValid()) return;
-            Instance._testEventInstance.Stop();
+            if (!_instance || !_instance._testEventInstance.isValid()) return;
+            _instance._testEventInstance.Stop();
         }
 
         private void Start()
