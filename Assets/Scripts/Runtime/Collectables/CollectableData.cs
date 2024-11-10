@@ -10,7 +10,7 @@ namespace Runtime.Collectables
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public string Description { get; private set; }
         [field: SerializeField] public GameObject Prefab { get; private set; }
-        [field: SerializeField] public Sprite Icon { get; private set; }
+        [field: SerializeField] public Texture Icon { get; private set; }
         
         [field: Header("Settings")]
         [field: SerializeField] public bool IsUnique { get; private set; }

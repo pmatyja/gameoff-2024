@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using OCSFX.Utility;
 using OCSFX.Utility.Debug;
 using UnityEngine;
@@ -114,8 +115,10 @@ namespace Runtime.Collectables
             OCSFXLogger.Log($"[{nameof(ItemInventory)}] Cleared all items from inventory", _instance, _showDebug);
         }
         #endregion // Callbacks
-        
-        
-        
+
+        public bool ContainsAll(List<CollectableData> requiredCollectables)
+        {
+            return requiredCollectables.All(_items.Contains);
+        }
     }   
 }

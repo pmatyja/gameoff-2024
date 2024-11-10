@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Runtime.Interactions;
 
 namespace Runtime.Collectables
@@ -18,7 +19,17 @@ namespace Runtime.Collectables
         {
             _overlapResults = new Collider[_overlapCountLimit];
         }
-        
+
+        private void OnEnable()
+        {
+            InputHandler.Get().OnInteractInput += OnInteractInput;
+        }
+
+        private void OnDisable()
+        {
+            InputHandler.Get().OnInteractInput -= OnInteractInput;
+        }
+
         private void Update()
         {
             var size = Physics.OverlapSphereNonAlloc(transform.position, _interactionRadius, _overlapResults);
@@ -44,6 +55,13 @@ namespace Runtime.Collectables
             
             _targetInteractable = newTargetInteractable;
             _targetInteractable?.ShowInteractionPrompt(true);
+        }
+        
+        private void OnInteractInput()
+        {
+            if (!CanInteract) return;
+            
+            _targetInteractable.Interact();
         }
 
         private void OnValidate()

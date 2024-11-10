@@ -16,6 +16,7 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     [field: SerializeField] public InputActionReference MoveActionRef { get; private set; }
     [field: SerializeField] public InputActionReference CameraDragActionRef { get; private set; }
     [field: SerializeField] public InputActionReference CameraZoomActionRef { get; private set; }
+    [field: SerializeField] public InputActionReference InteractActionRef { get; private set; }
 
     [field: Header("Settings")]
     [field: SerializeField, Range(0.1f, 1f)] public float CameraZoomSensitivity { get; private set; } = 1f;
@@ -25,7 +26,8 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
 
     public event Action<Vector2> OnMoveInput;
     public event Action<bool> OnDragCameraInput;
-    public event Action<float> OnZoomInput; 
+    public event Action<float> OnZoomInput;
+    public event Action OnInteractInput;
 
 #if UNITY_EDITOR
     [UnityEditor.InitializeOnLoadMethod]
@@ -66,6 +68,8 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
             
             Get().CameraZoomActionRef.action.performed += OnZoomInputPerformed;
             
+            Get().InteractActionRef.action.performed += OnInteractInputPerformed;
+            
             Application.quitting += Deinitialize;
         }
         else
@@ -75,8 +79,9 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
             
             Get().CameraDragActionRef.action.performed -= OnDragCameraInputPerformed;
             Get().CameraDragActionRef.action.canceled -= OnDragCameraInputPerformed;
-            
             Get().CameraZoomActionRef.action.performed -= OnZoomInputPerformed;
+            
+            Get().InteractActionRef.action.performed -= OnInteractInputPerformed;
             
             Application.quitting -= Deinitialize;
         }
@@ -109,5 +114,12 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         OCSFXLogger.Log($"Zoom input performed ({value}). Scaled value: ({scaledValue})", Get(), Get()._showDebug);
         
         Get().OnZoomInput?.Invoke(scaledValue);
+    }
+    
+    private static void OnInteractInputPerformed(InputAction.CallbackContext context)
+    {
+        OCSFXLogger.Log($"Interact input performed", Get(), Get()._showDebug);
+        
+        Get().OnInteractInput?.Invoke();
     }
 }
