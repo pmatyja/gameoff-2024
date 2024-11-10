@@ -118,6 +118,8 @@ namespace OCSFX.FMOD
 #if UNITY_EDITOR
             if (Application.isPlaying)
                 SetGlobalValue(_fmodParameter.Value);
+            
+            Application.quitting += () => SetGlobalValue(_data.DefaultValue);
 #endif //UNITY_EDITOR
         }
 
