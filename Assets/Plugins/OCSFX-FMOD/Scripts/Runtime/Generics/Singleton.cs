@@ -13,7 +13,11 @@ namespace OCSFX.Generics
         {
             get
             {
-                if (Application.isPlaying && !_instance) _instance = LazyLoadInstance();
+                if (Application.isPlaying && !_instance)
+                {
+                    LazyLoadInstance();
+                }
+                
                 return _instance;
             }
         }
