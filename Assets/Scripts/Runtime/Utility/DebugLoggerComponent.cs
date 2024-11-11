@@ -3,25 +3,25 @@ using UnityEngine;
 
 namespace Runtime.Utility
 {
-    public class DebugLoggerComponent : MonoBehaviour
+    public class DebugLoggerComponent : TriggerOnMonoBehaviourFunction
     {
-        [SerializeField] private LogType _logType = LogType.Log;
-        [SerializeField] private string _message;
+        public LogType LogType = LogType.Log;
+        public string Message;
         
         [Header("Settings")]
         [Tooltip("Toggle to enable/disable logging")]
-        [SerializeField] private bool _print = true;
-        [SerializeField] private Color _textColor;
+        public bool Print = true;
+        public Color TextColor;
 
         public void Log()
         {
-            if (!_print) return;
-            if (string.IsNullOrEmpty(_message)) return;
-            
-            var coloredText = $"<color=#{ColorUtility.ToHtmlStringRGB(_textColor)}>{_message}</color>";
-            
-            switch (_logType)
+            if (!Print || string.IsNullOrEmpty(Message)) return;
+
+            var coloredText = $"<color=#{ColorUtility.ToHtmlStringRGB(TextColor)}>{Message}</color>";
+
+            switch (LogType)
             {
+                default:
                 case LogType.Log:
                     Debug.Log(coloredText, this);
                     break;
@@ -37,15 +37,15 @@ namespace Runtime.Utility
                 case LogType.Exception:
                     Debug.LogException(new Exception(coloredText), this);
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
+        
+        protected override void Trigger() => Log();
 
         private void Reset()
         {
 #if UNITY_EDITOR
-            _textColor = UnityEditor.EditorGUIUtility.isProSkin ? Color.white : Color.black;
+            TextColor = UnityEditor.EditorGUIUtility.isProSkin ? Color.white : Color.black;
 #endif
         }
     }

@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <RotationSpeed>k__BackingField: {x: 0, y: 180, z: 0}
+  <RandomStartRange>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!114 &5510009014748380571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,8 +181,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e9c501d7ee46d264287d2e53a13791a6, type: 2}
     - target: {fileID: 2434437770014351145, guid: 5242827ea61731b4b9b59ed0072cb779, type: 3}
+      propertyPath: Message
+      value: Picked up Key Item!
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434437770014351145, guid: 5242827ea61731b4b9b59ed0072cb779, type: 3}
       propertyPath: _message
       value: Picked up Key Item!
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434437770014351145, guid: 5242827ea61731b4b9b59ed0072cb779, type: 3}
+      propertyPath: TextColor.b
+      value: 0.3207547
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434437770014351145, guid: 5242827ea61731b4b9b59ed0072cb779, type: 3}
+      propertyPath: TextColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434437770014351145, guid: 5242827ea61731b4b9b59ed0072cb779, type: 3}
+      propertyPath: TextColor.r
+      value: 0.8718909
       objectReference: {fileID: 0}
     - target: {fileID: 2434437770014351145, guid: 5242827ea61731b4b9b59ed0072cb779, type: 3}
       propertyPath: _textColor.b

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7903668776144533305}
   - component: {fileID: 1273788100474644320}
   - component: {fileID: 6419667986079666977}
+  - component: {fileID: 6980506511215321965}
   m_Layer: 3
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -150,6 +151,30 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   defaultParent: {fileID: 0}
+--- !u!114 &6980506511215321965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2977464065436162598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec313c85948c31241916d008b0b72b5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shouldPlay: 1
+  _sourceObject: {fileID: 2977464065436162598}
+  _interval: 0.5
+  _footstepEventRef:
+    Guid:
+      Data1: -550437163
+      Data2: 1105194321
+      Data3: -886046048
+      Data4: 568832082
+    Path: event:/SX/CHAR/Player/sx_char_player_fs
+  _surfaceParameter: Surface
+  _surface: 0
 --- !u!1 &4923026199523293171
 GameObject:
   m_ObjectHideFlags: 0
