@@ -4,6 +4,15 @@ using UnityEngine;
 [Serializable]
 public class SpriteAnimation
 {
+    public int Hash
+    {
+        get
+        {
+            var result = Animator.StringToHash(this.id);
+            return result;
+        }
+    }
+
     [SerializeField]
     private string id;
     public string Id => this.id;

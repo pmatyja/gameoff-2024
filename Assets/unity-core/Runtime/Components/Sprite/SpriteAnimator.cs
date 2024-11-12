@@ -46,14 +46,9 @@ public class SpriteAnimator
         this.spriteRenderer.sprite = this.Frame;
     }
 
-    public void Play(SpriteAnimation animationSet)
+    public void Set(SpriteAnimation animation)
     {
-        if (this.animation == animationSet)
-        {
-            return;
-        }
-
-        this.animation = animationSet;
+        this.animation = animation;
         this.frameIndex = 0;
         this.time = 0.0f;
 
@@ -63,9 +58,41 @@ public class SpriteAnimator
         }
     }
 
+    public void Set(string id)
+    {
+        this.Set(this.animations.FirstOrDefault(x => string.Equals(x.Id, id, StringComparison.OrdinalIgnoreCase)));
+    }
+
+    public void Play(SpriteAnimation animation)
+    {
+        if (this.animation == animation)
+        {
+            return;
+        }
+
+        Debug.Log("SpriteAnimationSet");
+        this.Set(animation);
+    }
+
+    public void Play(int hash)
+    {
+        this.Play(this.animations.FirstOrDefault(x => x.Hash == hash));
+    }
+
     public void Play(string id)
     {
         this.Play(this.animations.FirstOrDefault(x => string.Equals(x.Id, id, StringComparison.OrdinalIgnoreCase)));
+    }
+
+    public void NextAnimation()
+    {
+        if (string.IsNullOrWhiteSpace(this.animation.NextAnimation))
+        {
+            return;
+        }
+
+        Debug.Log("NextAnimation");
+        this.Play(this.animation.NextAnimation);
     }
 
     public void Update()
