@@ -436,7 +436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
-  moveThreshold: {x: 0.05, y: 0.05, z: 0.05}
+  moveThreshold: {x: 0.01, y: 0.01, z: 0.01}
 --- !u!95 &3314051649831116782
 Animator:
   serializedVersion: 7
