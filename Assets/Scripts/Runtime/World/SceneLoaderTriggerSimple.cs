@@ -1,5 +1,6 @@
 ﻿using System;
 using OCSFX.Utility.Debug;
+using Runtime.Utility;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,8 +10,8 @@ namespace Runtime.World
     [RequireComponent(typeof(BoxCollider))]
     public class SceneLoaderTriggerSimple : MonoBehaviour
     {
-        public string SceneName;
-        public string PlayerTag = "Player";
+        [BuildSceneName] public string SceneName;
+        [TagField] public string PlayerTag = "Player";
 
         [Header("Debug")]
         [SerializeField] private bool _showDebug;
