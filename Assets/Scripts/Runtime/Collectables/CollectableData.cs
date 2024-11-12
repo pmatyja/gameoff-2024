@@ -24,6 +24,15 @@ namespace Runtime.Collectables
         
         public void OnSpawn(Transform spawnTransform)
         {
+            if (IsUnique)
+            {
+                if (ItemInventory.Instance.Contains(this))
+                {
+                    Destroy(spawnTransform.gameObject);
+                    return;
+                }
+            }
+            
             if (!LoopSfx.IsNull)
             {
                 LoopSfx.Play(spawnTransform.gameObject);
