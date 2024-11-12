@@ -112,27 +112,21 @@ namespace OCSFX.FMOD.AudioData
         private void PlayMusic(EventReference eventRef)
         {
             var eventRefID = eventRef.Guid;
-            if (_instances.ContainsKey(eventRefID))
-            {
-                if (_instances[eventRefID].isValid())
-                {
-                    OCSFXLogger.LogWarning($"[{this}] {eventRef.GetEventName()} music is already playing.", this, _showDebug);
-                }
-                else
-                {
-                    _instances.Remove(eventRefID);
-                }
-            }
 
             if (_currentInstance.isValid())
             {
-                _currentInstance.getDescription(out var eventDesc);
-                eventDesc.getID(out var guid);
-                
-                if (_instances.ContainsKey(guid))
+                var currentInstanceID = _currentInstance.GetEventGUID();
+
+                if (eventRefID == currentInstanceID)
                 {
-                    _instances[guid].Stop();
-                    _instances.Remove(guid);
+                    OCSFXLogger.LogWarning($"[{this}] {eventRef.GetEventName()} music is already playing.", this, _showDebug);
+                    return;
+                }
+
+                if (_instances.TryGetValue(currentInstanceID, out var currentInstance))
+                {
+                    currentInstance.Stop();
+                    _instances.Remove(currentInstanceID);
                 }
             }
 
@@ -145,7 +139,7 @@ namespace OCSFX.FMOD.AudioData
                 OCSFXLogger.LogWarning($"[{this}] failed to play music {eventRef.GetEventName()}", this, _showDebug);
                 return;
             }
-            
+
             OCSFXLogger.Log("Play Music: " + eventRef.GetEventName(), this, _showDebug);
         }
 

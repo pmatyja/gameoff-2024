@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FMOD;
 using FMOD.Studio;
 using FMODUnity;
 using OCSFX.FMOD.Types;
@@ -166,6 +167,14 @@ namespace OCSFX.FMOD
             var eventName = segments[^1];
 
             return eventName;
+        }
+        
+        public static GUID GetEventGUID(this EventInstance eventInstance)
+        {
+            eventInstance.getDescription(out var eventDescription);
+            eventDescription.getID(out var eventGUID);
+            
+            return eventGUID;
         }
         
         public static float GetEventVolume(this EventInstance eventInstance)
