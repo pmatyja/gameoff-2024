@@ -20,7 +20,7 @@ namespace Lavgine
             this.MakeWall(new Vector3(+0, -1, +0));
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             if (this.showClippingPreview)
             {
