@@ -33874,13 +33874,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1688038464}
   - component: {fileID: 1688038465}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BoundsBuilder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1688038464
 Transform:
   m_ObjectHideFlags: 0
@@ -33911,7 +33911,7 @@ MonoBehaviour:
   bounds:
     m_Center: {x: -4, y: 5, z: 1}
     m_Extent: {x: 15, y: 15, z: 15}
-  clippingPreview: 0
+  showClippingPreview: 0
 --- !u!43 &1704567255
 Mesh:
   m_ObjectHideFlags: 0
@@ -39228,19 +39228,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8541312
+      value: 0.8543027
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.1293534
+      value: 0.12937938
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.4980349
+      value: -0.49774063
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.075424604
+      value: 0.07538004
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
