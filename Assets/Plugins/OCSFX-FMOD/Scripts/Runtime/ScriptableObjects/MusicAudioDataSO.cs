@@ -132,7 +132,12 @@ namespace OCSFX.FMOD.AudioData
 
             _currentEventRef = eventRef;
             _currentInstance = eventRef.Play2D();
-            _instances.Add(eventRefID, _currentInstance);
+            
+            // Add or set
+            if (!_instances.TryAdd(eventRefID, _currentInstance))
+            {
+                _instances[eventRefID] = _currentInstance;
+            }
 
             if (!_currentInstance.isValid())
             {
