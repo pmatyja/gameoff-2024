@@ -66,7 +66,7 @@ namespace Runtime.Controllers
             HandleGroundChecks();
             
             //Add player movement to velocity;
-            var targetVelocity = GetCameraRelativeMoveDirection(_movementInput) * MovementSpeed;
+            var targetVelocity = GameOff2024Statics.GetCameraRelativeMoveDirection(_movementInput, _cameraTransform) * MovementSpeed;
             var isReversing = Vector3.Dot(_moveDirection.normalized, targetVelocity.normalized) < 0f;
             var accelerationFactor = isReversing ? 2 * Acceleration : Acceleration;
             
@@ -160,22 +160,6 @@ namespace Runtime.Controllers
         private float GetMaxRotationDelta()
         {
             return TurnSpeed * _MAX_ROT_DELTA_FACTOR;
-        }
-        
-        private Vector3 GetCameraRelativeMoveDirection(Vector2 inputDirection)
-        {
-            // If there is no camera, use this object's forward vector;
-            // Otherwise, use the camera's forward and right vectors to calculate the move direction;
-            var forward = _cameraTransform ? _cameraTransform.forward : _transform.forward;
-            var right = _cameraTransform ? _cameraTransform.right : _transform.right;
-        
-            forward.y = 0f;
-            right.y = 0f;
-        
-            forward.Normalize();
-            right.Normalize();
-        
-            return forward * inputDirection.y + right * inputDirection.x;
         }
         
         //This function is called when the controller has landed on a surface after being in the air;

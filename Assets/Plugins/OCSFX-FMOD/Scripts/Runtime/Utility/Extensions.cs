@@ -63,7 +63,7 @@ namespace OCSFX.Utility
         
         public static float Map01(this float value, float fromMin, float fromMax)
         {
-            return (value - fromMin) / (fromMax - fromMin);
+            return Map(value, fromMin, fromMax, 0, 1);
         }
         
         public static T GetOrAdd<T>(this GameObject attachGameObject) where T : Component

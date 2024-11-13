@@ -49,5 +49,21 @@ namespace Runtime
 
             return waitForSeconds;
         }
+        
+        public static Vector3 GetCameraRelativeMoveDirection(Vector2 inputDirection, Transform cameraTransform = null)
+        {
+            // If there is no camera, use this object's forward vector;
+            // Otherwise, use the camera's forward and right vectors to calculate the move direction;
+            var forward = cameraTransform ? cameraTransform.forward : GetMainCamera().transform.forward;
+            var right = cameraTransform ? cameraTransform.right : GetMainCamera().transform.right;
+        
+            forward.y = 0f;
+            right.y = 0f;
+        
+            forward.Normalize();
+            right.Normalize();
+        
+            return forward * inputDirection.y + right * inputDirection.x;
+        }
     }
 }
