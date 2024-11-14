@@ -1,19 +1,24 @@
+using System;
+using System.Collections.Generic;
 using OCSFX.Attributes;
 using OCSFX.Utility;
 using OCSFX.Utility.Attributes;
 using Runtime;
 using Runtime.Controllers;
+using Runtime.Utility;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 
 public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
 {
     [Header("Animation")]
-    [SerializeField] private Animator _animator;
     [SerializeField] private GameOff2024SimpleWalkController _walkController;
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    [Space]
-    [SerializeField] private string _moveSpeedParameter = "MoveSpeed";
-    [SerializeField] private string _facingCameraParameter = "IsFacingCamera";
+    [FormerlySerializedAs("_castShadowMode")] [SerializeField] private ShadowCastingMode _shadowCastingMode = ShadowCastingMode.On;
+    [Header("Animator Parameters")]
+    [SerializeField] private AnimatorParamRef _moveSpeedParamRef = new AnimatorParamRef("MoveSpeed", AnimatorControllerParameterType.Float);
+    [SerializeField] private AnimatorParamRef _isFacingCameraParamRef = new AnimatorParamRef("IsFacingCamera", AnimatorControllerParameterType.Bool);
     
     [Header("Settings")]
     [Tooltip("The dead zone for the facing camera check." +
@@ -22,9 +27,6 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
     [SerializeField, MinMaxRange(-1,1)] private Vector2 _facingCameraDeadZone = new Vector2(-.25f, .25f); 
     [SerializeField, MinMaxRange(-90, 90)] private Vector2 _verticalRotationLimits = new Vector2(-90, 90);
     [SerializeField] private bool _faceCameraWhenStill = true;
-
-    private int _moveSpeedHash;
-    private int _faceCameraHash;
     
     private Vector2 _movementInput = Vector2.zero;
     
@@ -35,9 +37,9 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
 
     private void OnEnable()
     {
-        CacheParameterHashes();
-        
         InputHandler.Get().OnMoveInput += OnMoveInput;
+        
+        _spriteRenderer.shadowCastingMode = _shadowCastingMode;
     }
 
     private void OnDisable()
@@ -49,23 +51,9 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
     {
         HandleBillboard();
         
-        if (!_animator || !_walkController)
-        {
-            return;
-        }
+        if (!_walkController) return;
 
-        GetNormalizedLocomotionSpeed();
-
-        if (AnimateLocomotion())
-        {
-            _animator.SetFloat(_moveSpeedHash, NormalizedLocomotionSpeed);
-        }
-        else
-        {
-            NormalizedLocomotionSpeed = 0;
-            _animator.SetFloat(_moveSpeedHash, 0);
-        }
-        
+        AnimateLocomotion();
         HandleCameraFaceDirection();
     }
     
@@ -75,14 +63,16 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
         var currentHorizontalSpeed = new Vector2(_walkController.GetVelocity().x, _walkController.GetVelocity().z).sqrMagnitude;
         
         // map the current speed to the range [0, 1]
-        NormalizedLocomotionSpeed = currentHorizontalSpeed.Map01(0, maxSpeed);
-        
-        return NormalizedLocomotionSpeed;
+        return currentHorizontalSpeed.Map01(0, maxSpeed);
     }
 
-    private bool AnimateLocomotion()
-    {
-        return _movementInput.sqrMagnitude > 0 && _walkController.GetVelocity().sqrMagnitude > 0;
+    private void AnimateLocomotion()
+    { 
+        var shouldAnimate = _movementInput.sqrMagnitude > 0 && _walkController.GetVelocity().sqrMagnitude > 0;
+        
+        NormalizedLocomotionSpeed = shouldAnimate ? GetNormalizedLocomotionSpeed() : 0;
+        
+        _moveSpeedParamRef.SetValue(NormalizedLocomotionSpeed);
     }
     
     private void HandleBillboard()
@@ -107,14 +97,14 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
         if (!_walkController)
         {
             IsFacingCamera = true;
-            _animator.SetBool(_faceCameraHash, IsFacingCamera);
+            _isFacingCameraParamRef.SetValue(IsFacingCamera);
             return;
         }
         
         if (_faceCameraWhenStill && _walkController.GetVelocity().sqrMagnitude < 0.01f)
         {
             IsFacingCamera = true;
-            _animator.SetBool(_faceCameraHash, IsFacingCamera);
+            _isFacingCameraParamRef.SetValue(IsFacingCamera);
             return;
         }
         
@@ -130,12 +120,7 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
             IsFacingCamera = FacingCameraDot < 0;
         }
         
-        if (!_animator)
-        {
-            return;
-        }
-
-        _animator.SetBool(_faceCameraHash, IsFacingCamera);
+        _isFacingCameraParamRef.SetValue(IsFacingCamera);
     }
     
     private void OnMoveInput(Vector2 movement)
@@ -148,14 +133,11 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
         }
     }
 
-    private void CacheParameterHashes()
-    {
-        _moveSpeedHash = Animator.StringToHash(_moveSpeedParameter);
-        _faceCameraHash = Animator.StringToHash(_facingCameraParameter);
-    }
-
     private void OnValidate()
     {
-        CacheParameterHashes();
+        if (_spriteRenderer)
+        {
+            _spriteRenderer.shadowCastingMode = _shadowCastingMode;
+        }
     }
 }
