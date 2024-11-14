@@ -4,6 +4,7 @@ using OCSFX.Utility.Debug;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 namespace Runtime
 {
@@ -13,13 +14,14 @@ namespace Runtime
         [field: SerializeField] public InputActionAsset InputActions { get; private set; }
         [field: SerializeField, TagField] public string PlayerTag { get; private set; } = "Player";
         
-        [field: Header("Audio")]
+        [field: Space]
         [field: SerializeField, Expandable] public AudioManager AudioManagerPrefab { get; private set; }
+        
+        [field: Space]
+        [field: SerializeField, Expandable] public Volume PostProcessingVolumePrefab { get; private set; }
         
         [Header("Debug")]
         [SerializeField] private bool _showDebug;
-
-        public static AudioManager AudioManager;
 
 #if UNITY_EDITOR
         [UnityEditor.InitializeOnLoadMethod]
@@ -29,14 +31,22 @@ namespace Runtime
         [RuntimeInitializeOnLoadMethod]
         private static void RuntimeInit()
         {
-            var audioManagerPrefabRef = Get().AudioManagerPrefab;
+            Get().ValidateFields();
+        }
+
+        private void ValidateFields()
+        {
+            if (!InputActions) WarnOfMissingField(nameof(InputActions));
+            if (string.IsNullOrEmpty(PlayerTag)) WarnOfMissingField(nameof(PlayerTag));
+            if (!AudioManagerPrefab) WarnOfMissingField(nameof(AudioManagerPrefab));
+            if (!PostProcessingVolumePrefab) WarnOfMissingField(nameof(PostProcessingVolumePrefab));
             
-            AudioManager = audioManagerPrefabRef ? Instantiate(audioManagerPrefabRef) : FindFirstObjectByType<AudioManager>();
-            
-            if (!AudioManager)
-            {
-                OCSFXLogger.LogError($"No {nameof(AudioManager)} found in the scene or in {nameof(GameOff2024GameSettings)}.");
-            }
+            if (_showDebug) OCSFXLogger.Log($"[{nameof(GameOff2024GameSettings)}] All fields are valid.", this);
+        }
+        
+        private void WarnOfMissingField(string fieldName)
+        {
+            OCSFXLogger.LogWarning($"[{nameof(GameOff2024GameSettings)}] {fieldName} is unassigned. This may cause problems during the game.", this);
         }
         
     }

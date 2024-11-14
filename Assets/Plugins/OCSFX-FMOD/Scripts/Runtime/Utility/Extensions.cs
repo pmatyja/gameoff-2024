@@ -52,13 +52,13 @@ namespace OCSFX.Utility
         public static float Map(this float value, float fromMin, float fromMax, float toMin, float toMax)
         {
             // Ensure the value is within the original range
-            value = Mathf.Clamp(value, fromMin, fromMax);
-
+            value = Mathf.Clamp(value, Mathf.Min(fromMin, fromMax), Mathf.Max(fromMin, fromMax));
+            
             // Map the value to the new range
             float mappedValue = (value - fromMin) / (fromMax - fromMin) * (toMax - toMin) + toMin;
-
+            
             // Ensure the mapped value is within the target range
-            return Mathf.Clamp(mappedValue, toMin, toMax);
+            return Mathf.Clamp(mappedValue, Mathf.Min(toMin, toMax), Mathf.Max(toMin, toMax));
         }
         
         public static float Map01(this float value, float fromMin, float fromMax)
