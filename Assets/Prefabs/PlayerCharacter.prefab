@@ -301,11 +301,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 7509604622125175283}
   _walkController: {fileID: 2724732678914842201}
+  _spriteRenderer: {fileID: 7045254357344253605}
   _moveSpeedParameter: MoveSpeed
   _facingCameraParameter: IsFacingCamera
   _facingCameraDeadZone: {x: -0.2, y: 0.2}
   _verticalRotationLimits: {x: -8, y: 8}
-  _faceCameraWhenStill: 1
+  _faceCameraWhenStill: 0
   <IsFacingCamera>k__BackingField: 1
   <NormalizedLocomotionSpeed>k__BackingField: 0
   <FacingCameraDot>k__BackingField: 0
@@ -547,7 +548,7 @@ GameObject:
   - component: {fileID: 1031161653070118048}
   - component: {fileID: 7259958544208325888}
   m_Layer: 3
-  m_Name: PointLight
+  m_Name: ExtraVisLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -561,13 +562,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7743008048474143292}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -0.5}
+  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
+  m_LocalPosition: {x: 0, y: 3.5, z: -0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8855616975441640692}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!108 &1031161653070118048
 Light:
   m_ObjectHideFlags: 0
@@ -577,12 +578,12 @@ Light:
   m_GameObject: {fileID: 7743008048474143292}
   m_Enabled: 1
   serializedVersion: 11
-  m_Type: 2
+  m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.01
-  m_Range: 5
-  m_SpotAngle: 56.289574
-  m_InnerSpotAngle: 21.80208
+  m_Range: 4
+  m_SpotAngle: 179
+  m_InnerSpotAngle: 129.99545
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0

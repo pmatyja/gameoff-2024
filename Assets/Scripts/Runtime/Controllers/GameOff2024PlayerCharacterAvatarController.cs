@@ -10,6 +10,7 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private Animator _animator;
     [SerializeField] private GameOff2024SimpleWalkController _walkController;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     [Space]
     [SerializeField] private string _moveSpeedParameter = "MoveSpeed";
     [SerializeField] private string _facingCameraParameter = "IsFacingCamera";
@@ -137,8 +138,16 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
         _animator.SetBool(_faceCameraHash, IsFacingCamera);
     }
     
-    private void OnMoveInput(Vector2 movement) => _movementInput = movement;
-    
+    private void OnMoveInput(Vector2 movement)
+    {
+        _movementInput = movement;
+        
+        if (Mathf.Abs(_movementInput.x) > 0.01f)
+        {
+            _spriteRenderer.flipX = _movementInput.x > 0;
+        }
+    }
+
     private void CacheParameterHashes()
     {
         _moveSpeedHash = Animator.StringToHash(_moveSpeedParameter);
