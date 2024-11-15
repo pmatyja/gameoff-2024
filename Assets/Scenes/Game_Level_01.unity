@@ -13106,8 +13106,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3678755149114345895, guid: fbf69f35776e0b04596c58be9eecc970, type: 3}
-      propertyPath: InitialModule.startSizeY.scalar
-      value: 0.015
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.5529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678755149114345895, guid: fbf69f35776e0b04596c58be9eecc970, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678755149114345895, guid: fbf69f35776e0b04596c58be9eecc970, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678755149114345895, guid: fbf69f35776e0b04596c58be9eecc970, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.3529412
       objectReference: {fileID: 0}
     - target: {fileID: 4882195332186064778, guid: fbf69f35776e0b04596c58be9eecc970, type: 3}
       propertyPath: m_LocalPosition.x
