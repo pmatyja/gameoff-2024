@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BlockMoverScript : MonoBehaviour
 {
@@ -14,9 +14,12 @@ public class BlockMoverScript : MonoBehaviour
 
     [SerializeField]
     private BlockDirection direction = BlockDirection.PositiveY;
+    
+    [Header("Events")]
+    [field: SerializeField] public UnityEvent OnBlockMoveBeginEvent { get; private set; }
+    [field: SerializeField] public UnityEvent OnBlockMoveEndEvent { get; private set; }
 
     [Header("Debug")]
-
     [SerializeField]
     private bool isDebugEnabled;
 
@@ -31,7 +34,7 @@ public class BlockMoverScript : MonoBehaviour
     private Vector3 pointA;
     private Vector3 pointB;
 
-    private WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
+    private readonly WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
     public void Activate()
     {
@@ -128,9 +131,9 @@ public class BlockMoverScript : MonoBehaviour
     {
         yield return waitForFixedUpdate;
         
-        EventBus.Raise<OnBlockMoveEventParameters>(this, default);
-        
         var destination = this.GetDestination();
+        
+        this.OnMoveBegin();
         
         while (this.isActiveAndEnabled)
         {
@@ -146,10 +149,24 @@ public class BlockMoverScript : MonoBehaviour
             yield return waitForFixedUpdate;
         }
         
-        EventBus.Raise<OnBlockMoveFinishedEventParameters>(this, default);
+        this.OnMoveEnd();
 
         this.direction = NegateDirection(this.direction);
         this.coroutine = null;
+    }
+
+    private void OnMoveBegin()
+    {
+        this.OnBlockMoveBeginEvent?.Invoke();
+        EventBus.Raise<OnBlockMoveEventParameters>(this, 
+            new OnBlockMoveEventParameters(this.gameObject, this.direction, this.transform.position));
+    }
+    
+    private void OnMoveEnd()
+    {
+        this.OnBlockMoveEndEvent?.Invoke();
+        EventBus.Raise<OnBlockMoveFinishedEventParameters>(this, 
+            new OnBlockMoveFinishedEventParameters(this.gameObject, this.direction, transform.position));
     }
 
     private Vector3 GetDestination()
