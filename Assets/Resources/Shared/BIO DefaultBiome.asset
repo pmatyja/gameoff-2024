@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a231c571288998449036a63a3bb1a86, type: 3}
   m_Name: BIO DefaultBiome
   m_EditorClassIdentifier: 
-  AmbientDay: {fileID: 11400000, guid: ae46fdfa1cdbb1140ace064467202bf8, type: 2}
-  AmbientNight: {fileID: 11400000, guid: d77db5dd81159b44d9013f354e65208f, type: 2}
+  AmbientDay: {fileID: 0}
+  AmbientNight: {fileID: 0}
   Temperature:
     TemperatureCurve:
       serializedVersion: 2
