@@ -1,5 +1,4 @@
-﻿using System;
-using OCSFX.Utility.Debug;
+﻿using OCSFX.Utility.Debug;
 using Runtime.Utility;
 using Unity.Cinemachine;
 using UnityEngine;
