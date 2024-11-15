@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b516b5735b38bc941a718c072aa2d38b, type: 3}
   m_Name: GameOff2024VolumeSettings
   m_EditorClassIdentifier: 
-  _showDebug: 1
+  _showDebug: 0
   _autoFillPlayerPrefsData: 1
   _volumeSettingParameters:
   - _parameter: Volume_Master
-    _value: 0.9
+    _value: 1
   - _parameter: Volume_SX
     _value: 1
   - _parameter: Volume_MX
@@ -24,7 +24,7 @@ MonoBehaviour:
   _audioPlayerPrefs:
     <Entries>k__BackingField:
     - _parameter: Volume_Master
-      _value: 0.9
+      _value: 1
     - _parameter: Volume_SX
       _value: 1
     - _parameter: Volume_MX
