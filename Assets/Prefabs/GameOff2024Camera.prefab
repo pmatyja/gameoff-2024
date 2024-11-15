@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Composition:
-    ScreenPosition: {x: -0.05, y: 0.2}
+    ScreenPosition: {x: 0.04611491, y: 0.04606754}
     DeadZone:
       Enabled: 1
       Size: {x: 0.2, y: 0.2}
@@ -266,6 +266,3 @@ MonoBehaviour:
   _showDebug: 0
   _zoomRange: {x: 1.5, y: 4}
   _fov: 6
-  _postProcessingVolume: {fileID: 0}
-  _depthOfFieldFocalLengthRange: {x: 0, y: 300}
-  _depthOfFieldFocalLength: 100
