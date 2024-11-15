@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7903668776144533305}
   - component: {fileID: 1273788100474644320}
   - component: {fileID: 6419667986079666977}
-  - component: {fileID: 6980506511215321965}
   m_Layer: 3
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -150,30 +149,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   defaultParent: {fileID: 0}
---- !u!114 &6980506511215321965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2977464065436162598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec313c85948c31241916d008b0b72b5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shouldPlay: 1
-  _sourceObject: {fileID: 2977464065436162598}
-  _interval: 0.4
-  _footstepEventRef:
-    Guid:
-      Data1: -550437163
-      Data2: 1105194321
-      Data3: -886046048
-      Data4: 568832082
-    Path: event:/SX/CHAR/Player/sx_char_player_fs
-  _surfaceParameter: Surface
-  _surface: 0
 --- !u!1 &3468115195455094011
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,6 +161,7 @@ GameObject:
   - component: {fileID: 7045254357344253605}
   - component: {fileID: 7509604622125175283}
   - component: {fileID: 1063189845271939371}
+  - component: {fileID: 4710912800012050595}
   m_Layer: 3
   m_Name: PaperCharacterAnimator
   m_TagString: Untagged
@@ -316,6 +292,19 @@ MonoBehaviour:
   <IsFacingCamera>k__BackingField: 1
   <NormalizedLocomotionSpeed>k__BackingField: 0
   <FacingCameraDot>k__BackingField: 0
+--- !u!114 &4710912800012050595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3468115195455094011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eadc630fc0f3fe44fb38b1a633be92ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterAudioData: {fileID: 11400000, guid: 9211ceff5e1d91f47b1064be5676c617, type: 2}
 --- !u!1 &4162034355716740382
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +523,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7309971100726972506}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.92387956, z: -0, w: -0.3826834}
+  m_LocalRotation: {x: -0, y: 0.49596173, z: -0, w: -0.8683444}
   m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
