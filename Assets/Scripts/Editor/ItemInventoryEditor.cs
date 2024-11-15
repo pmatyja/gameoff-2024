@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Runtime.Collectables;
 using UnityEditor;
 using UnityEngine;
@@ -37,15 +39,23 @@ namespace Editor
             {
                 EditorGUILayout.LabelField("No items in inventory", EditorStyles.helpBox);
             }
-
-            for (var i = 0; i < items.Count; i++)
+            else
             {
-                var item = items[i];
+                var itemCounts = items.GroupBy(item => item)
+                                      .ToDictionary(group => group.Key, group => group.Count());
 
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField($"Item {i}", GUILayout.Width(100));
-                items[i] = (CollectableData)EditorGUILayout.ObjectField(items[i], typeof(CollectableData), false);
-                EditorGUILayout.EndHorizontal();
+                EditorGUI.BeginDisabledGroup(true);
+                foreach (var kvp in itemCounts)
+                {
+                    var item = kvp.Key;
+                    var count = kvp.Value;
+
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.ObjectField(item, typeof(CollectableData), false);
+                    EditorGUILayout.LabelField($"Count: {count}", GUILayout.Width(100));
+                    EditorGUILayout.EndHorizontal();
+                }
+                EditorGUI.EndDisabledGroup();
             }
 
             serializedObject.ApplyModifiedProperties();
