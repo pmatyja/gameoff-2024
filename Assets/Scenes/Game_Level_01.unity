@@ -13105,9 +13105,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3901738429798407709, guid: fbf69f35776e0b04596c58be9eecc970, type: 3}
-      propertyPath: maxFogDensity
-      value: 0.035
+    - target: {fileID: 3678755149114345895, guid: fbf69f35776e0b04596c58be9eecc970, type: 3}
+      propertyPath: InitialModule.startSizeY.scalar
+      value: 0.015
       objectReference: {fileID: 0}
     - target: {fileID: 4882195332186064778, guid: fbf69f35776e0b04596c58be9eecc970, type: 3}
       propertyPath: m_LocalPosition.x
