@@ -315,8 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 611e6d3fd8a02b542a145d550118d790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enabled: 0
-  _setOnAwake: 1
+  _currentState: 0
+  _stateOnAwake: 0
 --- !u!1001 &15902869304076201
 PrefabInstance:
   m_ObjectHideFlags: 0

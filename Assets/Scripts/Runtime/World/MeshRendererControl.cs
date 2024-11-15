@@ -1,12 +1,12 @@
-using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Runtime.World
 {
     public class MeshRendererControl : MonoBehaviour
     {
-        [SerializeField] private bool _enabled = true;
-        [SerializeField] private bool _setOnAwake = true;
+        [FormerlySerializedAs("_enabled")] [SerializeField] private bool _currentState = true;
+        [FormerlySerializedAs("_setOnAwake")] [SerializeField] private bool _stateOnAwake = true;
         
         private MeshRenderer[] _meshRenderers;
         
@@ -14,30 +14,30 @@ namespace Runtime.World
         {
             _meshRenderers = GetComponentsInChildren<MeshRenderer>();
             
-            if (_setOnAwake) SetMeshRenderersEnabled(_enabled);
+            SetMeshRenderersEnabled(_stateOnAwake);
         }
 
         public void SetMeshRenderersEnabled(bool enable)
         {
-            _enabled = enable;
+            _currentState = enable;
             
             foreach (var meshRenderer in _meshRenderers)
             {
-                meshRenderer.enabled = _enabled;
+                meshRenderer.enabled = _currentState;
             }
         }
         
         public void ToggleMeshRenderersEnabled()
         {
-            _enabled = !_enabled;
-            SetMeshRenderersEnabled(_enabled);
+            _currentState = !_currentState;
+            SetMeshRenderersEnabled(_currentState);
         }
 
         private void OnValidate()
         {
             _meshRenderers = GetComponentsInChildren<MeshRenderer>();
             
-            SetMeshRenderersEnabled(_enabled);
+            SetMeshRenderersEnabled(_currentState);
         }
     }
 }
