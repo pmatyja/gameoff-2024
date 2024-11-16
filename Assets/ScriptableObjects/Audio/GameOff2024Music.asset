@@ -22,7 +22,7 @@ MonoBehaviour:
         Data3: 0
         Data4: 0
       Path: 
-  - _name: Game
+  - _name: Game_Level_01
     _eventRef:
       Guid:
         Data1: 760368772
@@ -30,6 +30,14 @@ MonoBehaviour:
         Data3: 1187395518
         Data4: 863309997
       Path: event:/MX/mx_gameplay_base
+  - _name: Game_Level_02
+    _eventRef:
+      Guid:
+        Data1: 165376082
+        Data2: 1313528641
+        Data3: 1471050144
+        Data4: 1132218843
+      Path: event:/MX/mx_gameplay_base_02
   - _name: GameOver
     _eventRef:
       Guid:

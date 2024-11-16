@@ -58,7 +58,14 @@
 			<destination>{ed5f5521-48b5-4498-8fa1-85f26edf9363}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{e1a44c9f-6fc6-4ef2-9e7b-faf27d41f198}" />
+	<object class="EventAutomatableProperties" id="{e1a44c9f-6fc6-4ef2-9e7b-faf27d41f198}">
+		<property name="maxVoices">
+			<value>2</value>
+		</property>
+		<property name="voiceStealing">
+			<value>3</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{d2e07e50-10fc-41b2-9734-ae5dcaa2ef42}" />
 	<object class="GroupTrack" id="{480d7a88-4cf4-4ab7-bde7-7ad31e031017}">
 		<relationship name="modules">
@@ -107,10 +114,10 @@
 			<value>true</value>
 		</property>
 		<property name="length">
-			<value>12</value>
+			<value>2</value>
 		</property>
 		<property name="quantizationInterval">
-			<value>5</value>
+			<value>3</value>
 		</property>
 		<relationship name="sounds">
 			<destination>{a88b462f-5597-4eb7-abef-2dcdfe29616d}</destination>
@@ -139,7 +146,7 @@
 	</object>
 	<object class="CommandSound" id="{be43c003-c75f-40b1-b5e2-accee6a9299f}">
 		<property name="length">
-			<value>12</value>
+			<value>2</value>
 		</property>
 		<property name="commandType">
 			<value>3</value>
