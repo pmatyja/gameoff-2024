@@ -5,6 +5,7 @@ namespace OCSFX.Generics
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         [SerializeField] protected bool _dontDestroyOnLoad = true;
+        [SerializeField] protected SingletonBehaviour _singletonBehaviour = SingletonBehaviour.PreventNew;
         
         // ReSharper disable once MemberCanBePrivate.Global
         protected static T _instance;
@@ -41,8 +42,15 @@ namespace OCSFX.Generics
         {
             if (_instance && _instance != this)
             {
-                Destroy(gameObject);
-                return;
+                switch (_singletonBehaviour)
+                {
+                    case SingletonBehaviour.PreventNew:
+                        Destroy(gameObject);
+                        return;
+                    case SingletonBehaviour.DestroyOld:
+                        Destroy(_instance.gameObject);
+                        break;
+                }
             }
 
             _instance = (T)this;
@@ -76,5 +84,11 @@ namespace OCSFX.Generics
             _instance = go.AddComponent<T>();
             return _instance;
         }
+    }
+    
+    public enum SingletonBehaviour
+    {
+        PreventNew,
+        DestroyOld
     }
 }
