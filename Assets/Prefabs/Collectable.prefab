@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 28354647108226236}
   - component: {fileID: 2372511055032801079}
   - component: {fileID: 2434437770014351145}
+  - component: {fileID: 1184788425608068618}
   m_Layer: 0
   m_Name: Collectable
   m_TagString: Untagged
@@ -497,3 +498,17 @@ MonoBehaviour:
   Message: Picked up Basic Collectable!
   Print: 1
   TextColor: {r: 0.6698113, g: 1, b: 0.9456322, a: 1}
+--- !u!114 &1184788425608068618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8426326815010447954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ee667d3e3a1443bb99c426fb8d22dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uniqueID: 3508f1b4-8157-49a8-bd71-6bc596a234ca
+  _generateIdButton: 0
