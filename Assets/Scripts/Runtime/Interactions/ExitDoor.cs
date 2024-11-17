@@ -28,16 +28,16 @@ namespace Runtime.Interactions
             ItemInventory.OnItemAdded += OnItemAdded;
             ItemInventory.OnItemRemoved += OnItemRemoved;
         }
-        
+
         private void OnDisable()
         {
             ItemInventory.OnItemAdded -= OnItemAdded;
             ItemInventory.OnItemRemoved -= OnItemRemoved;
         }
-
-        private void OnItemAdded(CollectableData addedItem) => UpdateCanInteract();
-
-        private void OnItemRemoved(CollectableData addedItem) => UpdateCanInteract();
+        
+        private void OnItemAdded(IdentifiedItem obj) => UpdateCanInteract();
+        private void OnItemRemoved(IdentifiedItem obj) => UpdateCanInteract();
+        
 
         protected override void Open()
         {

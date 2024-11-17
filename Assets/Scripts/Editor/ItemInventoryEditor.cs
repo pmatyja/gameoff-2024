@@ -41,18 +41,18 @@ namespace Editor
             }
             else
             {
-                var itemCounts = items.GroupBy(item => item)
+                var itemCounts = items.GroupBy(item => item.Data)
                                       .ToDictionary(group => group.Key, group => group.Count());
 
                 EditorGUI.BeginDisabledGroup(true);
                 foreach (var kvp in itemCounts)
                 {
-                    var item = kvp.Key;
+                    var data = kvp.Key;
                     var count = kvp.Value;
 
                     EditorGUILayout.BeginHorizontal();
-                    EditorGUILayout.ObjectField(item, typeof(CollectableData), false);
-                    EditorGUILayout.LabelField($"Count: {count}", GUILayout.Width(100));
+                    EditorGUILayout.ObjectField(data, typeof(CollectableData), false);
+                    EditorGUILayout.LabelField(!data.IsUnique ? $"Count: {count}" : "Unique");
                     EditorGUILayout.EndHorizontal();
                 }
                 EditorGUI.EndDisabledGroup();

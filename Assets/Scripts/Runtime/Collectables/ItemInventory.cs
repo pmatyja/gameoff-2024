@@ -1,70 +1,70 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using OCSFX.Utility;
 using OCSFX.Utility.Debug;
 using UnityEngine;
 using Utility.Generics;
 
 namespace Runtime.Collectables
 {
-    public class ItemInventory : OCSFX.Generics.Singleton<ItemInventory>, IList<CollectableData>
+    public class ItemInventory : OCSFX.Generics.Singleton<ItemInventory>, IList<IdentifiedItem>
     {
         /**
         Note that while the ObservableList serializes, it does not display in the inspector
         If we want to see the list in the inspector, we need to create a custom inspector for this class,
         or use an Editor-only copy of the list to display in the inspector 
         */
-        [SerializeField] private ObservableList<CollectableData> _items = new ObservableList<CollectableData>();
+        [SerializeField] private ObservableList<IdentifiedItem> _items = new ObservableList<IdentifiedItem>();
 
         [SerializeField] private bool _showDebug = true;
 
         #region Events
-        public static event Action<CollectableData> OnItemAdded;
-        public static event Action<CollectableData> OnItemRemoved;
-        public static event Action<int, CollectableData> OnItemInserted; 
-        public static event Action<int, CollectableData>  OnItemRemovedAt;
+        public static event Action<IdentifiedItem> OnItemAdded;
+        public static event Action<IdentifiedItem> OnItemRemoved;
+        public static event Action<int, IdentifiedItem> OnItemInserted; 
+        public static event Action<int, IdentifiedItem>  OnItemRemovedAt;
         public static event Action OnItemsCleared;
         #endregion // Events
         
         #region IList Interface
-        public IEnumerator<CollectableData> GetEnumerator() => _items.GetEnumerator();
+        public IEnumerator<IdentifiedItem> GetEnumerator() => _items.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public void Add(CollectableData item) => _items.Add(item);
+        public void Add(IdentifiedItem item) => _items.Add(item);
 
         public void Clear() => _items.Clear();
-        public bool Contains(CollectableData item) => _items.Contains(item);
+        public bool Contains(IdentifiedItem item) => _items.Contains(item);
 
-        public void CopyTo(CollectableData[] array, int arrayIndex) => _items.CopyTo(array, arrayIndex);
-        public bool Remove(CollectableData item) => _items.Remove(item);
+        public void CopyTo(IdentifiedItem[] array, int arrayIndex) => _items.CopyTo(array, arrayIndex);
+        public bool Remove(IdentifiedItem item) => _items.Remove(item);
 
         public int Count => _items.Count;
         public bool IsReadOnly => _items.IsReadOnly;
         
-        public int IndexOf(CollectableData item) => _items.IndexOf(item);
+        public int IndexOf(IdentifiedItem item) => _items.IndexOf(item);
 
-        public void Insert(int index, CollectableData item) => _items.Insert(index, item);
+        public void Insert(int index, IdentifiedItem item) => _items.Insert(index, item);
 
         public void RemoveAt(int index) => _items.RemoveAt(index);
 
-        public CollectableData this[int index]
+        public IdentifiedItem this[int index]
         {
             get => _items[index];
             set => _items[index] = value;
         }
         #endregion // IList Interface
 
-        public void AddUnique(CollectableData item)
+        public void AddUnique(IdentifiedItem item)
         {
-            if (!_items.Contains(item))
+            var containsThisID = _items.Exists(i => i.ID == item.ID);
+            
+            if (!containsThisID)
             {
                 _items.Add(item);
             }
         }
-        public List<CollectableData> GetItems() => _items;
+        public List<IdentifiedItem> GetItems() => _items;
         
         [RuntimeInitializeOnLoadMethod]
         private static void RuntimeInitialize()
@@ -91,44 +91,46 @@ namespace Runtime.Collectables
         }
         
         #region Callbacks
-        private void OnElementAdded(CollectableData item)
+        private void OnElementAdded(IdentifiedItem item)
         {
             OnItemAdded?.Invoke(item);
-            OCSFXLogger.Log($"[{nameof(ItemInventory)}] Added {item.name} to inventory", _instance, _showDebug);
+            OCSFXLogger.Log($"[{nameof(ItemInventory)}] Added {item.Data.name} to inventory", _instance, _showDebug);
         }
 
-        private void OnElementInserted(int index, CollectableData item)
+        private void OnElementInserted(int index, IdentifiedItem item)
         {
             OnItemInserted?.Invoke(index, item);
-            OCSFXLogger.Log($"[{nameof(ItemInventory)}] Inserted {item.name} at index {index} in inventory", _instance, _showDebug);
+            OCSFXLogger.Log($"[{nameof(ItemInventory)}] Inserted {item.Data.name} at index {index} in inventory", _instance, _showDebug);
         }
 
-        private void OnElementRemoved(CollectableData item)
+        private void OnElementRemoved(IdentifiedItem item)
         {
             OnItemRemoved?.Invoke(item);
-            OCSFXLogger.Log($"[{nameof(ItemInventory)}] Removed {item.name} from inventory", _instance, _showDebug);
+            OCSFXLogger.Log($"[{nameof(ItemInventory)}] Removed {item.Data.name} from inventory", _instance, _showDebug);
         }
 
-        private void OnElementRemovedAt(int index, CollectableData item)
+        private void OnElementRemovedAt(int index, IdentifiedItem item)
         {
             OnItemRemovedAt?.Invoke(index, item);
-            OCSFXLogger.Log($"[{nameof(ItemInventory)}] Removed {item.name} at index {index} from inventory", _instance, _showDebug);
+            OCSFXLogger.Log($"[{nameof(ItemInventory)}] Removed {item.Data.name} at index {index} from inventory", _instance, _showDebug);
         }
 
         private void OnElementsCleared()
         {
             OnItemsCleared?.Invoke();
-            OCSFXLogger.Log($"[{nameof(ItemInventory)}] Cleared all items from inventory", _instance, _showDebug);
+            OCSFXLogger.Log($"[{nameof(IdentifiedItem)}] Cleared all items from inventory", _instance, _showDebug);
         }
         #endregion // Callbacks
 
-        public bool ContainsAll(List<CollectableData> requiredCollectables)
+        public bool ContainsAll(List<CollectableData> compareCollectables)
         {
-            foreach (var collectable in requiredCollectables)
+            foreach (var collectableData in compareCollectables)
             {
-                if (!Contains(collectable))
+                var containsThisData = _items.Exists(i => i.Data == collectableData);
+                
+                if (!containsThisData)
                 {
-                    OCSFXLogger.Log($"[{nameof(ItemInventory)}] Missing {collectable.name} from inventory", _instance, _showDebug);
+                    OCSFXLogger.Log($"[{nameof(ItemInventory)}] Missing {collectableData.name} from inventory", _instance, _showDebug);
                     return false;
                 }
             }
@@ -138,4 +140,17 @@ namespace Runtime.Collectables
             return true;
         }
     }   
+    
+    [Serializable]
+    public class IdentifiedItem
+    {
+        public string ID;
+        public CollectableData Data;
+            
+        public IdentifiedItem(string id, CollectableData data)
+        {
+            ID = id;
+            Data = data;
+        }
+    }
 }

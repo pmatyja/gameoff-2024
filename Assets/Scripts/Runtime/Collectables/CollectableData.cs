@@ -1,6 +1,10 @@
+using System;
 using FMODUnity;
 using OCSFX.FMOD;
+using Runtime.Utility;
 using UnityEngine;
+using System.Linq;
+using OCSFX.Utility.Debug;
 
 namespace Runtime.Collectables
 {
@@ -14,7 +18,7 @@ namespace Runtime.Collectables
         
         [field: Header("Settings")]
         [field: SerializeField] public bool IsUnique { get; private set; }
-        [field: SerializeField] public bool IsTransient { get; private set; }
+        [field: SerializeField, Tooltip("Not Unique and can respawn with the scene")] public bool IsTransient { get; private set; }
         
         [field: Header("Effects")]
         [field: SerializeField] public GameObject OnCollectVfx { get; private set; }
@@ -22,12 +26,33 @@ namespace Runtime.Collectables
         [field: SerializeField] public EventReference OnCollectSfx { get; private set; }
         [field: SerializeField] public EventReference LoopSfx { get; private set; }
         
+        [Header("Debug")]
+        [SerializeField] private bool _showDebug;
+        
         public void OnSpawn(Transform spawnTransform)
         {
             if (IsUnique)
             {
-                if (ItemInventory.Instance.Contains(this))
+                var inventoryContainsThisData = ItemInventory.Instance.Any(item => item.Data == this);
+                
+                if (inventoryContainsThisData)
                 {
+                    OCSFXLogger.Log($"{nameof(CollectableData)} {Name} is unique and already in inventory. " +
+                                    $"Destroying spawned object.", this, _showDebug);
+                    
+                    Destroy(spawnTransform.gameObject);
+                    return;
+                }
+            }
+            else if (!IsTransient)
+            {
+                var inventoryContainsThisData = ItemInventory.Instance.Any(item => item.Data == this);
+                
+                if (inventoryContainsThisData)
+                {
+                    OCSFXLogger.Log($"{nameof(CollectableData)} {Name} is not unique or transient and is already in inventory. " +
+                                    $"Destroying spawned object.", this, _showDebug);
+                    
                     Destroy(spawnTransform.gameObject);
                     return;
                 }
@@ -43,7 +68,7 @@ namespace Runtime.Collectables
         {
             HandleVfxOnCollect(collectableTransform);
             HandleSoundOnCollect(collectableTransform);
-            HandleInventoryOnCollect();
+            HandleInventoryOnCollect(collectableTransform);
         }
 
         private void HandleVfxOnCollect(Transform collectableTransform)
@@ -73,17 +98,28 @@ namespace Runtime.Collectables
             }
         }
 
-        private void HandleInventoryOnCollect()
+        private void HandleInventoryOnCollect(Transform collectableTransform)
         {
             if (IsTransient) return;
             
+            var idComponent = collectableTransform.GetComponent<GameOff2024UniqueID>();
+            var id = idComponent ? idComponent.ID : string.Empty;
+            
             if (IsUnique)
             {
-                ItemInventory.Instance.AddUnique(this);
+                ItemInventory.Instance.AddUnique(new IdentifiedItem(id, this));
             }
             else
             {
-                ItemInventory.Instance.Add(this);
+                ItemInventory.Instance.Add(new IdentifiedItem(id, this));
+            }
+        }
+
+        private void OnValidate()
+        {
+            if (IsUnique)
+            {
+                IsTransient = false;
             }
         }
     }
