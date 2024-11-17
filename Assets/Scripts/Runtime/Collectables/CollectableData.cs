@@ -29,13 +29,11 @@ namespace Runtime.Collectables
         [Header("Debug")]
         [SerializeField] private bool _showDebug;
         
-        public void OnSpawn(Transform spawnTransform)
+        public void OnSpawn(Transform spawnTransform, string id)
         {
             if (IsUnique)
             {
-                var inventoryContainsThisData = ItemInventory.Instance.Any(item => item.Data == this);
-                
-                if (inventoryContainsThisData)
+                if (ItemInventory.Instance.ContainsData(this))
                 {
                     OCSFXLogger.Log($"{nameof(CollectableData)} {Name} is unique and already in inventory. " +
                                     $"Destroying spawned object.", this, _showDebug);
@@ -46,9 +44,7 @@ namespace Runtime.Collectables
             }
             else if (!IsTransient)
             {
-                var inventoryContainsThisData = ItemInventory.Instance.Any(item => item.Data == this);
-                
-                if (inventoryContainsThisData)
+                if (ItemInventory.Instance.ContainsID(id))
                 {
                     OCSFXLogger.Log($"{nameof(CollectableData)} {Name} is not unique or transient and is already in inventory. " +
                                     $"Destroying spawned object.", this, _showDebug);
@@ -100,6 +96,7 @@ namespace Runtime.Collectables
 
         private void HandleInventoryOnCollect(Transform collectableTransform)
         {
+            // If the collectable is transient, don't add it to the inventory
             if (IsTransient) return;
             
             var idComponent = collectableTransform.GetComponent<GameOff2024UniqueID>();

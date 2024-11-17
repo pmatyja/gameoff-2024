@@ -70,6 +70,8 @@ namespace Runtime.Collectables
         private static void RuntimeInitialize()
         {
             LazyLoadInstance();
+            
+            _instance._items.Clear();
         }
         
         private void OnEnable()
@@ -139,6 +141,9 @@ namespace Runtime.Collectables
 
             return true;
         }
+        
+        public bool ContainsID(string id) => _items.Exists(i => i.ID == id);
+        public bool ContainsData(CollectableData data) => _items.Exists(i => i.Data == data);
     }   
     
     [Serializable]
