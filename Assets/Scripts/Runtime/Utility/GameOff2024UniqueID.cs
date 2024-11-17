@@ -13,8 +13,14 @@ namespace Runtime.Utility
         [SerializeField, Button(nameof(GenerateID))]
         private bool _generateIdButton;
 #endif
-        
-        public void GenerateID() => ID = Guid.NewGuid().ToString();
+
+        public void GenerateID()
+        {
+            ID = Guid.NewGuid().ToString();
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
 
         private void Reset() => GenerateID();
     }
