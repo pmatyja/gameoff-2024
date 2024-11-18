@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
+  _singletonBehaviour: 0
   _volumeSettings: {fileID: 11400000, guid: dc8bf32066040dc418705e8fae40b699, type: 2}
   _banksAudioData: {fileID: 11400000, guid: 6f40fbacbafa22c4cb47a5c11fef7c09, type: 2}
   _snapshotsAudioData: {fileID: 11400000, guid: 85caf7a70346caa4db68b7f2b6015596, type: 2}
@@ -154,6 +155,37 @@ MonoBehaviour:
     _onSceneUnloaded:
       m_PersistentCalls:
         m_Calls: []
+  - _sceneName: Game_Level_03
+    _onSceneLoaded:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: c0b8c3c6d2c59c641abe0325d5801cf2, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.FMOD.Components.MusicPlayer, OCSFX.FMOD
+          m_MethodName: MusicEventPlay
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Game_Level_03
+            m_BoolArgument: 0
+          m_CallState: 2
+    _onSceneUnloaded:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: c0b8c3c6d2c59c641abe0325d5801cf2, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.FMOD.AudioData.MusicAudioDataSO, OCSFX.FMOD
+          m_MethodName: MusicEventStop
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Game_Level_03
+            m_BoolArgument: 0
+          m_CallState: 2
   - _sceneName: Ending
     _onSceneLoaded:
       m_PersistentCalls:
