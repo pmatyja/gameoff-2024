@@ -6,10 +6,16 @@ namespace Lavgine
     public class BoundsBuilder : MonoBehaviour
     {
         public Bounds bounds = new Bounds(Vector3.zero, new Vector3(6, 6, 6));
+        public string Layer = "Ignore Raycast";
 
         [Header("Debug")]
         [SerializeField]
         private bool showClippingPreview;
+
+        private void Awake()
+        {
+            ValidateLayer();
+        }
 
         private void Start()
         {
@@ -57,6 +63,22 @@ namespace Lavgine
                 axis.y + ( ( 1 - MathF.Abs(axis.y) ) * this.bounds.extents.y), 
                 axis.z + ( ( 1 - MathF.Abs(axis.z) ) * this.bounds.extents.z)
             );
+        }
+
+        private void ValidateLayer()
+        {
+            if (string.IsNullOrWhiteSpace(Layer) || LayerMask.NameToLayer(Layer) == -1)
+            {
+                Debug.LogWarning($"[{name}] Invalid Layer. Setting to 'Ignore Raycast'.");
+                this.Layer = "Ignore Raycast";
+            }
+            
+            this.gameObject.layer = LayerMask.NameToLayer(this.Layer);
+        }
+
+        private void OnValidate()
+        {
+            ValidateLayer();   
         }
     }
 }
