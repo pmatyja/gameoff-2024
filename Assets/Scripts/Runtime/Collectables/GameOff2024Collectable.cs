@@ -18,7 +18,10 @@ namespace Runtime.Collectables
 
         protected override void OnSpawn()
         {
-            if (_data) _data.OnSpawn(transform, ID);
+            if (!_data) return;
+            
+            TryApplyMaterial();
+            _data.OnSpawn(transform, ID);
         }
 
         protected override void OnPickUp(GameObject pickerObject)
@@ -29,15 +32,32 @@ namespace Runtime.Collectables
             
             base.OnPickUp(pickerObject);
         }
+        
+        private bool TryApplyMaterial()
+        {
+            if (!_data) return false;
+            
+            if (!_data.Material) return false;
+            
+            var meshRenderer = GetComponentInChildren<Renderer>();
+            if (!meshRenderer) return false;
+            
+            meshRenderer.material = _data.Material;
+            return true;
+        }
 
         private void OnValidate()
         {
             if (!_uniqueIDComponent) _uniqueIDComponent = GetComponent<GameOff2024UniqueID>();
+            
+            TryApplyMaterial();
         }
 
         private void Reset()
         {
             if (!_uniqueIDComponent) _uniqueIDComponent = GetComponent<GameOff2024UniqueID>();
+            
+            TryApplyMaterial();
         }
     }
 }

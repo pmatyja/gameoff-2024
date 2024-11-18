@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2fee01a15d84b6a946d44948f285632, type: 3}
-  m_Name: Collectable_Key_02
+  m_Name: Collectable_Key_Blue
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Ket Item 2
+  <Name>k__BackingField: Key Item 3
   <Description>k__BackingField: 
   <Prefab>k__BackingField: {fileID: 0}
   <Icon>k__BackingField: {fileID: 2800000, guid: 7a43ba6447ea1dd47a55caeccbd18b60, type: 3}
+  <Material>k__BackingField: {fileID: 2100000, guid: 5f0a2707146213c4a8ed4d2b60f14c11, type: 2}
   <IsUnique>k__BackingField: 1
   <IsTransient>k__BackingField: 0
   <OnCollectVfx>k__BackingField: {fileID: 7308132404632923821, guid: caf9b7102b297dd4db4d659ee78b794a, type: 3}
@@ -34,3 +35,4 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
+  _showDebug: 0

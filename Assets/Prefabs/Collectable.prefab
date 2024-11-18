@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 717593837036798415}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.078427434, y: 0.14999962, z: 0}
+  m_LocalPosition: {x: 0.00000011920929, y: 0.19999981, z: 0}
   m_LocalScale: {x: 0.25, y: 0.025, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -86,7 +86,7 @@ Light:
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -380,6 +380,7 @@ MonoBehaviour:
     m_Bits: 8
   showDebug: 0
   _data: {fileID: 11400000, guid: 535c8780f50856d4a9c7a7bd98e0bea9, type: 2}
+  _uniqueIDComponent: {fileID: 1184788425608068618}
   <OnCollect>k__BackingField:
     m_PersistentCalls:
       m_Calls: []

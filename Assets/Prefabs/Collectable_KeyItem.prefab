@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73ad14d90d9c81c49b1eff0619974485, type: 2}
+  - {fileID: 2100000, guid: b65799519898d5a47a90930721bed2a1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -180,6 +180,10 @@ PrefabInstance:
       propertyPath: _data
       value: 
       objectReference: {fileID: 11400000, guid: e9c501d7ee46d264287d2e53a13791a6, type: 2}
+    - target: {fileID: 454737503529985712, guid: 5242827ea61731b4b9b59ed0072cb779, type: 3}
+      propertyPath: showDebug
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2434437770014351145, guid: 5242827ea61731b4b9b59ed0072cb779, type: 3}
       propertyPath: Message
       value: Picked up Key Item!
