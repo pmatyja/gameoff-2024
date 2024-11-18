@@ -36,6 +36,11 @@ namespace Runtime
             {
                 _playerGameObject = GameObject.FindGameObjectWithTag(GameOff2024GameSettings.Get().PlayerTag);
             }
+            
+            if (!_playerGameObject)
+            {
+                _playerGameObject = Object.Instantiate(GameOff2024GameSettings.Get().PlayerCharacterPrefab).gameObject;
+            }
 
             return _playerGameObject;
         }
