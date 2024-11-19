@@ -120,7 +120,7 @@ namespace Runtime.Collectables
         private void OnElementsCleared()
         {
             OnItemsCleared?.Invoke();
-            OCSFXLogger.Log($"[{nameof(IdentifiedItem)}] Cleared all items from inventory", _instance, _showDebug);
+            OCSFXLogger.Log($"[{nameof(ItemInventory)}] Cleared all items from inventory", _instance, _showDebug);
         }
         #endregion // Callbacks
 
