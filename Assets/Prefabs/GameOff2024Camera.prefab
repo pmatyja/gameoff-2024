@@ -79,7 +79,7 @@ MonoBehaviour:
       Curvature: {x: 2, y: 11}
       BarrelClipping: 0.25
       Anamorphism: 0
-  BlendHint: 0
+  BlendHint: 8
 --- !u!114 &2046437357804850484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,3 +266,6 @@ MonoBehaviour:
   _showDebug: 0
   _zoomRange: {x: 1.5, y: 4}
   _fov: 6
+  _postProcessingVolume: {fileID: 0}
+  _depthOfFieldFocalLengthRange: {x: 120, y: 300}
+  _depthOfFieldFocalLength: 100

@@ -11,8 +11,6 @@ namespace Runtime.Cameras
     [RequireComponent(typeof(CinemachineRecomposer))]
     public class GameOff2024PerspectiveCameraController : GameOff2024CameraControllerBase
     {
-        private CinemachineRecomposer _recomposer;
-        
         [Header("Perspective Settings")]
         [SerializeField, MinMaxRange(0.5f,10f)] private Vector2 _zoomRange = new Vector2(1, 2);
         [SerializeField, Range(1,10)] private float _fov = 6;
@@ -22,10 +20,11 @@ namespace Runtime.Cameras
         
         [Space]
         [SerializeField, ReadOnly, Range(0,300)] private float _depthOfFieldFocalLength = 100;
+        
+        private CinemachineRecomposer _recomposer;
 
         protected override Vector2 GetZoomRange() => _zoomRange;
         protected override LensSettings.OverrideModes _lensMode => LensSettings.OverrideModes.Perspective;
-
 
         protected override void InitializeZoom()
         {
@@ -56,6 +55,8 @@ namespace Runtime.Cameras
                     ref _depthOfFieldFocalLengthVelocity, _zoomSmoothTime, Mathf.Infinity, Time.deltaTime);
             }
         }
+        
+        private void ResetZoom() => _targetZoomValue = _zoomRange.x;
 
         protected override bool ResolveDependencies()
         {
