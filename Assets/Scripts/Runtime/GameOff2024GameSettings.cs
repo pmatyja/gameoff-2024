@@ -1,6 +1,7 @@
 ﻿using OCSFX.FMOD.Components;
 using OCSFX.Generics;
 using OCSFX.Utility.Debug;
+using Runtime.Cameras;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +15,7 @@ namespace Runtime
         [field: SerializeField] public InputActionAsset InputActions { get; private set; }
         [field: SerializeField, TagField] public string PlayerTag { get; private set; } = "Player";
         [field: SerializeField, Expandable] public PlayerCharacter PlayerCharacterPrefab { get; private set; }
+        [field: SerializeField, Expandable] public GameOff2024CameraControllerBase PlayerCameraPrefab { get; private set; }
         
         [field: Header("Effects")]
         [field: SerializeField, Expandable] public AudioManager AudioManagerPrefab { get; private set; }

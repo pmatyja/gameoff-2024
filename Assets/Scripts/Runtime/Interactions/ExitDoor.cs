@@ -46,6 +46,13 @@ namespace Runtime.Interactions
             _blockMoverScript.Activate();
         }
         
+        protected override void Close()
+        {
+            base.Close();
+        
+            _blockMoverScript.Activate();
+        }
+        
         private void UpdateCanInteract()
         {
             var currentInteractState = CanInteract;

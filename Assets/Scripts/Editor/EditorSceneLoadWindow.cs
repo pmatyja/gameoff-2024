@@ -13,6 +13,7 @@ namespace Editor
         private EditorBuildSettingsScene[] _scenes;
         private string[] _sceneNames;
         private int _selectedIndex;
+        private LoadSceneMode _loadSceneMode = LoadSceneMode.Single;
         
         [MenuItem(GameOff2024Statics.PROJECT_NAME + "/Load Scene")]
         private static void ShowWindow()
@@ -35,6 +36,8 @@ namespace Editor
             
             DrawHelpBox();
 
+            DrawLoadSceneModeDropdown();
+            
             DrawLoadSceneButton();
         }
 
@@ -54,7 +57,7 @@ namespace Editor
             // While in play mode
             if (Application.isPlaying)
             {
-                SceneManager.LoadScene(_sceneName);
+                SceneManager.LoadScene(_sceneName, _loadSceneMode);
                 return;
             }
 
@@ -63,7 +66,7 @@ namespace Editor
             if (cancelled) return;
 
             Save();
-            EditorSceneManager.OpenScene(_scenes[_selectedIndex].path);
+            EditorSceneManager.OpenScene(_scenes[_selectedIndex].path, (OpenSceneMode)_loadSceneMode);
         }
 
         private void DrawScenesDropdown()
@@ -80,6 +83,11 @@ namespace Editor
             _selectedIndex = Mathf.Max(0, System.Array.IndexOf(_sceneNames, _sceneName));
             _selectedIndex = EditorGUILayout.Popup("Scene", _selectedIndex, _sceneNames);
             _sceneName = _sceneNames[_selectedIndex];
+        }
+        
+        private void DrawLoadSceneModeDropdown()
+        {
+            _loadSceneMode = (LoadSceneMode) EditorGUILayout.EnumPopup("Load Scene Mode", _loadSceneMode);
         }
 
         private static void Save() => AssetDatabase.SaveAssets();
