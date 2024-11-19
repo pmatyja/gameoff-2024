@@ -15,7 +15,7 @@ public class BlockMoverScript : MonoBehaviour
     [SerializeField]
     private BlockDirection direction = BlockDirection.PositiveY;
     [SerializeField]
-    private BlockDirectionScope directionScope = BlockDirectionScope.WorldSpace;
+    private BlockDirectionScope directionScope = BlockDirectionScope.LocalSpace;
     
     [Header("Events")]
     [field: SerializeField] public UnityEvent OnBlockMoveBeginEvent { get; private set; }
