@@ -1,11 +1,13 @@
+using OCSFX.Utility.Debug;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace OCSFX.Generics
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         [SerializeField] protected bool _dontDestroyOnLoad = true;
-        [SerializeField] protected SingletonBehaviour _singletonBehaviour = SingletonBehaviour.PreventNew;
+        [FormerlySerializedAs("singletonBehavior")] [FormerlySerializedAs("_singletonBehaviour")] [SerializeField] protected SingletonBehavior _singletonBehavior = SingletonBehavior.PreventNew;
         
         // ReSharper disable once MemberCanBePrivate.Global
         protected static T _instance;
@@ -23,15 +25,9 @@ namespace OCSFX.Generics
             }
         }
 
-        [RuntimeInitializeOnLoadMethod]
-        private static void Initialize()
-        {
-            Application.quitting += () => _instance?.ClearSelfAsInstance();
-        }
-
         protected virtual void Awake() => SetupSingleton();
-        protected virtual void OnDestroy() => _instance?.ClearSelfAsInstance();
-        protected virtual void OnApplicationQuit() => _instance?.ClearSelfAsInstance();
+        protected virtual void OnDestroy() => ClearSelfAsInstance();
+        protected virtual void OnApplicationQuit() => ClearSelfAsInstance();
         
         private void ClearSelfAsInstance()
         {
@@ -42,17 +38,17 @@ namespace OCSFX.Generics
         {
             if (_instance && _instance != this)
             {
-                switch (_singletonBehaviour)
+                switch (_singletonBehavior)
                 {
-                    case SingletonBehaviour.PreventNew:
+                    case SingletonBehavior.PreventNew:
                         Destroy(gameObject);
                         return;
-                    case SingletonBehaviour.DestroyOld:
+                    case SingletonBehavior.DestroyOld:
                         Destroy(_instance.gameObject);
                         break;
                 }
             }
-
+            
             _instance = (T)this;
 
             if (!_dontDestroyOnLoad) return;
@@ -77,8 +73,12 @@ namespace OCSFX.Generics
             if (existingInstance)
             {
                 _instance = existingInstance;
+                
+                OCSFXLogger.Log($"An instance of {typeof(T).Name} was found in the scene and assigned to the instance variable.", _instance);
                 return _instance;
             }
+            
+            OCSFXLogger.Log($"No existing instance of {typeof(T).Name} was found in the scene. Creating a new instance.", _instance);
 
             var go = new GameObject(typeof(T).Name);
             _instance = go.AddComponent<T>();
@@ -86,7 +86,7 @@ namespace OCSFX.Generics
         }
     }
     
-    public enum SingletonBehaviour
+    public enum SingletonBehavior
     {
         PreventNew,
         DestroyOld
