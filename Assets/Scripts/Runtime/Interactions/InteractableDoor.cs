@@ -35,9 +35,6 @@ namespace Runtime.Interactions
             OCSFXLogger.Log($"[{name} ({GetType().Name})] Show interaction prompt: {show}", this, _showDebug);
         }
         
-        public void Unlock() => CanInteract = true;
-        public void Lock() => CanInteract = false;
-        
         protected virtual void Open()
         {
             // Open the door

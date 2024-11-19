@@ -85,16 +85,5 @@ namespace Runtime.World
             _boxCollider = GetComponent<BoxCollider>();
             _boxCollider.isTrigger = true;
         }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.green;
-            
-            var colliderSize = _boxCollider.size;
-            var localScale = transform.localScale;
-            var scaledSize = new Vector3(colliderSize.x * localScale.x, colliderSize.y * localScale.y, colliderSize.z * localScale.z);
-            
-            Gizmos.DrawWireCube(transform.position + _boxCollider.center, scaledSize);
-        }
     }
 }

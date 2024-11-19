@@ -14,6 +14,8 @@ public class BlockMoverScript : MonoBehaviour
 
     [SerializeField]
     private BlockDirection direction = BlockDirection.PositiveY;
+    [SerializeField]
+    private BlockDirectionScope directionScope = BlockDirectionScope.WorldSpace;
     
     [Header("Events")]
     [field: SerializeField] public UnityEvent OnBlockMoveBeginEvent { get; private set; }
@@ -102,7 +104,7 @@ public class BlockMoverScript : MonoBehaviour
         if (this.showIndividualBlocks == false)
         {
             var bounds = this.gameObject.getColliderBounds();
-            var destination = GetDirection(this.direction) * this.distance;
+            var destination = GetWorldDirection(this.direction) * this.distance;
 
             DebugExtension.DrawBounds(new Bounds(bounds.center, bounds.size), Color.cyan);
             DebugExtension.DrawBounds(new Bounds(bounds.center + destination, bounds.size), Color.green);
@@ -171,10 +173,17 @@ public class BlockMoverScript : MonoBehaviour
 
     private Vector3 GetDestination()
     {
-        return this.transform.position + GetDirection(this.direction) * this.distance;
+        switch (directionScope)
+        {
+            default:
+            case BlockDirectionScope.WorldSpace:
+                return this.transform.position + GetWorldDirection(this.direction) * this.distance;
+            case BlockDirectionScope.LocalSpace:
+                return this.transform.position + GetLocalDirection(this.transform, this.direction) * this.distance;
+        }
     }
 
-    private static Vector3 GetDirection(BlockDirection direction)
+    private static Vector3 GetWorldDirection(BlockDirection direction)
     {
         switch (direction)
         {
@@ -186,6 +195,21 @@ public class BlockMoverScript : MonoBehaviour
             case BlockDirection.NegativeZ:  return Vector3.back;
         }
 
+        return Vector3.zero;
+    }
+
+    private static Vector3 GetLocalDirection(Transform targetTransform, BlockDirection direction)
+    {
+        switch (direction)
+        {
+            case BlockDirection.PositiveX: return targetTransform.right;
+            case BlockDirection.NegativeX: return -targetTransform.right;
+            case BlockDirection.PositiveY: return targetTransform.up;
+            case BlockDirection.NegativeY: return -targetTransform.up;
+            case BlockDirection.PositiveZ: return targetTransform.forward;
+            case BlockDirection.NegativeZ: return -targetTransform.forward;
+        }
+        
         return Vector3.zero;
     }
 
@@ -202,5 +226,11 @@ public class BlockMoverScript : MonoBehaviour
         }
 
         return direction;
+    }
+
+    public enum BlockDirectionScope
+    {
+        WorldSpace,
+        LocalSpace
     }
 }
