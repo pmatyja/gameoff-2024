@@ -24,7 +24,14 @@ public abstract class AudioResourceSO : ResourceSO
         var id = $"AudioSource:{Guid.NewGuid().ToString()}";
         var child = new GameObject(id);
 
-        child.transform.SetParent(anchor?.transform ?? GameManager.Instance.transform);
+        if (anchor != null)
+        {
+            child.transform.position = anchor.transform.position;
+        }
+        else if (GameManager.Instance != null)
+        {
+            child.transform.position = GameManager.Instance.transform.position;
+        }
 
         return this.Resource.CreateAudioSource(id, this, child);
     }
