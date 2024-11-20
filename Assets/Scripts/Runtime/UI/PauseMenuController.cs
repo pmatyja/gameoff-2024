@@ -10,6 +10,15 @@ public class PauseMenuController : MonoBehaviour
 
     public const float DefaultVolume = 0.75f;
 
+    [SerializeField] private SliderValue[] defaultVolumes = new[]
+    {
+        new SliderValue(nameof(Master), DefaultVolume),
+        new SliderValue(nameof(Sfx), DefaultVolume),
+        new SliderValue(nameof(Music), DefaultVolume),
+        new SliderValue(nameof(Ambient), DefaultVolume),
+        new SliderValue(nameof(Voice), DefaultVolume),
+    };
+
     [SerializeField]
     [Readonly]
     [Range(0, 1)]
@@ -99,5 +108,42 @@ public class PauseMenuController : MonoBehaviour
     private void SetValue(ChangeEvent<float> evt, ref float previewField)
     {
         this.SetValue(evt.target as Slider, ref previewField, evt.newValue);
+    }
+
+    private void OnValidate()
+    {
+        // Do not apply changes to the default volumes when in play mode
+        if (Application.isPlaying)
+        {
+            return;
+        }
+        
+        foreach (var sliderValue in this.defaultVolumes)
+        {
+            switch (sliderValue.Name)
+            {
+                case "Master": this.master = sliderValue.Value; break;
+                case "Sfx": this.sfx = sliderValue.Value; break;
+                case "Music": this.music = sliderValue.Value; break;
+                case "Ambient": this.ambient = sliderValue.Value; break;
+                case "Voice": this.voice = sliderValue.Value; break;
+                default: return;
+            }
+
+            GameSettings.Set(GameSettingsSubsystem.Audio, sliderValue.Name, sliderValue.Value);
+        }
+    }
+
+    [Serializable]
+    public class SliderValue
+    {
+        public string Name;
+        public float Value;
+
+        public SliderValue(string name, float value)
+        {
+            this.Name = name;
+            this.Value = value;
+        }
     }
 }

@@ -64,8 +64,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373bd0f7e3e2063479bf22b7e4e718df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  master: 0.75
-  sfx: 0.75
-  music: 0.75
-  ambient: 0.75
-  voice: 0.75
+  defaultVolumes:
+  - Name: Master
+    Value: 0.9
+  - Name: Sfx
+    Value: 1
+  - Name: Music
+    Value: 1
+  - Name: Ambient
+    Value: 1
+  - Name: Voice
+    Value: 1
+  master: 0.9
+  sfx: 1
+  music: 1
+  ambient: 1
+  voice: 1
