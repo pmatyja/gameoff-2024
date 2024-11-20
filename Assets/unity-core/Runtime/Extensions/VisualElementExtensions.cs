@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UIElements;
 
 public static class VisualElementExtensions
@@ -202,6 +203,18 @@ public static class VisualElementExtensions
         return false;
     }
 
+    public static T Get<T>(this VisualElement parent) where T : VisualElement
+    {
+        parent.TryGet<T>(out var element, true);
+        return element;
+    }
+
+    public static T Get<T>(this VisualElement parent, string id) where T : VisualElement
+    {
+        parent.TryGet<T>(id, out var element, true);
+        return element;
+    }
+
     public static IEnumerable<T> GetChildren<T>(this VisualElement parent, bool recursive = true, Func<T, bool> predicate = null) where T : VisualElement
     {
         if (parent == null)
@@ -296,6 +309,22 @@ public static class VisualElementExtensions
     public static void RegisterSlider(this VisualElement element, string id, EventCallback<ChangeEvent<float>> callback, float defaultValue = 1.0f)
     {
         if( element.TryGet<Slider>(id, out var slider) )
+        {
+            slider.RegisterValueChangedCallback(evt =>
+            {
+                if (element.IsEnabled())
+                {
+                    callback.Invoke(evt);
+                }
+            });
+
+            slider.value = defaultValue;
+        }
+    }
+
+    public static void RegisterSlider(this VisualElement element, out Slider slider, string id, EventCallback<ChangeEvent<float>> callback, float defaultValue = 1.0f)
+    {
+        if( element.TryGet<Slider>(id, out slider) )
         {
             slider.RegisterValueChangedCallback(evt =>
             {

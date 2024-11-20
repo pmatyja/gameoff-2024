@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
-  _singletonBehaviour: 0
+  _singletonBehavior: 0
   _volumeSettings: {fileID: 11400000, guid: dc8bf32066040dc418705e8fae40b699, type: 2}
   _banksAudioData: {fileID: 11400000, guid: 6f40fbacbafa22c4cb47a5c11fef7c09, type: 2}
   _snapshotsAudioData: {fileID: 11400000, guid: 85caf7a70346caa4db68b7f2b6015596, type: 2}
@@ -265,3 +265,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _onGameSettingsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGameSettingsAudioValueChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: dc8bf32066040dc418705e8fae40b699, type: 2}
+        m_TargetAssemblyTypeName: OCSFX.FMOD.AudioData.VolumeSettingsAudioDataSO,
+          OCSFX.FMOD
+        m_MethodName: SetVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _audioSettingIdConversions:
+  - GameSettingsId: Master
+    VolumeSettingsId: Volume_Master
+  - GameSettingsId: Sfx
+    VolumeSettingsId: Volume_SX
+  - GameSettingsId: Music
+    VolumeSettingsId: Volume_MX
+  - GameSettingsId: Ambient
+    VolumeSettingsId: Volume_AMB
+  - GameSettingsId: Voice
+    VolumeSettingsId: Volume_VX
+  - GameSettingsId: Ui
+    VolumeSettingsId: Volume_UI
