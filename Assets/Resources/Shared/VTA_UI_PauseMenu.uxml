@@ -4,7 +4,7 @@
         <ui:GroupBox name="Center" class="page" style="position: absolute;">
             <ui:GroupBox name="Modal" class="modal" style="min-width: 400px; align-items: center; border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px;">
                 <ui:VisualElement name="Content" />
-                <ui:GroupBox name="MainMenu" focusable="true" class="button" style="width: 200px; min-width: 320px;">
+                <ui:GroupBox name="MainMenu" focusable="true" class="button button-exit" style="background-image: resource(&apos;Local/UI Elements/button1&apos;); background-color: rgba(0, 0, 0, 0.95); -unity-slice-scale: 1px; color: rgb(0, 0, 0); min-width: 300px;">
                     <ui:Label text="Back to Main Menu" display-tooltip-when-elided="true" />
                 </ui:GroupBox>
                 <ui:Slider label="Master" value="0.75" high-value="1" show-input-field="false" inverted="false" name="Master" data-source="project://database/Assets/ScriptableObjects/UI/PauseSettingsSO.asset?fileID=11400000&amp;guid=e200f5ee0696fc74292da71d9c75659e&amp;type=2#PauseSettingsSO" style="min-width: 400px;" />
@@ -12,7 +12,7 @@
                 <ui:Slider label="Music" value="0.75" high-value="1" show-input-field="false" inverted="false" name="Music" data-source="project://database/Assets/ScriptableObjects/UI/PauseSettingsSO.asset?fileID=11400000&amp;guid=e200f5ee0696fc74292da71d9c75659e&amp;type=2#PauseSettingsSO" style="min-width: 400px;" />
                 <ui:Slider label="Ambient" value="0.75" high-value="1" show-input-field="false" inverted="false" name="Ambient" data-source="project://database/Assets/ScriptableObjects/UI/PauseSettingsSO.asset?fileID=11400000&amp;guid=e200f5ee0696fc74292da71d9c75659e&amp;type=2#PauseSettingsSO" style="min-width: 400px;" />
                 <ui:Slider label="Voice" value="0.75" high-value="1" show-input-field="false" inverted="false" name="Voice" data-source="project://database/Assets/ScriptableObjects/UI/PauseSettingsSO.asset?fileID=11400000&amp;guid=e200f5ee0696fc74292da71d9c75659e&amp;type=2#PauseSettingsSO" style="min-width: 400px;" />
-                <ui:GroupBox name="Close" focusable="true" class="button button-exit">
+                <ui:GroupBox name="Close" focusable="true" class="button button-exit" style="background-image: resource(&apos;Local/UI Elements/button1&apos;); background-color: rgba(0, 0, 0, 0.95); -unity-slice-scale: 1px; color: rgb(0, 0, 0);">
                     <ui:Label text="Close" display-tooltip-when-elided="true" />
                 </ui:GroupBox>
             </ui:GroupBox>

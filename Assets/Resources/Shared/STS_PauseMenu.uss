@@ -78,19 +78,20 @@
     background-color: rgba(0, 0, 0, 0.95);
     font-size: 24px;
     -unity-text-align: middle-center middle;
-    transition-property: color, background-color;
-    transition-duration: 0.25s, 0.25s;
-    transition-timing-function: ease-in-out, ease-in-out;
+    transition-property: color, background-color, scale;
+    transition-duration: 0.25s, 0.25s, 0.25s;
+    transition-timing-function: ease-in-out, ease-in-out, ease-in-out;
 }
 
 .button:hover {
-    color: black;
-    background-color: rgba(255, 223, 85, 0.95);
+    /* color: black; */
+    /* background-color: rgba(255, 223, 85, 0.95); */
+    scale: 1.05;
 }
 
 .button-selected {
     color: black;
-    background-color: rgba(255, 223, 85, 0.95);
+    /* background-color: rgba(255, 223, 85, 0.95); */
 }
 
 .page-menu {
