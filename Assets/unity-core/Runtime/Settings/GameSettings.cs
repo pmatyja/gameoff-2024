@@ -48,7 +48,10 @@ public static class GameSettings
 
         if (PlayerPrefs.HasKey(id))
         {
-            return parser.Invoke(PlayerPrefs.GetString(id), out value);
+            if (parser.Invoke(PlayerPrefs.GetString(id), out value))
+            {
+                return true;
+            }
         }
 
         value = defaultValue;

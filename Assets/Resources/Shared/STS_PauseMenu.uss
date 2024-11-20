@@ -11,10 +11,18 @@
 .unity-base-slider__dragger {
     margin-top: -12px;
     width: 24px;
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;
+    border-bottom: 0px;
 }
 
 .unity-base-slider__dragger-border {
     margin-top: -12px;
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;
+    border-bottom: 0px;
 }
 
 .background {
@@ -49,6 +57,16 @@
     padding-bottom: 32px;
     align-items: center;
     justify-content: center;
+}
+
+.unity-slider__label {
+    width: 200px;
+    padding: 8px 16px 8px 16px;
+    margin: 0;
+    margin-bottom: 5px;
+    color: white;
+    font-size: 24px;
+    -unity-text-align: middle-center middle;
 }
 
 .button {
