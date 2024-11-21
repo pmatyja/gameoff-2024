@@ -1,6 +1,8 @@
-﻿using OCSFX.Utility.Debug;
+﻿using System.Collections.Generic;
+using OCSFX.Utility.Debug;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 namespace Runtime.Interactions
 {
@@ -13,6 +15,7 @@ namespace Runtime.Interactions
         
         private void OnEnable()
         {
+            EventSystem.SetUITookitEventSystemOverride(null, true, false);
             BindChildren(true);
         }
         
@@ -23,6 +26,11 @@ namespace Runtime.Interactions
 
         private void OnChildClicked()
         {
+            if (UIHoverDetector.Hovering)
+            {
+                return;
+            }
+
             Debug.Log("Clicked on a child of " + name, this);
             
             OnClick?.Invoke();
