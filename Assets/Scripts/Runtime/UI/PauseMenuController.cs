@@ -3,10 +3,10 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
-public class PauseMenuController : MonoBehaviour
+public class PauseMenuController : Singleton<PauseMenuController>
 {
     [Readonly]
-    private UIDocument root;
+    private UIDocument ui;
 
     public const float DefaultVolume = 0.75f;
 
@@ -74,15 +74,89 @@ public class PauseMenuController : MonoBehaviour
         set => this.SetValue(this.voiceSlider, ref this.voice, value);
     }
 
+    [SerializeField]
+    [Range(0.0f, 1.0f)]
+    private float fadeDuration = 0.25f;
+
+    [SerializeField]
+    [InputActionMap]
+    private string pauseMenu;
+
+    private VisualElement root;
+    private int target = 0;
+
+    public void Toggle()
+    {
+        if (this.target == 0)
+            this.Open();
+        else
+            this.Close();
+    }
+
+    public void Open()
+    {
+        if (this.target == 1)
+        {
+            return;
+        }
+        
+        this.target = 1;
+
+        EventBus.Raise(this, new UIEventParameters
+        {
+            Action = UIAction.OpenMenu
+        });
+    }
+
+    public void Close()
+    {
+        if (this.target == 0)
+        {
+            return;
+        }
+
+        this.target = 0;
+        
+        EventBus.Raise(this, new UIEventParameters
+        {
+            Action = UIAction.CloseMenu
+        });
+    }
+
     private void Start()
     {
-        this.root = this.GetComponent<UIDocument>();
+        this.ui = this.GetComponent<UIDocument>();
+        this.root = this.ui.rootVisualElement.Get<VisualElement>("Root") ?? this.ui.rootVisualElement;
 
-        this.root.rootVisualElement.RegisterSlider(out this.masterSlider,     nameof(this.Master),     evt => this.SetValue(evt, ref this.master),  this.GetValue(nameof(this.Master),    ref this.master));
-        this.root.rootVisualElement.RegisterSlider(out this.sfxSlider,        nameof(this.Sfx),        evt => this.SetValue(evt, ref this.sfx),     this.GetValue(nameof(this.Sfx),       ref this.sfx));
-        this.root.rootVisualElement.RegisterSlider(out this.musicSlider,      nameof(this.Music),      evt => this.SetValue(evt, ref this.music),   this.GetValue(nameof(this.Music),     ref this.music));
-        this.root.rootVisualElement.RegisterSlider(out this.voiceSlider,      nameof(this.Voice),      evt => this.SetValue(evt, ref this.voice),   this.GetValue(nameof(this.Voice),     ref this.voice));
-        this.root.rootVisualElement.RegisterSlider(out this.ambientSlider,    nameof(this.Ambient),    evt => this.SetValue(evt, ref this.ambient), this.GetValue(nameof(this.Ambient),   ref this.ambient));
+        this.root.RegisterSlider(out this.masterSlider,     nameof(this.Master),     evt => this.SetValue(evt, ref this.master),  this.GetValue(nameof(this.Master),    ref this.master));
+        this.root.RegisterSlider(out this.sfxSlider,        nameof(this.Sfx),        evt => this.SetValue(evt, ref this.sfx),     this.GetValue(nameof(this.Sfx),       ref this.sfx));
+        this.root.RegisterSlider(out this.musicSlider,      nameof(this.Music),      evt => this.SetValue(evt, ref this.music),   this.GetValue(nameof(this.Music),     ref this.music));
+        this.root.RegisterSlider(out this.voiceSlider,      nameof(this.Voice),      evt => this.SetValue(evt, ref this.voice),   this.GetValue(nameof(this.Voice),     ref this.voice));
+        this.root.RegisterSlider(out this.ambientSlider,    nameof(this.Ambient),    evt => this.SetValue(evt, ref this.ambient), this.GetValue(nameof(this.Ambient),   ref this.ambient));
+
+        if (this.root.TryGet<VisualElement>("Close", out var close, true))
+        {
+            close.OnClick(evt =>this.Close());
+        }
+
+        if (this.root.TryGet<VisualElement>("MainMenu", out var mainMenu, true))
+        {
+            mainMenu.OnClick(evt =>
+            {
+                this.Close();
+                // add going back to main menu
+            });
+        }
+    }
+
+    public void Update()
+    {
+        this.root.Fade(this.target, this.fadeDuration);
+
+        if (InputManager.Released(this.pauseMenu))
+        {
+            this.Toggle();
+        }
     }
 
     private float GetValue(string name, ref float previewField)
@@ -137,7 +211,10 @@ public class PauseMenuController : MonoBehaviour
     [Serializable]
     public class SliderValue
     {
+        [Readonly]
         public string Name;
+
+        [Range(0.0f, 1.0f)]
         public float Value;
 
         public SliderValue(string name, float value)
@@ -145,5 +222,16 @@ public class PauseMenuController : MonoBehaviour
             this.Name = name;
             this.Value = value;
         }
+    }
+
+    public enum UIAction
+    {
+        OpenMenu,
+        CloseMenu
+    }
+
+    public struct UIEventParameters
+    {
+        public UIAction Action;
     }
 }

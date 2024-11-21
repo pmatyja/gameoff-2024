@@ -1,8 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/Shared/STS_Gameplay.uss?fileID=7433441132597879392&amp;guid=047b32b19f0516141810f549058bab38&amp;type=3#STS_Gameplay" />
     <Style src="project://database/Assets/Resources/Local/STS%20Styles.uss?fileID=7433441132597879392&amp;guid=91e8fd2e1ca9ee54b9f7af3cc2c9a392&amp;type=3#STS Styles" />
-    <ui:VisualElement name="Root" style="flex-grow: 1;">
-        <ui:VisualElement name="Cutscene" style="width: 100%; height: 100%; position: absolute; opacity: 1;">
+    <Style src="project://database/Assets/Resources/Shared/STS_PauseMenu.uss?fileID=7433441132597879392&amp;guid=8055d38b080b8ac48a563dae6cf6fb06&amp;type=3#STS_PauseMenu" />
+    <ui:VisualElement name="Root" picking-mode="Ignore" style="flex-grow: 1;">
+        <ui:VisualElement name="Cutscene" picking-mode="Ignore" style="width: 100%; height: 100%; position: absolute; opacity: 1;">
             <ui:GroupBox name="DialogSystem" class="dialog-system">
                 <ui:GroupBox name="Choices" class="choices">
                     <ui:GroupBox name="ChoiceP" class="choice choice-primary">
@@ -36,33 +37,33 @@
                 </ui:VisualElement>
             </ui:GroupBox>
         </ui:VisualElement>
-        <ui:VisualElement name="Gameplay" style="width: 100%; height: 100%; position: absolute; opacity: 1;">
-            <ui:GroupBox name="QuestTracker" class="quest-tracker" style="display: none; opacity: 0;">
-                <ui:VisualElement name="Quest" class="quest-tracker-quest" style="opacity: 1;">
+        <ui:VisualElement name="Gameplay" picking-mode="Ignore" style="width: 100%; height: 100%; position: absolute; opacity: 1;">
+            <ui:GroupBox name="QuestTracker" picking-mode="Ignore" class="quest-tracker" style="display: none; opacity: 0;">
+                <ui:VisualElement name="Quest" picking-mode="Ignore" class="quest-tracker-quest" style="opacity: 1;">
                     <ui:Label text="\ue837 Metro &apos;72" display-tooltip-when-elided="true" name="Name" class="quest-tracker-quest-header" />
                     <ui:Label text="\ue834 Find parts hatch key (10 / 10)" display-tooltip-when-elided="false" name="Objective" enable-rich-text="true" class="quest-tracker-objective" />
                     <ui:Label text="\ue835 Reach the train" display-tooltip-when-elided="true" name="Objective" class="quest-tracker-objective" />
                 </ui:VisualElement>
-                <ui:VisualElement name="Quest" class="quest-tracker-quest" style="opacity: 1;">
+                <ui:VisualElement name="Quest" picking-mode="Ignore" class="quest-tracker-quest" style="opacity: 1;">
                     <ui:Label text="\ue837 Explore Cave" display-tooltip-when-elided="true" name="Name" class="quest-tracker-quest-header" />
                     <ui:Label text="\ue834 Reach the Cave" display-tooltip-when-elided="true" name="Objective" class="quest-tracker-objective" />
                     <ui:Label text="\ue835 Find Entrance" display-tooltip-when-elided="true" name="Objective" class="quest-tracker-objective" />
                 </ui:VisualElement>
             </ui:GroupBox>
-            <ui:GroupBox name="NotificationSystem" class="notification-system">
+            <ui:GroupBox name="NotificationSystem" picking-mode="Ignore" class="notification-system">
                 <ui:GroupBox name="Notification" class="notification">
                     <ui:Label text="New Quest" display-tooltip-when-elided="true" name="Title" class="notification-title" />
                     <ui:Label text="Explore Cave" display-tooltip-when-elided="true" name="Content" class="notification-content" />
                 </ui:GroupBox>
             </ui:GroupBox>
-            <ui:GroupBox name="AmbientDialogSystem" class="dialog-system" style="opacity: 0;">
+            <ui:GroupBox name="AmbientDialogSystem" picking-mode="Ignore" class="dialog-system" style="opacity: 0;">
                 <ui:GroupBox name="Dialog" class="dialog">
                     <ui:Label display-tooltip-when-elided="true" name="Content" text="&lt;color=#ff3333&gt;Obi-wan Kenobi:&lt;/color&gt; Hello there" class="dialog-text" />
                 </ui:GroupBox>
             </ui:GroupBox>
-            <ui:VisualElement name="UI" style="position: absolute; width: 100%; height: 100%;" />
+            <ui:VisualElement name="UI" picking-mode="Ignore" style="position: absolute; width: 100%; height: 100%;" />
         </ui:VisualElement>
-        <ui:VisualElement name="Menu" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; align-items: center; justify-content: center;" />
+        <ui:VisualElement name="Menu" picking-mode="Ignore" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; align-items: center; justify-content: center; opacity: 0; display: none;" />
         <ui:VisualElement name="Fade" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; background-color: rgb(0, 0, 0); opacity: 0; display: none;" />
     </ui:VisualElement>
 </ui:UXML>

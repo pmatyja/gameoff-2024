@@ -64,6 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 373bd0f7e3e2063479bf22b7e4e718df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
   defaultVolumes:
   - Name: Master
     Value: 0.9
@@ -80,3 +81,5 @@ MonoBehaviour:
   music: 1
   ambient: 1
   voice: 1
+  fadeDuration: 0.25
+  pauseMenu: InputAction/Gameplay/Start
