@@ -8,6 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2665577150084239176, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: m_Size.x
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665577150084239176, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: m_Size.z
+      value: 24.999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665577150084239176, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: m_Center.x
+      value: -16.500004
+      objectReference: {fileID: 0}
+    - target: {fileID: 2665577150084239176, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: m_Center.z
+      value: -0.0000019073486
+      objectReference: {fileID: 0}
     - target: {fileID: 3520863667784494051, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
       propertyPath: _targetScene
       value: Game_Level_03
@@ -58,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 5f0a2707146213c4a8ed4d2b60f14c11, type: 2}
     - target: {fileID: 7136242861796243171, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
       propertyPath: m_Name
-      value: Level_Entry_Archway_LVL_03 Variant
+      value: Level_Entry_Archway_LVL_03
       objectReference: {fileID: 0}
     - target: {fileID: 7690030313960171134, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
