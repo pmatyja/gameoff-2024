@@ -11,6 +11,9 @@ namespace Runtime
         private static Camera _mainCamera;
         private static Volume _globalPostProcessingVolume;
         private static AudioManager _audioManager;
+        private static UserInterface _userInterface;
+        private static PauseMenuController _pauseMenuController;
+        private static UIHoverDetector _uiHoverDetector;
         
         private static readonly Dictionary<float, WaitForSeconds> _waitForSeconds = new Dictionary<float, WaitForSeconds>();
         
@@ -26,6 +29,9 @@ namespace Runtime
             GetPlayerGameObject();
             GetGlobalPostProcessingVolume();
             GetAudioManager();
+            GetUserInterface();
+            GetPauseMenuController();
+            GetUIHoverDetector();
         }
         
         public static string GetPlayerTag() => GameOff2024GameSettings.Get().PlayerTag;
@@ -40,6 +46,7 @@ namespace Runtime
             if (!_playerGameObject)
             {
                 _playerGameObject = Object.Instantiate(GameOff2024GameSettings.Get().PlayerCharacterPrefab).gameObject;
+                _playerGameObject.name = GameOff2024GameSettings.Get().PlayerCharacterPrefab.name;
             }
 
             return _playerGameObject;
@@ -89,6 +96,7 @@ namespace Runtime
             if (!_audioManager)
             {
                 _audioManager = Object.Instantiate(GameOff2024GameSettings.Get().AudioManagerPrefab);
+                _audioManager.name = GameOff2024GameSettings.Get().AudioManagerPrefab.name;
             }
             
             return _audioManager;
@@ -112,9 +120,61 @@ namespace Runtime
             if (!_globalPostProcessingVolume)
             {
                 _globalPostProcessingVolume = Object.Instantiate(GameOff2024GameSettings.Get().PostProcessingVolumePrefab);
+                _globalPostProcessingVolume.name = GameOff2024GameSettings.Get().PostProcessingVolumePrefab.name;
             }
 
             return _globalPostProcessingVolume;
+        }
+        
+        public static UserInterface GetUserInterface()
+        {
+            if (_userInterface) return _userInterface;
+            
+            // Find the user interface in the scene
+            _userInterface = Object.FindFirstObjectByType<UserInterface>();
+            
+            // If no user interface is found, instantiate the one from the game settings
+            if (!_userInterface)
+            {
+                _userInterface = Object.Instantiate(GameOff2024GameSettings.Get().UserInterfacePrefab);
+                _userInterface.name = GameOff2024GameSettings.Get().UserInterfacePrefab.name;
+            }
+            
+            return _userInterface;
+        }
+        
+        public static PauseMenuController GetPauseMenuController()
+        {
+            if (_pauseMenuController) return _pauseMenuController;
+            
+            // Find the pause menu controller in the scene
+            _pauseMenuController = Object.FindFirstObjectByType<PauseMenuController>();
+            
+            // If no pause menu controller is found, instantiate the one from the game settings
+            if (!_pauseMenuController)
+            {
+                _pauseMenuController = Object.Instantiate(GameOff2024GameSettings.Get().PauseMenuPrefab);
+                _pauseMenuController.name = GameOff2024GameSettings.Get().PauseMenuPrefab.name;
+            }
+            
+            return _pauseMenuController;
+        }
+
+        public static UIHoverDetector GetUIHoverDetector()
+        {
+            if (_uiHoverDetector) return _uiHoverDetector;
+
+            // Find the UI hover detector in the scene
+            _uiHoverDetector = Object.FindFirstObjectByType<UIHoverDetector>();
+
+            // If no UI hover detector is found, instantiate the one from the game settings
+            if (!_uiHoverDetector)
+            {
+                _uiHoverDetector = Object.Instantiate(GameOff2024GameSettings.Get().UIHoverDetectorPrefab);
+                _uiHoverDetector.name = GameOff2024GameSettings.Get().UIHoverDetectorPrefab.name;
+            }
+
+            return _uiHoverDetector;
         }
     }
 }

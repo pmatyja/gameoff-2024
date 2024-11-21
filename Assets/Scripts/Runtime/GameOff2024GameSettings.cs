@@ -21,6 +21,11 @@ namespace Runtime
         [field: SerializeField, Expandable] public AudioManager AudioManagerPrefab { get; private set; }
         [field: SerializeField, Expandable] public Volume PostProcessingVolumePrefab { get; private set; }
         
+        [field: Header("UI")]
+        [field: SerializeField, Expandable] public UserInterface UserInterfacePrefab { get; private set; }
+        [field: SerializeField, Expandable] public PauseMenuController PauseMenuPrefab { get; private set; }
+        [field: SerializeField, Expandable] public UIHoverDetector UIHoverDetectorPrefab { get; private set; }
+        
         [Header("Debug")]
         [SerializeField] private bool _showDebug;
 
