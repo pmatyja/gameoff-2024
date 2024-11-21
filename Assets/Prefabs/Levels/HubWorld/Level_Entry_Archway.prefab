@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1217990264751256956}
   serializedVersion: 2
   m_LocalRotation: {x: -0.05212115, y: 0.7905804, z: -0.067958556, w: -0.6063396}
-  m_LocalPosition: {x: 28.491684, y: 1.6970205, z: 4.5128193}
+  m_LocalPosition: {x: 24.670174, y: 13.281315, z: 1.2500343}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76,7 +76,7 @@ MonoBehaviour:
       Curvature: {x: 2, y: 11}
       BarrelClipping: 0.25
       Anamorphism: 0
-  BlendHint: 0
+  BlendHint: 8
 --- !u!114 &6700829119485380480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,9 +91,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SplineSettings:
     Spline: {fileID: 2352801689133558997}
-    Position: 0.70075005
+    Position: 0.13870609
     Units: 1
-  SplineOffset: {x: 5.38, y: -5, z: -12}
+  SplineOffset: {x: 0, y: 0, z: 0}
   CameraRotation: 0
   Damping:
     Enabled: 1
@@ -112,9 +112,9 @@ MonoBehaviour:
     - rid: 5523376206078541825
       type: {class: SplineAutoDolly/NearestPointToTarget, ns: Unity.Cinemachine, asm: Unity.Cinemachine}
       data:
-        PositionOffset: -0.2
-        SearchResolution: 8
-        SearchIteration: 2
+        PositionOffset: 0
+        SearchResolution: 24
+        SearchIteration: 4
 --- !u!114 &7859221897320736839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3914300946025498210
 Transform:
   m_ObjectHideFlags: 0
