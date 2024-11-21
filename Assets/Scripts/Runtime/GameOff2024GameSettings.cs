@@ -2,6 +2,7 @@
 using OCSFX.Generics;
 using OCSFX.Utility.Debug;
 using Runtime.Cameras;
+using Runtime.Collectables;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -26,6 +27,10 @@ namespace Runtime
         [field: SerializeField, Expandable] public PauseMenuController PauseMenuPrefab { get; private set; }
         [field: SerializeField, Expandable] public UIHoverDetector UIHoverDetectorPrefab { get; private set; }
         
+        [field: Header("Game")]
+        [field: SerializeField, Expandable] public CollectableData[] KeyCollectables { get; private set; }
+        [field: SerializeField] public int TotalOptionalCollectables { get; private set; }
+        
         [Header("Debug")]
         [SerializeField] private bool _showDebug;
 
@@ -47,6 +52,9 @@ namespace Runtime
             if (!PlayerCharacterPrefab) WarnOfMissingField(nameof(PlayerCharacterPrefab));
             if (!AudioManagerPrefab) WarnOfMissingField(nameof(AudioManagerPrefab));
             if (!PostProcessingVolumePrefab) WarnOfMissingField(nameof(PostProcessingVolumePrefab));
+            if (!UserInterfacePrefab) WarnOfMissingField(nameof(UserInterfacePrefab));
+            if (!PauseMenuPrefab) WarnOfMissingField(nameof(PauseMenuPrefab));
+            if (!UIHoverDetectorPrefab) WarnOfMissingField(nameof(UIHoverDetectorPrefab));
             
             if (_showDebug) OCSFXLogger.Log($"[{nameof(GameOff2024GameSettings)}] All fields are valid.", this);
         }

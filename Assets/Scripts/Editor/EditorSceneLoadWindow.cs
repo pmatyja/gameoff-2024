@@ -53,13 +53,16 @@ namespace Editor
         private void DrawLoadSceneButton()
         {
             if (!GUILayout.Button("Load Scene")) return;
-            
-            var alreadyLoaded = SceneManager.GetSceneByName(_sceneName).isLoaded;
-            if (alreadyLoaded)
+
+            if (_loadSceneMode == LoadSceneMode.Additive)
             {
-                Debug.LogWarning($"[{nameof(EditorSceneLoadWindow)}] {_sceneName} is already loaded. " +
-                                 $"Aborting load operation");
-                return;
+                var alreadyLoaded = SceneManager.GetSceneByName(_sceneName).isLoaded;
+                if (alreadyLoaded)
+                {
+                    Debug.LogWarning($"[{nameof(EditorSceneLoadWindow)}] {_sceneName} is already loaded. " +
+                                     $"Aborting load operation");
+                    return;
+                }   
             }
             
             // While in play mode

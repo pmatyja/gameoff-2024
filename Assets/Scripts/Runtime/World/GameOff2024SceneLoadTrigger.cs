@@ -20,12 +20,6 @@ namespace Runtime.World
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag(GameOff2024Statics.GetPlayerTag())) return;
-
-            // var currentScene = SceneManager.GetActiveScene();
-            // var currentSkyBox = RenderSettings.skybox;
-            
-            // var targetScene = SceneManager.GetSceneByName(_targetScene);
-            // if (!targetScene.IsValid()) return;
             
             var alreadyLoaded = SceneManager.GetSceneByName(_targetScene).isLoaded;
             if (alreadyLoaded)

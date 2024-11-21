@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using OCSFX.Utility.Debug;
 using Runtime.Collectables;
 using UnityEngine;
@@ -25,6 +27,11 @@ namespace Runtime.Interactions
         
         private void OnEnable()
         {
+            if (_requiredCollectables == null || _requiredCollectables.Count == 0)
+            {
+                _requiredCollectables = GameOff2024GameSettings.Get().KeyCollectables.ToList();
+            }
+            
             ItemInventory.OnItemAdded += OnItemAdded;
             ItemInventory.OnItemRemoved += OnItemRemoved;
         }
@@ -62,6 +69,16 @@ namespace Runtime.Interactions
             if (currentInteractState != CanInteract)
             {
                 DebugLog();
+            }
+        }
+
+        private void OnValidate()
+        {
+            if (!_blockMoverScript) _blockMoverScript = GetComponent<BlockMoverScript>();
+            
+            if (_requiredCollectables == null || _requiredCollectables.Count == 0)
+            {
+                _requiredCollectables = GameOff2024GameSettings.Get().KeyCollectables.ToList();
             }
         }
 
