@@ -1,5 +1,6 @@
 ﻿using OCSFX.FMOD.Components;
 using OCSFX.Generics;
+using OCSFX.Utility.Attributes;
 using OCSFX.Utility.Debug;
 using Runtime.Cameras;
 using Runtime.Collectables;
@@ -29,7 +30,7 @@ namespace Runtime
         
         [field: Header("Game")]
         [field: SerializeField, Expandable] public CollectableData[] KeyCollectables { get; private set; }
-        [field: SerializeField] public int TotalOptionalCollectables { get; private set; }
+        [field: SerializeField, Min(0)] public int TotalOptionalCollectables { get; private set; }
         
         [Header("Debug")]
         [SerializeField] private bool _showDebug;
@@ -39,7 +40,7 @@ namespace Runtime
         private static void Init() => UnityEditor.EditorApplication.delayCall += () => Get();
 #endif
 
-        [RuntimeInitializeOnLoadMethod]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
         private static void RuntimeInit()
         {
             Get().ValidateFields();
@@ -47,15 +48,27 @@ namespace Runtime
 
         private void ValidateFields()
         {
-            if (!InputActions) WarnOfMissingField(nameof(InputActions));
-            if (string.IsNullOrEmpty(PlayerTag)) WarnOfMissingField(nameof(PlayerTag));
-            if (!PlayerCharacterPrefab) WarnOfMissingField(nameof(PlayerCharacterPrefab));
-            if (!AudioManagerPrefab) WarnOfMissingField(nameof(AudioManagerPrefab));
-            if (!PostProcessingVolumePrefab) WarnOfMissingField(nameof(PostProcessingVolumePrefab));
-            if (!UserInterfacePrefab) WarnOfMissingField(nameof(UserInterfacePrefab));
-            if (!PauseMenuPrefab) WarnOfMissingField(nameof(PauseMenuPrefab));
-            if (!UIHoverDetectorPrefab) WarnOfMissingField(nameof(UIHoverDetectorPrefab));
+            var fields = new (object field, string name)[]
+            {
+                (InputActions, nameof(InputActions)),
+                (PlayerTag, nameof(PlayerTag)),
+                (PlayerCharacterPrefab, nameof(PlayerCharacterPrefab)),
+                (AudioManagerPrefab, nameof(AudioManagerPrefab)),
+                (PostProcessingVolumePrefab, nameof(PostProcessingVolumePrefab)),
+                (UserInterfacePrefab, nameof(UserInterfacePrefab)),
+                (PauseMenuPrefab, nameof(PauseMenuPrefab)),
+                (UIHoverDetectorPrefab, nameof(UIHoverDetectorPrefab))
+            };
+
+            foreach (var (field, fieldName) in fields)
+            {
+                if (field is null || (field is string str && string.IsNullOrEmpty(str)))
+                {
+                    WarnOfMissingField(fieldName);
+                }
+            }
             
+
             if (_showDebug) OCSFXLogger.Log($"[{nameof(GameOff2024GameSettings)}] All fields are valid.", this);
         }
         

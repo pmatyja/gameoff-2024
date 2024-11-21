@@ -16,16 +16,28 @@ MonoBehaviour:
   _autoFillPlayerPrefsData: 1
   _volumeSettingParameters:
   - _parameter: Volume_Master
-    _value: 1
+    _value: 0.9
   - _parameter: Volume_SX
     _value: 1
   - _parameter: Volume_MX
     _value: 1
+  - _parameter: Volume_AMB
+    _value: 1
+  - _parameter: Volume_UI
+    _value: 1
+  - _parameter: Volume_VX
+    _value: 1
   _audioPlayerPrefs:
     <Entries>k__BackingField:
     - _parameter: Volume_Master
-      _value: 1
+      _value: 0.9
     - _parameter: Volume_SX
       _value: 1
     - _parameter: Volume_MX
+      _value: 1
+    - _parameter: Volume_AMB
+      _value: 1
+    - _parameter: Volume_UI
+      _value: 1
+    - _parameter: Volume_VX
       _value: 1

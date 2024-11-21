@@ -9,7 +9,7 @@ namespace Editor
         public static void SelectPlayer()
         {
             // Select the player gameobject in the hierarchy
-            Selection.activeObject = GameOff2024Statics.GetPlayerGameObject();
+            Selection.activeObject = GameOff2024Statics.GetPlayerCharacter();
         }
     }
 }

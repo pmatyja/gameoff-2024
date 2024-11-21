@@ -3,11 +3,15 @@ using OCSFX.FMOD.Components;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace Runtime
 {
     public static class GameOff2024Statics
     {
-        private static GameObject _playerGameObject;
+        private static PlayerCharacter _playerCharacter;
         private static Camera _mainCamera;
         private static Volume _globalPostProcessingVolume;
         private static AudioManager _audioManager;
@@ -20,43 +24,32 @@ namespace Runtime
         public const string PROJECT_NAME = "GameOff2024";
         public const string MENU_ROOT = PROJECT_NAME + "/";
         
+#if UNITY_EDITOR
+        [MenuItem(MENU_ROOT + "Initialize Singletons")]
+        private static void InitializeSingletons()
+        {
+            if (Application.isPlaying)
+            {
+                Debug.LogWarning("This method should only be called in the editor.");
+                return;
+            }
+            
+            Initialize();
+        }
+#endif
+        
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize()
         {
             _waitForSeconds.Clear();
 
             GetMainCamera();
-            GetPlayerGameObject();
+            GetPlayerCharacter();
             GetGlobalPostProcessingVolume();
             GetAudioManager();
-            GetUserInterface();
             GetPauseMenuController();
             GetUIHoverDetector();
-        }
-        
-        public static string GetPlayerTag() => GameOff2024GameSettings.Get().PlayerTag;
-        
-        public static GameObject GetPlayerGameObject()
-        {
-            if (!_playerGameObject)
-            {
-                _playerGameObject = GameObject.FindGameObjectWithTag(GameOff2024GameSettings.Get().PlayerTag);
-            }
-            
-            if (!_playerGameObject)
-            {
-                _playerGameObject = Object.Instantiate(GameOff2024GameSettings.Get().PlayerCharacterPrefab).gameObject;
-                _playerGameObject.name = GameOff2024GameSettings.Get().PlayerCharacterPrefab.name;
-            }
-
-            return _playerGameObject;
-        }
-        
-        public static Camera GetMainCamera()
-        {
-            if (!_mainCamera) _mainCamera = Camera.main;
-
-            return _mainCamera;
+            GetUserInterface();
         }
         
         public static WaitForSeconds GetWaitForSeconds(float seconds)
@@ -68,6 +61,8 @@ namespace Runtime
 
             return waitForSeconds;
         }
+        
+        public static string GetPlayerTag() => GameOff2024GameSettings.Get().PlayerTag;
         
         public static Vector3 GetCameraRelativeMoveDirection(Vector2 inputDirection, Transform cameraTransform = null)
         {
@@ -85,96 +80,86 @@ namespace Runtime
             return forward * inputDirection.y + right * inputDirection.x;
         }
 
-        public static AudioManager GetAudioManager()
+        public static PlayerCharacter GetPlayerCharacter() => 
+            GetOrCreateObject(ref _playerCharacter, GameOff2024GameSettings.Get().PlayerCharacterPrefab);
+        
+        public static Camera GetMainCamera()
         {
-            if (_audioManager) return _audioManager;
+            if (!_mainCamera) _mainCamera = Camera.main;
+
+            return _mainCamera;
+        }
+
+        public static AudioManager GetAudioManager() => 
+            GetOrCreateObject(ref _audioManager, GameOff2024GameSettings.Get().AudioManagerPrefab);
+        
+        public static Volume GetGlobalPostProcessingVolume() => 
+            GetOrCreateObjectWithCondition(
+                ref _globalPostProcessingVolume, GameOff2024GameSettings.Get().PostProcessingVolumePrefab, 
+                volume => volume.isGlobal);
+        
+        public static UserInterface GetUserInterface() => 
+            GetOrCreateObject(ref _userInterface, GameOff2024GameSettings.Get().UserInterfacePrefab);
+        
+        public static PauseMenuController GetPauseMenuController() => 
+            GetOrCreateObject(ref _pauseMenuController, GameOff2024GameSettings.Get().PauseMenuPrefab);
+
+        public static UIHoverDetector GetUIHoverDetector() => 
+            GetOrCreateObject(ref _uiHoverDetector, GameOff2024GameSettings.Get().UIHoverDetectorPrefab);
+        
+        private static T GetOrCreateObject<T> (ref T reference, T prefab) where T : MonoBehaviour
+        {
+            if (reference) return reference;
             
-            // Find the audio manager in the scene
-            _audioManager = Object.FindFirstObjectByType<AudioManager>();
+            reference = Object.FindFirstObjectByType<T>();
+            if (reference) return reference;
             
-            // If no audio manager is found, instantiate the one from the game settings
-            if (!_audioManager)
+#if UNITY_EDITOR
+            reference = PrefabUtility.InstantiatePrefab(prefab) as T;
+            if (reference)
             {
-                _audioManager = Object.Instantiate(GameOff2024GameSettings.Get().AudioManagerPrefab);
-                _audioManager.name = GameOff2024GameSettings.Get().AudioManagerPrefab.name;
+                reference.name = prefab.name;
+                EditorUtility.SetDirty(reference);
+            }
+            return reference;
+#endif
+            reference = Object.Instantiate(prefab);
+            reference.name = prefab.name;
+            
+            return reference;
+        }
+
+        private static T GetOrCreateObjectWithCondition<T>(ref T reference, T prefab, System.Func<T, bool> condition)
+            where T : MonoBehaviour
+        {
+            if (reference) return reference;
+            
+            var allOfType = Object.FindObjectsByType<T>(FindObjectsSortMode.None);
+            
+            if (allOfType.Length == 0)
+            {
+#if UNITY_EDITOR
+                reference = PrefabUtility.InstantiatePrefab(prefab) as T;
+                if (reference)
+                {
+                    reference.name = prefab.name;
+                    EditorUtility.SetDirty(reference);
+                }
+                return reference;
+#endif
+                reference = Object.Instantiate(prefab);
+                reference.name = prefab.name;
+                return reference;
             }
             
-            return _audioManager;
-        }
-        
-        public static Volume GetGlobalPostProcessingVolume()
-        {
-            if (_globalPostProcessingVolume) return _globalPostProcessingVolume;
-            
-            // Find the global post-processing volume in the scene
-            var volumesInScene = Object.FindObjectsByType<Volume>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            foreach (var volume in volumesInScene)
+            foreach (var obj in allOfType)
             {
-                if (!volume.isGlobal) continue;
-                _globalPostProcessingVolume = volume;
-                    
+                if (!condition(obj)) continue;
+                reference = obj;
                 break;
             }
 
-            // If no global post-processing volume is found, instantiate the one from the game settings
-            if (!_globalPostProcessingVolume)
-            {
-                _globalPostProcessingVolume = Object.Instantiate(GameOff2024GameSettings.Get().PostProcessingVolumePrefab);
-                _globalPostProcessingVolume.name = GameOff2024GameSettings.Get().PostProcessingVolumePrefab.name;
-            }
-
-            return _globalPostProcessingVolume;
-        }
-        
-        public static UserInterface GetUserInterface()
-        {
-            if (_userInterface) return _userInterface;
-            
-            // Find the user interface in the scene
-            _userInterface = Object.FindFirstObjectByType<UserInterface>();
-            
-            // If no user interface is found, instantiate the one from the game settings
-            if (!_userInterface)
-            {
-                _userInterface = Object.Instantiate(GameOff2024GameSettings.Get().UserInterfacePrefab);
-                _userInterface.name = GameOff2024GameSettings.Get().UserInterfacePrefab.name;
-            }
-            
-            return _userInterface;
-        }
-        
-        public static PauseMenuController GetPauseMenuController()
-        {
-            if (_pauseMenuController) return _pauseMenuController;
-            
-            // Find the pause menu controller in the scene
-            _pauseMenuController = Object.FindFirstObjectByType<PauseMenuController>();
-            
-            // If no pause menu controller is found, instantiate the one from the game settings
-            if (!_pauseMenuController)
-            {
-                _pauseMenuController = Object.Instantiate(GameOff2024GameSettings.Get().PauseMenuPrefab);
-                _pauseMenuController.name = GameOff2024GameSettings.Get().PauseMenuPrefab.name;
-            }
-            
-            return _pauseMenuController;
-        }
-
-        public static UIHoverDetector GetUIHoverDetector()
-        {
-            if (_uiHoverDetector) return _uiHoverDetector;
-
-            // Find the UI hover detector in the scene
-            _uiHoverDetector = Object.FindFirstObjectByType<UIHoverDetector>();
-
-            // If no UI hover detector is found, instantiate the one from the game settings
-            if (!_uiHoverDetector)
-            {
-                _uiHoverDetector = Object.Instantiate(GameOff2024GameSettings.Get().UIHoverDetectorPrefab);
-                _uiHoverDetector.name = GameOff2024GameSettings.Get().UIHoverDetectorPrefab.name;
-            }
-
-            return _uiHoverDetector;
+            return reference;
         }
     }
 }
