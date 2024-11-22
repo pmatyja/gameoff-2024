@@ -14,17 +14,22 @@ namespace Runtime.Audio
         [SerializeField] private UnityEvent _onGameSettingsChanged;
         [SerializeField] private UnityEvent<string, float> _onGameSettingsAudioValueChanged;
         [SerializeField] private AudioSettingIdConversion[] _audioSettingIdConversions;
+        [Space]
+        [SerializeField] private UnityEvent _onPauseMenuOpen;
+        [SerializeField] private UnityEvent _onPauseMenuClose;
 
         private void OnEnable()
         {
             EventBus.AddListener<CollectableEventParameters>(OnCollectableCollected);
             EventBus.AddListener<GameSettingsChangedEventParameters>(OnGameSettingsChanged);
+            EventBus.AddListener<PauseMenuController.UIEventParameters>(OnPauseMenuControllerUIEvent);
         }
 
         private void OnDisable()
         {
             EventBus.RemoveListener<CollectableEventParameters>(OnCollectableCollected);
             EventBus.RemoveListener<GameSettingsChangedEventParameters>(OnGameSettingsChanged);
+            EventBus.RemoveListener<PauseMenuController.UIEventParameters>(OnPauseMenuControllerUIEvent);
         }
 
         private void OnCollectableCollected(object sender, CollectableEventParameters info)
@@ -55,6 +60,22 @@ namespace Runtime.Audio
                 
                 var floatValue = (float)(object)info.Value;
                 _onGameSettingsAudioValueChanged?.Invoke(convertedId, floatValue);
+            }
+        }
+        
+        private void OnPauseMenuControllerUIEvent(object sender, PauseMenuController.UIEventParameters info)
+        {
+            switch (info.Action)
+            {
+                case PauseMenuController.UIAction.OpenMenu:
+                    OCSFXLogger.Log($"[{nameof(GameOff2024EventResponder)}] {nameof(OnPauseMenuControllerUIEvent)} : Open Menu", this, _showDebug);
+                    _onPauseMenuOpen?.Invoke();
+                    break;
+                default:
+                case PauseMenuController.UIAction.CloseMenu:
+                    OCSFXLogger.Log($"[{nameof(GameOff2024EventResponder)}] {nameof(OnPauseMenuControllerUIEvent)} : Close Menu", this, _showDebug);
+                    _onPauseMenuClose?.Invoke();
+                    break;
             }
         }
         
