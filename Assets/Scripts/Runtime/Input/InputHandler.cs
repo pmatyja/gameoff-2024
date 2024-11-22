@@ -12,14 +12,18 @@ using UnityEditor;
 public class InputHandler: SingletonScriptableObject<InputHandler>
 {
     [field: SerializeField] public InputActionAsset InputActions { get; private set; }
-    [field: SerializeField, ReadOnly] public InputActionMap[] InputActionMaps { get; private set; }
+    [field: SerializeField, ReadOnly] public string[] InputActionMapNames { get; private set; }
     
     [field: Header("Gameplay Actions")]
-    [field: SerializeField] public InputActionReference MoveActionRef { get; private set; }
-    [field: SerializeField] public InputActionReference CameraDragActionRef { get; private set; }
-    [field: SerializeField] public InputActionReference CameraZoomActionRef { get; private set; }
-    [field: SerializeField] public InputActionReference InteractActionRef { get; private set; }
-    [field: SerializeField] public InputActionReference PauseActionRef { get; private set; }
+    [field: SerializeField] public GameplayInputActions GameplayActions { get; private set; }
+    // [field: SerializeField] public InputActionReference MoveActionRef { get; private set; }
+    // [field: SerializeField] public InputActionReference CameraDragActionRef { get; private set; }
+    // [field: SerializeField] public InputActionReference CameraZoomActionRef { get; private set; }
+    // [field: SerializeField] public InputActionReference InteractActionRef { get; private set; }
+    // [field: SerializeField] public InputActionReference PauseActionRef { get; private set; }
+    
+    [field: Header("UI Actions")]
+    [field: SerializeField] public GameplayUIInputActions GameplayUIActions { get; private set; }
 
     [field: Header("Settings")]
     [field: SerializeField, Range(0.1f, 1f)] public float CameraZoomSensitivity { get; private set; } = 1f;
@@ -66,15 +70,17 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     {
         if (bind)
         {
-            Get().MoveActionRef.action.performed += OnMoveInputPerformed;
-            Get().MoveActionRef.action.canceled += OnMoveInputPerformed;
-            Get().InteractActionRef.action.performed += OnInteractInputPerformed;
+            var gameplayActions = Get().GameplayActions;
+            gameplayActions.Move.action.performed += OnMoveInputPerformed;
+            gameplayActions.Move.action.canceled += OnMoveInputPerformed;
+            gameplayActions.Interact.action.performed += OnInteractInputPerformed;
+            gameplayActions.CameraDrag.action.performed += OnDragCameraInputPerformed;
+            gameplayActions.CameraDrag.action.canceled += OnDragCameraInputPerformed;
+            gameplayActions.CameraZoom.action.performed += OnZoomInputPerformed;
+            gameplayActions.Pause.action.performed += OnPauseInputPerformed;
             
-            Get().CameraDragActionRef.action.performed += OnDragCameraInputPerformed;
-            Get().CameraDragActionRef.action.canceled += OnDragCameraInputPerformed;
-            Get().CameraZoomActionRef.action.performed += OnZoomInputPerformed;
-
-            Get().PauseActionRef.action.performed += OnPauseInputPerformed;
+            var gameplayUIActions = Get().GameplayUIActions;
+            gameplayUIActions.Resume.action.performed += OnPauseInputPerformed;
             
             EventBus.AddListener<PauseMenuController.UIEventParameters>(OnPauseMenuToggle);
             
@@ -82,15 +88,17 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         }
         else
         {
-            Get().MoveActionRef.action.performed -= OnMoveInputPerformed;
-            Get().MoveActionRef.action.canceled -= OnMoveInputPerformed;
-            Get().InteractActionRef.action.performed -= OnInteractInputPerformed;
+            var gameplayActions = Get().GameplayActions;
+            gameplayActions.Move.action.performed -= OnMoveInputPerformed;
+            gameplayActions.Move.action.canceled -= OnMoveInputPerformed;
+            gameplayActions.Interact.action.performed -= OnInteractInputPerformed;
+            gameplayActions.CameraDrag.action.performed -= OnDragCameraInputPerformed;
+            gameplayActions.CameraDrag.action.canceled -= OnDragCameraInputPerformed;
+            gameplayActions.CameraZoom.action.performed -= OnZoomInputPerformed;
+            gameplayActions.Pause.action.performed -= OnPauseInputPerformed;
             
-            Get().CameraDragActionRef.action.performed -= OnDragCameraInputPerformed;
-            Get().CameraDragActionRef.action.canceled -= OnDragCameraInputPerformed;
-            Get().CameraZoomActionRef.action.performed -= OnZoomInputPerformed;
-            
-            Get().PauseActionRef.action.performed -= OnPauseInputPerformed;
+            var gameplayUIActions = Get().GameplayUIActions;
+            gameplayUIActions.Resume.action.performed -= OnPauseInputPerformed;
             
             EventBus.RemoveListener<PauseMenuController.UIEventParameters>(OnPauseMenuToggle);
             
@@ -100,15 +108,17 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
 
     private static void OnPauseMenuToggle(object sender, PauseMenuController.UIEventParameters info)
     {
-        if (info.Action == PauseMenuController.UIAction.OpenMenu)
+        switch (info.Action)
         {
-            Get().SetCurrentActionMap("UI_Gameplay");
+            case PauseMenuController.UIAction.OpenMenu:
+                Get().SetCurrentActionMap(Get().GameplayUIActions.ActionMap);
+                break;
+            default:
+            case PauseMenuController.UIAction.CloseMenu:
+                Get().SetCurrentActionMap(Get().GameplayActions.ActionMap);
+                break;
         }
-        else if (info.Action == PauseMenuController.UIAction.CloseMenu)
-        {
-            Get().SetCurrentActionMap("Gameplay");
-        }
-        
+
         OCSFXLogger.Log($"Pause menu toggle event received. Action: {info.Action}", Get(), Get()._showDebug);
     }
 
@@ -164,6 +174,23 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
             return;
         }
         
+        InputActions.Disable();
+        
+        _currentActionMap?.Disable();
+        _currentActionMap = actionMap;
+        _currentActionMap.Enable();
+    }
+    
+    public void SetCurrentActionMap(InputActionMap actionMap)
+    {
+        if (actionMap == null)
+        {
+            OCSFXLogger.Log($"Action map is null", this, _showDebug);
+            return;
+        }
+        
+        InputActions.Disable();
+        
         _currentActionMap?.Disable();
         _currentActionMap = actionMap;
         _currentActionMap.Enable();
@@ -173,10 +200,71 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     {
         if (!InputActions)
         {
-            InputActionMaps = Array.Empty<InputActionMap>();
+            InputActionMapNames = Array.Empty<string>();
             return;
         }
         
-        InputActionMaps = InputActions.actionMaps.ToArray();
+        var actionMaps = InputActions.actionMaps;
+        InputActionMapNames = new string[actionMaps.Count];
+
+        for (int i = 0; i < InputActions.actionMaps.Count; i++)
+        {
+            InputActionMapNames[i] = InputActions.actionMaps[i].name;
+        }
+
+        GameplayActions?.TrySetActionMapFromAsset(InputActions);
+        GameplayUIActions?.TrySetActionMapFromAsset(InputActions);
+    }
+
+    [Serializable]
+    public class GameplayInputActions : InputActionsCollection
+    {
+        [field:SerializeField] public InputActionReference Move { get; private set; }
+        [field:SerializeField] public InputActionReference CameraDrag { get; private set; }
+        [field:SerializeField] public InputActionReference CameraZoom { get; private set; }
+        [field:SerializeField] public InputActionReference Interact { get; private set; }
+        [field:SerializeField] public InputActionReference Pause { get; private set; }
+    }
+    
+    [Serializable]
+    public class GameplayUIInputActions : InputActionsCollection
+    {
+        [field: SerializeField] public InputActionReference Resume { get; private set; }
+    }
+
+    [Serializable]
+    public abstract class InputActionsCollection
+    {
+        [field: SerializeField] public string ActionMapName { get; private set; }
+        public InputActionMap ActionMap { get; private set; }
+        
+        public bool TrySetActionMapFromAsset(InputActionAsset asset)
+        {
+            if (!asset)
+            {
+                OCSFXLogger.LogError($"[{nameof(InputActionsCollection)}] {nameof(TrySetActionMapFromAsset)}: " +
+                                     $"Input action asset is null");
+                return false;
+            }
+            var foundActionMap = asset.FindActionMap(ActionMapName);
+            if (foundActionMap == null)
+            {
+                OCSFXLogger.LogError($"[{nameof(InputActionsCollection)}] {nameof(TrySetActionMapFromAsset)}: " +
+                                     $"Action map {ActionMapName} not found in asset {asset.name}");
+                return false;
+            }
+            
+            ActionMap = foundActionMap;
+            return true;
+        }
+        
+        public void SetActionMap(InputActionMap actionMap)
+        {
+            // Set action map
+            if (actionMap == ActionMap) return;
+            
+            ActionMap?.Disable();
+            ActionMap = actionMap;
+        }
     }
 }
