@@ -78,10 +78,6 @@ public class PauseMenuController : Singleton<PauseMenuController>
     [Range(0.0f, 1.0f)]
     private float fadeDuration = 0.25f;
 
-    [SerializeField]
-    [InputActionMap]
-    private string pauseMenu;
-
     private VisualElement root;
     private int target = 0;
 
@@ -162,11 +158,6 @@ public class PauseMenuController : Singleton<PauseMenuController>
     public void Update()
     {
         this.root.Fade(this.target, this.fadeDuration);
-
-        if (InputManager.Released(this.pauseMenu))
-        {
-            this.Toggle();
-        }
     }
 
     private float GetValue(string name, ref float previewField)
