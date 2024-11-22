@@ -13,9 +13,149 @@ MonoBehaviour:
   m_Name: InputHandler
   m_EditorClassIdentifier: 
   <InputActions>k__BackingField: {fileID: -944628639613478452, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+  <InputActionMaps>k__BackingField:
+  - m_Name: Gameplay
+    m_Id: 8159da9e-c0f3-491a-9f4a-b3aedd7f00e2
+    m_Asset: {fileID: -944628639613478452, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+    m_Actions:
+    - m_Name: Move
+      m_Type: 0
+      m_ExpectedControlType: Vector2
+      m_Id: 7bdc7544-3441-4fdf-9818-36ec6000dba5
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 1
+    - m_Name: DragCamera
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: e2d9c495-899c-4850-8628-2892854835ba
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Zoom
+      m_Type: 2
+      m_ExpectedControlType: Axis
+      m_Id: c298ba40-3257-42e1-a0e5-c3209642cb69
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Interact
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: 8d4f29c5-01da-4eda-873b-d9629280dacf
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Pause
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: f4d99f2a-f4f4-4021-986b-1dc9ed7ee69e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Bindings:
+    - m_Name: WASD
+      m_Id: eb7b2d2c-2a87-4513-8474-ef6aaaaee184
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 9d120923-e4c5-42f3-af8c-e6c655cfbfbd
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 844996ff-0210-416d-88db-153aa8eb8e0d
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 4131c9f3-55fc-4bb9-8ea6-693bbceaaab7
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: a197d349-de60-402f-a523-8dce4bc79dac
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: 
+      m_Id: 282e59fc-02d1-402f-9d62-1cb2f5f6609f
+      m_Path: <Mouse>/rightButton
+      m_Interactions: Press
+      m_Processors: 
+      m_Groups: 
+      m_Action: DragCamera
+      m_Flags: 0
+    - m_Name: 
+      m_Id: ce9bba3a-b564-44a0-b40b-40b8c1d232da
+      m_Path: <Mouse>/scroll/y
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Zoom
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 0eec6a9b-f758-4095-8efc-4962a1639065
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 666d2586-61c2-409b-88e3-8ae74942454a
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause
+      m_Flags: 0
+  - m_Name: UI_Gameplay
+    m_Id: 3586e2c8-001f-421a-b692-d5f3d573c4fc
+    m_Asset: {fileID: -944628639613478452, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+    m_Actions:
+    - m_Name: Pause
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: d2580d05-1fb4-4b11-b5cd-161e3a713416
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Bindings:
+    - m_Name: 
+      m_Id: 261c0b3f-7fdc-4eef-bfca-2b5e636dfcd6
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause
+      m_Flags: 0
   <MoveActionRef>k__BackingField: {fileID: -3477496464877089287, guid: 64a922b153190654682e9702dfa308b2, type: 3}
   <CameraDragActionRef>k__BackingField: {fileID: 7267231072281116439, guid: 64a922b153190654682e9702dfa308b2, type: 3}
   <CameraZoomActionRef>k__BackingField: {fileID: 5587239334537673649, guid: 64a922b153190654682e9702dfa308b2, type: 3}
   <InteractActionRef>k__BackingField: {fileID: -6630898346341296811, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+  <PauseActionRef>k__BackingField: {fileID: -4141206974311367078, guid: 64a922b153190654682e9702dfa308b2, type: 3}
   <CameraZoomSensitivity>k__BackingField: 0.5
-  _showDebug: 0
+  _showDebug: 1

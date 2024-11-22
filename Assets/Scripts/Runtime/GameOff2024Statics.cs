@@ -15,7 +15,7 @@ namespace Runtime
         private static Camera _mainCamera;
         private static Volume _globalPostProcessingVolume;
         private static AudioManager _audioManager;
-        private static UserInterface _userInterface;
+        // private static UserInterface _userInterface;
         private static PauseMenuController _pauseMenuController;
         private static UIHoverDetector _uiHoverDetector;
         
@@ -49,7 +49,7 @@ namespace Runtime
             GetAudioManager();
             GetPauseMenuController();
             GetUIHoverDetector();
-            GetUserInterface();
+            // GetUserInterface();
         }
         
         public static WaitForSeconds GetWaitForSeconds(float seconds)
@@ -98,8 +98,8 @@ namespace Runtime
                 ref _globalPostProcessingVolume, GameOff2024GameSettings.Get().PostProcessingVolumePrefab, 
                 volume => volume.isGlobal);
         
-        public static UserInterface GetUserInterface() => 
-            GetOrCreateObject(ref _userInterface, GameOff2024GameSettings.Get().UserInterfacePrefab);
+        // public static UserInterface GetUserInterface() => 
+        //     GetOrCreateObject(ref _userInterface, GameOff2024GameSettings.Get().UserInterfacePrefab);
         
         public static PauseMenuController GetPauseMenuController() => 
             GetOrCreateObject(ref _pauseMenuController, GameOff2024GameSettings.Get().PauseMenuPrefab);
@@ -114,14 +114,23 @@ namespace Runtime
             reference = Object.FindFirstObjectByType<T>();
             if (reference) return reference;
             
-#if UNITY_EDITOR
-            reference = PrefabUtility.InstantiatePrefab(prefab) as T;
-            if (reference)
+            if (!prefab)
             {
-                reference.name = prefab.name;
-                EditorUtility.SetDirty(reference);
+                Debug.LogError($"Prefab of type {typeof(T).Name} is null. Cannot create object.");
+                return null;
             }
-            return reference;
+            
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
+                reference = PrefabUtility.InstantiatePrefab(prefab) as T;
+                if (reference)
+                {
+                    reference.name = prefab.name;
+                    EditorUtility.SetDirty(reference);
+                }
+                return reference;   
+            }
 #endif
             reference = Object.Instantiate(prefab);
             reference.name = prefab.name;
@@ -133,12 +142,23 @@ namespace Runtime
             where T : MonoBehaviour
         {
             if (reference) return reference;
-            
-            var allOfType = Object.FindObjectsByType<T>(FindObjectsSortMode.None);
-            
-            if (allOfType.Length == 0)
+
+            foreach (var obj in Object.FindObjectsByType<T>(FindObjectsSortMode.None))
             {
+                if (!condition(obj)) continue;
+                reference = obj;
+                return reference;
+            }
+
+            if (!prefab)
+            {
+                Debug.LogError($"Prefab of type {typeof(T).Name} is null. Cannot create object.");
+                return null;
+            }
+
 #if UNITY_EDITOR
+            if (!Application.isPlaying)
+            {
                 reference = PrefabUtility.InstantiatePrefab(prefab) as T;
                 if (reference)
                 {
@@ -146,19 +166,11 @@ namespace Runtime
                     EditorUtility.SetDirty(reference);
                 }
                 return reference;
+            }
 #endif
-                reference = Object.Instantiate(prefab);
-                reference.name = prefab.name;
-                return reference;
-            }
-            
-            foreach (var obj in allOfType)
-            {
-                if (!condition(obj)) continue;
-                reference = obj;
-                break;
-            }
 
+            reference = Object.Instantiate(prefab);
+            reference.name = prefab.name;
             return reference;
         }
     }

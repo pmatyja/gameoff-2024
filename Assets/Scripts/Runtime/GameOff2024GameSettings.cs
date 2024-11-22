@@ -24,7 +24,7 @@ namespace Runtime
         [field: SerializeField, Expandable] public Volume PostProcessingVolumePrefab { get; private set; }
         
         [field: Header("UI")]
-        [field: SerializeField, Expandable] public UserInterface UserInterfacePrefab { get; private set; }
+        // [field: SerializeField, Expandable] public UserInterface UserInterfacePrefab { get; private set; }
         [field: SerializeField, Expandable] public PauseMenuController PauseMenuPrefab { get; private set; }
         [field: SerializeField, Expandable] public UIHoverDetector UIHoverDetectorPrefab { get; private set; }
         
@@ -55,7 +55,7 @@ namespace Runtime
                 (PlayerCharacterPrefab, nameof(PlayerCharacterPrefab)),
                 (AudioManagerPrefab, nameof(AudioManagerPrefab)),
                 (PostProcessingVolumePrefab, nameof(PostProcessingVolumePrefab)),
-                (UserInterfacePrefab, nameof(UserInterfacePrefab)),
+                // (UserInterfacePrefab, nameof(UserInterfacePrefab)),
                 (PauseMenuPrefab, nameof(PauseMenuPrefab)),
                 (UIHoverDetectorPrefab, nameof(UIHoverDetectorPrefab))
             };
@@ -67,7 +67,6 @@ namespace Runtime
                     WarnOfMissingField(fieldName);
                 }
             }
-            
 
             if (_showDebug) OCSFXLogger.Log($"[{nameof(GameOff2024GameSettings)}] All fields are valid.", this);
         }

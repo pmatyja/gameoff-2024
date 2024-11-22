@@ -85,6 +85,16 @@ public class PauseMenuController : Singleton<PauseMenuController>
     private VisualElement root;
     private int target = 0;
 
+    private void OnEnable()
+    {
+        InputHandler.Get().OnPauseInput += this.Toggle;
+    }
+
+    private void OnDisable()
+    {
+        InputHandler.Get().OnPauseInput -= this.Toggle;   
+    }
+
     public void Toggle()
     {
         if (this.target == 0)
