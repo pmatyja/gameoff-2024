@@ -15,10 +15,9 @@ namespace Runtime.Interactions
         
         private void OnEnable()
         {
-            EventSystem.SetUITookitEventSystemOverride(null, true, false);
             BindChildren(true);
         }
-        
+
         private void OnDisable()
         {
             BindChildren(false);
