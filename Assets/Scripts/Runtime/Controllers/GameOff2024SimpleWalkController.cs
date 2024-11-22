@@ -51,15 +51,15 @@ namespace Runtime.Controllers
 
         private void OnEnable()
         {
-            _inputHandler.OnMoveInput += OnMoveInput;
+            _inputHandler.OnGameplayMoveInput += OnGameplayMoveInput;
         }
         
         private void OnDisable()
         {
-            _inputHandler.OnMoveInput -= OnMoveInput;
+            _inputHandler.OnGameplayMoveInput -= OnGameplayMoveInput;
         }
 
-        private void OnMoveInput(Vector2 inputDirection) => _movementInput = inputDirection;
+        private void OnGameplayMoveInput(Vector2 inputDirection) => _movementInput = inputDirection;
 
         private void FixedUpdate()
         {

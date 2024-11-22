@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using OCSFX.Attributes;
 using OCSFX.Generics;
 using OCSFX.Utility.Debug;
+using Runtime.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,15 +14,9 @@ using UnityEditor;
 public class InputHandler: SingletonScriptableObject<InputHandler>
 {
     [field: SerializeField] public InputActionAsset InputActions { get; private set; }
-    [field: SerializeField, ReadOnly] public string[] InputActionMapNames { get; private set; }
     
     [field: Header("Gameplay Actions")]
     [field: SerializeField] public GameplayInputActions GameplayActions { get; private set; }
-    // [field: SerializeField] public InputActionReference MoveActionRef { get; private set; }
-    // [field: SerializeField] public InputActionReference CameraDragActionRef { get; private set; }
-    // [field: SerializeField] public InputActionReference CameraZoomActionRef { get; private set; }
-    // [field: SerializeField] public InputActionReference InteractActionRef { get; private set; }
-    // [field: SerializeField] public InputActionReference PauseActionRef { get; private set; }
     
     [field: Header("UI Actions")]
     [field: SerializeField] public GameplayUIInputActions GameplayUIActions { get; private set; }
@@ -33,11 +29,12 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     
     private InputActionMap _currentActionMap;
 
-    public event Action<Vector2> OnMoveInput;
-    public event Action<bool> OnDragCameraInput;
-    public event Action<float> OnZoomInput;
-    public event Action OnInteractInput;
-    public event Action OnPauseInput;
+    public event Action<Vector2> OnGameplayMoveInput;
+    public event Action<bool> OnGameplayDragCameraInput;
+    public event Action<float> OnGameplayCameraZoomInput;
+    public event Action OnGameplayInteractInput;
+    public event Action OnGameplayPauseInput;
+    public event Action OnUIGameplayResumeInput;
 
 #if UNITY_EDITOR
     [UnityEditor.InitializeOnLoadMethod]
@@ -80,7 +77,7 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
             gameplayActions.Pause.action.performed += OnPauseInputPerformed;
             
             var gameplayUIActions = Get().GameplayUIActions;
-            gameplayUIActions.Resume.action.performed += OnPauseInputPerformed;
+            gameplayUIActions.Resume.action.performed += OnResumeInputPerformed;
             
             EventBus.AddListener<PauseMenuController.UIEventParameters>(OnPauseMenuToggle);
             
@@ -98,7 +95,7 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
             gameplayActions.Pause.action.performed -= OnPauseInputPerformed;
             
             var gameplayUIActions = Get().GameplayUIActions;
-            gameplayUIActions.Resume.action.performed -= OnPauseInputPerformed;
+            gameplayUIActions.Resume.action.performed -= OnResumeInputPerformed;
             
             EventBus.RemoveListener<PauseMenuController.UIEventParameters>(OnPauseMenuToggle);
             
@@ -119,23 +116,23 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
                 break;
         }
 
-        OCSFXLogger.Log($"Pause menu toggle event received. Action: {info.Action}", Get(), Get()._showDebug);
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Pause menu toggle event received. Action: {info.Action}", Get(), Get()._showDebug);
     }
 
     private static void OnMoveInputPerformed(InputAction.CallbackContext context)
     {
-        OCSFXLogger.Log($"Move input performed ({context.ReadValue<Vector2>()})", Get(), Get()._showDebug);
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Move input performed ({context.ReadValue<Vector2>()})", Get(), Get()._showDebug);
         
         var normalized = context.ReadValue<Vector2>().normalized;
-        Get().OnMoveInput?.Invoke(normalized);
+        Get().OnGameplayMoveInput?.Invoke(normalized);
     }
     
     private static void OnDragCameraInputPerformed(InputAction.CallbackContext context)
     {
         var pressed = context.performed;
-        OCSFXLogger.Log($"Drag camera input performed ({pressed})", Get(), Get()._showDebug);
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Drag camera input performed ({pressed})", Get(), Get()._showDebug);
         
-        Get().OnDragCameraInput?.Invoke(pressed);
+        Get().OnGameplayDragCameraInput?.Invoke(pressed);
     }
     
     private static void OnZoomInputPerformed(InputAction.CallbackContext context)
@@ -146,23 +143,67 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         if (Mathf.Approximately(value, 0)) return;
         var scaledValue = value * Get().CameraZoomSensitivity;
         
-        OCSFXLogger.Log($"Zoom input performed ({value}). Scaled value: ({scaledValue})", Get(), Get()._showDebug);
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Zoom input performed ({value}). Scaled value: ({scaledValue})", Get(), Get()._showDebug);
         
-        Get().OnZoomInput?.Invoke(scaledValue);
+        Get().OnGameplayCameraZoomInput?.Invoke(scaledValue);
     }
     
     private static void OnInteractInputPerformed(InputAction.CallbackContext context)
     {
-        OCSFXLogger.Log($"Interact input performed", Get(), Get()._showDebug);
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Interact input performed", Get(), Get()._showDebug);
         
-        Get().OnInteractInput?.Invoke();
+        Get().OnGameplayInteractInput?.Invoke();
     }
     
-    private static void OnPauseInputPerformed(InputAction.CallbackContext obj)
+    private static void OnPauseInputPerformed(InputAction.CallbackContext context)
     {
-        OCSFXLogger.Log($"Pause input performed", Get(), Get()._showDebug);
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Pause input performed", Get(), Get()._showDebug);
         
-        Get().OnPauseInput?.Invoke();
+        Get().OnGameplayPauseInput?.Invoke();
+    }
+    
+    private static void OnResumeInputPerformed(InputAction.CallbackContext context)
+    {
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Resume input performed", Get(), Get()._showDebug);
+        
+        Get().OnUIGameplayResumeInput?.Invoke();
+    }
+    
+    public void SetCurrentActionMap(InputActionMap actionMap)
+    {
+        if (actionMap == null)
+        {
+            OCSFXLogger.Log($"[{nameof(InputHandler)}] Action map is null", this, _showDebug);
+            return;
+        }
+        
+        var validatedActionMap = InputActions.FindActionMap(actionMap.id);
+        
+        if (validatedActionMap == null)
+        {
+            OCSFXLogger.Log($"[{nameof(InputHandler)}] Action map ({actionMap.name}) not found in input actions asset ({InputActions.name})", this, _showDebug);
+            return;
+        }
+        
+        InputActions.Disable();
+        
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Disabling current action map ({_currentActionMap.name})", this, _showDebug);
+        
+        _currentActionMap?.Disable();
+        _currentActionMap = validatedActionMap;
+        _currentActionMap.Enable();
+        
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Set and enable current action map ({_currentActionMap.name})", this, _showDebug);
+    }
+    
+    public void SetCurrentActionMap(InputActionsCollection actionsCollection)
+    {
+        SetCurrentActionMap(actionsCollection.ActionMap);
+    }
+    
+    public void SetCurrentActionMap(InputActionMapRef actionMapRef)
+    {
+        SetCurrentActionMap(actionMapRef.Map);
     }
     
     public void SetCurrentActionMap(string actionMapName)
@@ -170,50 +211,11 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         var actionMap = InputActions.FindActionMap(actionMapName);
         if (actionMap == null)
         {
-            OCSFXLogger.Log($"Action map {actionMapName} not found", this, _showDebug);
+            OCSFXLogger.Log($"[{nameof(InputHandler)}] Action map ({actionMapName}) not found in input actions asset ({InputActions.name})", this, _showDebug);
             return;
         }
         
-        InputActions.Disable();
-        
-        _currentActionMap?.Disable();
-        _currentActionMap = actionMap;
-        _currentActionMap.Enable();
-    }
-    
-    public void SetCurrentActionMap(InputActionMap actionMap)
-    {
-        if (actionMap == null)
-        {
-            OCSFXLogger.Log($"Action map is null", this, _showDebug);
-            return;
-        }
-        
-        InputActions.Disable();
-        
-        _currentActionMap?.Disable();
-        _currentActionMap = actionMap;
-        _currentActionMap.Enable();
-    }
-
-    private void OnValidate()
-    {
-        if (!InputActions)
-        {
-            InputActionMapNames = Array.Empty<string>();
-            return;
-        }
-        
-        var actionMaps = InputActions.actionMaps;
-        InputActionMapNames = new string[actionMaps.Count];
-
-        for (int i = 0; i < InputActions.actionMaps.Count; i++)
-        {
-            InputActionMapNames[i] = InputActions.actionMaps[i].name;
-        }
-
-        GameplayActions?.TrySetActionMapFromAsset(InputActions);
-        GameplayUIActions?.TrySetActionMapFromAsset(InputActions);
+        SetCurrentActionMap(actionMap);
     }
 
     [Serializable]
@@ -235,36 +237,7 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     [Serializable]
     public abstract class InputActionsCollection
     {
-        [field: SerializeField] public string ActionMapName { get; private set; }
-        public InputActionMap ActionMap { get; private set; }
-        
-        public bool TrySetActionMapFromAsset(InputActionAsset asset)
-        {
-            if (!asset)
-            {
-                OCSFXLogger.LogError($"[{nameof(InputActionsCollection)}] {nameof(TrySetActionMapFromAsset)}: " +
-                                     $"Input action asset is null");
-                return false;
-            }
-            var foundActionMap = asset.FindActionMap(ActionMapName);
-            if (foundActionMap == null)
-            {
-                OCSFXLogger.LogError($"[{nameof(InputActionsCollection)}] {nameof(TrySetActionMapFromAsset)}: " +
-                                     $"Action map {ActionMapName} not found in asset {asset.name}");
-                return false;
-            }
-            
-            ActionMap = foundActionMap;
-            return true;
-        }
-        
-        public void SetActionMap(InputActionMap actionMap)
-        {
-            // Set action map
-            if (actionMap == ActionMap) return;
-            
-            ActionMap?.Disable();
-            ActionMap = actionMap;
-        }
+        [field: SerializeField] public InputActionMapRef ActionMapRef { get; private set; }
+        public InputActionMap ActionMap => ActionMapRef.Map;
     }
 }

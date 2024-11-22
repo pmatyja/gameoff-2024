@@ -37,14 +37,14 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
 
     private void OnEnable()
     {
-        InputHandler.Get().OnMoveInput += OnMoveInput;
+        InputHandler.Get().OnGameplayMoveInput += OnGameplayMoveInput;
         
         _spriteRenderer.shadowCastingMode = _shadowCastingMode;
     }
 
     private void OnDisable()
     {
-        InputHandler.Get().OnMoveInput -= OnMoveInput;
+        InputHandler.Get().OnGameplayMoveInput -= OnGameplayMoveInput;
     }
 
     private void Update()
@@ -123,7 +123,7 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
         _isFacingCameraParamRef.SetValue(IsFacingCamera);
     }
     
-    private void OnMoveInput(Vector2 movement)
+    private void OnGameplayMoveInput(Vector2 movement)
     {
         _movementInput = movement;
         

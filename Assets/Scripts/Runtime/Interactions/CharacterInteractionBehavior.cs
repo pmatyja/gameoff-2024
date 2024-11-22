@@ -22,12 +22,12 @@ namespace Runtime.Collectables
 
         private void OnEnable()
         {
-            InputHandler.Get().OnInteractInput += OnInteractInput;
+            InputHandler.Get().OnGameplayInteractInput += OnGameplayInteractInput;
         }
 
         private void OnDisable()
         {
-            InputHandler.Get().OnInteractInput -= OnInteractInput;
+            InputHandler.Get().OnGameplayInteractInput -= OnGameplayInteractInput;
         }
 
         private void Update()
@@ -57,7 +57,7 @@ namespace Runtime.Collectables
             _targetInteractable?.ShowInteractionPrompt(true);
         }
         
-        private void OnInteractInput()
+        private void OnGameplayInteractInput()
         {
             if (!CanInteract) return;
             
