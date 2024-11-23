@@ -166,8 +166,11 @@
 			<value>162.52799999999999</value>
 		</property>
 		<property name="volume">
-			<value>10</value>
+			<value>4</value>
 		</property>
+		<relationship name="triggerConditions">
+			<destination>{1d478fcb-71fb-48c6-83be-c20fc89a3abf}</destination>
+		</relationship>
 		<relationship name="audioFile">
 			<destination>{ff15f1df-f389-4c89-9eae-a26ef18c532c}</destination>
 		</relationship>
@@ -360,6 +363,7 @@
 			<destination>{bc98c961-ab4b-41e6-bc14-b95fc081a67f}</destination>
 		</relationship>
 	</object>
+	<object class="EventCondition" id="{1d478fcb-71fb-48c6-83be-c20fc89a3abf}" />
 	<object class="MixerBusEffectChain" id="{f9c29089-dd55-45db-99d2-fb3ed36d2cb2}">
 		<relationship name="effects">
 			<destination>{c2ab2c64-7bbc-4fbe-95aa-b15d41c3b441}</destination>
