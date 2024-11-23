@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -80,6 +81,7 @@ public class PauseMenuController : Singleton<PauseMenuController>
 
     private VisualElement root;
     private int target = 0;
+    private Coroutine fadeCoroutine;
 
     private void OnEnable()
     {
@@ -109,6 +111,8 @@ public class PauseMenuController : Singleton<PauseMenuController>
         }
         
         this.target = 1;
+        
+        Fade(target, fadeDuration);
 
         EventBus.Raise(this, new UIEventParameters
         {
@@ -124,6 +128,8 @@ public class PauseMenuController : Singleton<PauseMenuController>
         }
 
         this.target = 0;
+        
+        Fade(target, fadeDuration);
         
         EventBus.Raise(this, new UIEventParameters
         {
@@ -156,10 +162,29 @@ public class PauseMenuController : Singleton<PauseMenuController>
             });
         }
     }
-
-    public void Update()
+    
+    private void Fade(int fadeTarget, float duration)
     {
-        this.root.Fade(this.target, this.fadeDuration);
+        if (this.fadeCoroutine != null)
+        {
+            this.StopCoroutine(this.fadeCoroutine);
+        }
+        
+        this.fadeCoroutine = this.StartCoroutine(this.Co_Fade(fadeTarget, duration));
+    }
+    
+    private IEnumerator Co_Fade(int fadeTarget, float duration)
+    {
+        var time = 0.0f;
+    
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            this.root.Fade(fadeTarget, duration);
+            yield return null;
+        }
+    
+        this.root.style.opacity = fadeTarget;
     }
 
     private float GetValue(string name, ref float previewField)
