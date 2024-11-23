@@ -24,7 +24,7 @@ namespace Runtime.Utility
         
         public bool IsSafeFall { get; private set; }
         
-        private void Update()
+        private void FixedUpdate()
         {
             GetProbeResult(transform.position, out var hit);
             
