@@ -140,8 +140,11 @@
 		</relationship>
 	</object>
 	<object class="CommandSound" id="{caa374a1-b1c0-4fd6-a890-f209acc143e9}">
+		<property name="start">
+			<value>0.03125</value>
+		</property>
 		<property name="length">
-			<value>2</value>
+			<value>1.96875</value>
 		</property>
 		<property name="commandType">
 			<value>3</value>

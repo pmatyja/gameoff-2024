@@ -163,21 +163,18 @@
 	</object>
 	<object class="SingleSound" id="{67401c04-4db1-4993-bae2-1b58f2ce6dd4}">
 		<property name="length">
-			<value>162.52799999999999</value>
-		</property>
-		<property name="volume">
-			<value>4</value>
+			<value>154.66662500000001</value>
 		</property>
 		<relationship name="triggerConditions">
 			<destination>{1d478fcb-71fb-48c6-83be-c20fc89a3abf}</destination>
 		</relationship>
 		<relationship name="audioFile">
-			<destination>{ff15f1df-f389-4c89-9eae-a26ef18c532c}</destination>
+			<destination>{856784dc-c147-4ced-a560-29d09c13d940}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{816c94a7-aa79-4d66-ab9d-fca6bba71fce}">
 		<property name="volume">
-			<value>6</value>
+			<value>-2</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
@@ -207,7 +204,7 @@
 	</object>
 	<object class="EventSound" id="{237b8e2a-968c-4c22-953b-0640917debf7}">
 		<property name="length">
-			<value>162.52799999999999</value>
+			<value>154.66662500000001</value>
 		</property>
 		<property name="quantizationInterval">
 			<value>5</value>
@@ -236,7 +233,7 @@
 	</object>
 	<object class="EventSound" id="{c2420e59-321e-49ff-9b7c-ed8cdceb5e88}">
 		<property name="length">
-			<value>162.52799999999999</value>
+			<value>154.66662500000001</value>
 		</property>
 		<relationship name="triggerConditions">
 			<destination>{9a1868ad-7775-4e32-b81b-5f47f8af86b9}</destination>
@@ -277,7 +274,7 @@
 			<value>0</value>
 		</property>
 		<property name="tempo">
-			<value>70</value>
+			<value>90</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{852eb8d1-cf36-4985-b0b0-05b5ea98b830}</destination>
@@ -288,7 +285,7 @@
 	</object>
 	<object class="NamedMarker" id="{44a9ffa8-1be2-42e7-91f7-8c46feef34d9}">
 		<property name="position">
-			<value>20.571428571428569</value>
+			<value>0</value>
 		</property>
 		<property name="name">
 			<value>Entry</value>
@@ -302,7 +299,7 @@
 	</object>
 	<object class="TransitionMarker" id="{f0f4c6b9-1c81-4ebd-abb6-99a12aeef062}">
 		<property name="position">
-			<value>157.71428571428569</value>
+			<value>146.66666666666666</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{852eb8d1-cf36-4985-b0b0-05b5ea98b830}</destination>
