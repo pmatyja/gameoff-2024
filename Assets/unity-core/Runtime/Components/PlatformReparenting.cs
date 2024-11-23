@@ -21,24 +21,14 @@ namespace Lavgine
         [SerializeField]
         private Transform defaultParent;
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if (Physics.SphereCast(this.transform.position + this.castOrigin, this.castRadius, Vector3.down, out var groundInfo, this.castLength, this.platformMask, QueryTriggerInteraction.Ignore))
+            if (Physics.SphereCast(transform.position + castOrigin, castRadius, Vector3.down, out var groundInfo, castLength, platformMask, QueryTriggerInteraction.Ignore))
             {
                 Transform root = groundInfo.transform;
 
-                while (root)
+                while (root && !root.TryGetComponent<BlockMoverScript>(out var _) && root.parent != null)
                 {
-                    if (root.TryGetComponent<BlockMoverScript>(out var _))
-                    {
-                        break;
-                    }
-
-                    if (root.parent == default)
-                    {
-                        break;
-                    }
-
                     root = root.parent;
                 }
 
@@ -46,7 +36,7 @@ namespace Lavgine
             }
             else
             {
-                this.transform.SetParent(this.defaultParent);
+                this.transform.SetParent(defaultParent);
             }
         }
 
