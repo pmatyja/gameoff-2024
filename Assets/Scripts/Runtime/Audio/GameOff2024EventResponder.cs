@@ -1,6 +1,7 @@
 ﻿using System;
 using FMODUnity;
 using OCSFX.Utility.Debug;
+using Runtime.Collectables;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,7 +11,8 @@ namespace Runtime.Audio
     {
         [SerializeField] private bool _showDebug;
         
-        [SerializeField] private UnityEvent _onCollectableCollected;
+        [SerializeField] private UnityEvent _onBasicItemCollected;
+        [SerializeField] private UnityEvent _onKeyItemCollected;
         [SerializeField] private UnityEvent _onGameSettingsChanged;
         [SerializeField] private UnityEvent<string, float> _onGameSettingsAudioValueChanged;
         [SerializeField] private AudioSettingIdConversion[] _audioSettingIdConversions;
@@ -34,7 +36,22 @@ namespace Runtime.Audio
 
         private void OnCollectableCollected(object sender, CollectableEventParameters info)
         {
-            _onCollectableCollected?.Invoke();
+            var asGameOff2024Collectable = (GameOff2024Collectable)info.Collectable;
+            if (!asGameOff2024Collectable)
+            {
+                _onBasicItemCollected?.Invoke();
+                return;
+            }
+            
+            var data = asGameOff2024Collectable.Data;
+            if (data && data.IsUnique)
+            {
+                _onKeyItemCollected?.Invoke();
+            }
+            else
+            {
+                _onBasicItemCollected?.Invoke();   
+            }
             
             OCSFXLogger.Log($"[{nameof(GameOff2024EventResponder)}] {nameof(OnCollectableCollected)}", this, _showDebug);
         }

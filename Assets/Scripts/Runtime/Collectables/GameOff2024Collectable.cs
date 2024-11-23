@@ -14,6 +14,8 @@ namespace Runtime.Collectables
         
         public string ID => _uniqueIDComponent.ID;
         
+        public CollectableData Data => _data;
+        
         [field: SerializeField] public UnityEvent OnCollect { get; protected set; }
 
         protected override void OnSpawn()

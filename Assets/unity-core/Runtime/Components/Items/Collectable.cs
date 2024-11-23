@@ -42,7 +42,7 @@ public class Collectable : MonoBehaviour
         EventBus.Raise(this, this.channel, new CollectableEventParameters
         {
             Picker = pickerObject,
-            Collectable = this.gameObject
+            Collectable = this
         });
         
         if (this.showDebug)
