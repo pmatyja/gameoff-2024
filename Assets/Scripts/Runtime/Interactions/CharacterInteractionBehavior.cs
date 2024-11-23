@@ -30,16 +30,16 @@ namespace Runtime.Collectables
             InputHandler.Get().OnGameplayInteractInput -= OnGameplayInteractInput;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             var size = Physics.OverlapSphereNonAlloc(transform.position, _interactionRadius, _overlapResults);
-            
+
             ICharacterInteractable newTargetInteractable = null;
             for (var i = 0; i < size; i++)
             {
                 var interactable = _overlapResults[i].GetComponent<ICharacterInteractable>();
-                if (interactable == null || !interactable.CanInteract) continue;
-
+                if (interactable is not { CanInteract: true }) continue;
+                
                 if (newTargetInteractable == null || 
                     Vector3.Distance(transform.position, interactable.transform.position) < 
                     Vector3.Distance(transform.position, newTargetInteractable.transform.position))
@@ -47,12 +47,12 @@ namespace Runtime.Collectables
                     newTargetInteractable = interactable;
                 }
             }
-            
+
             if (_targetInteractable != newTargetInteractable)
             {
                 _targetInteractable?.ShowInteractionPrompt(false);
             }
-            
+
             _targetInteractable = newTargetInteractable;
             _targetInteractable?.ShowInteractionPrompt(true);
         }
