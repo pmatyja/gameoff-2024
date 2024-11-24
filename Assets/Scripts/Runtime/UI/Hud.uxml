@@ -1,0 +1,10 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement name="Center" picking-mode="Ignore" style="flex-grow: 1; left: 50%;">
+        <engine:VisualElement name="Content" picking-mode="Ignore" style="flex-grow: 1; left: -50%; width: auto; max-width: 1920px;">
+            <engine:VisualElement name="Right" style="flex-grow: 1; right: 32px; top: 32px; white-space: nowrap; flex-direction: row-reverse;">
+                <engine:VisualElement name="Pause" style="flex-grow: 1; background-image: resource(&apos;Local/UI Elements/pause button&apos;); background-size: 64% 64%; max-height: 64px; max-width: 64px;" />
+                <engine:VisualElement name="Background" picking-mode="Ignore" style="background-image: resource(&apos;Local/UI Elements/UI-Decoration&apos;); height: 128px; position: absolute; right: 0; top: -32px; width: 512px;" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

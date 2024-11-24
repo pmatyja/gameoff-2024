@@ -87,12 +87,16 @@ public class PauseMenuController : Singleton<PauseMenuController>
     {
         InputHandler.Get().OnGameplayPauseInput += this.Open;
         InputHandler.Get().OnUIGameplayResumeInput += this.Close;
+
+        EventBus.AddListener<OpenPauseMenuEventsParameters>(this.OnOpenEvent);
     }
 
     private void OnDisable()
     {
         InputHandler.Get().OnGameplayPauseInput -= this.Open;   
         InputHandler.Get().OnUIGameplayResumeInput -= this.Close;
+
+        EventBus.RemoveListener<OpenPauseMenuEventsParameters>(this.OnOpenEvent);
     }
 
     public void Toggle()
@@ -236,6 +240,11 @@ public class PauseMenuController : Singleton<PauseMenuController>
         }
     }
 
+    private void OnOpenEvent(object sender, OpenPauseMenuEventsParameters parameters)
+    {
+        this.Open();
+    }
+
     [Serializable]
     public class SliderValue
     {
@@ -261,5 +270,9 @@ public class PauseMenuController : Singleton<PauseMenuController>
     public struct UIEventParameters
     {
         public UIAction Action;
+    }
+
+    public struct OpenPauseMenuEventsParameters
+    {
     }
 }
