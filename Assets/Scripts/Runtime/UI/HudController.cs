@@ -1,4 +1,5 @@
 using System;
+using Common;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,11 +11,25 @@ public class HudController : MonoBehaviour
     private UIDocument document;
 
     [SerializeField]
-    private PauseMenuController pauseMenu;
+    [Readonly]
+    private int coinsCounter;
+
+    [SerializeField]
+    [Range(0, 100)]
+    private int maxCoinsCounter;
+
+    [SerializeField]
+    private CubeDef[] sprites;
+
+    private Label coinsCounterElement;
 
     private void Start()
     {
         this.document = this.GetComponent<UIDocument>();
+
+        this.document.rootVisualElement.TryGet("Coins", out this.coinsCounterElement, true);
+
+        this.UpdateCoinsCounter();
 
         if (this.document.rootVisualElement.TryGet<VisualElement>("Pause", out var pause))
         {
@@ -28,32 +43,67 @@ public class HudController : MonoBehaviour
     private void OnEnable()
     {
         EventBus.AddListener<ItemCollectedEventsParameters>(this.OnItemCollected);
+        EventBus.AddListener<CubeCollectedEventsParameters>(this.OnCubeCollected);
     }
 
     private void OnDisable()
     {
         EventBus.RemoveListener<ItemCollectedEventsParameters>(this.OnItemCollected);
+        EventBus.RemoveListener<CubeCollectedEventsParameters>(this.OnCubeCollected);
+    }
+
+    private void UpdateCoinsCounter()
+    {
+        if (this.maxCoinsCounter > 0)
+        {
+            this.coinsCounterElement.text = $"{this.coinsCounter} / {this.maxCoinsCounter}";
+        }
+        else
+        {
+            this.coinsCounterElement.text = this.coinsCounter.ToString();
+        }
     }
 
     private void OnItemCollected(object sender, ItemCollectedEventsParameters parameters)
     {
-        switch (parameters.Type)
+        this.coinsCounter++;
+        this.UpdateCoinsCounter();
+    }
+
+    private void OnCubeCollected(object sender, CubeCollectedEventsParameters parameters)
+    {
+        if (this.document.rootVisualElement.TryGet<VisualElement>(parameters.Type.ToString(), out var cube, true))
         {
-            case ItemType.Collectable:
-                //this.collectable.Text = this.collectables.T
-                break;
+            foreach (var item in this.sprites)
+            {
+                if (item.Type != parameters.Type)
+                {
+                    cube.style.backgroundImage = Background.FromSprite(item.Sprite);
+                }
+            }
         }
     }
-}
 
-public enum ItemType
-{
-    Collectable,
-    Key
-}
+    public enum CubeType
+    {
+        Red,
+        Green,
+        Blue
+    }
 
-public struct ItemCollectedEventsParameters
-{
-    public ItemType Type;
-    public int Count;
+    [Serializable]
+    public struct CubeDef
+    {
+        public CubeType Type;
+        public Sprite Sprite;
+    }
+
+    public struct CubeCollectedEventsParameters
+    {
+        public CubeType Type;
+    }
+
+    public struct ItemCollectedEventsParameters
+    {
+    }
 }

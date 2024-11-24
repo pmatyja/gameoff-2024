@@ -64,3 +64,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cac3a4096657fa4f9bf7db52b414d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  document: {fileID: 0}
+  coinsCounter: 0
+  maxCoinsCounter: 0
+  sprites:
+  - Type: 0
+    Sprite: {fileID: 21300000, guid: b3d7ce543e9233b48beb30ccdeeff52f, type: 3}
+  - Type: 1
+    Sprite: {fileID: 21300000, guid: 5998c4a1c03171748afa56a2b080425b, type: 3}
+  - Type: 2
+    Sprite: {fileID: 21300000, guid: 5eecf15a0aa80814eade6964301f4973, type: 3}

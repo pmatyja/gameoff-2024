@@ -4,12 +4,12 @@
             <engine:VisualElement name="Right" style="flex-grow: 1; right: 32px; top: 32px; flex-direction: row-reverse; max-height: 64px;">
                 <engine:VisualElement name="Pause" style="flex-grow: 1; background-image: resource(&apos;Local/UI Elements/pause button&apos;); background-size: 64% 64%; max-height: 64px; max-width: 64px;" />
                 <engine:VisualElement name="Background" picking-mode="Ignore" style="background-image: resource(&apos;Local/UI Elements/UI-Decoration&apos;); height: 128px; position: absolute; right: 0; top: -32px; width: 512px;" />
-                <engine:VisualElement name="Cubes" picking-mode="Ignore" style="flex-grow: 1; flex-direction: row-reverse;">
-                    <engine:VisualElement name="Cube0" picking-mode="Ignore" style="flex-grow: 1; position: relative; background-image: resource(&apos;Local/UI Elements/cubeEmpty&apos;); max-width: 64px; max-height: 64px; top: 0;" />
-                    <engine:VisualElement name="Cube0" picking-mode="Ignore" style="flex-grow: 1; position: relative; background-image: resource(&apos;Local/UI Elements/cubeEmpty&apos;); max-width: 64px; max-height: 64px; top: 0;" />
-                    <engine:VisualElement name="Cube0" picking-mode="Ignore" style="flex-grow: 1; position: relative; background-image: resource(&apos;Local/UI Elements/cubeEmpty&apos;); max-width: 64px; max-height: 64px; top: 0;" />
+                <engine:VisualElement name="Icons" picking-mode="Ignore" style="flex-grow: 1; flex-direction: row-reverse;">
+                    <engine:VisualElement name="Blue" picking-mode="Ignore" style="flex-grow: 1; position: relative; background-image: resource(&apos;Local/UI Elements/cubeEmpty&apos;); max-width: 64px; max-height: 64px; top: 0;" />
+                    <engine:VisualElement name="Green" picking-mode="Ignore" style="flex-grow: 1; position: relative; background-image: resource(&apos;Local/UI Elements/cubeEmpty&apos;); max-width: 64px; max-height: 64px; top: 0;" />
+                    <engine:VisualElement name="Red" picking-mode="Ignore" style="flex-grow: 1; position: relative; background-image: resource(&apos;Local/UI Elements/cubeEmpty&apos;); max-width: 64px; max-height: 64px; top: 0;" />
                     <engine:VisualElement name="Shard" picking-mode="Ignore" style="flex-grow: 1; position: relative; background-image: resource(&apos;Local/UI Elements/collectibleFull&apos;); max-width: 64px; max-height: 64px; top: 0; flex-direction: column-reverse; align-items: flex-start; margin-right: 80px;">
-                        <engine:Label text="XX / XX" picking-mode="Ignore" style="-unity-text-align: upper-center; -unity-font-style: bold; color: rgb(255, 255, 255); -unity-text-outline-color: rgba(0, 0, 0, 0); -unity-text-outline-width: 1px; font-size: 20px; left: 36px; top: 8px; min-width: 100px;" />
+                        <engine:Label text="XX / XX" picking-mode="Ignore" name="Coins" style="-unity-text-align: middle-left; -unity-font-style: bold; color: rgb(255, 255, 255); -unity-text-outline-color: rgba(0, 0, 0, 0); -unity-text-outline-width: 1px; font-size: 20px; left: 36px; top: 8px; min-width: 100px;" />
                     </engine:VisualElement>
                 </engine:VisualElement>
             </engine:VisualElement>
