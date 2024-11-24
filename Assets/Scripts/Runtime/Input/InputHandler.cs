@@ -184,10 +184,15 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
             OCSFXLogger.Log($"[{nameof(InputHandler)}] Action map ({actionMap.name}) not found in input actions asset ({InputActions.name})", this, _showDebug);
             return;
         }
+
+        if (validatedActionMap == _currentActionMap) return;
         
         InputActions.Disable();
-        
-        OCSFXLogger.Log($"[{nameof(InputHandler)}] Disabling current action map ({_currentActionMap.name})", this, _showDebug);
+
+        if (_currentActionMap != null)
+        {
+            OCSFXLogger.Log($"[{nameof(InputHandler)}] Disabling current action map ({_currentActionMap.name})", this, _showDebug);   
+        }
         
         _currentActionMap?.Disable();
         _currentActionMap = validatedActionMap;
