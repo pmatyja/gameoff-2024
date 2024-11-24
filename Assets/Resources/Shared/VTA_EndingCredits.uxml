@@ -6,7 +6,7 @@
             <ui:VisualElement name="RollingCredits" class="page" style="flex-grow: 1; -unity-font-definition: resource(&apos;Shared/FNA_base&apos;);">
                 <ui:VisualElement name="Logo" />
                 <ui:GroupBox name="Item" class="credits-item">
-                    <ui:Label text="Lead Programmer&#10;AI Programmer" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                    <ui:Label text="Programmer" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
                     <ui:Label text="Piotr Matyja" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
                 </ui:GroupBox>
                 <ui:GroupBox name="Item" class="credits-item">
@@ -14,8 +14,8 @@
                     <ui:Label text="Owen Cooper" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
                 </ui:GroupBox>
                 <ui:GroupBox name="Item" class="credits-item">
-                    <ui:Label text="Music Composition&#10;Sound Design" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
-                    <ui:Label text="Catherine Bevan" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                    <ui:Label text="Music Composition" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                    <ui:Label text="Chili Max" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
                 </ui:GroupBox>
                 <ui:GroupBox name="Item" class="credits-item">
                     <ui:Label text="Artist" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
