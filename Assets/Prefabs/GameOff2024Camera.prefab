@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3505179084665006915}
   - component: {fileID: 1722809263081321308}
   - component: {fileID: 732960501598851460}
+  - component: {fileID: 8916386385562088168}
   m_Layer: 0
   m_Name: GameOff2024Camera
   m_TagString: Untagged
@@ -188,7 +189,7 @@ MonoBehaviour:
   Tilt: 0
   Pan: 0
   Dutch: 0
-  ZoomScale: 3.999996
+  ZoomScale: 3.999999
   FollowAttachment: 0.5
   LookAtAttachment: 1
 --- !u!114 &1722809263081321308
@@ -269,3 +270,26 @@ MonoBehaviour:
   _postProcessingVolume: {fileID: 0}
   _depthOfFieldFocalLengthRange: {x: 0, y: 0}
   _depthOfFieldFocalLength: 100
+--- !u!114 &8916386385562088168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6551647482924064275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
