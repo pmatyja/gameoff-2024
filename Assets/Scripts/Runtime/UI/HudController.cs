@@ -84,13 +84,25 @@ public class HudController : MonoBehaviour
         {
             foreach (var item in this.sprites)
             {
-                if (item.Type != parameters.Type)
+                if (item.Type == parameters.Type)
                 {
                     cube.style.backgroundImage = Background.FromSprite(item.Sprite);
                 }
             }
         }
     }
+
+    private void SimulateCube(CubeType cube)
+    {
+        EventBus.Raise(this, new CubeCollectedEventsParameters
+        {
+            Type = cube
+        });
+    }
+
+    [ContextMenu("Test: Red Cube")] private void TestRedCube() { this.SimulateCube(CubeType.Red); }
+    [ContextMenu("Test: Green Cube")] private void TestGreenCube() { this.SimulateCube(CubeType.Green); }
+    [ContextMenu("Test: Blue Cube")] private void TestBlueCube() { this.SimulateCube(CubeType.Blue); }
 
     public enum CubeType
     {
