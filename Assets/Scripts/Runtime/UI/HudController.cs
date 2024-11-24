@@ -1,4 +1,5 @@
 using System;
+using Runtime;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,6 +19,9 @@ public class HudController : MonoBehaviour
     private int maxCoinsCounter;
 
     [SerializeField]
+    private GameOff2024GameSettings settings;
+
+    [SerializeField]
     private CubeDef[] sprites;
 
     private Label coinsCounterElement;
@@ -27,6 +31,11 @@ public class HudController : MonoBehaviour
         this.document = this.GetComponent<UIDocument>();
 
         this.document.rootVisualElement.TryGet("Coins", out this.coinsCounterElement, true);
+
+        if (this.settings != default)
+        {
+            this.maxCoinsCounter = this.settings.TotalOptionalCollectables;
+        }
 
         this.UpdateCoinsCounter();
 
