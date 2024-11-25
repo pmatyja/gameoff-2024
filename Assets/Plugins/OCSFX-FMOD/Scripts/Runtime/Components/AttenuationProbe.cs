@@ -1,8 +1,6 @@
-using System;
 using FMODUnity;
 using OCSFX.Utility.Debug;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace OCSFX.FMOD.Components
 {

@@ -8,13 +8,12 @@ namespace Runtime.Audio
     public class GameOff2024BlockMoverAudioData : ScriptableObject
     {
         [field: SerializeField] public EventReference MoveBegin { get; private set; }
-        [field: SerializeField] public EventReference MoveLoop { get; private set; }
         [field: SerializeField] public EventReference MoveEnd { get; private set; }
         
         public void PlayBlockMoveBegin(GameObject blockObject)
         {
             if (MoveBegin.IsNull) return;
-
+            
             MoveBegin.Play(blockObject);
         }
         
@@ -25,24 +24,10 @@ namespace Runtime.Audio
             MoveBegin.Stop(blockObject);
         }
         
-        public void PlayBlockMoveLoop(GameObject blockObject)
-        {
-            if (MoveLoop.IsNull) return;
-
-            MoveLoop.Play(blockObject);
-        }
-        
-        public void StopBlockMoveLoop(GameObject blockObject)
-        {
-            if (MoveLoop.IsNull) return;
-
-            MoveLoop.Stop(blockObject);
-        }
-        
         public void PlayBlockMoveEnd(GameObject blockObject)
         {
             if (MoveEnd.IsNull) return;
-
+            
             MoveEnd.Play(blockObject);
         }
         
