@@ -29,6 +29,16 @@ namespace OCSFX.FMOD
             OCSFXAudioStatics.SetFMODParameterGlobal(_fmodParameter.Parameter, _fmodParameter.Value);
         }
 
+        public void SetGlobalValue(int newValue)
+        {
+            if (string.IsNullOrWhiteSpace(_fmodParameter.Parameter)) return;
+
+            _fmodParameter.Value = newValue;
+            
+            // Debug.Log($"Set Param ({_fmodParameter.Parameter}) to {_fmodParameter.Value}");
+            OCSFXAudioStatics.SetFMODParameterGlobal(_fmodParameter.Parameter, _fmodParameter.Value);
+        }
+
         public float GetGlobalValue()
         {
             return OCSFXAudioStatics.GetFMODParameterGlobalValue(_fmodParameter.Parameter);

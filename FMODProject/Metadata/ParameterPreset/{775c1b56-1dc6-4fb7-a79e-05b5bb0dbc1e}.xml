@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="ParameterPreset" id="{775c1b56-1dc6-4fb7-a79e-05b5bb0dbc1e}">
 		<property name="name">
-			<value>Cubes_Collected</value>
+			<value>Item_Keys_Collected</value>
 		</property>
 		<relationship name="folder">
 			<destination>{552289e6-d485-4e07-a054-7d56b9d0a01c}</destination>
@@ -15,11 +15,17 @@
 		<property name="maximum">
 			<value>3</value>
 		</property>
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
 		<property name="initialValue">
 			<value>0</value>
 		</property>
 		<property name="seekSpeed">
 			<value>1</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
 		</property>
 	</object>
 </objects>

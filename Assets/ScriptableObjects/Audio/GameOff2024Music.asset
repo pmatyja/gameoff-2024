@@ -17,11 +17,11 @@ MonoBehaviour:
   - _name: MainMenu
     _eventRef:
       Guid:
-        Data1: 760368772
-        Data2: 1117863706
-        Data3: 1187395518
-        Data4: 863309997
-      Path: event:/MX/mx_gameplay_base
+        Data1: -1495909537
+        Data2: 1247795339
+        Data3: -1361749571
+        Data4: 1536257240
+      Path: event:/MX/mx_gameplay_hubWorld
   - _name: Game_Level_01
     _eventRef:
       Guid:
@@ -49,29 +49,27 @@ MonoBehaviour:
   - _name: GameOver
     _eventRef:
       Guid:
-        Data1: 760368772
-        Data2: 1117863706
-        Data3: 1187395518
-        Data4: 863309997
-      Path: event:/MX/mx_gameplay_base
+        Data1: -1495909537
+        Data2: 1247795339
+        Data3: -1361749571
+        Data4: 1536257240
+      Path: event:/MX/mx_gameplay_hubWorld
   - _name: Ending
     _eventRef:
       Guid:
-        Data1: 760368772
-        Data2: 1117863706
-        Data3: 1187395518
-        Data4: 863309997
-      Path: event:/MX/mx_gameplay_base
+        Data1: -1495909537
+        Data2: 1247795339
+        Data3: -1361749571
+        Data4: 1536257240
+      Path: event:/MX/mx_gameplay_hubWorld
   - _name: Game_HubWorld
     _eventRef:
       Guid:
-        Data1: 760368772
-        Data2: 1117863706
-        Data3: 1187395518
-        Data4: 863309997
-      Path: event:/MX/mx_gameplay_base
+        Data1: -1495909537
+        Data2: 1247795339
+        Data3: -1361749571
+        Data4: 1536257240
+      Path: event:/MX/mx_gameplay_hubWorld
   _globalParameters:
-  - _parameter: MusicParamVertical
-    _value: 0
   - _parameter: MusicParamHorizontal
     _value: 0

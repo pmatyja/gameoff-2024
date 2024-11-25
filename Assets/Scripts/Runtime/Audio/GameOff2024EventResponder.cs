@@ -13,6 +13,7 @@ namespace Runtime.Audio
         
         [SerializeField] private UnityEvent _onBasicItemCollected;
         [SerializeField] private UnityEvent _onKeyItemCollected;
+        [SerializeField] private UnityEvent<int> _onKeysCollectedChanged;
         [SerializeField] private UnityEvent _onGameSettingsChanged;
         [SerializeField] private UnityEvent<string, float> _onGameSettingsAudioValueChanged;
         [SerializeField] private AudioSettingIdConversion[] _audioSettingIdConversions;
@@ -25,6 +26,8 @@ namespace Runtime.Audio
             EventBus.AddListener<CollectableEventParameters>(OnCollectableCollected);
             EventBus.AddListener<GameSettingsChangedEventParameters>(OnGameSettingsChanged);
             EventBus.AddListener<PauseMenuController.UIEventParameters>(OnPauseMenuControllerUIEvent);
+
+            ItemInventory.OnKeyItemsCollectedChanged += OnKeyItemsCollectedChanged;
         }
 
         private void OnDisable()
@@ -32,6 +35,13 @@ namespace Runtime.Audio
             EventBus.RemoveListener<CollectableEventParameters>(OnCollectableCollected);
             EventBus.RemoveListener<GameSettingsChangedEventParameters>(OnGameSettingsChanged);
             EventBus.RemoveListener<PauseMenuController.UIEventParameters>(OnPauseMenuControllerUIEvent);
+            
+            ItemInventory.OnKeyItemsCollectedChanged -= OnKeyItemsCollectedChanged;
+        }
+
+        private void OnKeyItemsCollectedChanged(int keyItemCount)
+        {
+            _onKeysCollectedChanged?.Invoke(keyItemCount);
         }
 
         private void OnCollectableCollected(object sender, CollectableEventParameters info)

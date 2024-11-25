@@ -18,12 +18,22 @@ namespace Runtime.Collectables
 
         [SerializeField] private bool _showDebug = true;
 
+        public int KeyItemsCollected
+        {
+            get
+            {
+                var keyItems = _items.FindAll(i => i.Data.IsUnique);
+                return keyItems.Count;
+            }
+        }
+
         #region Events
         public static event Action<IdentifiedItem> OnItemAdded;
         public static event Action<IdentifiedItem> OnItemRemoved;
         public static event Action<int, IdentifiedItem> OnItemInserted; 
         public static event Action<int, IdentifiedItem>  OnItemRemovedAt;
         public static event Action OnItemsCleared;
+        public static event Action <int> OnKeyItemsCollectedChanged;
         #endregion // Events
         
         #region IList Interface
@@ -101,6 +111,8 @@ namespace Runtime.Collectables
             // TODO: Improve this spaghetti
             if (item.Data.IsUnique)
             {
+                OnKeyItemsCollectedChanged?.Invoke(KeyItemsCollected);
+                
                 EventBus.Raise(this, new HudController.CubeCollectedEventsParameters
                 {
                     Type = item.Data.CubeType
