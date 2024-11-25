@@ -141,17 +141,14 @@
 	</object>
 	<object class="CommandSound" id="{caa374a1-b1c0-4fd6-a890-f209acc143e9}">
 		<property name="start">
-			<value>0.03125</value>
+			<value>0.055936940966010734</value>
 		</property>
 		<property name="length">
-			<value>1.96875</value>
+			<value>1.9440630590339889</value>
 		</property>
 		<property name="commandType">
 			<value>3</value>
 		</property>
-		<relationship name="triggerConditions">
-			<destination>{360acafa-97c8-463c-9042-9a5c2620d9bd}</destination>
-		</relationship>
 		<relationship name="commandTarget">
 			<destination>{19f4254a-09b5-41c1-85fd-d3d5554dd13a}</destination>
 		</relationship>
@@ -217,17 +214,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{8c9aa42c-d053-4973-ab79-0baf8ac8cdf3}" />
-	<object class="ParameterCondition" id="{360acafa-97c8-463c-9042-9a5c2620d9bd}">
-		<property name="minimum">
-			<value>1</value>
-		</property>
-		<property name="maximum">
-			<value>1</value>
-		</property>
-		<relationship name="parameter">
-			<destination>{95e5bce3-0a3e-4cb6-9c27-db6ff5e86eee}</destination>
-		</relationship>
-	</object>
 	<object class="MixerBusEffectChain" id="{22626fb1-7b13-400d-b1d4-f2201c68050e}">
 		<relationship name="effects">
 			<destination>{bf2a8b9c-0d38-4a65-85ca-86b9dd20a763}</destination>

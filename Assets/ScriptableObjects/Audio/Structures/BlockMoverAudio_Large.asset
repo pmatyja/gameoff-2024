@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d4247e242204a4096d1140a940721b8, type: 3}
+  m_Name: BlockMoverAudio_Large
+  m_EditorClassIdentifier: 
+  <MoveBegin>k__BackingField:
+    Guid:
+      Data1: -979287592
+      Data2: 1211173357
+      Data3: -1958703981
+      Data4: -1340213207
+    Path: event:/SX/INT/Structure/sx_int_structure_large_move_begin
+  <MoveEnd>k__BackingField:
+    Guid:
+      Data1: -409216074
+      Data2: 1250431879
+      Data3: -1725003345
+      Data4: -1826450546
+    Path: event:/SX/INT/Structure/sx_int_structure_large_move_end
