@@ -247,7 +247,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1395
+  m_VersionIndex: 1401
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3232,6 +3232,18 @@ PrefabInstance:
       propertyPath: directionScope
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4148840435938881714, guid: 19cbaad401c456240bac24777ba0201e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 745c62c3e04b3664f818204637ea87ee, type: 2}
+    - target: {fileID: 4148840435938881714, guid: 19cbaad401c456240bac24777ba0201e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 745c62c3e04b3664f818204637ea87ee, type: 2}
+    - target: {fileID: 4148840435938881714, guid: 19cbaad401c456240bac24777ba0201e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 745c62c3e04b3664f818204637ea87ee, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

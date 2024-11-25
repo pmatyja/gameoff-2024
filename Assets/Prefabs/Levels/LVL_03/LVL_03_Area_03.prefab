@@ -705,10 +705,46 @@ MonoBehaviour:
   directionScope: 1
   <OnBlockMoveBeginEvent>k__BackingField:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 026b9ce223fc4f04ab5856f88f755329, type: 2}
+        m_TargetAssemblyTypeName: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
+        m_MethodName: PlayBlockMoveBegin
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6965776057773114709}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <OnBlockMoveEndEvent>k__BackingField:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 026b9ce223fc4f04ab5856f88f755329, type: 2}
+        m_TargetAssemblyTypeName: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
+        m_MethodName: PlayBlockMoveEnd
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6965776057773114709}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 026b9ce223fc4f04ab5856f88f755329, type: 2}
+        m_TargetAssemblyTypeName: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
+        m_MethodName: StopBlockMoveBegin
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6965776057773114709}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   isDebugEnabled: 0
   showIndividualBlocks: 1
   manualTrigger: 0
@@ -896,6 +932,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 026b9ce223fc4f04ab5856f88f755329, type: 2}
+        m_TargetAssemblyTypeName: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
+        m_MethodName: PlayBlockMoveBegin
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8232516269275288187}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   <OnBlockMoveEndEvent>k__BackingField:
     m_PersistentCalls:
       m_Calls:
@@ -906,6 +954,30 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 026b9ce223fc4f04ab5856f88f755329, type: 2}
+        m_TargetAssemblyTypeName: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
+        m_MethodName: PlayBlockMoveEnd
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8232516269275288187}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 026b9ce223fc4f04ab5856f88f755329, type: 2}
+        m_TargetAssemblyTypeName: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
+        m_MethodName: StopBlockMoveBegin
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8232516269275288187}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -979,6 +1051,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 026b9ce223fc4f04ab5856f88f755329, type: 2}
+        m_TargetAssemblyTypeName: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
+        m_MethodName: PlayBlockMoveBegin
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8752015952856423007}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   <OnBlockMoveEndEvent>k__BackingField:
     m_PersistentCalls:
       m_Calls:
@@ -989,6 +1073,30 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 026b9ce223fc4f04ab5856f88f755329, type: 2}
+        m_TargetAssemblyTypeName: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
+        m_MethodName: PlayBlockMoveEnd
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8752015952856423007}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 026b9ce223fc4f04ab5856f88f755329, type: 2}
+        m_TargetAssemblyTypeName: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
+        m_MethodName: StopBlockMoveBegin
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8752015952856423007}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4631,6 +4739,18 @@ PrefabInstance:
       propertyPath: directionScope
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4148840435938881714, guid: 19cbaad401c456240bac24777ba0201e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 745c62c3e04b3664f818204637ea87ee, type: 2}
+    - target: {fileID: 4148840435938881714, guid: 19cbaad401c456240bac24777ba0201e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 745c62c3e04b3664f818204637ea87ee, type: 2}
+    - target: {fileID: 4148840435938881714, guid: 19cbaad401c456240bac24777ba0201e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 745c62c3e04b3664f818204637ea87ee, type: 2}
     - target: {fileID: 5098536969985108860, guid: 19cbaad401c456240bac24777ba0201e, type: 3}
       propertyPath: <OnClick>k__BackingField.m_PersistentCalls.m_Calls.Array.size
       value: 4

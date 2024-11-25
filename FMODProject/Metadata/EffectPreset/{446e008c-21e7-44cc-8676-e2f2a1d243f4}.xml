@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EffectPreset" id="{446e008c-21e7-44cc-8676-e2f2a1d243f4}">
+		<property name="name">
+			<value>EQ_PianoStinger</value>
+		</property>
+		<relationship name="folder">
+			<destination>{5a3c52b8-ccb3-49a6-92c0-991cc3e35f32}</destination>
+		</relationship>
+		<relationship name="effect">
+			<destination>{9b3f9bed-86b3-41c6-9a19-b6c927cb8fef}</destination>
+		</relationship>
+	</object>
+	<object class="ThreeEQEffect" id="{9b3f9bed-86b3-41c6-9a19-b6c927cb8fef}">
+		<property name="lowGain">
+			<value>-80</value>
+		</property>
+	</object>
+</objects>
