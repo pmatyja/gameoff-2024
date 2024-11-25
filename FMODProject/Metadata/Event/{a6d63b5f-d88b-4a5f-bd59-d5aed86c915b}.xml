@@ -638,8 +638,14 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{86ff5a2b-c772-4857-87c9-9c39fd78b0da}">
+		<property name="start">
+			<value>100</value>
+		</property>
 		<property name="length">
-			<value>283.75887499999999</value>
+			<value>183.75887499999993</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>100</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{13d50d80-65e5-4fbb-b802-4e9041e6b673}</destination>
@@ -801,8 +807,14 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{2b4305b1-3568-46ba-8eb0-75f20695fa5f}">
+		<property name="start">
+			<value>100</value>
+		</property>
 		<property name="length">
-			<value>283.75887499999999</value>
+			<value>183.75887500000007</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>100</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{440df493-f11e-4f1e-9f62-fe0decd7679b}</destination>
@@ -964,8 +976,14 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{7e19a7e5-6514-4855-97d9-34656c6445a1}">
+		<property name="start">
+			<value>100</value>
+		</property>
 		<property name="length">
-			<value>283.75887499999999</value>
+			<value>183.75887500000005</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>100</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{585b8fde-4190-4d23-a51d-c4d6d9fb601a}</destination>
@@ -1232,7 +1250,6 @@
 		<property name="length">
 			<value>18</value>
 		</property>
-		<property name="name" />
 		<property name="commandType">
 			<value>3</value>
 		</property>
@@ -1247,7 +1264,6 @@
 		<property name="length">
 			<value>18</value>
 		</property>
-		<property name="name" />
 		<property name="commandType">
 			<value>3</value>
 		</property>
@@ -1265,7 +1281,6 @@
 		<property name="length">
 			<value>18</value>
 		</property>
-		<property name="name" />
 		<property name="commandType">
 			<value>3</value>
 		</property>
@@ -1283,7 +1298,6 @@
 		<property name="length">
 			<value>18</value>
 		</property>
-		<property name="name" />
 		<property name="commandType">
 			<value>3</value>
 		</property>
@@ -1301,7 +1315,6 @@
 		<property name="length">
 			<value>18</value>
 		</property>
-		<property name="name" />
 		<property name="commandType">
 			<value>3</value>
 		</property>
@@ -1319,7 +1332,6 @@
 		<property name="length">
 			<value>18</value>
 		</property>
-		<property name="name" />
 		<property name="commandType">
 			<value>3</value>
 		</property>
@@ -1337,7 +1349,6 @@
 		<property name="length">
 			<value>18</value>
 		</property>
-		<property name="name" />
 		<property name="commandType">
 			<value>3</value>
 		</property>
@@ -1355,7 +1366,6 @@
 		<property name="length">
 			<value>18</value>
 		</property>
-		<property name="name" />
 		<property name="commandType">
 			<value>3</value>
 		</property>
@@ -1373,7 +1383,6 @@
 		<property name="length">
 			<value>18</value>
 		</property>
-		<property name="name" />
 		<property name="commandType">
 			<value>3</value>
 		</property>
