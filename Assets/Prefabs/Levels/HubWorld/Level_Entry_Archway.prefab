@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: 5940990663506271020}
   - component: {fileID: 7715885279457431345}
   - component: {fileID: 8528327377733231504}
+  - component: {fileID: 929856409625660923}
   m_Layer: 2
   m_Name: LevelBaseTrigger
   m_TagString: Untagged
@@ -310,6 +311,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <LevelIndex>k__BackingField: 0
   <LevelSceneBase>k__BackingField: {fileID: 0}
+--- !u!114 &929856409625660923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834762816188345647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ba252ff55f44b9390e54367ca9f307e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  CollisionTagFilter: []
+  <TriggerEvents>k__BackingField:
+    <OnTriggerEnterEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: c0b8c3c6d2c59c641abe0325d5801cf2, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.FMOD.AudioData.MusicAudioDataSO, OCSFX.FMOD
+          m_MethodName: MusicEventPlay
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    <OnTriggerStayEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+    <OnTriggerExitEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: c0b8c3c6d2c59c641abe0325d5801cf2, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.FMOD.AudioData.MusicAudioDataSO, OCSFX.FMOD
+          m_MethodName: MusicEventPlay
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Game_HubWorld
+            m_BoolArgument: 0
+          m_CallState: 2
+  <CollisionEvents>k__BackingField:
+    <OnCollisionEnterEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+    <OnCollisionStayEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
+    <OnCollisionExitEvent>k__BackingField:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1001 &268237888851861845
 PrefabInstance:
   m_ObjectHideFlags: 0
