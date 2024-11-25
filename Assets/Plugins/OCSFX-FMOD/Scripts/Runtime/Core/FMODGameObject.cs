@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
@@ -69,31 +70,26 @@ namespace OCSFX.FMOD
             eventDesc.getInstanceList(out var instanceList);
 
             if (instanceList.Length < 1) return;
+            
+            var matchingInstances = new List<EventInstance>();
 
-            var invalidInstances = new List<EventInstance>();
-            EventInstance instance = default;
-
+            // TODO: Optimize this. We can't use "Contains" in the hashset because event instance equality is not reliable.
             foreach (var eventInstance in instanceList)
             {
-                if (!_attachedInstances.Contains(eventInstance)) return;
                 if (!eventInstance.isValid()) continue;
+                
+                var instanceHandle = eventInstance.handle;
+                
+                var matchingInstance = _attachedInstances.FirstOrDefault(i => i.handle == instanceHandle);
+                if (!matchingInstance.isValid()) continue;
 
-                eventInstance.getPlaybackState(out var playbackState);
-                if (playbackState is PLAYBACK_STATE.STOPPED or PLAYBACK_STATE.STOPPING) continue;
-
-                instance = eventInstance;
-                break;
+                matchingInstances.Add(eventInstance);
             }
-            
-            instance.Stop(allowFadeout);
 
-            foreach (var eventInstance in _attachedInstances)
-                if (!eventInstance.isValid()) invalidInstances.Add(eventInstance);
-
-            foreach (var eventInstance in invalidInstances)
-                _attachedInstances.Remove(eventInstance);
-            
-            _attachedInstances.TrimExcess();
+            foreach (var instance in matchingInstances)
+            {
+                instance.Stop();
+            }
         }
         
         public void StopEvent(string eventPath, bool allowFadeout = true)
@@ -104,31 +100,26 @@ namespace OCSFX.FMOD
             eventDesc.getInstanceList(out var instanceList);
 
             if (instanceList.Length < 1) return;
+            
+            var matchingInstances = new List<EventInstance>();
 
-            var invalidInstances = new List<EventInstance>();
-            EventInstance instance = default;
-
+            // TODO: Optimize this. We can't use "Contains" in the hashset because event instance equality is not reliable.
             foreach (var eventInstance in instanceList)
             {
-                if (!_attachedInstances.Contains(eventInstance)) return;
                 if (!eventInstance.isValid()) continue;
+                
+                var instanceHandle = eventInstance.handle;
+                
+                var matchingInstance = _attachedInstances.FirstOrDefault(i => i.handle == instanceHandle);
+                if (!matchingInstance.isValid()) continue;
 
-                eventInstance.getPlaybackState(out var playbackState);
-                if (playbackState is PLAYBACK_STATE.STOPPED or PLAYBACK_STATE.STOPPING) continue;
-
-                instance = eventInstance;
-                break;
+                matchingInstances.Add(eventInstance);
             }
-            
-            instance.Stop(allowFadeout);
 
-            foreach (var eventInstance in _attachedInstances)
-                if (!eventInstance.isValid()) invalidInstances.Add(eventInstance);
-
-            foreach (var eventInstance in invalidInstances)
-                _attachedInstances.Remove(eventInstance);
-
-            _attachedInstances.TrimExcess();
+            foreach (var instance in matchingInstances)
+            {
+                instance.Stop(allowFadeout);
+            }
         }
 
         public void Stop(bool allowFadeout = false)
@@ -228,8 +219,6 @@ namespace OCSFX.FMOD
                 instance.release();
                 _attachedInstances.Remove(instance);
             }
-            
-            _attachedInstances.TrimExcess();
         }
     }
 }
