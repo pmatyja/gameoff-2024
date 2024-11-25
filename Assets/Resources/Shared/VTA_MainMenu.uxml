@@ -8,15 +8,15 @@
                     <ui:GroupBox name="Page" picking-mode="Ignore" class="root">
                         <ui:GroupBox name="Main" picking-mode="Ignore" class="subpage page" style="-unity-background-scale-mode: stretch-to-fill; visibility: visible;">
                             <ui:VisualElement name="Logo" picking-mode="Ignore" class="logo" style="background-image: resource(&apos;titleLogo&apos;); position: absolute; width: 1024px; height: 512px; -unity-background-scale-mode: scale-to-fit; background-size: cover; align-self: center; align-content: flex-start; align-items: center; left: auto;" />
-                            <ui:GroupBox name="Menu" picking-mode="Ignore" class="menu page-menu">
-                                <ui:GroupBox name="Menu-Start" class="button button-start">
-                                    <ui:Label text="Start" display-tooltip-when-elided="true" />
+                            <ui:GroupBox name="Menu" picking-mode="Ignore" class="menu page-menu" style="background-color: rgba(0, 0, 0, 0.7); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; padding-top: 16px; padding-right: 16px; padding-bottom: 16px; padding-left: 16px;">
+                                <ui:GroupBox name="Menu-Start" class="button button-start" style="background-image: resource(&apos;Local/UI Elements/button1&apos;); -unity-background-image-tint-color: rgb(255, 255, 255); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; background-color: rgba(0, 0, 0, 0); margin-bottom: 8px;">
+                                    <ui:Label text="Start" display-tooltip-when-elided="true" style="color: rgb(0, 0, 0);" />
                                 </ui:GroupBox>
-                                <ui:GroupBox name="Menu-Credits" class="button button-credits">
-                                    <ui:Label text="Credits" display-tooltip-when-elided="true" />
+                                <ui:GroupBox name="Menu-Credits" class="button button-credits" style="border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; background-image: resource(&apos;Local/UI Elements/button1&apos;); background-color: rgba(0, 0, 0, 0); margin-bottom: 8px;">
+                                    <ui:Label text="Credits" display-tooltip-when-elided="true" style="color: rgb(0, 0, 0);" />
                                 </ui:GroupBox>
-                                <ui:GroupBox name="Menu-Exit" class="button button-exit">
-                                    <ui:Label text="Exit" display-tooltip-when-elided="true" />
+                                <ui:GroupBox name="Menu-Exit" class="button button-exit" style="border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; background-image: resource(&apos;Local/UI Elements/button1&apos;); background-color: rgba(0, 0, 0, 0); margin-bottom: 0;">
+                                    <ui:Label text="Exit" display-tooltip-when-elided="true" name="Label" style="color: rgb(0, 0, 0);" />
                                 </ui:GroupBox>
                             </ui:GroupBox>
                         </ui:GroupBox>
@@ -44,8 +44,8 @@
                                 </ui:GroupBox>
                             </ui:GroupBox>
                             <ui:GroupBox name="Menu" class="menu page-menu">
-                                <ui:GroupBox name="Menu-Back" class="button button-back button-selected">
-                                    <ui:Label text="Back" display-tooltip-when-elided="true" />
+                                <ui:GroupBox name="Menu-Back" class="button button-back button-selected" style="border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; background-color: rgba(255, 223, 85, 0); background-image: resource(&apos;Local/UI Elements/button1&apos;);">
+                                    <ui:Label text="Back" display-tooltip-when-elided="true" style="color: rgb(0, 0, 0);" />
                                 </ui:GroupBox>
                             </ui:GroupBox>
                         </ui:GroupBox>
