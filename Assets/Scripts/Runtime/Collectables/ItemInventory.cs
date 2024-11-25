@@ -97,6 +97,19 @@ namespace Runtime.Collectables
         {
             OnItemAdded?.Invoke(item);
             OCSFXLogger.Log($"[{nameof(ItemInventory)}] Added {item.Data.name} to inventory", _instance, _showDebug);
+
+            // TODO: Improve this spaghetti
+            if (item.Data.IsUnique)
+            {
+                EventBus.Raise(this, new HudController.CubeCollectedEventsParameters
+                {
+                    Type = item.Data.CubeType
+                });
+            }
+            else if (!item.Data.IsTransient)
+            {
+                EventBus.Raise(this, new HudController.ItemCollectedEventsParameters());
+            }
         }
 
         private void OnElementInserted(int index, IdentifiedItem item)
