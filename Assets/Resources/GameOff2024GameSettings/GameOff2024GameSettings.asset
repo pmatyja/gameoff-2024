@@ -18,12 +18,13 @@ MonoBehaviour:
   <PlayerCameraPrefab>k__BackingField: {fileID: 732960501598851460, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
   <AudioManagerPrefab>k__BackingField: {fileID: 7011063476094992024, guid: 43a3dfe275df9b247a83e0c398888e14, type: 3}
   <PostProcessingVolumePrefab>k__BackingField: {fileID: 6493559329777014977, guid: fe1e5fc29ddb8864fbc34ce5c14b7b23, type: 3}
-  <UserInterfacePrefab>k__BackingField: {fileID: 0}
+  <HudPrefab>k__BackingField: {fileID: 728024146355291531, guid: bd045f68dc177a846bac8791c504b2e1, type: 3}
   <PauseMenuPrefab>k__BackingField: {fileID: 8580124588764103511, guid: 64172481a791c9d49ae55f3bcc5e1c6f, type: 3}
   <UIHoverDetectorPrefab>k__BackingField: {fileID: 1585790649793112091, guid: ce137bd68ef0771469c6afa3cd2ef190, type: 3}
   <KeyCollectables>k__BackingField:
   - {fileID: 11400000, guid: bd0b7bfb0dc377f4eb06d3fa7beb279a, type: 2}
   - {fileID: 11400000, guid: 46dc0906139ca054384e7a82946e66b4, type: 2}
   - {fileID: 11400000, guid: e9c501d7ee46d264287d2e53a13791a6, type: 2}
-  <TotalOptionalCollectables>k__BackingField: 15
+  _totalOptionalCollectables: 15
+  <LevelPreloaderPrefab>k__BackingField: {fileID: 0}
   _showDebug: 1

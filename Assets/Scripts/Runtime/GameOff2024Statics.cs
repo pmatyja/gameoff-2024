@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OCSFX.FMOD.Components;
+using Runtime.Collectables;
+using Runtime.World;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Object = UnityEngine.Object;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,14 +19,17 @@ namespace Runtime
         private static Camera _mainCamera;
         private static Volume _globalPostProcessingVolume;
         private static AudioManager _audioManager;
-        // private static UserInterface _userInterface;
         private static PauseMenuController _pauseMenuController;
         private static UIHoverDetector _uiHoverDetector;
+        private static HudController _hudController;
+        private static SceneLoader _levelPreloader;
         
         private static readonly Dictionary<float, WaitForSeconds> _waitForSeconds = new Dictionary<float, WaitForSeconds>();
         
         public const string PROJECT_NAME = "GameOff2024";
         public const string MENU_ROOT = PROJECT_NAME + "/";
+        
+        public static event Action<int> OnOptionalCollectableTotalChanged;
         
 #if UNITY_EDITOR
         [MenuItem(MENU_ROOT + "Initialize Singletons")]
@@ -47,9 +54,10 @@ namespace Runtime
             GetPlayerCharacter();
             GetGlobalPostProcessingVolume();
             GetAudioManager();
+            GetLevelPreloader();
             GetPauseMenuController();
             GetUIHoverDetector();
-            // GetUserInterface();
+            GetHudController();
         }
         
         public static WaitForSeconds GetWaitForSeconds(float seconds)
@@ -98,14 +106,31 @@ namespace Runtime
                 ref _globalPostProcessingVolume, GameOff2024GameSettings.Get().PostProcessingVolumePrefab, 
                 volume => volume.isGlobal);
         
-        // public static UserInterface GetUserInterface() => 
-        //     GetOrCreateObject(ref _userInterface, GameOff2024GameSettings.Get().UserInterfacePrefab);
-        
         public static PauseMenuController GetPauseMenuController() => 
             GetOrCreateObject(ref _pauseMenuController, GameOff2024GameSettings.Get().PauseMenuPrefab);
 
         public static UIHoverDetector GetUIHoverDetector() => 
             GetOrCreateObject(ref _uiHoverDetector, GameOff2024GameSettings.Get().UIHoverDetectorPrefab);
+        
+        public static HudController GetHudController() =>
+            GetOrCreateObject(ref _hudController, GameOff2024GameSettings.Get().HudPrefab);
+        
+        public static int GetOptionalCollectableTotal() => 
+            GameOff2024GameSettings.Get().TotalOptionalCollectables;
+        
+        public static SceneLoader GetLevelPreloader() => 
+            GetOrCreateObject(ref _levelPreloader, GameOff2024GameSettings.Get().LevelPreloaderPrefab);
+
+        public static void RegisterOptionalCollectable(GameOff2024Collectable collectable)
+        {
+            if (GameOff2024GameSettings.Get().RegisterOptionalCollectable(collectable))
+            {
+                OnOptionalCollectableTotalChanged?.Invoke(GetOptionalCollectableTotal());
+            }
+        }
+
+
+        // HELPER FUNCTIONS
         
         private static T GetOrCreateObject<T> (ref T reference, T prefab) where T : MonoBehaviour
         {

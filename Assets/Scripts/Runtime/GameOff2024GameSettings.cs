@@ -1,9 +1,10 @@
-﻿using OCSFX.FMOD.Components;
+﻿using System.Collections.Generic;
+using OCSFX.FMOD.Components;
 using OCSFX.Generics;
-using OCSFX.Utility.Attributes;
 using OCSFX.Utility.Debug;
 using Runtime.Cameras;
 using Runtime.Collectables;
+using Runtime.World;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -24,13 +25,25 @@ namespace Runtime
         [field: SerializeField, Expandable] public Volume PostProcessingVolumePrefab { get; private set; }
         
         [field: Header("UI")]
-        // [field: SerializeField, Expandable] public UserInterface UserInterfacePrefab { get; private set; }
+        [field: SerializeField, Expandable] public HudController HudPrefab { get; private set; }
         [field: SerializeField, Expandable] public PauseMenuController PauseMenuPrefab { get; private set; }
         [field: SerializeField, Expandable] public UIHoverDetector UIHoverDetectorPrefab { get; private set; }
         
         [field: Header("Game")]
         [field: SerializeField, Expandable] public CollectableData[] KeyCollectables { get; private set; }
-        [field: SerializeField, Min(0)] public int TotalOptionalCollectables { get; private set; }
+        [SerializeField, Readonly] private int _totalOptionalCollectables = 15;
+        [field: SerializeField, Expandable] public SceneLoader LevelPreloaderPrefab { get; private set; }
+
+        public int TotalOptionalCollectables
+        {
+            get
+            {
+                _totalOptionalCollectables = _optionalCollectableIDs.Count;
+                return _totalOptionalCollectables;
+            }
+        }
+
+        private readonly HashSet<string> _optionalCollectableIDs = new HashSet<string>();
         
         [Header("Debug")]
         [SerializeField] private bool _showDebug;
@@ -43,7 +56,20 @@ namespace Runtime
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
         private static void RuntimeInit()
         {
-            Get().ValidateFields();
+            var instance = Get();
+            if (!instance) return;
+            
+            instance._optionalCollectableIDs.Clear();
+            
+            instance.ValidateFields();
+        }
+
+        public bool RegisterOptionalCollectable(GameOff2024Collectable collectable)
+        {
+            var added = collectable && _optionalCollectableIDs.Add(collectable.ID);
+            if (added) _totalOptionalCollectables = _optionalCollectableIDs.Count;
+            
+            return added;
         }
 
         private void ValidateFields()
@@ -55,9 +81,10 @@ namespace Runtime
                 (PlayerCharacterPrefab, nameof(PlayerCharacterPrefab)),
                 (AudioManagerPrefab, nameof(AudioManagerPrefab)),
                 (PostProcessingVolumePrefab, nameof(PostProcessingVolumePrefab)),
-                // (UserInterfacePrefab, nameof(UserInterfacePrefab)),
+                (HudPrefab, nameof(HudPrefab)),
                 (PauseMenuPrefab, nameof(PauseMenuPrefab)),
-                (UIHoverDetectorPrefab, nameof(UIHoverDetectorPrefab))
+                (UIHoverDetectorPrefab, nameof(UIHoverDetectorPrefab)),
+                (LevelPreloaderPrefab, nameof(LevelPreloaderPrefab))
             };
 
             foreach (var (field, fieldName) in fields)

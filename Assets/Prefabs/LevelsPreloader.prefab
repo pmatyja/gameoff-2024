@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4617062777218864539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5701989037467913832}
+  - component: {fileID: 7775623286696059653}
+  - component: {fileID: 7341518358338225110}
+  m_Layer: 0
+  m_Name: LevelsPreloader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5701989037467913832
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617062777218864539}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7775623286696059653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617062777218864539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b70b805c5c8c2b44ae53644a0fdaa3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _triggerOn: 8
+  _delay: 0
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7341518358338225110}
+        m_TargetAssemblyTypeName: Runtime.World.SceneLoader, Assembly-CSharp
+        m_MethodName: Load
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7341518358338225110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617062777218864539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08cbf29fc4db4e8f8fd984b6ee31003c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loadSceneActions:
+  - _sceneName: Game_Level_01
+    _loadSceneMode: 1
+    _loadSceneMethod: 1
+  - _sceneName: Game_Level_02
+    _loadSceneMode: 1
+    _loadSceneMethod: 1
+  - _sceneName: Game_Level_03
+    _loadSceneMode: 1
+    _loadSceneMethod: 1
+  <OnLoadStart>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <OnLoadComplete>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <OnUnloadStart>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <OnUnloadComplete>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []

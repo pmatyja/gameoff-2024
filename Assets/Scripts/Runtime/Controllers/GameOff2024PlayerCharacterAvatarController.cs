@@ -78,6 +78,8 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
     private void HandleBillboard()
     {
         var cam = GameOff2024Statics.GetMainCamera();
+        
+        if (!cam) return;
 
         // Calculate the direction from the camera
         var directionFromCamera = transform.position - cam.transform.position;
@@ -109,6 +111,9 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
         }
         
         var cam = GameOff2024Statics.GetMainCamera();
+        
+        if (!cam) return;
+        
         var camForward = cam.transform.forward.normalized;
     
         FacingCameraDot = Vector3.Dot(GameOff2024Statics.GetCameraRelativeMoveDirection(_movementInput), camForward);

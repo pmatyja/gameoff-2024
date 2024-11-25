@@ -239,8 +239,77 @@ Transform:
   - {fileID: 9194776487018876406}
   - {fileID: 3914300946025498210}
   - {fileID: 2087299682251904221}
+  - {fileID: 5940990663506271020}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &7834762816188345647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5940990663506271020}
+  - component: {fileID: 7715885279457431345}
+  - component: {fileID: 8528327377733231504}
+  m_Layer: 0
+  m_Name: LevelBaseTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5940990663506271020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834762816188345647}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11, y: 0.5, z: -0.000032424927}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4096915812812344839}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7715885279457431345
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834762816188345647}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 40, y: 20, z: 22.999998}
+  m_Center: {x: -14.500004, y: -4.5, z: -1.0000019}
+--- !u!114 &8528327377733231504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834762816188345647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 862f714f22e6418bac4092ee835a6e1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <LevelIndex>k__BackingField: 0
+  <LevelSceneBase>k__BackingField: {fileID: 0}
 --- !u!1001 &268237888851861845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4198,6 +4267,10 @@ PrefabInstance:
     - target: {fileID: 3862140408483622953, guid: 52f3cdb21404ec849be4e302fc5e0d37, type: 3}
       propertyPath: m_Name
       value: AdditiveSceneLoader
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862140408483622953, guid: 52f3cdb21404ec849be4e302fc5e0d37, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6630490097005422298, guid: 52f3cdb21404ec849be4e302fc5e0d37, type: 3}
       propertyPath: m_LocalPosition.x

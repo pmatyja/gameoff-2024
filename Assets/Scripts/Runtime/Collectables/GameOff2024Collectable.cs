@@ -24,6 +24,11 @@ namespace Runtime.Collectables
             
             TryApplyMaterial();
             _data.OnSpawn(transform, ID);
+            
+            if (!_data.IsUnique && !_data.IsTransient)
+            {
+                GameOff2024Statics.RegisterOptionalCollectable(this);
+            }
         }
 
         protected override void OnPickUp(GameObject pickerObject)

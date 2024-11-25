@@ -9,7 +9,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void RunOnStart()
     {
-        Instance = null;
+        Application.quitting += () => Instance = null;
     }
 
     protected virtual void Awake()

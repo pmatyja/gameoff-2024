@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
-public class HudController : MonoBehaviour
+public class HudController : Singleton<HudController>
 {
     [SerializeField]
     [Readonly]
@@ -19,9 +19,6 @@ public class HudController : MonoBehaviour
     private int maxCoinsCounter;
 
     [SerializeField]
-    private GameOff2024GameSettings settings;
-
-    [SerializeField]
     private CubeDef[] sprites;
 
     private Label coinsCounterElement;
@@ -32,10 +29,7 @@ public class HudController : MonoBehaviour
 
         this.document.rootVisualElement.TryGet("Coins", out this.coinsCounterElement, true);
 
-        if (this.settings != default)
-        {
-            this.maxCoinsCounter = this.settings.TotalOptionalCollectables;
-        }
+        this.maxCoinsCounter = GameOff2024Statics.GetOptionalCollectableTotal();
 
         this.UpdateCoinsCounter();
 
@@ -52,12 +46,22 @@ public class HudController : MonoBehaviour
     {
         EventBus.AddListener<ItemCollectedEventsParameters>(this.OnItemCollected);
         EventBus.AddListener<CubeCollectedEventsParameters>(this.OnCubeCollected);
+        
+        GameOff2024Statics.OnOptionalCollectableTotalChanged += this.UpdateMaxCoinCount;
     }
 
     private void OnDisable()
     {
         EventBus.RemoveListener<ItemCollectedEventsParameters>(this.OnItemCollected);
         EventBus.RemoveListener<CubeCollectedEventsParameters>(this.OnCubeCollected);
+        
+        GameOff2024Statics.OnOptionalCollectableTotalChanged -= this.UpdateMaxCoinCount;
+    }
+    
+    private void UpdateMaxCoinCount(int total)
+    {
+        this.maxCoinsCounter = total;
+        this.UpdateCoinsCounter();
     }
 
     private void UpdateCoinsCounter()
