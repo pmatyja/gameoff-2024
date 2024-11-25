@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{7443bc8e-8cfa-4ec9-bad6-9b46be795090}">
+		<property name="name">
+			<value>MX_LastSectionPlayed</value>
+		</property>
+		<relationship name="folder">
+			<destination>{2b524020-c6cf-4cef-ac1e-2cf90630316f}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{6a687c8f-ec21-4965-b7b8-4451e96140ce}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{6a687c8f-ec21-4965-b7b8-4451e96140ce}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>9</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>LoopPoint</value>
+			<value>Random A</value>
+			<value>Random B</value>
+			<value>Random C</value>
+			<value>Random D</value>
+			<value>Random E</value>
+			<value>Random F</value>
+			<value>Random G</value>
+			<value>Random H</value>
+		</property>
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
