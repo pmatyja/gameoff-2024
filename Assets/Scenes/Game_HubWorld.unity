@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: c4f8ce282b5c81e49a8893c19b3d852b, type: 2}
+  m_LightingDataAsset: {fileID: 112000004, guid: c4f8ce282b5c81e49a8893c19b3d852b, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: dc72765a01bf77a4dbf12b72e9e18898, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -1494,7 +1494,7 @@ MonoBehaviour:
   BlendUpdateMethod: 1
   LensModeOverride:
     Enabled: 1
-    DefaultMode: 1
+    DefaultMode: 2
   DefaultBlend:
     Style: 1
     Time: 2
