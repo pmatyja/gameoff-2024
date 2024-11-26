@@ -24,10 +24,15 @@ public class HudController : Singleton<HudController>
     [SerializeField]
     private TweenCurve tween = new TweenCurve();
 
-    private float shardsProgress = 1.0f;
-    private VisualElement shardsElement;
+    [SerializeField]
+    private Vector2 animationScaleFactor = new Vector2(0.8f, 1.2f);
 
+    private VisualElement shardsElement;
     private Label coinsCounterElement;
+    
+    private float shardsProgress = 1.0f;
+    private VisualElement[] cubeElements = new VisualElement[3];
+    private float[] cubesProgress = new float[3] { 1.0f, 1.0f, 1.0f };
 
     private void Start()
     {
@@ -67,16 +72,41 @@ public class HudController : Singleton<HudController>
 
     private void Update()
     {
-        if (this.shardsElement != default)
-        {
-            this.shardsProgress = Tween.Interpolate(this.shardsProgress, this.tween.Duration, tween.PingPong, 1.0f, value =>
-            {
-                var x = this.tween.GetValue(this.shardsProgress);
-                var y = this.tween.GetValue(this.shardsProgress);
+        this.AnimateIcon("Shards", ref this.shardsElement, ref this.shardsProgress);
 
-                this.shardsElement.style.scale = new StyleScale(new Vector2(x, y));
-            });
+        for (var i = 0; i < this.cubesProgress.Length; ++i)
+        {
+            if (this.cubesProgress[i] != 1.0f)
+            {
+                this.AnimateIcon(((CubeType)i).ToString(), ref this.cubeElements[i], ref this.cubesProgress[i]);
+            }
         }
+    }
+
+    private void AnimateIcon(string name, ref VisualElement element, ref float progress)
+    {
+        if (element == default)
+        {
+            if (this.document.rootVisualElement.TryGet<VisualElement>(name, out var result))
+            {
+                element = result;
+            }
+        }
+
+        if (element == default)
+        {
+            return;
+        }
+
+        var local = element;
+
+        progress = Tween.Interpolate(progress, this.tween.Duration, tween.PingPong, 1.0f, value =>
+        {
+            var x = this.tween.GetValue(value * this.animationScaleFactor.x);
+            var y = this.tween.GetValue(value * this.animationScaleFactor.y);
+
+            local.style.scale = new StyleScale(new Vector2(x, y));
+        });
     }
     
     private void UpdateMaxCoinCount(int total)
@@ -113,6 +143,8 @@ public class HudController : Singleton<HudController>
                 if (item.Type == parameters.Type)
                 {
                     cube.style.backgroundImage = Background.FromSprite(item.Sprite);
+
+                    this.cubesProgress[(int)item.Type] = 0.0f;
                 }
             }
         }
