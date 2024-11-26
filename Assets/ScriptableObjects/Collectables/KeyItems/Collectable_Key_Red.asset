@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Key Item 1
   <Description>k__BackingField: 1/3 Key Items needed to unlock the exit door.
-  <Prefab>k__BackingField: {fileID: 0}
-  <Icon>k__BackingField: {fileID: 2800000, guid: 7a43ba6447ea1dd47a55caeccbd18b60, type: 3}
+  <CubeType>k__BackingField: 0
+  <Prefab>k__BackingField: {fileID: 6525529386450828124, guid: ebfc736021eee4c4b801b1a2599b8408, type: 3}
+  <NonInteractablePrefab>k__BackingField: {fileID: 6323836768842109855, guid: 90f6ec8dafefc44499372c0415dc406f, type: 3}
   <Sprite>k__BackingField: {fileID: 21300000, guid: b3d7ce543e9233b48beb30ccdeeff52f, type: 3}
   <Material>k__BackingField: {fileID: 2100000, guid: 6e1a4dde7d180364b8842029f8d49c5c, type: 2}
   <IsUnique>k__BackingField: 1
@@ -36,4 +37,11 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
+  <OnUseKeySfx>k__BackingField:
+    Guid:
+      Data1: 644919063
+      Data2: 1139188699
+      Data3: 564997267
+      Data4: -636185385
+    Path: event:/Placeholders/3D/sx_robotvoice_number_3d_10
   _showDebug: 0

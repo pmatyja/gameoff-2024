@@ -10,6 +10,11 @@ public class AutoRotateBehavior : MonoBehaviour
     private bool _rotate;
     private Vector3 _startRotation;
 
+    private void OnEnable()
+    {
+        _rotate = true;
+    }
+
     private void OnDisable()
     {
         _rotate = false;

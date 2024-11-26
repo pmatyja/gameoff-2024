@@ -89,7 +89,7 @@ Transform:
   m_GameObject: {fileID: 2961202860141736594}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.0000059604645, z: -0, w: -1}
-  m_LocalPosition: {x: -8.101608, y: 6.716441, z: 1.3514643}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -137,7 +137,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6729229689673567492}
-  - component: {fileID: 3303862871520777831}
+  - component: {fileID: 4462443780714101728}
+  - component: {fileID: 1365534541091194456}
   - component: {fileID: 1081298334191359807}
   m_Layer: 0
   m_Name: GOLDEN_DOOR
@@ -163,7 +164,7 @@ Transform:
   - {fileID: 8406967121077673484}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
---- !u!114 &3303862871520777831
+--- !u!114 &4462443780714101728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,20 +173,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 5752669784970119741}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a0022cd7f051b048969b99461c526eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 311f69f68da741b2975aae5dfd35bf5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CanInteract>k__BackingField: 1
-  <IsRepeatable>k__BackingField: 1
-  <HasInteracted>k__BackingField: 0
-  <IsOpen>k__BackingField: 0
-  _interactionPrompt: {fileID: 0}
-  _showDebug: 1
-  _requiredCollectables:
-  - {fileID: 11400000, guid: bd0b7bfb0dc377f4eb06d3fa7beb279a, type: 2}
-  - {fileID: 11400000, guid: 46dc0906139ca054384e7a82946e66b4, type: 2}
-  - {fileID: 11400000, guid: e9c501d7ee46d264287d2e53a13791a6, type: 2}
+  _keySlots:
+  - SlotTransform: {fileID: 638164862842532644}
+    ExpectedKey: {fileID: 11400000, guid: e9c501d7ee46d264287d2e53a13791a6, type: 2}
+    IsOccupied: 0
+  - SlotTransform: {fileID: 4072303807725594505}
+    ExpectedKey: {fileID: 11400000, guid: 46dc0906139ca054384e7a82946e66b4, type: 2}
+    IsOccupied: 0
+  - SlotTransform: {fileID: 4831639174132898184}
+    ExpectedKey: {fileID: 11400000, guid: bd0b7bfb0dc377f4eb06d3fa7beb279a, type: 2}
+    IsOccupied: 0
   _blockMoverScript: {fileID: 4382602266058764245}
+  _interactionPrompt: {fileID: 0}
+  <OnKeyInserted>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <CanInteract>k__BackingField: 0
+  <IsRepeatable>k__BackingField: 0
+  <HasInteracted>k__BackingField: 0
+--- !u!65 &1365534541091194456
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752669784970119741}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3, z: 2.1299098}
+  m_Center: {x: -0.9999993, y: 1, z: -1.0896691}
 --- !u!114 &1081298334191359807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,7 +509,7 @@ Transform:
   m_GameObject: {fileID: 7458904281634219025}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.99999857, y: 0.5, z: -0.2500063}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -497,15 +526,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3168784541308854285, guid: f6d04c6aa7f163b47866119b24070a5d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.398293
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3168784541308854285, guid: f6d04c6aa7f163b47866119b24070a5d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.966441
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3168784541308854285, guid: f6d04c6aa7f163b47866119b24070a5d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.1488423
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3168784541308854285, guid: f6d04c6aa7f163b47866119b24070a5d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1253,15 +1282,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8163403782526385824, guid: 23fb81d44cc4bd04fa1b6b4ef4968dac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.219345
+      value: 3.7021475
       objectReference: {fileID: 0}
     - target: {fileID: 8163403782526385824, guid: 23fb81d44cc4bd04fa1b6b4ef4968dac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6864815
+      value: -1.4500008
       objectReference: {fileID: 0}
     - target: {fileID: 8163403782526385824, guid: 23fb81d44cc4bd04fa1b6b4ef4968dac, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.2394104
+      value: -0.4999964
       objectReference: {fileID: 0}
     - target: {fileID: 8163403782526385824, guid: 23fb81d44cc4bd04fa1b6b4ef4968dac, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1336,13 +1365,13 @@ MonoBehaviour:
   <OnBlockMoveBeginEvent>k__BackingField:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: f6dbbf13b2c2ec349aad72af93616ae5, type: 2}
-        m_TargetAssemblyTypeName: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
-        m_MethodName: PlayBlockMoveBegin
-        m_Mode: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
-          m_ObjectArgument: {fileID: 4495018838058839287}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1360,9 +1389,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: f6dbbf13b2c2ec349aad72af93616ae5, type: 2}
+        m_TargetAssemblyTypeName: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
+        m_MethodName: PlayBlockMoveBegin
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 4495018838058839287}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <OnBlockMoveEndEvent>k__BackingField:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 11400000, guid: f6dbbf13b2c2ec349aad72af93616ae5, type: 2}
         m_TargetAssemblyTypeName: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
         m_MethodName: PlayBlockMoveEnd

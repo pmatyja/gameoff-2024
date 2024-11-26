@@ -80,7 +80,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Collectable_KeyItem_Green
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8970459693978500329, guid: d69dfb89b0730be44872f05f39a7429a, type: 3}
+    - {fileID: 5510009014748380571, guid: d69dfb89b0730be44872f05f39a7429a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -13,7 +13,8 @@ namespace Runtime.Collectables
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public string Description { get; private set; }
         [field: SerializeField] public HudController.CubeType CubeType { get; private set; }
-        // [field: SerializeField] public GameObject Prefab { get; private set; }
+        [field: SerializeField] public GameObject Prefab { get; private set; }
+        [field: SerializeField] public GameObject NonInteractablePrefab { get; private set; }
         // [field: SerializeField] public Texture Icon { get; private set; }
         [field: SerializeField] public Sprite Sprite { get; private set; }
         [field: SerializeField] public Material Material { get; private set; }
@@ -27,6 +28,7 @@ namespace Runtime.Collectables
         [field: SerializeField] public float OnCollectVfxLifetime { get; private set; } = 2f;
         [field: SerializeField] public EventReference OnCollectSfx { get; private set; }
         [field: SerializeField] public EventReference LoopSfx { get; private set; }
+        [field: SerializeField] public EventReference OnUseKeySfx { get; private set; }
         
         [Header("Debug")]
         [SerializeField] private bool _showDebug;
