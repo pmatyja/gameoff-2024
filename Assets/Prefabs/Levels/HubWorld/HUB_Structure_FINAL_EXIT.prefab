@@ -8365,13 +8365,81 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1381959443764244528}
     - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: isDebugEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: showIndividualBlocks
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
       propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1381959443764244528}
     - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 8535576779851314540}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 562371147639749257}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
       propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5716463041114996132}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: GenerateImpulse
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: Unity.Cinemachine.CinemachineImpulseSource, Unity.Cinemachine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: Runtime.Utility.DelayedUnityEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4462443780714101728, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
       propertyPath: _interactionPrompt
       value: 
@@ -8427,10 +8495,92 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4495018838058839287, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 562371147639749257}
+    - targetCorrespondingSourceObject: {fileID: 4495018838058839287, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5064159453586602364}
   m_SourcePrefab: {fileID: 100100000, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
 --- !u!4 &3183387913870058883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6729229689673567492, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
   m_PrefabInstance: {fileID: 8164653179753883783}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5705831059876332656 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4495018838058839287, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+  m_PrefabInstance: {fileID: 8164653179753883783}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &562371147639749257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5705831059876332656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b70b805c5c8c2b44ae53644a0fdaa3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _triggerOn: 2
+  _delay: 2
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5064159453586602364}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5064159453586602364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5705831059876332656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4319c3ea42a4db4499da34b0751e73b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1723330097
+      Data2: 1099093851
+      Data3: -849806959
+      Data4: -1364313115
+    Path: event:/Placeholders/2D/dx_placeholder_youWin
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &8535576779851314540 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 520967389276429803, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+  m_PrefabInstance: {fileID: 8164653179753883783}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
