@@ -27,4 +27,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e9c501d7ee46d264287d2e53a13791a6, type: 2}
   _totalOptionalCollectables: 15
   <LevelPreloaderPrefab>k__BackingField: {fileID: 0}
+  ExcludeScenesFromInitialization:
+  - MainMenu
+  - Ending
   _showDebug: 1

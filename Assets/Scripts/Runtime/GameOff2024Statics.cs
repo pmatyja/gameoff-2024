@@ -5,6 +5,7 @@ using Runtime.Collectables;
 using Runtime.World;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 #if UNITY_EDITOR
@@ -49,17 +50,33 @@ namespace Runtime
         private static void Initialize()
         {
             _waitForSeconds.Clear();
+            
+            GetAudioManager();
+            
+            // If the current scene is in the exclusion list, do not initialize the following singletons;
+            // Load them when the next scene is loaded;
+            var activeScene = SceneManager.GetActiveScene();
+            if (GameOff2024GameSettings.Get().ExcludeScenesFromInitialization.Contains(activeScene.name))
+            {
+                SceneManager.sceneLoaded += InitializeOnNextSceneLoad;
+                return;
+            }
 
             GetMainCamera();
             GetPlayerCharacter();
             GetGlobalPostProcessingVolume();
-            GetAudioManager();
-            GetLevelPreloader();
+            // GetLevelPreloader();
             GetPauseMenuController();
             GetUIHoverDetector();
             GetHudController();
         }
-        
+
+        private static void InitializeOnNextSceneLoad(Scene scene, LoadSceneMode mode)
+        {
+            Initialize();
+            SceneManager.sceneLoaded -= InitializeOnNextSceneLoad;
+        }
+
         public static WaitForSeconds GetWaitForSeconds(float seconds)
         {
             if (_waitForSeconds.TryGetValue(seconds, out var waitForSeconds)) return waitForSeconds;
@@ -118,8 +135,8 @@ namespace Runtime
         public static int GetOptionalCollectableTotal() => 
             GameOff2024GameSettings.Get().TotalOptionalCollectables;
         
-        public static SceneLoader GetLevelPreloader() => 
-            GetOrCreateObject(ref _levelPreloader, GameOff2024GameSettings.Get().LevelPreloaderPrefab);
+        // public static SceneLoader GetLevelPreloader() => 
+        //     GetOrCreateObject(ref _levelPreloader, GameOff2024GameSettings.Get().LevelPreloaderPrefab);
 
         public static void RegisterOptionalCollectable(GameOff2024Collectable collectable)
         {

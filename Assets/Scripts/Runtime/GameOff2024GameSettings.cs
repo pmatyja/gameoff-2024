@@ -4,6 +4,7 @@ using OCSFX.Generics;
 using OCSFX.Utility.Debug;
 using Runtime.Cameras;
 using Runtime.Collectables;
+using Runtime.Utility;
 using Runtime.World;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -32,7 +33,10 @@ namespace Runtime
         [field: Header("Game")]
         [field: SerializeField, Expandable] public CollectableData[] KeyCollectables { get; private set; }
         [SerializeField, Readonly] private int _totalOptionalCollectables = 15;
-        [field: SerializeField, Expandable] public SceneLoader LevelPreloaderPrefab { get; private set; }
+        // [field: SerializeField, Expandable] public SceneLoader LevelPreloaderPrefab { get; private set; }
+
+        [field: SerializeField, BuildSceneName]
+        public string[] ExcludeScenesFromInitialization = new string[0];
 
         public int TotalOptionalCollectables
         {
@@ -84,7 +88,7 @@ namespace Runtime
                 (HudPrefab, nameof(HudPrefab)),
                 (PauseMenuPrefab, nameof(PauseMenuPrefab)),
                 (UIHoverDetectorPrefab, nameof(UIHoverDetectorPrefab)),
-                (LevelPreloaderPrefab, nameof(LevelPreloaderPrefab))
+                // (LevelPreloaderPrefab, nameof(LevelPreloaderPrefab))
             };
 
             foreach (var (field, fieldName) in fields)

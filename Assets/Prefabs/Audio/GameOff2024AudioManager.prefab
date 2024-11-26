@@ -80,7 +80,7 @@ MonoBehaviour:
   _musicAudioData: {fileID: 11400000, guid: c0b8c3c6d2c59c641abe0325d5801cf2, type: 2}
   _volumeSettings: {fileID: 11400000, guid: dc8bf32066040dc418705e8fae40b699, type: 2}
   _musicVolumeParamName: Volume_MX
-  _resetParametersOnEnable: 1
+  _resetParametersOnEnable: 0
   _mute: 0
   _onStartupBanksLoaded:
     m_PersistentCalls:
@@ -104,19 +104,7 @@ MonoBehaviour:
           m_CallState: 2
     _onSceneUnloaded:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: c0b8c3c6d2c59c641abe0325d5801cf2, type: 2}
-          m_TargetAssemblyTypeName: OCSFX.FMOD.AudioData.MusicAudioDataSO, OCSFX.FMOD
-          m_MethodName: MusicEventStop
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: MainMenu
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   - _sceneName: Ending
     _onSceneLoaded:
       m_PersistentCalls:
@@ -135,19 +123,7 @@ MonoBehaviour:
           m_CallState: 2
     _onSceneUnloaded:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: c0b8c3c6d2c59c641abe0325d5801cf2, type: 2}
-          m_TargetAssemblyTypeName: OCSFX.FMOD.AudioData.MusicAudioDataSO, OCSFX.FMOD
-          m_MethodName: MusicEventStop
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Ending
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   - _sceneName: Game_HubWorld
     _onSceneLoaded:
       m_PersistentCalls:
