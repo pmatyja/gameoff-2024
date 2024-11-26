@@ -6,7 +6,7 @@ using UnityEngine;
 public class Tween
 {
     public bool PingPong;
-    public float Value => this.Method.Invoke(this.PingPong ? Tween.Bounce(this.progress) : this.progress);
+    public float Value => this.GetValue(this.progress);
 
     [SerializeField]
     public Func<float, float> Method = Easing.SmoothStep;
@@ -51,6 +51,11 @@ public class Tween
     {
         this.target = target;
         this.duration = duration;
+    }
+
+    public float GetValue(float progress)
+    {
+        return this.Method.Invoke(this.PingPong ? Tween.Bounce(progress) : progress);
     }
 
     public static float Once(float progress, float duration = 1.0f, float target = 1.0f)

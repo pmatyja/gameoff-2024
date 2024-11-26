@@ -64,10 +64,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cac3a4096657fa4f9bf7db52b414d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
   document: {fileID: 0}
   coinsCounter: 0
   maxCoinsCounter: 0
-  settings: {fileID: 0}
   sprites:
   - Type: 0
     Sprite: {fileID: 21300000, guid: b3d7ce543e9233b48beb30ccdeeff52f, type: 3}
@@ -75,3 +75,60 @@ MonoBehaviour:
     Sprite: {fileID: 21300000, guid: 5998c4a1c03171748afa56a2b080425b, type: 3}
   - Type: 2
     Sprite: {fileID: 21300000, guid: 5eecf15a0aa80814eade6964301f4973, type: 3}
+  tween:
+    PingPong: 0
+    loopCount: 1
+    target: 1
+    progress: 0
+    duration: 1
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0000014293473
+        value: 0.9999889
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0.5916667
+      - serializedVersion: 3
+        time: 0.225
+        value: 1
+        inSlope: -4.402922
+        outSlope: -4.402922
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.59166664
+        outWeight: 0.3916667
+      - serializedVersion: 3
+        time: 0.525
+        value: 1
+        inSlope: -0.55036545
+        outSlope: -0.55036545
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.8666667
+        outWeight: 0.40833333
+      - serializedVersion: 3
+        time: 0.825
+        value: 1
+        inSlope: -0.06879558
+        outSlope: -0.06879558
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0.8916666
+        outWeight: 0.008331367
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0.014328615
+        outSlope: 0.014328615
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 1
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
