@@ -13,10 +13,13 @@
 	</object>
 	<object class="ThreeEQEffect" id="{9b3f9bed-86b3-41c6-9a19-b6c927cb8fef}">
 		<property name="lowGain">
-			<value>-16</value>
+			<value>-8</value>
 		</property>
 		<property name="lowCrossover">
 			<value>260</value>
+		</property>
+		<property name="crossoverSlope">
+			<value>0</value>
 		</property>
 	</object>
 </objects>

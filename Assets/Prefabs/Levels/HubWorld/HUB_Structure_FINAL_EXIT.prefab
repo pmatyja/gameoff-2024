@@ -8356,6 +8356,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2792929693120988886}
     m_Modifications:
+    - target: {fileID: 520967389276429803, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: DefaultVelocity.y
+      value: -0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 3303862871520777831, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
       propertyPath: _interactionPrompt
       value: 
@@ -8418,7 +8422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7312233748842362662, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
       propertyPath: m_VersionIndex
-      value: 185
+      value: 233
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

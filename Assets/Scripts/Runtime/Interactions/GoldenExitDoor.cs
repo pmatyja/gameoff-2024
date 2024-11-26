@@ -1,5 +1,5 @@
 using System;
-using OCSFX.FMOD;
+using System.Linq;
 using Runtime.Collectables;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,11 +11,16 @@ namespace Runtime.Interactions
         [SerializeField] private DoorKeySlot[] _keySlots;
         [SerializeField] private BlockMoverScript _blockMoverScript;
         [SerializeField] private InteractionPrompt _interactionPrompt;
-        [field: SerializeField] public UnityEvent<Transform> OnKeyInserted { get; private set; }
+        
+        [field: Space]
+        [field: SerializeField] public UnityEvent<CollectableData> OnKeyInsertedEvent { get; private set; }
+        [field: SerializeField] public UnityEvent OnAllKeysInsertedEvent { get; private set; }
         
         [field: SerializeField] public bool CanInteract { get; private set; }
         [field: SerializeField] public bool IsRepeatable { get; private set; }
         [field: SerializeField] public bool HasInteracted { get; private set; }
+
+        private CollectableData[] _allKeyDatas;
 
         private void OnEnable()
         {
@@ -40,27 +45,24 @@ namespace Runtime.Interactions
 
         public void InitializeSlots()
         {
-            foreach (var keySlot in _keySlots)
+            _allKeyDatas = new CollectableData[_keySlots.Length];
+            
+            for (int i = 0; i < _keySlots.Length; i++)
             {
-                var existingChildCollectables = keySlot.SlotTransform.GetComponentsInChildren<Collectable>();
-                foreach (var collectable in existingChildCollectables)
+                var keySlot = _keySlots[i];
+                for (int j = 0; j < keySlot.SlotTransform.childCount; j++)
                 {
-                    Destroy(collectable.gameObject);
+                    Destroy(keySlot.SlotTransform.GetChild(j).gameObject);
                 }
-                
+    
                 keySlot.IsOccupied = false;
-                
+    
                 var nonInteractableCollectable = Instantiate(keySlot.ExpectedKey.NonInteractablePrefab, keySlot.SlotTransform);
                 nonInteractableCollectable.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-                
+    
                 nonInteractableCollectable.SetActive(false);
-
-                if (keySlot.ExpectedKey.OnUseKeySfx.IsNull) return;
                 
-                OnKeyInserted.AddListener(slotTransform =>
-                {
-                    keySlot.ExpectedKey.OnUseKeySfx.Play(slotTransform.gameObject);
-                });
+                _allKeyDatas[i] = keySlot.ExpectedKey;
             }
         }
 
@@ -72,13 +74,7 @@ namespace Runtime.Interactions
                 
                 if (!ItemInventory.Instance.ContainsData(keySlot.ExpectedKey)) continue;
                 
-                keySlot.GetKey().SetActive(true);
-                keySlot.IsOccupied = true;
-                
-                HasInteracted = true;
-                
-                OnKeyInserted?.Invoke(keySlot.SlotTransform);
-                
+                InsertKey(keySlot);
                 break;
             }
 
@@ -86,8 +82,33 @@ namespace Runtime.Interactions
             
             _blockMoverScript.Activate();
             CanInteract = false;
+            
+            OnAllKeysInsertedEvent?.Invoke();
         }
-        
+
+        private void InsertKey(DoorKeySlot keySlot)
+        {
+            keySlot.GetKey().SetActive(true);
+            keySlot.IsOccupied = true;
+            keySlot.ExpectedKey.OnUseKey(keySlot.GetKey().transform);
+            
+            HasInteracted = true;
+            OnKeyInsertedEvent?.Invoke(keySlot.ExpectedKey);
+            
+            UpdateCanInteract();
+        }
+
+        private void UpdateCanInteract()
+        {
+            // If the door doesn't have any unoccupied slots which correspond with key items in the inventory,
+            // we can't interact.
+            var unInsertedKeyDatas = _keySlots
+                .Where(slot => !slot.IsOccupied)
+                .Select(slot => slot.ExpectedKey);
+            
+            CanInteract = ItemInventory.Instance.ContainsAny(unInsertedKeyDatas);
+        }
+
         public bool AllKeysInserted()
         {
             foreach (var keySlot in _keySlots)
@@ -100,7 +121,7 @@ namespace Runtime.Interactions
 
         public void ShowInteractionPrompt(bool show)
         {
-            if (!_interactionPrompt) return;
+            if (!_interactionPrompt || _interactionPrompt.IsShowing == show) return;
             
             _interactionPrompt.Show(show);
         }

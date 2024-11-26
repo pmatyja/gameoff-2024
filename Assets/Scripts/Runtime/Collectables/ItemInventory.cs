@@ -149,7 +149,7 @@ namespace Runtime.Collectables
         }
         #endregion // Callbacks
 
-        public bool ContainsAll(List<CollectableData> compareCollectables)
+        public bool ContainsAll(IEnumerable<CollectableData> compareCollectables)
         {
             foreach (var collectableData in compareCollectables)
             {
@@ -165,6 +165,42 @@ namespace Runtime.Collectables
             OCSFXLogger.Log($"[{nameof(ItemInventory)}] Contains all required collectables", _instance, _showDebug);
 
             return true;
+        }
+        
+        public bool ContainsAny(IEnumerable<CollectableData> compareCollectables)
+        {
+            foreach (var collectableData in compareCollectables)
+            {
+                var containsThisData = _items.Exists(i => i.Data == collectableData);
+                
+                if (containsThisData)
+                {
+                    OCSFXLogger.Log($"[{nameof(ItemInventory)}] Contains {collectableData.name} in inventory", _instance, _showDebug);
+                    return true;
+                }
+            }
+            
+            OCSFXLogger.Log($"[{nameof(ItemInventory)}] Missing all required collectables", _instance, _showDebug);
+
+            return false;
+        }
+        
+        public bool ContainsAnyID(IEnumerable<string> compareIDs)
+        {
+            foreach (var id in compareIDs)
+            {
+                var containsThisID = _items.Exists(i => i.ID == id);
+                
+                if (containsThisID)
+                {
+                    OCSFXLogger.Log($"[{nameof(ItemInventory)}] Contains {id} in inventory", _instance, _showDebug);
+                    return true;
+                }
+            }
+            
+            OCSFXLogger.Log($"[{nameof(ItemInventory)}] Missing all required IDs", _instance, _showDebug);
+
+            return false;
         }
         
         public bool ContainsID(string id) => _items.Exists(i => i.ID == id);

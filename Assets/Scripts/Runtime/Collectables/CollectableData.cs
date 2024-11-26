@@ -70,6 +70,11 @@ namespace Runtime.Collectables
             HandleSoundOnCollect(collectableTransform);
             HandleInventoryOnCollect(collectableTransform);
         }
+        
+        public void OnUseKey(Transform keyTransform)
+        {
+            HandleSoundOnUseKey(keyTransform);
+        }
 
         private void HandleVfxOnCollect(Transform collectableTransform)
         {
@@ -113,6 +118,14 @@ namespace Runtime.Collectables
             else
             {
                 ItemInventory.Instance.Add(new IdentifiedItem(id, this));
+            }
+        }
+        
+        private void HandleSoundOnUseKey(Transform keyTransform)
+        {
+            if (!OnUseKeySfx.IsNull)
+            {
+                OnUseKeySfx.Play(keyTransform.gameObject);
             }
         }
 

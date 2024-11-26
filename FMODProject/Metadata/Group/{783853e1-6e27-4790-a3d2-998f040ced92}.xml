@@ -27,7 +27,10 @@
 	<object class="MixerBusFader" id="{cda6d797-4524-403f-b17e-69ba73b3ed2d}" />
 	<object class="ThreeEQEffect" id="{5b3d884c-6225-4825-9bbd-2773f29d262e}">
 		<property name="lowGain">
-			<value>-10</value>
+			<value>-6</value>
+		</property>
+		<property name="crossoverSlope">
+			<value>0</value>
 		</property>
 	</object>
 </objects>
