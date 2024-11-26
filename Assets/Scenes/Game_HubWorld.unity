@@ -1608,7 +1608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155786402}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.095713206, y: -0.6917792, z: 0.09330554, w: 0.7096299}
+  m_LocalRotation: {x: 0.095814265, y: -0.69100976, z: 0.09320177, w: 0.71037924}
   m_LocalPosition: {x: 47.500305, y: 18.335697, z: 5.03137}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6384,6 +6384,7 @@ GameObject:
   - component: {fileID: 586616718}
   - component: {fileID: 586616717}
   - component: {fileID: 586616716}
+  - component: {fileID: 586616719}
   m_Layer: 0
   m_Name: CinemachineCamera_FocusGoldenDoor_Close
   m_TagString: Untagged
@@ -6497,6 +6498,29 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 21
+--- !u!114 &586616719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586616714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &603431050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16759,19 +16783,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.70963
+      value: 0.71037924
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.09571321
+      value: 0.09581429
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6917792
+      value: -0.69100976
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.09330554
+      value: 0.09320177
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17211,7 +17235,7 @@ PrefabInstance:
       objectReference: {fileID: 1489823151}
     - target: {fileID: 746534599611206605, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_VersionIndex
-      value: 1030
+      value: 1123
       objectReference: {fileID: 0}
     - target: {fileID: 944580726546071213, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_Mesh
@@ -17227,7 +17251,7 @@ PrefabInstance:
       objectReference: {fileID: 1775327348}
     - target: {fileID: 1456044857144467361, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_VersionIndex
-      value: 362
+      value: 455
       objectReference: {fileID: 0}
     - target: {fileID: 1676514088217818679, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_Mesh
@@ -17315,7 +17339,7 @@ PrefabInstance:
       objectReference: {fileID: 2049916817}
     - target: {fileID: 4080606134041031512, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_VersionIndex
-      value: 1082
+      value: 1175
       objectReference: {fileID: 0}
     - target: {fileID: 4310503479753038542, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_Mesh
@@ -17395,7 +17419,7 @@ PrefabInstance:
       objectReference: {fileID: 1502135566}
     - target: {fileID: 7976795586066695916, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_VersionIndex
-      value: 1241
+      value: 1334
       objectReference: {fileID: 0}
     - target: {fileID: 8309293256217233775, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_Name

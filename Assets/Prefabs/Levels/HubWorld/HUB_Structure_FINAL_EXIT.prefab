@@ -445,6 +445,7 @@ GameObject:
   - component: {fileID: 1278138222653944408}
   - component: {fileID: 5233580012372318483}
   - component: {fileID: 1305328180814030073}
+  - component: {fileID: 8547349661556392696}
   m_Layer: 0
   m_Name: CinemachineCamera_FocusGoldenDoor
   m_TagString: Untagged
@@ -558,6 +559,29 @@ MonoBehaviour:
   ZoomScale: 3
   FollowAttachment: 1
   LookAtAttachment: 1
+--- !u!114 &8547349661556392696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7830836140903160420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &8309293256217233775
 GameObject:
   m_ObjectHideFlags: 0
@@ -8068,13 +8092,121 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1381959443764244528}
     - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
       propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 5716463041114996132}
+      objectReference: {fileID: 1381959443764244528}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: f6dbbf13b2c2ec349aad72af93616ae5, type: 2}
     - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
       propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5716463041114996132}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: f6dbbf13b2c2ec349aad72af93616ae5, type: 2}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_enabled
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayBlockMoveEnd
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: PlayBlockMoveBegin
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.Behaviour, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: Runtime.Audio.GameOff2024BlockMoverAudioData, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 5705831059876332656}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 5705831059876332656}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveEndEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382602266058764245, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+      propertyPath: <OnBlockMoveBeginEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5752669784970119741, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
       propertyPath: m_Name
       value: GOLDEN_DOOR
@@ -8121,7 +8253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7312233748842362662, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
       propertyPath: m_VersionIndex
-      value: 131
+      value: 158
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8131,5 +8263,10 @@ PrefabInstance:
 --- !u!4 &3183387913870058883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6729229689673567492, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
+  m_PrefabInstance: {fileID: 8164653179753883783}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5705831059876332656 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4495018838058839287, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
   m_PrefabInstance: {fileID: 8164653179753883783}
   m_PrefabAsset: {fileID: 0}
