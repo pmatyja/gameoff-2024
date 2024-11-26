@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{ac75ca31-07f2-42d3-bff2-da0249501ac4}">
+		<property name="name">
+			<value>FTUE_Complete</value>
+		</property>
+		<relationship name="folder">
+			<destination>{552289e6-d485-4e07-a054-7d56b9d0a01c}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{866b2cf1-bd46-4994-a928-bb0bde427b1a}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{866b2cf1-bd46-4994-a928-bb0bde427b1a}">
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
