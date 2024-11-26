@@ -2263,8 +2263,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.42999938, y: 0.29999962, z: 0.22999933}
+  m_Center: {x: -0.11500015, y: 0.09999981, z: 0.065000065}
 --- !u!114 &382028733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2281,8 +2281,8 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 8
-  _ambEventName: Default
-  _priority: 0
+  _ambEventName: EXT_Level_01
+  _priority: 1
   _overlapCount: 0
 --- !u!4 &382028734
 Transform:
@@ -2316,7 +2316,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _reverbName: Exterior
-  _priority: 0
+  _priority: 1
   _overlapCount: 0
 --- !u!43 &386914317
 Mesh:

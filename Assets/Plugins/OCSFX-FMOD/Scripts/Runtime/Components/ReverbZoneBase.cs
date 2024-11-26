@@ -24,6 +24,9 @@ namespace OCSFX.FMOD.Components
         {
             if (!_layerMask.Contains(other)) return;
             
+            // Don't include disabled game objects
+            if (!other.gameObject.activeSelf) return;
+            
             if (_overlapCount < 1)
             {
                 if (_snapshotsAudioData)
@@ -38,6 +41,9 @@ namespace OCSFX.FMOD.Components
         protected void HandleTriggerExit(Component other)
         {
             if (!_layerMask.Contains(other)) return;
+            
+            // Don't include disabled game objects
+            if (!other.gameObject.activeSelf) return;
 
             _overlapCount--;
             

@@ -29,7 +29,7 @@ MonoBehaviour:
         Data2: 1117863706
         Data3: 1187395518
         Data4: 863309997
-      Path: event:/MX/mx_gameplay_base
+      Path: event:/MX/mx_gameplay_level_01
   - _name: Game_Level_02
     _eventRef:
       Guid:
@@ -37,7 +37,7 @@ MonoBehaviour:
         Data2: 1313528641
         Data3: 1471050144
         Data4: 1132218843
-      Path: event:/MX/mx_gameplay_base_02
+      Path: event:/MX/mx_gameplay_level_02
   - _name: Game_Level_03
     _eventRef:
       Guid:
@@ -45,7 +45,7 @@ MonoBehaviour:
         Data2: 1238637143
         Data3: -1337696119
         Data4: 1210374693
-      Path: event:/MX/mx_gameplay_base_03
+      Path: event:/MX/mx_gameplay_level_03
   - _name: GameOver
     _eventRef:
       Guid:
@@ -70,6 +70,4 @@ MonoBehaviour:
         Data3: -1361749571
         Data4: 1536257240
       Path: event:/MX/mx_gameplay_hubWorld
-  _globalParameters:
-  - _parameter: MusicParamHorizontal
-    _value: 0
+  _globalParameters: []

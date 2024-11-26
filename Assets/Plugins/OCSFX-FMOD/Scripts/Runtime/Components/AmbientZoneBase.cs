@@ -21,6 +21,9 @@ namespace OCSFX.FMOD.Components
         protected void HandleTriggerEnter(Component other)
         {
             if (!_layerMask.Contains(other)) return;
+            
+            // Don't include disabled game objects
+            if (!other.gameObject.activeSelf) return;
 
             if (!AudioDataIsValid(_ambienceAudioData)) return;
 
@@ -35,6 +38,9 @@ namespace OCSFX.FMOD.Components
         protected void HandleTriggerExit(Component other)
         {
             if (!_layerMask.Contains(other)) return;
+            
+            // Don't include disabled game objects
+            if (!other.gameObject.activeSelf) return;
 
             if (!AudioDataIsValid(_ambienceAudioData)) return;
             

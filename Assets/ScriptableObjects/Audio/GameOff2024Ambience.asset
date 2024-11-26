@@ -19,7 +19,7 @@ MonoBehaviour:
       Data2: 1221297378
       Data3: -464404818
       Data4: 1790380397
-    Path: event:/SX/AMB/sx_amb_gameplay_base
+    Path: event:/SX/AMB/sx_amb_ext_gameplay_base
   _autoPlayAmbDefault: 0
   _events:
   - _name: Default
@@ -29,4 +29,28 @@ MonoBehaviour:
         Data2: 1221297378
         Data3: -464404818
         Data4: 1790380397
-      Path: event:/SX/AMB/sx_amb_gameplay_base
+      Path: event:/SX/AMB/sx_amb_ext_gameplay_base
+  - _name: EXT_Level_01
+    _eventRef:
+      Guid:
+        Data1: -133819349
+        Data2: 1143180978
+        Data3: 1517526966
+        Data4: 1259571501
+      Path: event:/SX/AMB/sx_amb_ext_gameplay_level_01
+  - _name: EXT_Level_02
+    _eventRef:
+      Guid:
+        Data1: 1806544611
+        Data2: 1297978249
+        Data3: 688827038
+        Data4: 1564147334
+      Path: event:/SX/AMB/sx_amb_ext_gameplay_level_02
+  - _name: EXT_Level_03
+    _eventRef:
+      Guid:
+        Data1: 1669661686
+        Data2: 1341539678
+        Data3: 1478515642
+        Data4: -1373911890
+      Path: event:/SX/AMB/sx_amb_ext_gameplay_level_03
