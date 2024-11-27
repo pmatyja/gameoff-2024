@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FMOD.Studio;
 using UnityEngine;
 using FMODUnity;
@@ -31,6 +32,29 @@ namespace OCSFX.FMOD.AudioData
 
         private EventInstance _currentPlayingAmb;
         [SerializeField, ReadOnly] private AmbientZoneBase _currentAmbientZone;
+
+        private void OnEnable()
+        {
+            Application.quitting += () => ResetAll();
+        }
+        
+        private void OnDisable()
+        {
+            ResetAll();
+        }
+
+        private void ResetAll()
+        {
+            StopAllAmbience();
+            
+            if (_currentAmbientZone)
+            {
+                StopAmbientZone(_currentAmbientZone);
+                _currentAmbientZone = null;
+            }
+            
+            _ambientZoneSet.Clear();
+        }
 
         // Methods
 

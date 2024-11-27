@@ -24,9 +24,15 @@
 		</relationship>
 		<relationship name="snapshotProperties">
 			<destination>{87d678ed-f127-4017-af52-62ad24f0af81}</destination>
+			<destination>{ae71143e-7050-4d09-8d8d-1c2c9abf7ce6}</destination>
+			<destination>{190ca471-08f3-4631-b191-325fac65266b}</destination>
+			<destination>{74c26b88-abef-420b-8efa-f54eacc7ca02}</destination>
+			<destination>{4cfd8c02-0dc5-421e-8659-448278ce74b7}</destination>
+			<destination>{aac04bb8-7924-4896-80fb-74228384e2ce}</destination>
 		</relationship>
 		<relationship name="snapshotTracks">
 			<destination>{b21828a8-48a2-4607-9d07-145a53f9d9e5}</destination>
+			<destination>{fe9560ed-6c35-431b-973b-c7df8bef3f9b}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{a9019088-823f-4942-b2ab-57ad9c9b4939}">
@@ -54,9 +60,69 @@
 			<destination>{305bb0dd-f983-42da-9cd3-5114f839dda3}</destination>
 		</relationship>
 	</object>
+	<object class="SnapshotProperty" id="{ae71143e-7050-4d09-8d8d-1c2c9abf7ce6}">
+		<property name="propertyName">
+			<value>highGain</value>
+		</property>
+		<property name="value">
+			<value>-24</value>
+		</property>
+		<relationship name="automatableObject">
+			<destination>{5b3d884c-6225-4825-9bbd-2773f29d262e}</destination>
+		</relationship>
+	</object>
+	<object class="SnapshotProperty" id="{190ca471-08f3-4631-b191-325fac65266b}">
+		<property name="propertyName">
+			<value>highCrossover</value>
+		</property>
+		<property name="value">
+			<value>4000</value>
+		</property>
+		<relationship name="automatableObject">
+			<destination>{5b3d884c-6225-4825-9bbd-2773f29d262e}</destination>
+		</relationship>
+	</object>
+	<object class="SnapshotProperty" id="{74c26b88-abef-420b-8efa-f54eacc7ca02}">
+		<property name="propertyName">
+			<value>lowGain</value>
+		</property>
+		<property name="value">
+			<value>-12</value>
+		</property>
+		<relationship name="automatableObject">
+			<destination>{5b3d884c-6225-4825-9bbd-2773f29d262e}</destination>
+		</relationship>
+	</object>
+	<object class="SnapshotProperty" id="{4cfd8c02-0dc5-421e-8659-448278ce74b7}">
+		<property name="propertyName">
+			<value>highGain</value>
+		</property>
+		<property name="value">
+			<value>-12</value>
+		</property>
+		<relationship name="automatableObject">
+			<destination>{57f1635a-d748-4640-b688-19e8ec0bbe18}</destination>
+		</relationship>
+	</object>
+	<object class="SnapshotProperty" id="{aac04bb8-7924-4896-80fb-74228384e2ce}">
+		<property name="propertyName">
+			<value>lowCrossover</value>
+		</property>
+		<property name="value">
+			<value>1000</value>
+		</property>
+		<relationship name="automatableObject">
+			<destination>{5b3d884c-6225-4825-9bbd-2773f29d262e}</destination>
+		</relationship>
+	</object>
 	<object class="SnapshotTrack" id="{b21828a8-48a2-4607-9d07-145a53f9d9e5}">
 		<relationship name="mixerStrip">
 			<destination>{305bb0dd-f983-42da-9cd3-5114f839dda3}</destination>
+		</relationship>
+	</object>
+	<object class="SnapshotTrack" id="{fe9560ed-6c35-431b-973b-c7df8bef3f9b}">
+		<relationship name="mixerStrip">
+			<destination>{783853e1-6e27-4790-a3d2-998f040ced92}</destination>
 		</relationship>
 	</object>
 	<object class="ADSRModulator" id="{5fd2869d-f1c6-4aee-b717-0819b6819386}">
