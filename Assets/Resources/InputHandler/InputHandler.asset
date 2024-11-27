@@ -72,7 +72,7 @@ MonoBehaviour:
           m_Action: Move
           m_Flags: 4
         - m_Name: up
-          m_Id: 9d120923-e4c5-42f3-af8c-e6c655cfbfbd
+          m_Id: 3816d1d3-10a7-48db-a168-b847ebf73dd7
           m_Path: <Keyboard>/w
           m_Interactions: 
           m_Processors: 
@@ -80,7 +80,7 @@ MonoBehaviour:
           m_Action: Move
           m_Flags: 8
         - m_Name: down
-          m_Id: 844996ff-0210-416d-88db-153aa8eb8e0d
+          m_Id: 3351b06e-8809-4c7c-becf-4431f46034e9
           m_Path: <Keyboard>/s
           m_Interactions: 
           m_Processors: 
@@ -88,7 +88,7 @@ MonoBehaviour:
           m_Action: Move
           m_Flags: 8
         - m_Name: left
-          m_Id: 4131c9f3-55fc-4bb9-8ea6-693bbceaaab7
+          m_Id: ae801db6-10eb-4c77-bd0d-c77a3ba6912a
           m_Path: <Keyboard>/a
           m_Interactions: 
           m_Processors: 
@@ -96,8 +96,48 @@ MonoBehaviour:
           m_Action: Move
           m_Flags: 8
         - m_Name: right
-          m_Id: a197d349-de60-402f-a523-8dce4bc79dac
+          m_Id: 0dedb626-84fe-4a14-ac30-2507b76a5844
           m_Path: <Keyboard>/d
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: ArrowKeys
+          m_Id: 904c4273-b4e7-44bd-b8eb-d0d4df55a422
+          m_Path: 2DVector
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 4
+        - m_Name: up
+          m_Id: 459b3fae-ad7f-4a98-a636-0f68928b2458
+          m_Path: <Keyboard>/upArrow
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: down
+          m_Id: f8985dee-3a3d-4e4a-b3d7-8f7f36b5816f
+          m_Path: <Keyboard>/downArrow
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: left
+          m_Id: 3b522a85-1ff0-4eef-8025-fea52e132a35
+          m_Path: <Keyboard>/leftArrow
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: right
+          m_Id: af4c3b3c-5144-4ae9-9dab-478d57cbe582
+          m_Path: <Keyboard>/rightArrow
           m_Interactions: 
           m_Processors: 
           m_Groups: 
@@ -149,10 +189,26 @@ MonoBehaviour:
         m_Id: 3586e2c8-001f-421a-b692-d5f3d573c4fc
         m_Asset: {fileID: -944628639613478452, guid: 64a922b153190654682e9702dfa308b2, type: 3}
         m_Actions:
-        - m_Name: Pause
+        - m_Name: Move
+          m_Type: 0
+          m_ExpectedControlType: Vector2
+          m_Id: 4a575231-3a04-4248-b4ed-836be4582bf6
+          m_Processors: 
+          m_Interactions: 
+          m_SingletonActionBindings: []
+          m_Flags: 1
+        - m_Name: Resume
           m_Type: 1
           m_ExpectedControlType: 
           m_Id: d2580d05-1fb4-4b11-b5cd-161e3a713416
+          m_Processors: 
+          m_Interactions: 
+          m_SingletonActionBindings: []
+          m_Flags: 0
+        - m_Name: Confirm
+          m_Type: 1
+          m_ExpectedControlType: 
+          m_Id: f65250be-b004-4c72-9d05-fc09a6bb4cc3
           m_Processors: 
           m_Interactions: 
           m_SingletonActionBindings: []
@@ -164,8 +220,247 @@ MonoBehaviour:
           m_Interactions: 
           m_Processors: 
           m_Groups: 
-          m_Action: Pause
+          m_Action: Resume
+          m_Flags: 0
+        - m_Name: WASD
+          m_Id: 6f689258-251b-4d38-9fac-ce7db6d48855
+          m_Path: 2DVector
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 4
+        - m_Name: up
+          m_Id: 6ffec391-5393-49a8-a1c6-ab07143dfe24
+          m_Path: <Keyboard>/w
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: down
+          m_Id: 9a999c15-17a0-4dac-9089-91e2367308c9
+          m_Path: <Keyboard>/s
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: left
+          m_Id: cf627301-58fb-40a1-a456-7a1df1aaee7c
+          m_Path: <Keyboard>/a
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: right
+          m_Id: d4be45e7-2789-4ffb-8149-25e4fa243083
+          m_Path: <Keyboard>/d
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: ArrowKeys
+          m_Id: 03d3d043-6256-4bc1-bf00-309b589281ea
+          m_Path: 2DVector
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 4
+        - m_Name: up
+          m_Id: 02d24047-261b-4689-9588-0555af8dc349
+          m_Path: <Keyboard>/upArrow
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: down
+          m_Id: 2d2eb53c-bde2-4c28-9d6c-5deece0c4064
+          m_Path: <Keyboard>/downArrow
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: left
+          m_Id: ee4a20f1-d868-40bb-bfba-92dbbd377243
+          m_Path: <Keyboard>/leftArrow
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: right
+          m_Id: 960a8417-658c-42d6-a01b-8da81f924b7a
+          m_Path: <Keyboard>/rightArrow
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: 
+          m_Id: 511a75ca-2770-4e47-9835-1913408ff138
+          m_Path: <Keyboard>/enter
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Confirm
+          m_Flags: 0
+        - m_Name: 
+          m_Id: 6313e5b1-3318-407f-9f96-9fda052af6b7
+          m_Path: <Keyboard>/space
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Confirm
           m_Flags: 0
     <Resume>k__BackingField: {fileID: 8367823787379387483, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+    <Confirm>k__BackingField: {fileID: 1253815903249683471, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+    <Move>k__BackingField: {fileID: 8169462946707429109, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+  <FrontEndUIActions>k__BackingField:
+    <ActionMapRef>k__BackingField:
+      _inputActionAsset: {fileID: -944628639613478452, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+      _name: UI_FrontEnd
+      _map:
+        m_Name: UI_FrontEnd
+        m_Id: 1fc96b1d-fc69-4469-894f-d8b550788a93
+        m_Asset: {fileID: -944628639613478452, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+        m_Actions:
+        - m_Name: Move
+          m_Type: 0
+          m_ExpectedControlType: Vector2
+          m_Id: 0c4e4068-72d6-4bef-9c81-ecc1c91b0096
+          m_Processors: 
+          m_Interactions: 
+          m_SingletonActionBindings: []
+          m_Flags: 1
+        - m_Name: Confirm
+          m_Type: 1
+          m_ExpectedControlType: 
+          m_Id: b8d75ca8-2332-43aa-b53f-7687a0a2a6e9
+          m_Processors: 
+          m_Interactions: 
+          m_SingletonActionBindings: []
+          m_Flags: 0
+        - m_Name: Cancel
+          m_Type: 1
+          m_ExpectedControlType: 
+          m_Id: 66c51ddb-af11-4fdf-85d7-3be725b58793
+          m_Processors: 
+          m_Interactions: 
+          m_SingletonActionBindings: []
+          m_Flags: 0
+        m_Bindings:
+        - m_Name: 
+          m_Id: 24bd0d7f-6606-4618-b3bf-14b493601458
+          m_Path: <Keyboard>/enter
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Confirm
+          m_Flags: 0
+        - m_Name: 
+          m_Id: d3096d34-9905-4ab1-a54d-384e6217219e
+          m_Path: <Keyboard>/space
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Confirm
+          m_Flags: 0
+        - m_Name: 
+          m_Id: ee625672-d69f-446a-be54-23f01004078e
+          m_Path: <Keyboard>/escape
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Cancel
+          m_Flags: 0
+        - m_Name: WASD
+          m_Id: 2938033a-cca4-4609-991c-2dcaa797dbac
+          m_Path: 2DVector
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 4
+        - m_Name: up
+          m_Id: d59f3239-efe9-4167-bc83-2be93c9b8037
+          m_Path: <Keyboard>/w
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: down
+          m_Id: 62a7315f-1b75-4615-9ba0-08301e89d03f
+          m_Path: <Keyboard>/s
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: left
+          m_Id: 0f76d3a0-7409-4e69-b069-772b0756853b
+          m_Path: <Keyboard>/a
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: right
+          m_Id: 6f67c796-f7c7-44e2-986f-ec7f832cff97
+          m_Path: <Keyboard>/d
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: ArrowKeys
+          m_Id: 30b01200-cd49-45e9-96cb-324bafeb4808
+          m_Path: 2DVector
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 4
+        - m_Name: up
+          m_Id: 0c217f60-1d50-475f-9b67-03d0de69994c
+          m_Path: <Keyboard>/upArrow
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: down
+          m_Id: fb6b230d-0699-4ed9-b6b7-b451808535c8
+          m_Path: <Keyboard>/downArrow
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: left
+          m_Id: ef2a4271-66f1-4f1e-983a-b38edf0e05d0
+          m_Path: <Keyboard>/leftArrow
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+        - m_Name: right
+          m_Id: aeda74a3-ef3f-4400-9450-48cdabb60feb
+          m_Path: <Keyboard>/rightArrow
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Move
+          m_Flags: 8
+    <Confirm>k__BackingField: {fileID: 8657607582107703633, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+    <Cancel>k__BackingField: {fileID: 4813245679345705246, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+    <Move>k__BackingField: {fileID: -2480207443570793049, guid: 64a922b153190654682e9702dfa308b2, type: 3}
   <CameraZoomSensitivity>k__BackingField: 0.5
   _showDebug: 0

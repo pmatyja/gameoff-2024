@@ -20,6 +20,7 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     
     [field: Header("UI Actions")]
     [field: SerializeField] public GameplayUIInputActions GameplayUIActions { get; private set; }
+    [field: SerializeField] public FrontEndUIInputActions FrontEndUIActions { get; private set; }
 
     [field: Header("Settings")]
     [field: SerializeField, Range(0.1f, 1f)] public float CameraZoomSensitivity { get; private set; } = 1f;
@@ -34,7 +35,13 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     public event Action<float> OnGameplayCameraZoomInput;
     public event Action OnGameplayInteractInput;
     public event Action OnGameplayPauseInput;
+    
     public event Action OnUIGameplayResumeInput;
+    public event Action OnUIGameplayMoveInput;
+    
+    public event Action OnFrontEndUIMoveInput;
+    public event Action OnFrontEndUIConfirmInput;
+    public event Action OnFrontEndUICancelInput;
 
 #if UNITY_EDITOR
     [UnityEditor.InitializeOnLoadMethod]
@@ -237,6 +244,16 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     public class GameplayUIInputActions : InputActionsCollection
     {
         [field: SerializeField] public InputActionReference Resume { get; private set; }
+        [field: SerializeField] public InputActionReference Confirm { get; private set; }
+        [field: SerializeField] public InputActionReference Move { get; private set; }
+    }
+    
+    [Serializable]
+    public class FrontEndUIInputActions : InputActionsCollection
+    {
+        [field: SerializeField] public InputActionReference Confirm { get; private set; }
+        [field: SerializeField] public InputActionReference Cancel { get; private set; }
+        [field: SerializeField] public InputActionReference Move { get; private set; }
     }
 
     [Serializable]
