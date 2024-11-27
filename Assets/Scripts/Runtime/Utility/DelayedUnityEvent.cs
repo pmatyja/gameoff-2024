@@ -10,7 +10,10 @@ namespace Runtime.Utility
     {
         [SerializeField] private TriggerOn _triggerOn = TriggerOn.Trigger;
         [SerializeField, Min(0)] private float _delay;
+        [SerializeField] private bool _doOnce;
         [SerializeField] private UnityEvent _event;
+        
+        private bool _hasTriggered;
 
         private float _timer;
 
@@ -30,14 +33,13 @@ namespace Runtime.Utility
 
         private void TriggerInternal(TriggerOn triggerType)
         {
-            if (triggerType != TriggerOn.Disable
-                && triggerType != TriggerOn.Destroy
-                && !isActiveAndEnabled)
-            {
-                return;
-            }
+            if (_doOnce && _hasTriggered) return;
+
+            if (!isActiveAndEnabled && triggerType != TriggerOn.Disable && triggerType != TriggerOn.Destroy) return;
 
             if (!_triggerOn.HasFlag(triggerType)) return;
+            
+            if (_doOnce) _hasTriggered = true;
             
             if (_delay <= 0)
             {
@@ -62,6 +64,7 @@ namespace Runtime.Utility
                 timer += Time.deltaTime;
                 yield return null;
             }
+            
             _event?.Invoke();
         }
         

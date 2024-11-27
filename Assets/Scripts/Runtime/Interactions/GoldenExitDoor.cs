@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Runtime.Collectables;
@@ -10,17 +11,17 @@ namespace Runtime.Interactions
 {
     public class GoldenExitDoor : MonoBehaviour, ICharacterInteractable
     {
-        private static readonly int _baseColorPropertyID = Shader.PropertyToID("_BaseColor");
-        private static readonly int _emissionColorPropertyID = Shader.PropertyToID("_EmissionColor");
+        private static readonly int _BASE_COLOR_PROPERTY_ID = Shader.PropertyToID("_BaseColor");
+        private static readonly int _EMISSION_COLOR_PROPERTY_ID = Shader.PropertyToID("_EmissionColor");
         
         [SerializeField] private DoorKeySlot[] _keySlots;
-        [SerializeField] private BlockMoverScript _blockMoverScript;
         [SerializeField] private InteractionPrompt _interactionPrompt;
         
         [Header("Star Color")]
         [SerializeField] private MeshRenderer _starRenderer;
         [SerializeField] private Material _starMaterial;
         [SerializeField, Readonly] private Material _starMaterialInstance;
+        [SerializeField, Min(0)] private float _starInterpColorDuration = 1f;
         [Space]
         [SerializeField] private KeyColorCombination[] _keyColorCombinations;
         
@@ -33,6 +34,8 @@ namespace Runtime.Interactions
         [field: SerializeField] public bool HasInteracted { get; private set; }
 
         private readonly List<CollectableData> _vacantKeys = new List<CollectableData>();
+        
+        private Coroutine _interpStarColorCoroutine;
 
         private void OnEnable()
         {
@@ -83,7 +86,6 @@ namespace Runtime.Interactions
 
             if (!AllKeysInserted()) return;
             
-            _blockMoverScript.Activate();
             CanInteract = false;
             
             OnAllKeysInsertedEvent?.Invoke();
@@ -121,22 +123,19 @@ namespace Runtime.Interactions
             if (!TryGetKeyColorCombination(occupiedKeys, out var keyColorCombination))
             {
                 // If no combination is found, use the first key's color
-                SetStarColor
-                (
-                    occupiedKeys[0].Material.GetColor(_baseColorPropertyID), 
-                    occupiedKeys[0].Material.GetColor(_emissionColorPropertyID)
-                );
+                InterpolateStarColor(
+                    occupiedKeys[0].Material.GetColor(_BASE_COLOR_PROPERTY_ID),
+                    occupiedKeys[0].Material.GetColor(_EMISSION_COLOR_PROPERTY_ID), 
+                    _starInterpColorDuration);
+                
             }
             else
             {
-                SetStarColor(keyColorCombination.CombinedBaseColor, keyColorCombination.CombinedEmissionColor);
+                InterpolateStarColor(
+                    keyColorCombination.CombinedBaseColor, 
+                    keyColorCombination.CombinedEmissionColor, 
+                    _starInterpColorDuration);
             }
-        }
-        
-        private void SetStarColor(Color baseColor, Color emissionColor)
-        {
-            _starMaterialInstance.SetColor(_baseColorPropertyID, baseColor);
-            _starMaterialInstance.SetColor(_emissionColorPropertyID, emissionColor);
         }
         
         private bool TryGetKeyColorCombination(CollectableData[] combination, out KeyColorCombination result)
@@ -157,6 +156,55 @@ namespace Runtime.Interactions
 
             result = null;
             return false;
+        }
+        
+        private void SetStarColor(Color baseColor, Color emissionColor)
+        {
+            _starMaterialInstance.SetColor(_BASE_COLOR_PROPERTY_ID, baseColor);
+            _starMaterialInstance.SetColor(_EMISSION_COLOR_PROPERTY_ID, emissionColor);
+        }
+        
+        private void InterpolateStarColor(Color targetBaseColor, Color targetEmissionColor, float duration = 1f)
+        {
+            if (_interpStarColorCoroutine != null)
+            {
+                StopCoroutine(_interpStarColorCoroutine);
+            }
+            
+            _interpStarColorCoroutine = StartCoroutine(Co_InterpolateStarColor
+            (
+                new Tuple<Color, Color>
+                (
+                    _starMaterialInstance.GetColor(_BASE_COLOR_PROPERTY_ID), 
+                    _starMaterialInstance.GetColor(_EMISSION_COLOR_PROPERTY_ID)
+                ),
+                new Tuple<Color, Color>(targetBaseColor, targetEmissionColor),
+                duration
+            ));
+        }
+
+        private IEnumerator Co_InterpolateStarColor(
+            Tuple<Color, Color> startBaseAndEmissionColor, 
+            Tuple<Color, Color> targetBaseAndEmissionColor, 
+            float duration = 1f)
+        {
+            var elapsedTime = 0f;
+            var startBaseColor = startBaseAndEmissionColor.Item1;
+            var startEmissionColor = startBaseAndEmissionColor.Item2;
+            var targetBaseColor = targetBaseAndEmissionColor.Item1;
+            var targetEmissionColor = targetBaseAndEmissionColor.Item2;
+
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                var t = elapsedTime / duration;
+                SetStarColor(Color.Lerp(startBaseColor, targetBaseColor, t), Color.Lerp(startEmissionColor, targetEmissionColor, t));
+                yield return null;
+            }
+            
+            SetStarColor(targetBaseColor, targetEmissionColor);
+            
+            _interpStarColorCoroutine = null;
         }
 
         public void ShowInteractionPrompt(bool show)
