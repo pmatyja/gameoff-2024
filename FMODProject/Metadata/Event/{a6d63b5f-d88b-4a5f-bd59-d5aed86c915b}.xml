@@ -1873,6 +1873,9 @@
 		<property name="triggerProbability">
 			<value>50</value>
 		</property>
+		<property name="triggerConditionMode">
+			<value>1</value>
+		</property>
 		<relationship name="timeline">
 			<destination>{ed176969-9e56-422d-b0f1-26beff1159a2}</destination>
 		</relationship>
@@ -1887,6 +1890,9 @@
 		</relationship>
 		<relationship name="triggerConditions">
 			<destination>{b11e77df-4208-4507-a7a7-55a87193175a}</destination>
+			<destination>{7af1e565-5169-4d76-b0c9-effd5621552e}</destination>
+			<destination>{cc8b6135-202f-470c-8e5c-c4153912ce21}</destination>
+			<destination>{16a2715a-88c4-406d-9951-9f3ec0fd3d05}</destination>
 		</relationship>
 	</object>
 	<object class="ADSRModulator" id="{b1e2313d-f7da-44ad-a4f4-59b2c99cfdbc}">
@@ -2707,6 +2713,39 @@
 		</property>
 		<relationship name="parameter">
 			<destination>{866b2cf1-bd46-4994-a928-bb0bde427b1a}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterCondition" id="{7af1e565-5169-4d76-b0c9-effd5621552e}">
+		<property name="minimum">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>1</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{b1ffd10e-503a-440d-9468-21198bdf6db6}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterCondition" id="{cc8b6135-202f-470c-8e5c-c4153912ce21}">
+		<property name="minimum">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>1</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{d6d92593-3b8d-4a39-a3b0-0fc3064ac8ed}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterCondition" id="{16a2715a-88c4-406d-9951-9f3ec0fd3d05}">
+		<property name="minimum">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>1</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{49414f16-33f6-47fa-82a4-4ab3e42719f6}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{a0ce330a-f1ef-44d9-a429-6590291f652f}" />

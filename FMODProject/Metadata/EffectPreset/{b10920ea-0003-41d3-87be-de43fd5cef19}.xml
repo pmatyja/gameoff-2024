@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EffectPreset" id="{b10920ea-0003-41d3-87be-de43fd5cef19}">
+		<property name="name">
+			<value>ATN_Default_Med</value>
+		</property>
+		<relationship name="folder">
+			<destination>{5a3c52b8-ccb3-49a6-92c0-991cc3e35f32}</destination>
+		</relationship>
+		<relationship name="effect">
+			<destination>{c4d5d064-1f74-45f4-a453-47936ebc2130}</destination>
+		</relationship>
+	</object>
+	<object class="SpatialiserEffect" id="{c4d5d064-1f74-45f4-a453-47936ebc2130}">
+		<property name="distanceRolloffType">
+			<value>1</value>
+		</property>
+		<property name="extentMode">
+			<value>1</value>
+		</property>
+		<property name="minimumExtent">
+			<value>180</value>
+		</property>
+	</object>
+</objects>

@@ -2,6 +2,7 @@
 using FMOD.Studio;
 using UnityEngine;
 using FMODUnity;
+using OCSFX.Attributes;
 using OCSFX.FMOD.Components;
 using OCSFX.FMOD.Types;
 using OCSFX.Utility.Debug;
@@ -29,7 +30,7 @@ namespace OCSFX.FMOD.AudioData
         public List<FMODEvent> Events => _events;
 
         private EventInstance _currentPlayingAmb;
-        private AmbientZoneBase _currentAmbientZone;
+        [SerializeField, ReadOnly] private AmbientZoneBase _currentAmbientZone;
 
         // Methods
 

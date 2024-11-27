@@ -97,7 +97,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{33b564dc-66e4-44fd-9328-bd24870846ce}">
 		<property name="volume">
-			<value>-12</value>
+			<value>-14</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
@@ -115,7 +115,7 @@
 	<object class="MixerBusEffectChain" id="{75679ce5-709f-4ec1-baee-822bd68eaf12}">
 		<relationship name="effects">
 			<destination>{ba5718d8-3239-4cab-a53e-2c12d67a0025}</destination>
-			<destination>{7f7b531e-2ffc-46b6-9ec4-b3201455b4b7}</destination>
+			<destination>{c6754dee-a059-40fe-8926-a4d35e11fefc}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{163e6225-85f9-4133-87ca-47947e8a5e22}" />
@@ -142,16 +142,13 @@
 	</object>
 	<object class="MixerBusPanner" id="{1bfba564-e5c6-444d-b4d2-f9c1a16ace95}" />
 	<object class="MixerBusFader" id="{ba5718d8-3239-4cab-a53e-2c12d67a0025}" />
-	<object class="SpatialiserEffect" id="{7f7b531e-2ffc-46b6-9ec4-b3201455b4b7}">
-		<property name="distanceRolloffType">
+	<object class="ProxyEffect" id="{c6754dee-a059-40fe-8926-a4d35e11fefc}">
+		<property name="inputFormat">
 			<value>1</value>
 		</property>
-		<property name="extentMode">
-			<value>1</value>
-		</property>
-		<property name="minimumExtent">
-			<value>180</value>
-		</property>
+		<relationship name="preset">
+			<destination>{0fa72c81-ffbd-46ac-a54e-83eecfae5d75}</destination>
+		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{0e7245d3-296a-487d-8fd5-d6c70bcb0644}" />
 </objects>
