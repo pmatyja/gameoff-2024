@@ -11,10 +11,17 @@ namespace OCSFX.Generics
         /*===========================================================*/
     
         protected static T _instance;
-        private static readonly string RESOURCE_PATH = typeof(T).Name + "/" + typeof(T).Name;
+        protected static readonly string RESOURCE_PATH = typeof(T).Name + "/" + typeof(T).Name;
 
         public static T Get()
         {
+            // Don't allow this for abstract classes
+            if (typeof(T).IsAbstract)
+            {
+                Debug.LogError("Cannot create instance of abstract class " + typeof(T).Name);
+                return null;
+            }
+            
             if (!_instance)
             {
                 _instance = GetOrCreate();

@@ -22,12 +22,12 @@ namespace Runtime.Collectables
 
         private void OnEnable()
         {
-            InputHandler.Get().OnGameplayInteractInput += OnGameplayInteractInput;
+            UserInputHandler.Get().OnGameplayInteractInput += OnGameplayInteractInput;
         }
 
         private void OnDisable()
         {
-            InputHandler.Get().OnGameplayInteractInput -= OnGameplayInteractInput;
+            UserInputHandler.Get().OnGameplayInteractInput -= OnGameplayInteractInput;
         }
 
         private void FixedUpdate()

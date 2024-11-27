@@ -85,16 +85,16 @@ public class PauseMenuController : Singleton<PauseMenuController>
 
     private void OnEnable()
     {
-        InputHandler.Get().OnGameplayPauseInput += this.Open;
-        InputHandler.Get().OnUIGameplayResumeInput += this.Close;
+        UserInputHandler.Get().OnGameplayPauseInput += this.Open;
+        UserInputHandler.Get().OnUIGameplayResumeInput += this.Close;
 
         EventBus.AddListener<OpenPauseMenuEventsParameters>(this.OnOpenEvent);
     }
 
     private void OnDisable()
     {
-        InputHandler.Get().OnGameplayPauseInput -= this.Open;   
-        InputHandler.Get().OnUIGameplayResumeInput -= this.Close;
+        UserInputHandler.Get().OnGameplayPauseInput -= this.Open;   
+        UserInputHandler.Get().OnUIGameplayResumeInput -= this.Close;
 
         EventBus.RemoveListener<OpenPauseMenuEventsParameters>(this.OnOpenEvent);
     }

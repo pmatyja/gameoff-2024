@@ -39,16 +39,16 @@ namespace Runtime.Cameras
 
         protected virtual void OnEnable()
         {
-            InputHandler.Get().OnGameplayDragCameraInput += OnGameplayDragCameraInput;
-            InputHandler.Get().OnGameplayCameraZoomInput += OnGameplayCameraZoomInput;
+            UserInputHandler.Get().OnGameplayDragCameraInput += OnGameplayDragCameraInput;
+            UserInputHandler.Get().OnGameplayCameraZoomInput += OnGameplayCameraZoomInput;
             
             _inputAxisController.enabled = false;
         }
 
         protected virtual void OnDisable()
         {
-            InputHandler.Get().OnGameplayDragCameraInput -= OnGameplayDragCameraInput;
-            InputHandler.Get().OnGameplayCameraZoomInput -= OnGameplayCameraZoomInput;
+            UserInputHandler.Get().OnGameplayDragCameraInput -= OnGameplayDragCameraInput;
+            UserInputHandler.Get().OnGameplayCameraZoomInput -= OnGameplayCameraZoomInput;
             
             _inputAxisController.enabled = false;
         }
