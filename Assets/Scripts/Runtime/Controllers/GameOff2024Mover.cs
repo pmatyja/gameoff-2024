@@ -330,8 +330,8 @@ namespace Runtime.Controllers
 			_rigidbody.linearVelocity = velocity + _currentGroundAdjustmentVelocity;	
 		}	
 
-		//Returns 'true' if mover is touching ground and the angle between hte 'up' vector and ground normal is not too steep (e.g., angle < slope_limit);
-		public bool IsGrounded() => _isGrounded;
+		//Returns 'true' if mover is touching ground and the angle between the 'up' vector and ground normal is not too steep (e.g., angle < slope_limit);
+		public bool IsGrounded => _isGrounded;
 
 		//Setters;
 

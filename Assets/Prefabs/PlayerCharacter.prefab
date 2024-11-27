@@ -302,7 +302,7 @@ MonoBehaviour:
     _name: IsFacingCamera
     _type: 4
   _facingCameraDeadZone: {x: -0.2, y: 0.2}
-  _verticalRotationLimits: {x: -8, y: 8}
+  _verticalRotationLimits: {x: -10, y: 16}
   _faceCameraWhenStill: 0
   <IsFacingCamera>k__BackingField: 1
   <NormalizedLocomotionSpeed>k__BackingField: 0
@@ -320,6 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterAudioData: {fileID: 11400000, guid: 9211ceff5e1d91f47b1064be5676c617, type: 2}
+  _mover: {fileID: 84520859797528748}
 --- !u!1 &4162034355716740382
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,7 +539,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7309971100726972506}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.698077, z: -0, w: -0.7160227}
+  m_LocalRotation: {x: -0, y: 0.6980743, z: -0, w: -0.71602535}
   m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0

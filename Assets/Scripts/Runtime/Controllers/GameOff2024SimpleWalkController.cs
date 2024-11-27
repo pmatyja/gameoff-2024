@@ -110,13 +110,13 @@ namespace Runtime.Controllers
             _mover.CheckForGround();
             
             //If character was not grounded in the last frame and is now grounded, call 'OnGroundContactRegained' function;
-            if (!_isGrounded && _mover.IsGrounded())
+            if (!_isGrounded && _mover.IsGrounded)
             {
                 OnGroundContactRegained(_currentVelocity);
             }
             
             //Check whether the character is grounded and store result;
-            _isGrounded = _mover.IsGrounded();
+            _isGrounded = _mover.IsGrounded;
         }
 
         private void HandleGravity()

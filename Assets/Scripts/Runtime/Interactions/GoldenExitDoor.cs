@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Runtime.Collectables;
+using Runtime.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,9 +10,19 @@ namespace Runtime.Interactions
 {
     public class GoldenExitDoor : MonoBehaviour, ICharacterInteractable
     {
+        private static readonly int _baseColorPropertyID = Shader.PropertyToID("_BaseColor");
+        private static readonly int _emissionColorPropertyID = Shader.PropertyToID("_EmissionColor");
+        
         [SerializeField] private DoorKeySlot[] _keySlots;
         [SerializeField] private BlockMoverScript _blockMoverScript;
         [SerializeField] private InteractionPrompt _interactionPrompt;
+        
+        [Header("Star Color")]
+        [SerializeField] private MeshRenderer _starRenderer;
+        [SerializeField] private Material _starMaterial;
+        [SerializeField, Readonly] private Material _starMaterialInstance;
+        [Space]
+        [SerializeField] private KeyColorCombination[] _keyColorCombinations;
         
         [field: Space]
         [field: SerializeField] public UnityEvent<CollectableData> OnKeyInsertedEvent { get; private set; }
@@ -41,6 +53,9 @@ namespace Runtime.Interactions
         {
             InitializeSlots();
             IsRepeatable = true;
+            
+            _starMaterialInstance = Instantiate(_starMaterial);
+            _starRenderer.material = _starMaterialInstance;
         }
 
         public void InitializeSlots()
@@ -82,6 +97,8 @@ namespace Runtime.Interactions
             
             HasInteracted = true;
             OnKeyInsertedEvent?.Invoke(keySlot.ExpectedKey);
+
+            UpdateStarColor();
             
             CanInteract = ItemInventory.Instance.ContainsAny(_vacantKeys);
         }
@@ -94,6 +111,52 @@ namespace Runtime.Interactions
             }
 
             return true;
+        }
+
+        private void UpdateStarColor()
+        {
+            var occupiedKeys = _keySlots.Where(slot => slot.IsOccupied).Select(slot => slot.ExpectedKey).ToArray();
+            if (occupiedKeys.Length == 0) return;
+            
+            if (!TryGetKeyColorCombination(occupiedKeys, out var keyColorCombination))
+            {
+                // If no combination is found, use the first key's color
+                SetStarColor
+                (
+                    occupiedKeys[0].Material.GetColor(_baseColorPropertyID), 
+                    occupiedKeys[0].Material.GetColor(_emissionColorPropertyID)
+                );
+            }
+            else
+            {
+                SetStarColor(keyColorCombination.CombinedBaseColor, keyColorCombination.CombinedEmissionColor);
+            }
+        }
+        
+        private void SetStarColor(Color baseColor, Color emissionColor)
+        {
+            _starMaterialInstance.SetColor(_baseColorPropertyID, baseColor);
+            _starMaterialInstance.SetColor(_emissionColorPropertyID, emissionColor);
+        }
+        
+        private bool TryGetKeyColorCombination(CollectableData[] combination, out KeyColorCombination result)
+        {
+            // Check that all keys in the requested combination are present in the keyColorCombination
+            // They do not need to be in the same order, but they must have the same keys
+            
+            foreach (var keyColorCombination in _keyColorCombinations)
+            {
+                if (combination.Length != keyColorCombination.Combination.Length) continue;
+
+                if (combination.All(key => keyColorCombination.Combination.Contains(key)))
+                {
+                    result = keyColorCombination;
+                    return true;
+                }
+            }
+
+            result = null;
+            return false;
         }
 
         public void ShowInteractionPrompt(bool show)

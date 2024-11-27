@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1608f5e459843fc888372b816181ec1, type: 3}
+  m_Name: KCC_RB
+  m_EditorClassIdentifier: 
+  Combination:
+  - {fileID: 11400000, guid: e9c501d7ee46d264287d2e53a13791a6, type: 2}
+  - {fileID: 11400000, guid: bd0b7bfb0dc377f4eb06d3fa7beb279a, type: 2}
+  CombinedBaseColor: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
+  CombinedEmissionColor: {r: 0, g: 0.1699212, b: 5.992157, a: 1}
