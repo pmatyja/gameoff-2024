@@ -34,12 +34,16 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
     [field: SerializeField, ReadOnly] public bool IsFacingCamera { get; private set; } = true;
     [field: SerializeField, ReadOnly] public float NormalizedLocomotionSpeed { get; private set; }
     [field: SerializeField, ReadOnly, Range(-1,1)] public float FacingCameraDot { get; private set; } 
+    
+    private Camera _mainCamera;
 
     private void OnEnable()
     {
         InputHandler.Get().OnGameplayMoveInput += OnGameplayMoveInput;
         
         _spriteRenderer.shadowCastingMode = _shadowCastingMode;
+        
+        _mainCamera = GameOff2024Statics.GetMainCamera();
     }
 
     private void OnDisable()
@@ -77,12 +81,10 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
     
     private void HandleBillboard()
     {
-        var cam = GameOff2024Statics.GetMainCamera();
-        
-        if (!cam) return;
+        if (!_mainCamera) return;
 
         // Calculate the direction from the camera
-        var directionFromCamera = transform.position - cam.transform.position;
+        var directionFromCamera = transform.position - _mainCamera.transform.position;
         var horizontalDirection = new Vector3(directionFromCamera.x, 0, directionFromCamera.z).normalized;
         var verticalAngle = Vector3.SignedAngle(horizontalDirection, directionFromCamera, transform.right);
 
@@ -110,11 +112,9 @@ public class GameOff2024PlayerCharacterAvatarController : MonoBehaviour
             return;
         }
         
-        var cam = GameOff2024Statics.GetMainCamera();
+        if (!_mainCamera) return;
         
-        if (!cam) return;
-        
-        var camForward = cam.transform.forward.normalized;
+        var camForward = _mainCamera.transform.forward.normalized;
     
         FacingCameraDot = Vector3.Dot(GameOff2024Statics.GetCameraRelativeMoveDirection(_movementInput), camForward);
         

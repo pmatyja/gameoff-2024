@@ -26,7 +26,6 @@ namespace Runtime.Controllers
         private Vector3 _currentVelocity;
         private Vector3 _moveDirection;
         
-        private InputHandler _inputHandler;
         private Transform _transform;
 
         private Vector2 _movementInput;
@@ -35,7 +34,6 @@ namespace Runtime.Controllers
         private void Awake()
         {
             _transform = transform;
-            _inputHandler = InputHandler.Get();
 
             if (!_mover)
             {
@@ -49,17 +47,7 @@ namespace Runtime.Controllers
             _cameraTransform = GameOff2024Statics.GetMainCamera().transform;
         }
 
-        private void OnEnable()
-        {
-            _inputHandler.OnGameplayMoveInput += OnGameplayMoveInput;
-        }
-        
-        private void OnDisable()
-        {
-            _inputHandler.OnGameplayMoveInput -= OnGameplayMoveInput;
-        }
-
-        private void OnGameplayMoveInput(Vector2 inputDirection) => _movementInput = inputDirection;
+        public void SetMovementDirection(Vector2 direction) => _movementInput = direction;
 
         private void FixedUpdate()
         {

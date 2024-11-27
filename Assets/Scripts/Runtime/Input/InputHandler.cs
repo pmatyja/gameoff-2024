@@ -1,15 +1,11 @@
 using System;
-using System.Linq;
-using OCSFX.Attributes;
 using OCSFX.Generics;
 using OCSFX.Utility.Debug;
+using Runtime.Input;
 using Runtime.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 public class InputHandler: SingletonScriptableObject<InputHandler>
 {
@@ -85,6 +81,13 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
             
             var gameplayUIActions = Get().GameplayUIActions;
             gameplayUIActions.Resume.action.performed += OnResumeInputPerformed;
+            gameplayUIActions.Move.action.performed += OnGameplayUIMoveInputPerformed;
+            gameplayUIActions.Confirm.action.performed += OnGameplayUIConfirmInputPerformed;
+            
+            var frontEndUIActions = Get().FrontEndUIActions;
+            frontEndUIActions.Move.action.performed += OnFrontEndUIMoveInputPerformed;
+            frontEndUIActions.Confirm.action.performed += OnFrontEndUIConfirmInputPerformed;
+            frontEndUIActions.Cancel.action.performed += OnFrontEndUICancelInputPerformed;
             
             EventBus.AddListener<PauseMenuController.UIEventParameters>(OnPauseMenuToggle);
             
@@ -103,6 +106,13 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
             
             var gameplayUIActions = Get().GameplayUIActions;
             gameplayUIActions.Resume.action.performed -= OnResumeInputPerformed;
+            gameplayUIActions.Move.action.performed -= OnGameplayUIMoveInputPerformed;
+            gameplayUIActions.Confirm.action.performed -= OnGameplayUIConfirmInputPerformed;
+            
+            var frontEndUIActions = Get().FrontEndUIActions;
+            frontEndUIActions.Move.action.performed -= OnFrontEndUIMoveInputPerformed;
+            frontEndUIActions.Confirm.action.performed -= OnFrontEndUIConfirmInputPerformed;
+            frontEndUIActions.Cancel.action.performed -= OnFrontEndUICancelInputPerformed;
             
             EventBus.RemoveListener<PauseMenuController.UIEventParameters>(OnPauseMenuToggle);
             
@@ -176,6 +186,41 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         Get().OnUIGameplayResumeInput?.Invoke();
     }
     
+    private static void OnGameplayUIMoveInputPerformed(InputAction.CallbackContext context)
+    {
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Gameplay UI move input performed", Get(), Get()._showDebug);
+        
+        Get().OnUIGameplayMoveInput?.Invoke();
+    }
+
+    private static void OnGameplayUIConfirmInputPerformed(InputAction.CallbackContext context)
+    {
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Gameplay UI confirm input performed", Get(), Get()._showDebug);
+        
+        Get().OnUIGameplayMoveInput?.Invoke();
+    }
+
+    private static void OnFrontEndUIMoveInputPerformed(InputAction.CallbackContext context)
+    {
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Front end UI move input performed", Get(), Get()._showDebug);
+        
+        Get().OnFrontEndUIMoveInput?.Invoke();
+    }
+
+    private static void OnFrontEndUIConfirmInputPerformed(InputAction.CallbackContext context)
+    {
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Front end UI confirm input performed", Get(), Get()._showDebug);
+        
+        Get().OnFrontEndUIConfirmInput?.Invoke();
+    }
+
+    private static void OnFrontEndUICancelInputPerformed(InputAction.CallbackContext context)
+    {
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Front end UI cancel input performed", Get(), Get()._showDebug);
+        
+        Get().OnFrontEndUICancelInput?.Invoke();
+    }
+    
     public void SetCurrentActionMap(InputActionMap actionMap)
     {
         if (actionMap == null)
@@ -228,38 +273,5 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         }
         
         SetCurrentActionMap(actionMap);
-    }
-
-    [Serializable]
-    public class GameplayInputActions : InputActionsCollection
-    {
-        [field:SerializeField] public InputActionReference Move { get; private set; }
-        [field:SerializeField] public InputActionReference CameraDrag { get; private set; }
-        [field:SerializeField] public InputActionReference CameraZoom { get; private set; }
-        [field:SerializeField] public InputActionReference Interact { get; private set; }
-        [field:SerializeField] public InputActionReference Pause { get; private set; }
-    }
-    
-    [Serializable]
-    public class GameplayUIInputActions : InputActionsCollection
-    {
-        [field: SerializeField] public InputActionReference Resume { get; private set; }
-        [field: SerializeField] public InputActionReference Confirm { get; private set; }
-        [field: SerializeField] public InputActionReference Move { get; private set; }
-    }
-    
-    [Serializable]
-    public class FrontEndUIInputActions : InputActionsCollection
-    {
-        [field: SerializeField] public InputActionReference Confirm { get; private set; }
-        [field: SerializeField] public InputActionReference Cancel { get; private set; }
-        [field: SerializeField] public InputActionReference Move { get; private set; }
-    }
-
-    [Serializable]
-    public abstract class InputActionsCollection
-    {
-        [field: SerializeField] public InputActionMapRef ActionMapRef { get; private set; }
-        public InputActionMap ActionMap => ActionMapRef.Map;
     }
 }
