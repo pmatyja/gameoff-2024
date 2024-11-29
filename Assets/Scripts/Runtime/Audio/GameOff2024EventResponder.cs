@@ -4,6 +4,7 @@ using OCSFX.Utility.Debug;
 using Runtime.Collectables;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Runtime.Audio
 {
@@ -20,15 +21,22 @@ namespace Runtime.Audio
         [Space]
         [SerializeField] private UnityEvent _onPauseMenuOpen;
         [SerializeField] private UnityEvent _onPauseMenuClose;
+
         [Space]
-        [SerializeField] private UnityEvent _onStartGameButtonPressed;
+        [SerializeField] private FrontEndButtonEvent[] _frontEndButtonEvents = new FrontEndButtonEvent[]
+        {
+            new FrontEndButtonEvent { ButtonName = "Menu-Start", OnButtonPressed = new UnityEvent() },
+            new FrontEndButtonEvent { ButtonName = "Menu-Credits", OnButtonPressed = new UnityEvent() },
+            new FrontEndButtonEvent { ButtonName = "Menu-Back", OnButtonPressed = new UnityEvent() },
+        };
 
         private void OnEnable()
         {
             EventBus.AddListener<CollectableEventParameters>(OnCollectableCollected);
             EventBus.AddListener<GameSettingsChangedEventParameters>(OnGameSettingsChanged);
             EventBus.AddListener<PauseMenuController.UIEventParameters>(OnPauseMenuControllerUIEvent);
-            EventBus.AddListener<GameSceneEventParameters>(OnStartGameButtonPressed);
+            EventBus.AddListener<GameSceneEventParameters>(OnLavgineStartGameButtonPressed);
+            EventBus.AddListener<MouseClickEvent>(OnLavgineMouseClickEvent);
 
             ItemInventory.OnKeyItemsCollectedChanged += OnKeyItemsCollectedChanged;
         }
@@ -38,14 +46,34 @@ namespace Runtime.Audio
             EventBus.RemoveListener<CollectableEventParameters>(OnCollectableCollected);
             EventBus.RemoveListener<GameSettingsChangedEventParameters>(OnGameSettingsChanged);
             EventBus.RemoveListener<PauseMenuController.UIEventParameters>(OnPauseMenuControllerUIEvent);
-            EventBus.RemoveListener<GameSceneEventParameters>(OnStartGameButtonPressed);
+            EventBus.RemoveListener<GameSceneEventParameters>(OnLavgineStartGameButtonPressed);
+            EventBus.RemoveListener<MouseClickEvent>(OnLavgineMouseClickEvent);
             
             ItemInventory.OnKeyItemsCollectedChanged -= OnKeyItemsCollectedChanged;
         }
 
-        private void OnStartGameButtonPressed(object sender, GameSceneEventParameters info)
+        private void OnLavgineMouseClickEvent(object sender, MouseClickEvent info)
         {
-            _onStartGameButtonPressed?.Invoke();
+            Debug.Log($"{info.Element.name} was clicked", this);
+            
+            HandleFrontEndMenuButtonPressed(info.Element.name);
+        }
+
+        private void OnLavgineStartGameButtonPressed(object sender, GameSceneEventParameters info)
+        {
+            // _onFrontEndStartGameButtonPressed?.Invoke();
+        }
+        
+        private void HandleFrontEndMenuButtonPressed(string buttonName)
+        {
+            foreach (var frontEndButtonEvent in _frontEndButtonEvents)
+            {
+                if (frontEndButtonEvent.ButtonName == buttonName)
+                {
+                    frontEndButtonEvent.OnButtonPressed?.Invoke();
+                    return;
+                }
+            }
         }
 
         private void OnKeyItemsCollectedChanged(int keyItemCount)
@@ -151,5 +179,12 @@ namespace Runtime.Audio
                 return VolumeSettingsId == volumeSettingsId ? GameSettingsId : null;
             }
         }
+    }
+    
+    [Serializable]
+    public class FrontEndButtonEvent
+    {
+        public string ButtonName;
+        public UnityEvent OnButtonPressed;
     }
 }

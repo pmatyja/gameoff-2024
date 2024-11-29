@@ -92,18 +92,28 @@ MonoBehaviour:
   _onPauseMenuClose:
     m_PersistentCalls:
       m_Calls: []
-  _onStartGameButtonPressed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8068738655614677206}
-        m_TargetAssemblyTypeName: SceneLoadManager, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Game_HubWorld
-          m_BoolArgument: 0
-        m_CallState: 2
+  _frontEndButtonEvents:
+  - ButtonName: Menu-Start
+    OnButtonPressed:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8068738655614677206}
+          m_TargetAssemblyTypeName: SceneLoadManager, Assembly-CSharp
+          m_MethodName: LoadScene
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Game_HubWorld
+            m_BoolArgument: 0
+          m_CallState: 2
+  - ButtonName: Menu-Credits
+    OnButtonPressed:
+      m_PersistentCalls:
+        m_Calls: []
+  - ButtonName: Menu-Back
+    OnButtonPressed:
+      m_PersistentCalls:
+        m_Calls: []
