@@ -532,7 +532,7 @@ Transform:
   m_GameObject: {fileID: 6938166250451433860}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.75, y: -0.5, z: 0}
+  m_LocalPosition: {x: 1.5499725, y: -0.5, z: -0.00000295043}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -557,8 +557,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
-  m_Height: 1
+  m_Radius: 0.5
+  m_Height: 1.2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7591861336505474980
@@ -967,7 +967,7 @@ Transform:
   m_GameObject: {fileID: 8085881557766198604}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: -0.5, z: 0}
+  m_LocalPosition: {x: -0.05002594, y: -0.5, z: 0.00000295043}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -992,8 +992,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
-  m_Height: 1
+  m_Radius: 0.5
+  m_Height: 1.25
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8938481384514631078
@@ -24334,7 +24334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7103011533050667637, guid: f6d04c6aa7f163b47866119b24070a5d, type: 3}
       propertyPath: m_VersionIndex
-      value: 3052
+      value: 3907
       objectReference: {fileID: 0}
     - target: {fileID: 7103011533050667637, guid: f6d04c6aa7f163b47866119b24070a5d, type: 3}
       propertyPath: m_SelectedEdges.Array.size
