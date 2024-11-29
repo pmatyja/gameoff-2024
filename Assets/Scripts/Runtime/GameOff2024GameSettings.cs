@@ -29,6 +29,8 @@ namespace Runtime
         [field: SerializeField, Expandable] public HudController HudPrefab { get; private set; }
         [field: SerializeField, Expandable] public PauseMenuController PauseMenuPrefab { get; private set; }
         [field: SerializeField, Expandable] public UIHoverDetector UIHoverDetectorPrefab { get; private set; }
+        [field: SerializeField, Expandable] public LoadingScreen LoadingScreenPrefab { get; private set; }
+        [field: SerializeField, Expandable] public SceneLoadManager SceneLoadManagerPrefab { get; private set; }
         
         [field: Header("Game")]
         [field: SerializeField, Expandable] public CollectableData[] KeyCollectables { get; private set; }

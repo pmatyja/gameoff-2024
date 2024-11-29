@@ -20,12 +20,15 @@ namespace Runtime.Audio
         [Space]
         [SerializeField] private UnityEvent _onPauseMenuOpen;
         [SerializeField] private UnityEvent _onPauseMenuClose;
+        [Space]
+        [SerializeField] private UnityEvent _onStartGameButtonPressed;
 
         private void OnEnable()
         {
             EventBus.AddListener<CollectableEventParameters>(OnCollectableCollected);
             EventBus.AddListener<GameSettingsChangedEventParameters>(OnGameSettingsChanged);
             EventBus.AddListener<PauseMenuController.UIEventParameters>(OnPauseMenuControllerUIEvent);
+            EventBus.AddListener<GameSceneEventParameters>(OnStartGameButtonPressed);
 
             ItemInventory.OnKeyItemsCollectedChanged += OnKeyItemsCollectedChanged;
         }
@@ -35,8 +38,14 @@ namespace Runtime.Audio
             EventBus.RemoveListener<CollectableEventParameters>(OnCollectableCollected);
             EventBus.RemoveListener<GameSettingsChangedEventParameters>(OnGameSettingsChanged);
             EventBus.RemoveListener<PauseMenuController.UIEventParameters>(OnPauseMenuControllerUIEvent);
+            EventBus.RemoveListener<GameSceneEventParameters>(OnStartGameButtonPressed);
             
             ItemInventory.OnKeyItemsCollectedChanged -= OnKeyItemsCollectedChanged;
+        }
+
+        private void OnStartGameButtonPressed(object sender, GameSceneEventParameters info)
+        {
+            _onStartGameButtonPressed?.Invoke();
         }
 
         private void OnKeyItemsCollectedChanged(int keyItemCount)

@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6352071278543960494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1261590465279886261}
+  - component: {fileID: 8068738655614677206}
+  - component: {fileID: -4655876960555025021}
+  m_Layer: 0
+  m_Name: SceneLoadManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1261590465279886261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6352071278543960494}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8068738655614677206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6352071278543960494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf5f8329ce3a9848a4ba86ccb8be9c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dontDestroyOnLoad: 1
+  _singletonBehavior: 0
+  _defaultLoadTime: 2
+  _fadeDuration: 2
+  _reloadCurrentSceneButton: 0
+  _inspectorLoadSceneName: 
+  _inspectorLoadScene: 0
+  _gameSceneName: Game_HubWorld
+  _mainMenuSceneName: MainMenu
+  _onSceneLoaded:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-4655876960555025021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6352071278543960494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4672b41f4d54ea38fc3a8d3879c3d26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showDebug: 0
+  _onBasicItemCollected:
+    m_PersistentCalls:
+      m_Calls: []
+  _onKeyItemCollected:
+    m_PersistentCalls:
+      m_Calls: []
+  _onKeysCollectedChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGameSettingsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  _onGameSettingsAudioValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  _audioSettingIdConversions: []
+  _onPauseMenuOpen:
+    m_PersistentCalls:
+      m_Calls: []
+  _onPauseMenuClose:
+    m_PersistentCalls:
+      m_Calls: []
+  _onStartGameButtonPressed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8068738655614677206}
+        m_TargetAssemblyTypeName: SceneLoadManager, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Game_HubWorld
+          m_BoolArgument: 0
+        m_CallState: 2

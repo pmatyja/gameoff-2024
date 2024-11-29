@@ -218,7 +218,7 @@ MonoBehaviour:
         inputDown: InputAction/Menu/Down
         inputConfirm: InputAction/Menu/Confirm
         inputBack: InputAction/Menu/Back
-        loadDefaultScene: 1
+        loadDefaultScene: 0
         music: {fileID: 0}
         onStart: {fileID: 0}
         onExit: {fileID: 0}
@@ -498,14 +498,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &4313338060181591023
-AudioListener:
+--- !u!114 &4313338060181591023
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4313338060181591022}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

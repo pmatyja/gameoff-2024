@@ -23,6 +23,8 @@ namespace Runtime
         private static PauseMenuController _pauseMenuController;
         private static UIHoverDetector _uiHoverDetector;
         private static HudController _hudController;
+        private static SceneLoadManager _sceneLoadManager;
+        private static LoadingScreen _loadingScreen;
         private static SceneLoader _levelPreloader;
         
         private static readonly Dictionary<float, WaitForSeconds> _waitForSeconds = new Dictionary<float, WaitForSeconds>();
@@ -52,6 +54,8 @@ namespace Runtime
             _waitForSeconds.Clear();
             
             GetAudioManager();
+            GetLoadingScreen();
+            GetSceneLoadManager();
             
             // If the current scene is in the exclusion list, do not initialize the following singletons;
             // Load them when the next scene is loaded;
@@ -131,6 +135,12 @@ namespace Runtime
         
         public static HudController GetHudController() =>
             GetOrCreateObject(ref _hudController, GameOff2024GameSettings.Get().HudPrefab);
+        
+        public static LoadingScreen GetLoadingScreen() => 
+            GetOrCreateObject(ref _loadingScreen, GameOff2024GameSettings.Get().LoadingScreenPrefab);
+        
+        public static SceneLoadManager GetSceneLoadManager() =>
+            GetOrCreateObject(ref _sceneLoadManager, GameOff2024GameSettings.Get().SceneLoadManagerPrefab);
         
         public static int GetOptionalCollectableTotal() => 
             GameOff2024GameSettings.Get().TotalOptionalCollectables;
