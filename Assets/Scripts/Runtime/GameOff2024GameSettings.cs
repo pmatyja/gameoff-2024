@@ -4,8 +4,8 @@ using OCSFX.Generics;
 using OCSFX.Utility.Debug;
 using Runtime.Cameras;
 using Runtime.Collectables;
+using Runtime.SceneLoading;
 using Runtime.Utility;
-using Runtime.World;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -29,12 +29,17 @@ namespace Runtime
         [field: SerializeField, Expandable] public HudController HudPrefab { get; private set; }
         [field: SerializeField, Expandable] public PauseMenuController PauseMenuPrefab { get; private set; }
         [field: SerializeField, Expandable] public UIHoverDetector UIHoverDetectorPrefab { get; private set; }
+        [field: SerializeField, Expandable] public Canvas UGUICanvasPrefab { get; private set; }
         [field: SerializeField, Expandable] public LoadingScreen LoadingScreenPrefab { get; private set; }
         [field: SerializeField, Expandable] public SceneLoadManager SceneLoadManagerPrefab { get; private set; }
+        [field: SerializeField, Expandable] public ScreenFade ScreenFadePrefab { get; private set; }
         
         [field: Header("Game")]
+        [field: SerializeField, Expandable] public ItemInventory ItemInventoryPrefab { get; private set; }
         [field: SerializeField, Expandable] public CollectableData[] KeyCollectables { get; private set; }
         [SerializeField, Readonly] private int _totalOptionalCollectables = 15;
+        [field: SerializeField, BuildSceneName] public string MainMenuSceneName = "MainMenu";
+        [field: SerializeField, BuildSceneName] public string EndingSceneName = "Ending";
         // [field: SerializeField, Expandable] public SceneLoader LevelPreloaderPrefab { get; private set; }
 
         [field: SerializeField, BuildSceneName]
@@ -90,7 +95,11 @@ namespace Runtime
                 (HudPrefab, nameof(HudPrefab)),
                 (PauseMenuPrefab, nameof(PauseMenuPrefab)),
                 (UIHoverDetectorPrefab, nameof(UIHoverDetectorPrefab)),
-                // (LevelPreloaderPrefab, nameof(LevelPreloaderPrefab))
+                (UGUICanvasPrefab, nameof(UGUICanvasPrefab)),
+                (LoadingScreenPrefab, nameof(LoadingScreenPrefab)),
+                (SceneLoadManagerPrefab, nameof(SceneLoadManagerPrefab)),
+                (ScreenFadePrefab, nameof(ScreenFadePrefab)),
+                (ItemInventoryPrefab, nameof(ItemInventoryPrefab)),
             };
 
             foreach (var (field, fieldName) in fields)

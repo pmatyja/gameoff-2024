@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-namespace Runtime.Audio
+namespace Runtime.Utility
 {
     public class GameOff2024EventResponder : MonoBehaviour
     {

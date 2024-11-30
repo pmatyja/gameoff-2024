@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OCSFX.FMOD.Components;
 using Runtime.Collectables;
+using Runtime.SceneLoading;
 using Runtime.World;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -23,9 +24,12 @@ namespace Runtime
         private static PauseMenuController _pauseMenuController;
         private static UIHoverDetector _uiHoverDetector;
         private static HudController _hudController;
+        private static ScreenFade _screenFade;
         private static SceneLoadManager _sceneLoadManager;
         private static LoadingScreen _loadingScreen;
         private static SceneLoader _levelPreloader;
+        private static Canvas _uguiCanvas;
+        private static ItemInventory _itemInventory;
         
         private static readonly Dictionary<float, WaitForSeconds> _waitForSeconds = new Dictionary<float, WaitForSeconds>();
         
@@ -54,26 +58,87 @@ namespace Runtime
             _waitForSeconds.Clear();
             
             GetAudioManager();
-            GetLoadingScreen();
+
+            var canvas = GetUGUICanvas();
+            if (Application.isPlaying)
+            {
+                Object.DontDestroyOnLoad(canvas);
+            }
+            
+            GetScreenFade().transform.SetParent(_uguiCanvas.transform, false);
+            GetLoadingScreen().transform.SetParent(_uguiCanvas.transform, false);
             GetSceneLoadManager();
             
             // If the current scene is in the exclusion list, do not initialize the following singletons;
-            // Load them when the next scene is loaded;
+            // They should be initialized only in the main game scenes;
             var activeScene = SceneManager.GetActiveScene();
-            if (GameOff2024GameSettings.Get().ExcludeScenesFromInitialization.Contains(activeScene.name))
+            if (!GameOff2024GameSettings.Get().ExcludeScenesFromInitialization.Contains(activeScene.name))
             {
-                SceneManager.sceneLoaded += InitializeOnNextSceneLoad;
-                return;
+                GetGameplayOnlySingletons();
             }
 
+            if (Application.isPlaying)
+            {
+                Application.quitting += Deinitialize;
+                SceneManager.sceneLoaded += OnSceneLoaded;
+            }
+        }
+        
+        private static void Deinitialize()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == GameOff2024GameSettings.Get().MainMenuSceneName
+                || scene.name == GameOff2024GameSettings.Get().EndingSceneName)
+            {
+                DestroyGameplayOnlySingletons();
+            }
+            else
+            {
+                GetGameplayOnlySingletons();
+            }
+        }
+
+        private static void DestroyGameplayOnlySingletons()
+        {
+            TryDestroyGameObject(_playerCharacter);
+            TryDestroyGameObject(_mainCamera);
+            TryDestroyGameObject(_globalPostProcessingVolume);
+            TryDestroyGameObject(_pauseMenuController);
+            TryDestroyGameObject(_uiHoverDetector);
+            TryDestroyGameObject(_hudController);
+            TryDestroyGameObject(_itemInventory);
+        }
+
+        private static void GetGameplayOnlySingletons()
+        {
             GetMainCamera();
             GetPlayerCharacter();
             GetGlobalPostProcessingVolume();
-            // GetLevelPreloader();
             GetPauseMenuController();
             GetUIHoverDetector();
             GetHudController();
+            GetItemInventory();
         }
+        
+        private static bool TryDestroyGameObject(Component component)
+        {
+            if (!component) return false;
+            Object.Destroy(component.gameObject);
+            return true;
+        }
+        
+        public static ItemInventory GetItemInventory() => 
+            GetOrCreateObject(ref _itemInventory, GameOff2024GameSettings.Get().ItemInventoryPrefab);
+
+        public static Canvas GetUGUICanvas() => 
+            GetOrCreateObject(ref _uguiCanvas, GameOff2024GameSettings.Get().UGUICanvasPrefab);
+
+        public static ScreenFade GetScreenFade() => 
+            GetOrCreateObject(ref _screenFade, GameOff2024GameSettings.Get().ScreenFadePrefab);
 
         private static void InitializeOnNextSceneLoad(Scene scene, LoadSceneMode mode)
         {
@@ -159,7 +224,7 @@ namespace Runtime
 
         // HELPER FUNCTIONS
         
-        private static T GetOrCreateObject<T> (ref T reference, T prefab) where T : MonoBehaviour
+        private static T GetOrCreateObject<T> (ref T reference, T prefab) where T : Component
         {
             if (reference) return reference;
             
@@ -191,7 +256,7 @@ namespace Runtime
         }
 
         private static T GetOrCreateObjectWithCondition<T>(ref T reference, T prefab, System.Func<T, bool> condition)
-            where T : MonoBehaviour
+            where T : Component
         {
             if (reference) return reference;
 

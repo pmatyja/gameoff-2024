@@ -5,8 +5,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-
-public class SceneLoadManager : OCSFX.Generics.Singleton<SceneLoadManager>
+namespace Runtime.SceneLoading
+{
+    public class SceneLoadManager : OCSFX.Generics.Singleton<SceneLoadManager>
 {
     [SerializeField, Min(0.1f)] private float _defaultLoadTime = 1.5f;
     [SerializeField] private float _fadeDuration = 2f;
@@ -208,4 +209,4 @@ public class SceneLoadManager : OCSFX.Generics.Singleton<SceneLoadManager>
         _defaultLoadTime = Mathf.Max(_defaultLoadTime, _fadeDuration);
     }
 }
-
+}

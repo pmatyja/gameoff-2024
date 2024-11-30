@@ -21,13 +21,18 @@ MonoBehaviour:
   <HudPrefab>k__BackingField: {fileID: 728024146355291531, guid: bd045f68dc177a846bac8791c504b2e1, type: 3}
   <PauseMenuPrefab>k__BackingField: {fileID: 8580124588764103511, guid: 64172481a791c9d49ae55f3bcc5e1c6f, type: 3}
   <UIHoverDetectorPrefab>k__BackingField: {fileID: 1585790649793112091, guid: ce137bd68ef0771469c6afa3cd2ef190, type: 3}
-  <LoadingScreenPrefab>k__BackingField: {fileID: 1439562485707050494, guid: ee502fbd51d333e49bd9c8efba8eb42c, type: 3}
+  <UGUICanvasPrefab>k__BackingField: {fileID: 5379326571294601560, guid: 53adb1f8c72c9a34b990bfa0b5536c06, type: 3}
+  <LoadingScreenPrefab>k__BackingField: {fileID: 5966875532286721728, guid: 7136dea9a07aecb46aa5267fbb13176a, type: 3}
   <SceneLoadManagerPrefab>k__BackingField: {fileID: 8068738655614677206, guid: 4b8ee81d77f80b1459fd90fbc540af55, type: 3}
+  <ScreenFadePrefab>k__BackingField: {fileID: 306098007957923648, guid: 878f37bde55b40b45a28f456760c343e, type: 3}
+  <ItemInventoryPrefab>k__BackingField: {fileID: 2566848700463331589, guid: 1ac9dd83f346b2046be5ee3e7fa8c7fd, type: 3}
   <KeyCollectables>k__BackingField:
   - {fileID: 11400000, guid: bd0b7bfb0dc377f4eb06d3fa7beb279a, type: 2}
   - {fileID: 11400000, guid: 46dc0906139ca054384e7a82946e66b4, type: 2}
   - {fileID: 11400000, guid: e9c501d7ee46d264287d2e53a13791a6, type: 2}
   _totalOptionalCollectables: 15
+  MainMenuSceneName: MainMenu
+  EndingSceneName: Ending
   ExcludeScenesFromInitialization:
   - MainMenu
   - Ending
