@@ -35,11 +35,19 @@ namespace Runtime.Utility
             {
                 if (bind)
                 {
-                    SceneManager.sceneLoaded += OnSceneLoadedEvent.Invoke;
+                    SceneManager.sceneLoaded += OnSceneLoaded;
                 }
                 else
                 {
-                    SceneManager.sceneLoaded -= OnSceneLoadedEvent.Invoke;
+                    SceneManager.sceneLoaded -= OnSceneLoaded;
+                }
+            }
+
+            private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+            {
+                if (scene.name == SceneName)
+                {
+                    OnSceneLoadedEvent?.Invoke(scene, mode);
                 }
             }
         }

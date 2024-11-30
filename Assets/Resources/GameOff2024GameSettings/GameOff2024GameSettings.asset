@@ -25,6 +25,7 @@ MonoBehaviour:
   <LoadingScreenPrefab>k__BackingField: {fileID: 5966875532286721728, guid: 7136dea9a07aecb46aa5267fbb13176a, type: 3}
   <SceneLoadManagerPrefab>k__BackingField: {fileID: 8068738655614677206, guid: 4b8ee81d77f80b1459fd90fbc540af55, type: 3}
   <ScreenFadePrefab>k__BackingField: {fileID: 306098007957923648, guid: 878f37bde55b40b45a28f456760c343e, type: 3}
+  <ScoreUIPrefab>k__BackingField: {fileID: 8477449206926768754, guid: 76cf4eaf9ebbbee40aab7d003317930e, type: 3}
   <ItemInventoryPrefab>k__BackingField: {fileID: 2566848700463331589, guid: 1ac9dd83f346b2046be5ee3e7fa8c7fd, type: 3}
   <KeyCollectables>k__BackingField:
   - {fileID: 11400000, guid: bd0b7bfb0dc377f4eb06d3fa7beb279a, type: 2}
@@ -33,6 +34,7 @@ MonoBehaviour:
   _totalOptionalCollectables: 15
   MainMenuSceneName: MainMenu
   EndingSceneName: Ending
+  StartGameSceneName: Game_HubWorld
   ExcludeScenesFromInitialization:
   - MainMenu
   - Ending

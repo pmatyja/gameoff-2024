@@ -26,6 +26,15 @@ namespace Runtime.Collectables
                 return keyItems.Count;
             }
         }
+        
+        public int OptionalItemsCollected
+        {
+            get
+            {
+                var optionalItems = _items.FindAll(i => !i.Data.IsUnique && !i.Data.IsTransient);
+                return optionalItems.Count;
+            }
+        }
 
         #region Events
         public static event Action<IdentifiedItem> OnItemAdded;
@@ -34,6 +43,7 @@ namespace Runtime.Collectables
         public static event Action<int, IdentifiedItem>  OnItemRemovedAt;
         public static event Action OnItemsCleared;
         public static event Action <int> OnKeyItemsCollectedChanged;
+        public static event Action <int> OnOptionalItemsCollectedChanged;
         #endregion // Events
         
         #region IList Interface
@@ -120,6 +130,8 @@ namespace Runtime.Collectables
             }
             else if (!item.Data.IsTransient)
             {
+                OnOptionalItemsCollectedChanged?.Invoke(OptionalItemsCollected);
+                
                 EventBus.Raise(this, new HudController.ItemCollectedEventsParameters());
             }
         }

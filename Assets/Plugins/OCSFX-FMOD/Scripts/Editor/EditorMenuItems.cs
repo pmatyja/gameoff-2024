@@ -18,45 +18,48 @@ namespace OCSFXEditor.FMOD
             {
                 var owner = listener.gameObject;
                 if (!owner.TryGetComponent<StudioListener>(out var fmodListener))
+                {
                     fmodListener = owner.AddComponent<StudioListener>();
-                else
-                {
-                    Debug.Log($"{owner.name} already has a {nameof(StudioListener)}");
-                    continue;
-                }
-
-                if (!fmodListener)
-                {
-                    Debug.LogWarning($"Failed to ensure a {nameof(StudioListener)} on {owner.name}");
-                    return;
-                }
-                
-                Object.DestroyImmediate(listener);
-            }
-
-            if (audioListeners.Length < 1)
-            {
-                var cameras = Object.FindObjectsOfType<Camera>();
-                
-                foreach (var camera in cameras)
-                {
-                    var owner = camera.gameObject;
-                    if (!owner.TryGetComponent<StudioListener>(out var fmodListener))
-                        fmodListener = owner.AddComponent<StudioListener>();
-                    else
-                    {
-                        Debug.Log($"{owner.name} already has a {nameof(StudioListener)}");
-                        continue;
-                    }
-
                     if (!fmodListener)
                     {
                         Debug.LogWarning($"Failed to ensure a {nameof(StudioListener)} on {owner.name}");
                         return;
                     }
+                    Object.DestroyImmediate(listener);
+                }
+                else
+                {
+                    Debug.Log($"{owner.name} already has a {nameof(StudioListener)}");
+                }
+                
+                EditorUtility.SetDirty(owner);
+            }
+
+            if (audioListeners.Length < 1)
+            {
+                var cameras = Object.FindObjectsOfType<Camera>();
+        
+                foreach (var camera in cameras)
+                {
+                    var owner = camera.gameObject;
+                    if (!owner.TryGetComponent<StudioListener>(out var fmodListener))
+                    {
+                        fmodListener = owner.AddComponent<StudioListener>();
+                        if (!fmodListener)
+                        {
+                            Debug.LogWarning($"Failed to ensure a {nameof(StudioListener)} on {owner.name}");
+                            return;
+                        }
+                        
+                        EditorUtility.SetDirty(owner);
+                    }
+                    else
+                    {
+                        Debug.Log($"{owner.name} already has a {nameof(StudioListener)}");
+                    }
                 }
             }
-            
+    
             DestroyDuplicateListeners();
         }
 
@@ -83,6 +86,8 @@ namespace OCSFXEditor.FMOD
                 {
                     Object.DestroyImmediate(listeners[i]);
                 }
+                
+                EditorUtility.SetDirty(obj);
             }
         }
     }

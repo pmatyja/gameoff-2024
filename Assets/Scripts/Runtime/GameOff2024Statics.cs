@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using OCSFX.FMOD.Components;
 using Runtime.Collectables;
 using Runtime.SceneLoading;
+using Runtime.UI;
 using Runtime.World;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -30,6 +31,7 @@ namespace Runtime
         private static SceneLoader _levelPreloader;
         private static Canvas _uguiCanvas;
         private static ItemInventory _itemInventory;
+        private static ScoreUI _scoreUI;
         
         private static readonly Dictionary<float, WaitForSeconds> _waitForSeconds = new Dictionary<float, WaitForSeconds>();
         
@@ -67,6 +69,7 @@ namespace Runtime
             
             GetScreenFade().transform.SetParent(_uguiCanvas.transform, false);
             GetLoadingScreen().transform.SetParent(_uguiCanvas.transform, false);
+            
             GetSceneLoadManager();
             
             // If the current scene is in the exclusion list, do not initialize the following singletons;
@@ -206,6 +209,9 @@ namespace Runtime
         
         public static SceneLoadManager GetSceneLoadManager() =>
             GetOrCreateObject(ref _sceneLoadManager, GameOff2024GameSettings.Get().SceneLoadManagerPrefab);
+        
+        public static ScoreUI GetScoreUI() => 
+            GetOrCreateObject(ref _scoreUI, GameOff2024GameSettings.Get().ScoreUIPrefab);
         
         public static int GetOptionalCollectableTotal() => 
             GameOff2024GameSettings.Get().TotalOptionalCollectables;

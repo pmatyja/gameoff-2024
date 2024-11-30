@@ -5,6 +5,7 @@ using OCSFX.Utility.Debug;
 using Runtime.Cameras;
 using Runtime.Collectables;
 using Runtime.SceneLoading;
+using Runtime.UI;
 using Runtime.Utility;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -33,6 +34,7 @@ namespace Runtime
         [field: SerializeField, Expandable] public LoadingScreen LoadingScreenPrefab { get; private set; }
         [field: SerializeField, Expandable] public SceneLoadManager SceneLoadManagerPrefab { get; private set; }
         [field: SerializeField, Expandable] public ScreenFade ScreenFadePrefab { get; private set; }
+        [field: SerializeField, Expandable] public ScoreUI ScoreUIPrefab { get; private set; }
         
         [field: Header("Game")]
         [field: SerializeField, Expandable] public ItemInventory ItemInventoryPrefab { get; private set; }
@@ -40,6 +42,7 @@ namespace Runtime
         [SerializeField, Readonly] private int _totalOptionalCollectables = 15;
         [field: SerializeField, BuildSceneName] public string MainMenuSceneName = "MainMenu";
         [field: SerializeField, BuildSceneName] public string EndingSceneName = "Ending";
+        [field: SerializeField, BuildSceneName] public string StartGameSceneName = "Game";
         // [field: SerializeField, Expandable] public SceneLoader LevelPreloaderPrefab { get; private set; }
 
         [field: SerializeField, BuildSceneName]
@@ -100,6 +103,7 @@ namespace Runtime
                 (SceneLoadManagerPrefab, nameof(SceneLoadManagerPrefab)),
                 (ScreenFadePrefab, nameof(ScreenFadePrefab)),
                 (ItemInventoryPrefab, nameof(ItemInventoryPrefab)),
+                (ScoreUIPrefab, nameof(ScoreUIPrefab)),
             };
 
             foreach (var (field, fieldName) in fields)
