@@ -8,6 +8,7 @@ using Runtime.World;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 #if UNITY_EDITOR
@@ -32,6 +33,7 @@ namespace Runtime
         private static Canvas _uguiCanvas;
         private static ItemInventory _itemInventory;
         private static ScoreUI _scoreUI;
+        private static RawImage _videoScreen;
         
         private static readonly Dictionary<float, WaitForSeconds> _waitForSeconds = new Dictionary<float, WaitForSeconds>();
         
@@ -114,6 +116,7 @@ namespace Runtime
             TryDestroyGameObject(_uiHoverDetector);
             TryDestroyGameObject(_hudController);
             TryDestroyGameObject(_itemInventory);
+            TryDestroyGameObject(_videoScreen);
         }
 
         private static void GetGameplayOnlySingletons()
@@ -125,6 +128,7 @@ namespace Runtime
             GetUIHoverDetector();
             GetHudController();
             GetItemInventory();
+            GetVideoScreen().transform.SetParent(_uguiCanvas.transform, false);
         }
         
         private static bool TryDestroyGameObject(Component component)
@@ -212,6 +216,9 @@ namespace Runtime
         
         public static ScoreUI GetScoreUI() => 
             GetOrCreateObject(ref _scoreUI, GameOff2024GameSettings.Get().ScoreUIPrefab);
+        
+        public static RawImage GetVideoScreen() =>
+            GetOrCreateObject(ref _videoScreen, GameOff2024GameSettings.Get().VideoScreenPrefab);
         
         public static int GetOptionalCollectableTotal() => 
             GameOff2024GameSettings.Get().TotalOptionalCollectables;

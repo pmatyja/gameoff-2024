@@ -11,6 +11,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 namespace Runtime
 {
@@ -35,6 +36,7 @@ namespace Runtime
         [field: SerializeField, Expandable] public SceneLoadManager SceneLoadManagerPrefab { get; private set; }
         [field: SerializeField, Expandable] public ScreenFade ScreenFadePrefab { get; private set; }
         [field: SerializeField, Expandable] public ScoreUI ScoreUIPrefab { get; private set; }
+        [field: SerializeField, Expandable] public RawImage VideoScreenPrefab { get; private set; }
         
         [field: Header("Game")]
         [field: SerializeField, Expandable] public ItemInventory ItemInventoryPrefab { get; private set; }
@@ -104,6 +106,7 @@ namespace Runtime
                 (ScreenFadePrefab, nameof(ScreenFadePrefab)),
                 (ItemInventoryPrefab, nameof(ItemInventoryPrefab)),
                 (ScoreUIPrefab, nameof(ScoreUIPrefab)),
+                (VideoScreenPrefab, nameof(VideoScreenPrefab)),
             };
 
             foreach (var (field, fieldName) in fields)

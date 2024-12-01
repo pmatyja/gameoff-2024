@@ -4,6 +4,9 @@
 		<property name="name">
 			<value>SX</value>
 		</property>
+		<property name="maxInstances">
+			<value>1</value>
+		</property>
 		<relationship name="masters">
 			<destination>{667a4a1e-680b-430e-9ad8-fd64874c2602}</destination>
 		</relationship>
