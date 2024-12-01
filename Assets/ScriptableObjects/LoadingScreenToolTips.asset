@@ -13,6 +13,18 @@ MonoBehaviour:
   m_Name: LoadingScreenToolTips
   m_EditorClassIdentifier: 
   _collection:
-  - _key: Default
-    _header: This is a Header
-    _text: This is the body text for the loading screen tooltip.
+  - _key: Hidden Treasures
+    _header: Hidden Treasures
+    _text: Remember to rotate the camera using RMB to spot hidden treasures
+  - _key: Solving Puzzles
+    _header: Solving Puzzles
+    _text: Zooming in/out could help you solve the puzzle
+  - _key: Gramma Safe
+    _header: Gramma Safe
+    _text: No gramma was hurt during making of this game
+  - _key: Moving Blocks
+    _header: Moving Blocks
+    _text: Try clicking on blocks to move them out of your way
+  - _key: Character Outline
+    _header: Character Outline
+    _text: If blocks are obstructing your view you will see an outline of a character
