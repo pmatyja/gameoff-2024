@@ -6,10 +6,6 @@
             <ui:VisualElement name="RollingCredits" class="page" style="flex-grow: 1; -unity-font-definition: resource(&apos;Shared/FNA_base&apos;);">
                 <ui:VisualElement name="Logo" />
                 <ui:GroupBox name="Item" class="credits-item">
-                    <ui:Label text="Programmer" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
-                    <ui:Label text="Piotr Matyja" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
-                </ui:GroupBox>
-                <ui:GroupBox name="Item" class="credits-item">
                     <ui:Label text="Sound Designer&#10;Programmer&#10;Level Designer" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
                     <ui:Label text="Owen Cooper" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
                 </ui:GroupBox>
@@ -24,6 +20,10 @@
                 <ui:GroupBox name="Item" class="credits-item">
                     <ui:Label text="2D Artist" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
                     <ui:Label text="Moss" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                </ui:GroupBox>
+                <ui:GroupBox name="Item" class="credits-item">
+                    <ui:Label text="Programmer" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                    <ui:Label text="Piotr Matyja" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
                 </ui:GroupBox>
                 <ui:VisualElement class="credits-thanks" style="color: rgb(255, 255, 255);">
                     <ui:Label tabindex="-1" text="Thank you for playing" parse-escape-sequences="true" display-tooltip-when-elided="true" class="credits-thanks" style="font-size: 36px;" />

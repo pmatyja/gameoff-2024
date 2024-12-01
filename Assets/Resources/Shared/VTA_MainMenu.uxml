@@ -23,10 +23,6 @@
                         <ui:GroupBox name="Credits" focusable="true" class="subpage page" style="opacity: 1; display: none; background-color: rgba(0, 0, 0, 0.9);">
                             <ui:GroupBox name="Content" picking-mode="Ignore" class="page-content credits-section" style="display: flex;">
                                 <ui:GroupBox name="Item" class="credits-item">
-                                    <ui:Label text="Programmer" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
-                                    <ui:Label text="Piotr Matyja" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
-                                </ui:GroupBox>
-                                <ui:GroupBox name="Item" class="credits-item">
                                     <ui:Label text="Sound Designer&#10;Programmer&#10;Level Designer" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
                                     <ui:Label text="Owen Cooper" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
                                 </ui:GroupBox>
@@ -41,6 +37,10 @@
                                 <ui:GroupBox name="Item" class="credits-item">
                                     <ui:Label text="2D Artist" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
                                     <ui:Label text="Moss" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                                </ui:GroupBox>
+                                <ui:GroupBox name="Item" class="credits-item">
+                                    <ui:Label text="Programmer" display-tooltip-when-elided="true" name="Title" class="credits-title" style="color: rgb(255, 174, 0); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
+                                    <ui:Label text="Piotr Matyja" display-tooltip-when-elided="true" name="Name" class="credits-name" style="color: rgb(255, 255, 255); text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);" />
                                 </ui:GroupBox>
                             </ui:GroupBox>
                             <ui:GroupBox name="Menu" class="menu page-menu">
