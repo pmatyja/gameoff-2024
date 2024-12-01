@@ -29856,16 +29856,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2880788499378790600, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
       propertyPath: m_VersionIndex
-      value: 65
+      value: 71
       objectReference: {fileID: 0}
-    - target: {fileID: 4462443780714101728, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
-      propertyPath: <OnKeyInsertedEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 481685233917733078}
-    - target: {fileID: 4462443780714101728, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
-      propertyPath: <OnAllKeysInsertedEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 5209200135623684756}
     - target: {fileID: 5752669784970119741, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
       propertyPath: m_Name
       value: GOLDEN_DOOR
@@ -29912,40 +29904,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7312233748842362662, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
       propertyPath: m_VersionIndex
-      value: 1070
+      value: 1076
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
---- !u!114 &481685233917733078 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8638439427205087313, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
-  m_PrefabInstance: {fileID: 8164653179753883783}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4319c3ea42a4db4499da34b0751e73b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &3183387913870058883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6729229689673567492, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
   m_PrefabInstance: {fileID: 8164653179753883783}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5209200135623684756 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4108522162015066643, guid: 52567f3324209fd47b6622a5693c606e, type: 3}
-  m_PrefabInstance: {fileID: 8164653179753883783}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4319c3ea42a4db4499da34b0751e73b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8243364692544069606
 PrefabInstance:
   m_ObjectHideFlags: 0
