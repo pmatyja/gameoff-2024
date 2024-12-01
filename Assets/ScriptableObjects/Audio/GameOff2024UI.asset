@@ -41,11 +41,11 @@ MonoBehaviour:
   - _name: BackButtonPress
     _eventRef:
       Guid:
-        Data1: 358676500
-        Data2: 1174037204
-        Data3: -632713559
-        Data4: 1450003704
-      Path: event:/SX/UI/sx_ui_hover
+        Data1: -679775196
+        Data2: 1307197722
+        Data3: -758420562
+        Data4: -957433613
+      Path: event:/SX/UI/sx_ui_cancel
   - _name: ButtonPress
     _eventRef:
       Guid:
@@ -53,7 +53,7 @@ MonoBehaviour:
         Data2: 1235256650
         Data3: -269201277
         Data4: 1031237325
-      Path: event:/SX/UI/sx_ui_select
+      Path: event:/SX/UI/sx_ui_confirm
   - _name: Focus
     _eventRef:
       Guid:
