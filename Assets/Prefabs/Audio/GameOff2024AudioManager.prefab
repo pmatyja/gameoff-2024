@@ -59,12 +59,12 @@ MonoBehaviour:
   _testGameObject: {fileID: 5097742136684402603}
   _testEventRef:
     Guid:
-      Data1: -241617314
-      Data2: 1240376142
-      Data3: -236158022
-      Data4: 77835046
-    Path: event:/Debug/sx_debug_mixTest_pinkNoise
-  _playTestEventOnStart: 0
+      Data1: -1095542441
+      Data2: 1136431929
+      Data3: -353398356
+      Data4: 1181245032
+    Path: snapshot:/Main
+  _playTestEventOnStart: 1
   _showDebug: 1
 --- !u!114 &4959973056717919816
 MonoBehaviour:
@@ -81,7 +81,7 @@ MonoBehaviour:
   _musicAudioData: {fileID: 11400000, guid: c0b8c3c6d2c59c641abe0325d5801cf2, type: 2}
   _volumeSettings: {fileID: 11400000, guid: dc8bf32066040dc418705e8fae40b699, type: 2}
   _musicVolumeParamName: Volume_MX
-  _resetParametersOnEnable: 0
+  _resetParametersOnEnable: 1
   _mute: 0
   _onStartupBanksLoaded:
     m_PersistentCalls:

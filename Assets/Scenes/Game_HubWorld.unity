@@ -329,6 +329,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3168784541308854285, guid: f6d04c6aa7f163b47866119b24070a5d, type: 3}
   m_PrefabInstance: {fileID: 5371708399013324884}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &57680460
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4617062777218864539, guid: 1d083d56467181747be7e1a9b6178fb5, type: 3}
+      propertyPath: m_Name
+      value: LevelsPreloader
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701989037467913832, guid: 1d083d56467181747be7e1a9b6178fb5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701989037467913832, guid: 1d083d56467181747be7e1a9b6178fb5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701989037467913832, guid: 1d083d56467181747be7e1a9b6178fb5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701989037467913832, guid: 1d083d56467181747be7e1a9b6178fb5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701989037467913832, guid: 1d083d56467181747be7e1a9b6178fb5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701989037467913832, guid: 1d083d56467181747be7e1a9b6178fb5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701989037467913832, guid: 1d083d56467181747be7e1a9b6178fb5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701989037467913832, guid: 1d083d56467181747be7e1a9b6178fb5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701989037467913832, guid: 1d083d56467181747be7e1a9b6178fb5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701989037467913832, guid: 1d083d56467181747be7e1a9b6178fb5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1d083d56467181747be7e1a9b6178fb5, type: 3}
 --- !u!4 &58870825 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5915865402572115010, guid: 91b74620df67e7b409f9a96857a5b958, type: 3}
@@ -4543,6 +4600,10 @@ PrefabInstance:
     - target: {fileID: 5855497072998571354, guid: a4da693b249b64b478b43f3698aaf202, type: 3}
       propertyPath: m_Name
       value: Level_Entry_Archway_LVL_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5855497072998571354, guid: a4da693b249b64b478b43f3698aaf202, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5986327011119189530, guid: a4da693b249b64b478b43f3698aaf202, type: 3}
       propertyPath: m_Mesh
@@ -33625,6 +33686,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUB_Structure_FINAL_EXIT
       objectReference: {fileID: 0}
+    - target: {fileID: 8309293256217233775, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8486152161541689019, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -49247,6 +49312,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level_Entry_Archway_LVL_03
       objectReference: {fileID: 0}
+    - target: {fileID: 4734142100295662839, guid: fb0326bd4ca5df14982c1e02aea992fa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4747607920740836013, guid: fb0326bd4ca5df14982c1e02aea992fa, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -50271,6 +50340,7 @@ SceneRoots:
   - {fileID: 1888989388}
   - {fileID: 248926125}
   - {fileID: 509798187}
+  - {fileID: 57680460}
   - {fileID: 453927794}
   - {fileID: 1640828841}
   - {fileID: 1953391527}
