@@ -1449,6 +1449,7 @@ GameObject:
   - component: {fileID: 1365534541091194456}
   - component: {fileID: 1081298334191359807}
   - component: {fileID: 2918891860001950332}
+  - component: {fileID: 6708616083402650946}
   m_Layer: 0
   m_Name: GOLDEN_DOOR
   m_TagString: Untagged
@@ -1511,6 +1512,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: OCSFX.FMOD.FmodParameterObject, OCSFX.FMOD
         m_MethodName: SetGlobalValue
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6708616083402650946}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1857,6 +1870,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6708616083402650946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752669784970119741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4319c3ea42a4db4499da34b0751e73b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 2078388489
+      Data2: 1144422177
+      Data3: 2038662810
+      Data4: 1838965923
+    Path: event:/SX/INT/Door/sx_int_door_golden_key_insert
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &7458904281634219025
 GameObject:
   m_ObjectHideFlags: 0
