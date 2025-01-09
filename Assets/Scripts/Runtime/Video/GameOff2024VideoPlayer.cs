@@ -18,6 +18,7 @@ public class GameOff2024VideoPlayer : Singleton<GameOff2024VideoPlayer>
     
     [field: Space]
     [field: SerializeField] public UnityEvent<VideoPlayer> OnVideoStart { get; private set; }
+    [field: SerializeField] public UnityEvent<VideoPlayer> OnVideoStop { get; private set; }
     [field: SerializeField] public UnityEvent<VideoPlayer> OnVideoComplete { get; private set; }
 
     protected override void Awake()
@@ -43,17 +44,34 @@ public class GameOff2024VideoPlayer : Singleton<GameOff2024VideoPlayer>
     [ContextMenu(nameof(EditorPlay))]
     public void EditorPlay() => Play();
     
-    [ContextMenu(nameof(EditorPause))]
-    public void EditorPause() => Pause();
-    
     [ContextMenu(nameof(EditorStop))]
     public void EditorStop() => Stop();
     
 #endif //UNITY_EDITOR
 
-    public static void Play() => Instance._videoPlayer.Play();
-    public static void Pause() => Instance._videoPlayer.Pause();
-    public static void Stop() => Instance._videoPlayer.Stop();
+    public static void Play()
+    {
+        Instance._videoPlayer.Prepare();
+        OnPlay();
+    }
+
+    public static void Stop()
+    {
+        OnStop();
+    }
+
+    private static void OnPlay()
+    {
+        Instance._videoPlayer.Play();
+    }
+
+    private static void OnStop()
+    {   
+        Instance._videoPlayer.time = 0;
+        Instance._videoPlayer.Stop();
+        
+        Instance.OnVideoStop.Invoke(Instance._videoPlayer);
+    }
 
     private string GetRelativeVideoPath()
     {

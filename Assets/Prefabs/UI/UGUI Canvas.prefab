@@ -112,8 +112,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 901175069270068571}
+  - component: {fileID: 4457944263537302134}
   - component: {fileID: 5212260245121566582}
   - component: {fileID: 4842201841968993475}
+  - component: {fileID: 8066107553695737792}
   m_Layer: 5
   m_Name: VideoPlayerScreen
   m_TagString: Untagged
@@ -140,6 +142,22 @@ RectTransform:
   m_AnchoredPosition: {x: -0, y: -0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4457944263537302134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6133398144630191960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc282978f4d342f43a2366e719ece7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
+  _alpha: 1
+  _fadeInDuration: 1
+  _fadeOutDuration: 1
 --- !u!222 &5212260245121566582
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -162,7 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -175,6 +193,18 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!225 &8066107553695737792
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6133398144630191960}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &9179793259587159033
 PrefabInstance:
   m_ObjectHideFlags: 0
