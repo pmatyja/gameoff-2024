@@ -1,13 +1,12 @@
 using System;
 using OCSFX.Attributes;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Video;
 using Object = UnityEngine.Object;
-using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
 using UnityEditor;
-using UnityEditor.SceneManagement;
 #endif //UNITY_EDITOR
 
 public class GameOff2024VideoPlayer : Singleton<GameOff2024VideoPlayer>
@@ -16,6 +15,10 @@ public class GameOff2024VideoPlayer : Singleton<GameOff2024VideoPlayer>
     [SerializeField, Tooltip("Video clip must be in Assets/StreamingAssets/")] private Object _videoClip;
     [SerializeField, ReadOnly] private string _streamingAssetsPath = "Assets/StreamingAssets/";
     [SerializeField, ReadOnly] private string _relativeVideoPath = string.Empty;
+    
+    [field: Space]
+    [field: SerializeField] public UnityEvent<VideoPlayer> OnVideoStart { get; private set; }
+    [field: SerializeField] public UnityEvent<VideoPlayer> OnVideoComplete { get; private set; }
 
     protected override void Awake()
     {
@@ -23,7 +26,35 @@ public class GameOff2024VideoPlayer : Singleton<GameOff2024VideoPlayer>
 
         TryUpdateUrl();
     }
+
+    private void OnEnable()
+    {
+        _videoPlayer.started += OnVideoStart.Invoke;
+        _videoPlayer.loopPointReached += OnVideoComplete.Invoke;
+    }
+
+    private void OnDisable()
+    {
+        _videoPlayer.started -= OnVideoStart.Invoke;
+        _videoPlayer.loopPointReached -= OnVideoComplete.Invoke;
+    }
     
+#if UNITY_EDITOR
+    [ContextMenu(nameof(EditorPlay))]
+    public void EditorPlay() => Play();
+    
+    [ContextMenu(nameof(EditorPause))]
+    public void EditorPause() => Pause();
+    
+    [ContextMenu(nameof(EditorStop))]
+    public void EditorStop() => Stop();
+    
+#endif //UNITY_EDITOR
+
+    public static void Play() => Instance._videoPlayer.Play();
+    public static void Pause() => Instance._videoPlayer.Pause();
+    public static void Stop() => Instance._videoPlayer.Stop();
+
     private string GetRelativeVideoPath()
     {
         _streamingAssetsPath = Application.streamingAssetsPath;
