@@ -93,6 +93,8 @@ public class GameOff2024VideoPlayer : MonoBehaviour
 
     public void Play()
     {
+        TryUpdateUrl();
+        
         _videoPlayer.Prepare();
         _videoPlayer.prepareCompleted += (_)=> OnPlay();
     }
@@ -129,10 +131,10 @@ public class GameOff2024VideoPlayer : MonoBehaviour
         _relativeVideoPath = _videoClip ? AssetDatabase.GetAssetPath(_videoClip) : string.Empty;
 #endif // UNITY_EDITOR
         
-        if (!_relativeVideoPath.Contains(projectRelativeStreamingAssetsPath))
-        {
-            throw new Exception($"Video clip must be in {projectRelativeStreamingAssetsPath}");
-        }
+        // if (!_relativeVideoPath.Contains(projectRelativeStreamingAssetsPath))
+        // {
+        //     throw new Exception($"Video clip must be in {projectRelativeStreamingAssetsPath}");
+        // }
         
         _relativeVideoPath = _relativeVideoPath.Replace(projectRelativeStreamingAssetsPath, string.Empty);
 

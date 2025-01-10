@@ -60,6 +60,8 @@ namespace Runtime.SceneLoading
                 timer += Time.deltaTime;
                 yield return null;
             }
+            
+            _canvasGroup.alpha = 1;
 
             onComplete?.Invoke();
         }
@@ -76,6 +78,8 @@ namespace Runtime.SceneLoading
                 timer += Time.deltaTime;
                 yield return null;
             }
+            
+            _canvasGroup.alpha = 0;
 
             onComplete?.Invoke();
         }
