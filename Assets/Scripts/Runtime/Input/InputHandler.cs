@@ -87,6 +87,9 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
             gameplayUIActions.Resume.action.performed += OnResumeInputPerformed;
             
             EventBus.AddListener<PauseMenuController.UIEventParameters>(OnPauseMenuToggle);
+
+            GameOff2024VideoPlayerScreen.OnScreenEnabled += OnVideoScreenEnabled;
+            GameOff2024VideoPlayerScreen.OnScreenDisabled += OnVideoScreenDisabled;
             
             Application.quitting += Deinitialize;
         }
@@ -106,9 +109,20 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
             
             EventBus.RemoveListener<PauseMenuController.UIEventParameters>(OnPauseMenuToggle);
             
+            GameOff2024VideoPlayerScreen.OnScreenEnabled -= OnVideoScreenEnabled;
+            GameOff2024VideoPlayerScreen.OnScreenDisabled -= OnVideoScreenDisabled;
+            
             Application.quitting -= Deinitialize;
         }
     }
+
+    private static void OnVideoScreenEnabled() => DisableInput();
+
+    private static void OnVideoScreenDisabled() => EnableInput();
+
+    public static void DisableInput() => Get().InputActions.Disable();
+
+    public static void EnableInput() => Get().InputActions.Enable();
 
     private static void OnPauseMenuToggle(object sender, PauseMenuController.UIEventParameters info)
     {

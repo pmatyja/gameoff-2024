@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,9 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
     
     [field: Space]
     [SerializeField, Range(0,1)] private float _alpha = 1;
+
+    public static event Action OnScreenEnabled;
+    public static event Action OnScreenDisabled;
 
     protected override void Awake()
     {
@@ -113,6 +117,8 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
         _instance._alpha = 1;
         _instance._canvasGroup.alpha = Instance._alpha;
         _instance._canvasGroup.blocksRaycasts = true;
+        
+        OnScreenEnabled?.Invoke();
     }
 
     private static void Disable()
@@ -123,6 +129,6 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
         _instance._canvasGroup.alpha = Instance._alpha;
         _instance._canvasGroup.blocksRaycasts = false;
         
-        _instance.StopAllCoroutines();
+        OnScreenDisabled?.Invoke();
     }
 }
