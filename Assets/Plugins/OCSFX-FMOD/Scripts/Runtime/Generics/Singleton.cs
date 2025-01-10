@@ -1,3 +1,4 @@
+using System;
 using OCSFX.Utility.Debug;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -25,6 +26,8 @@ namespace OCSFX.Generics
             }
         }
 
+        public static event Action OnInitialized;
+
         protected virtual void Awake() => SetupSingleton();
         protected virtual void OnDestroy() => ClearSelfAsInstance();
         protected virtual void OnApplicationQuit() => ClearSelfAsInstance();
@@ -50,6 +53,8 @@ namespace OCSFX.Generics
             }
             
             _instance = (T)this;
+            
+            OnInitialized?.Invoke();
 
             if (!_dontDestroyOnLoad) return;
 

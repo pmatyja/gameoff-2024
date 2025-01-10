@@ -32,6 +32,7 @@ namespace Runtime
         private static Canvas _uguiCanvas;
         private static ItemInventory _itemInventory;
         private static ScoreUI _scoreUI;
+        private static GameOff2024VideoPlayer _videoPlayer;
         
         private static readonly Dictionary<float, WaitForSeconds> _waitForSeconds = new Dictionary<float, WaitForSeconds>();
         
@@ -114,6 +115,7 @@ namespace Runtime
             TryDestroyGameObject(_uiHoverDetector);
             TryDestroyGameObject(_hudController);
             TryDestroyGameObject(_itemInventory);
+            TryDestroyGameObject(_videoPlayer);
         }
 
         private static void GetGameplayOnlySingletons()
@@ -125,6 +127,7 @@ namespace Runtime
             GetUIHoverDetector();
             GetHudController();
             GetItemInventory();
+            GetVideoPlayer();
         }
         
         private static bool TryDestroyGameObject(Component component)
@@ -226,6 +229,9 @@ namespace Runtime
                 OnOptionalCollectableTotalChanged?.Invoke(GetOptionalCollectableTotal());
             }
         }
+        
+        public static GameOff2024VideoPlayer GetVideoPlayer() => 
+            GetOrCreateObject(ref _videoPlayer, GameOff2024GameSettings.Get().VideoPlayerPrefab);
 
 
         // HELPER FUNCTIONS

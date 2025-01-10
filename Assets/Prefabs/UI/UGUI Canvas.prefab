@@ -154,10 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc282978f4d342f43a2366e719ece7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 0
+  _dontDestroyOnLoad: 0
+  _singletonBehavior: 0
   _alpha: 1
-  _fadeInDuration: 1
-  _fadeOutDuration: 1
 --- !u!222 &5212260245121566582
 CanvasRenderer:
   m_ObjectHideFlags: 0

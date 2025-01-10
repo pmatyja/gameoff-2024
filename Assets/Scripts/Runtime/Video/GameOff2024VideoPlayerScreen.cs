@@ -1,48 +1,112 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
 [RequireComponent(typeof(RawImage), typeof(CanvasGroup))]
-public class GameOff2024VideoPlayerScreen : Singleton<GameOff2024VideoPlayerScreen>
+public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024VideoPlayerScreen>
 {
     private CanvasGroup _canvasGroup;
     
+    private static readonly List<GameOff2024VideoPlayer> _registeredVideoPlayers = new List<GameOff2024VideoPlayer>();
+    
     [field: Space]
     [SerializeField, Range(0,1)] private float _alpha = 1;
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void RuntimeInit()
+    {
+        Application.quitting += () => _registeredVideoPlayers.Clear();
+    }
+
+    protected override void Awake()
+    {
+        _dontDestroyOnLoad = false;
+        base.Awake();
+    }
 
     private void Start()
     {
         if (!_canvasGroup) _canvasGroup = GetComponent<CanvasGroup>();
         Disable();
     }
-
-    private void OnEnable()
+    
+    public static void RegisterVideoPlayer(GameOff2024VideoPlayer videoPlayer)
     {
-        GameOff2024VideoPlayer.Instance.OnVideoStart.AddListener(OnVideoStart);
-        GameOff2024VideoPlayer.Instance.OnVideoStop.AddListener(OnVideoStop);
-        GameOff2024VideoPlayer.Instance.OnVideoComplete.AddListener(OnVideoComplete);
+        if (_registeredVideoPlayers.Contains(videoPlayer)) return;
+        
+        _registeredVideoPlayers.Add(videoPlayer);
+
+        if (!_instance)
+        {
+            OnInitialized += () => _instance.SetEventBindings(videoPlayer, true);
+        }
+        else
+        {
+            _instance.SetEventBindings(videoPlayer, true);
+        }
     }
     
-    private void OnDisable()
+    public static void UnregisterVideoPlayer(GameOff2024VideoPlayer videoPlayer)
     {
-        GameOff2024VideoPlayer.Instance.OnVideoStart.RemoveListener(OnVideoStart);
-        GameOff2024VideoPlayer.Instance.OnVideoStop.RemoveListener(OnVideoStop);
-        GameOff2024VideoPlayer.Instance.OnVideoComplete.RemoveListener(OnVideoComplete);
+        if (!_registeredVideoPlayers.Contains(videoPlayer)) return;
+        
+        _registeredVideoPlayers.Remove(videoPlayer);
+        
+        if (!_instance)
+        {
+            OnInitialized += () => _instance.SetEventBindings(videoPlayer, false);
+        }
+        else
+        {
+            _instance.SetEventBindings(videoPlayer, false);
+        }
     }
 
-    private void OnVideoStart(VideoPlayer videoPlayerComp)
+    private void SetEventBindings(GameOff2024VideoPlayer videoPlayer, bool bind)
+    {
+        if (!videoPlayer)
+        {
+            Debug.LogError("Video player is null", this);
+            return;
+        }
+        
+        if (bind)
+        {
+            videoPlayer.OnVideoStart.AddListener(OnVideoStart);
+            videoPlayer.OnVideoStop.AddListener(OnVideoStop);
+            videoPlayer.OnVideoComplete.AddListener(OnVideoComplete);
+        }
+        else
+        {
+            videoPlayer.OnVideoStart.RemoveListener(OnVideoStart);
+            videoPlayer.OnVideoStop.RemoveListener(OnVideoStop);
+            videoPlayer.OnVideoComplete.RemoveListener(OnVideoComplete);   
+        }
+    }
+
+    private void OnVideoStart(GameOff2024VideoPlayer videoPlayer)
     {
         Enable();
     }
     
-    private void OnVideoStop(VideoPlayer videoPlayerComp)
+    private void OnVideoStop(GameOff2024VideoPlayer videoPlayer)
     {
         Disable();
     }
 
-    private void OnVideoComplete(VideoPlayer videoPlayerComp)
+    private void OnVideoComplete(GameOff2024VideoPlayer videoPlayer)
     {
-        Disable();
+        if (videoPlayer.VideoPlayer.isPlaying)
+        {
+            videoPlayer.VideoPlayer.loopPointReached += _ => Disable();
+            SceneManager.sceneUnloaded += _ => Disable();
+        }
+        else
+        {
+            Disable();
+        }
     }
 
     private static void Enable()
