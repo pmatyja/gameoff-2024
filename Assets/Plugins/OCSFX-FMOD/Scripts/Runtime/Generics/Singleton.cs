@@ -30,11 +30,19 @@ namespace OCSFX.Generics
 
         protected virtual void Awake() => SetupSingleton();
         protected virtual void OnDestroy() => ClearSelfAsInstance();
-        protected virtual void OnApplicationQuit() => ClearSelfAsInstance();
+
+        protected virtual void OnApplicationQuit()
+        {
+            ClearSelfAsInstance();
+        }
         
         private void ClearSelfAsInstance()
         {
-            if (_instance == this) _instance = null;
+            if (_instance == this)
+            {
+                _instance = null;
+                OnInitialized = null;
+            }
         }
         
         private void SetupSingleton()

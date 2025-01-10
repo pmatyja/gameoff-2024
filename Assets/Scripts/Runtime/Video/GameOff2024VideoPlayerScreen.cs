@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Video;
 
 [RequireComponent(typeof(RawImage), typeof(CanvasGroup))]
 public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024VideoPlayerScreen>
@@ -14,24 +13,26 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
     [field: Space]
     [SerializeField, Range(0,1)] private float _alpha = 1;
 
-    [RuntimeInitializeOnLoadMethod]
-    private static void RuntimeInit()
-    {
-        Application.quitting += () => _registeredVideoPlayers.Clear();
-    }
-
     protected override void Awake()
     {
         _dontDestroyOnLoad = false;
         base.Awake();
+        
+        if (!_canvasGroup) _canvasGroup = GetComponent<CanvasGroup>();
     }
 
     private void Start()
     {
-        if (!_canvasGroup) _canvasGroup = GetComponent<CanvasGroup>();
         Disable();
     }
-    
+
+    protected override void OnApplicationQuit()
+    {
+        base.OnApplicationQuit();
+        
+        _registeredVideoPlayers.Clear();
+    }
+
     public static void RegisterVideoPlayer(GameOff2024VideoPlayer videoPlayer)
     {
         if (_registeredVideoPlayers.Contains(videoPlayer)) return;
@@ -53,15 +54,11 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
         if (!_registeredVideoPlayers.Contains(videoPlayer)) return;
         
         _registeredVideoPlayers.Remove(videoPlayer);
+
+        if (!_instance) return;
+
+        _instance.SetEventBindings(videoPlayer, false);
         
-        if (!_instance)
-        {
-            OnInitialized += () => _instance.SetEventBindings(videoPlayer, false);
-        }
-        else
-        {
-            _instance.SetEventBindings(videoPlayer, false);
-        }
     }
 
     private void SetEventBindings(GameOff2024VideoPlayer videoPlayer, bool bind)
@@ -111,17 +108,21 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
 
     private static void Enable()
     {
-        Instance._alpha = 1;
-        Instance._canvasGroup.alpha = Instance._alpha;
-        Instance._canvasGroup.blocksRaycasts = true;
+        if (!_instance) return;
+        
+        _instance._alpha = 1;
+        _instance._canvasGroup.alpha = Instance._alpha;
+        _instance._canvasGroup.blocksRaycasts = true;
     }
 
     private static void Disable()
     {
-        Instance._alpha = 0;
-        Instance._canvasGroup.alpha = Instance._alpha;
-        Instance._canvasGroup.blocksRaycasts = false;
+        if (!_instance) return;
         
-        Instance.StopAllCoroutines();
+        _instance._alpha = 0;
+        _instance._canvasGroup.alpha = Instance._alpha;
+        _instance._canvasGroup.blocksRaycasts = false;
+        
+        _instance.StopAllCoroutines();
     }
 }
