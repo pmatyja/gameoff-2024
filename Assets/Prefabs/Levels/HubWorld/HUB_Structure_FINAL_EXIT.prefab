@@ -26524,9 +26524,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2315262585022273602, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
+      propertyPath: m_Url
+      value: D:/Projects/Game Projects/Unity Projects/Remote Repos/GameOff-2024/Assets/StreamingAssets/Video/EndingCutscene_720p30.mp4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
+      propertyPath: _videoClip
+      value: 
+      objectReference: {fileID: 102900000, guid: 8dc9747b06de68245b8b94ff2bfa5d8d, type: 3}
     - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
       propertyPath: _endingBuffer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
+      propertyPath: _relativeVideoPath
+      value: Video/EndingCutscene_720p30.mp4
       objectReference: {fileID: 0}
     - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
       propertyPath: <OnVideoStart>k__BackingField.m_PersistentCalls.m_Calls.Array.size
