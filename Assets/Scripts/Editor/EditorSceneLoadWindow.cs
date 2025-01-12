@@ -1,6 +1,4 @@
-﻿using System;
-using Runtime;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,28 +13,27 @@ namespace Editor
         private int _selectedIndex;
         private LoadSceneMode _loadSceneMode = LoadSceneMode.Single;
         
-        [MenuItem(GameOff2024Statics.PROJECT_NAME + "/Load Scene")]
-        private static void ShowWindow()
+        public static void ShowWindow()
         {
             var window = GetWindow<EditorSceneLoadWindow>();
-            window.titleContent = new GUIContent(GameOff2024Statics.PROJECT_NAME + " Scene Loader");
+            window.titleContent = new GUIContent("Scene Loader");
             window.Show();
         }
 
         private void CreateGUI()
         {
             // Set the dimensions of the window
-            minSize = new Vector2(400, 100);
-            maxSize = new Vector2(400, 100);
+            minSize = new Vector2(400, 120);
+            maxSize = new Vector2(400, 120);
         }
 
         private void OnGUI()
         {
             DrawScenesDropdown();
-            
-            DrawHelpBox();
 
             DrawLoadSceneModeDropdown();
+            
+            DrawHelpBox();
             
             DrawLoadSceneButton();
         }
@@ -60,7 +57,7 @@ namespace Editor
                 if (alreadyLoaded)
                 {
                     Debug.LogWarning($"[{nameof(EditorSceneLoadWindow)}] {_sceneName} is already loaded. " +
-                                     $"Aborting load operation");
+                                     $"Aborting load operation", this);
                     return;
                 }   
             }

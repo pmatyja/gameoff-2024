@@ -22,17 +22,43 @@ namespace Runtime.SceneLoading
             _canvasGroup.alpha = 0;
         }
         
-        public void FadeIn(float duration = default, Color color = default, Action onComplete = null)
+#if UNITY_EDITOR
+        [ContextMenu(nameof(EditorFadeIn))]
+        private void EditorFadeIn()
         {
-            if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
-            _fadeRoutine = StartCoroutine(Co_FadeIn(duration == default ? _defaultFadeDuration : duration, color, onComplete));
+            FadeIn(_defaultFadeDuration, _defaultFadeColor);
         }
         
-        public void FadeOut(float duration = default, Color color = default, Action onComplete = null)
+        [ContextMenu(nameof(EditorFadeOut))]
+        private void EditorFadeOut()
+        {
+            FadeOut(_defaultFadeDuration, _defaultFadeColor);
+        }
+
+        [ContextMenu(nameof(EditorFadeInOut))]
+        private void EditorFadeInOut()
+        {
+            FadeInOut(_defaultFadeDuration, _defaultSustainDuration, _defaultFadeDuration, _defaultFadeColor);
+        }
+#endif // UNITY_EDITOR
+        
+        public void FadeIn(float duration, Color color = default, Action onComplete = null)
         {
             if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
-            _fadeRoutine = StartCoroutine(Co_FadeOut(duration == default ? _defaultFadeDuration : duration, color, onComplete));
+            _fadeRoutine = StartCoroutine(Co_FadeIn(duration, color, onComplete));
         }
+        
+        public void FadeIn(Color color = default, Action onComplete = null) 
+            => FadeIn(_defaultFadeDuration, color, onComplete);
+        
+        public void FadeOut(float duration, Color color = default, Action onComplete = null)
+        {
+            if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
+            _fadeRoutine = StartCoroutine(Co_FadeOut(duration, color, onComplete));
+        }
+        
+        public void FadeOut(Color color = default, Action onComplete = null) 
+            => FadeOut(_defaultFadeDuration, color, onComplete);
 
         public void FadeInOut()
         {
@@ -42,7 +68,7 @@ namespace Runtime.SceneLoading
         }
         
         public void FadeInOut(float fadeInDuration, float sustainDuration, float fadeOutDuration, Color color, 
-            Action onFadeInComplete, Action onFadeOutComplete)
+            Action onFadeInComplete = null, Action onFadeOutComplete = null)
         {
             if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
             _fadeRoutine = StartCoroutine(Co_FadeInOut(fadeInDuration, sustainDuration, fadeOutDuration, color, onFadeInComplete, onFadeOutComplete));

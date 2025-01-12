@@ -11,9 +11,9 @@ namespace Editor
         [SerializeField] private Vector3 _rotationSteps;
         
         [MenuItem("Tools/Random Rotator")]
-        static void CreateReplaceWithPrefab()
+        public static void CreateReplaceWithPrefab()
         {
-            EditorWindow.GetWindow<EditorRandomRotatorWindow>();
+            GetWindow<EditorRandomRotatorWindow>();
         }
 
         private void OnGUI()
