@@ -7,13 +7,13 @@ namespace Runtime.Interactions
 {
     public class SimplePrefabSpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject _prefab;
-        [SerializeField] private Transform _defaultSpawnPoint;
+        [SerializeField] protected GameObject _prefab;
+        [SerializeField] protected Transform _defaultSpawnPoint;
 
         [Header("Settings")]
-        [SerializeField] private bool _spawnOnStart;
-        [SerializeField] private bool _useLifeTime;
-        [SerializeField] private float _lifeTime = 2f;
+        [SerializeField] protected bool _spawnOnStart;
+        [SerializeField] protected bool _useLifeTime;
+        [SerializeField] protected float _lifeTime = 2f;
         
         private readonly HashSet<GameObject> _instances = new HashSet<GameObject>();
 
@@ -49,7 +49,7 @@ namespace Runtime.Interactions
             SpawnAt(position, rotation);
         }
         
-        private void SpawnAt(Vector3 position, Quaternion rotation = default)
+        protected void SpawnAt(Vector3 position, Quaternion rotation = default)
         {
             if (!_prefab) return;
             
