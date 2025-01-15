@@ -9,13 +9,14 @@ namespace Runtime.Interactions
         
         [field: Header("Debug")]
         [SerializeField] private bool _showDebug;
-        [SerializeField] private bool _drawDebugSphere;
+
         [SerializeField] private float _debugSphereRadius = 0.1f;
         [SerializeField] private float _debugSphereDuration = 0.5f;
 
         private Vector3 _clickedPosition;
         private Quaternion _clickedRotation;
         
+        private bool _drawDebugSphere;
         private Coroutine _debugSphereCoroutine;
 
         private void OnMouseDown()
@@ -38,7 +39,7 @@ namespace Runtime.Interactions
                 newInstance.transform.SetParent(hitInfo.transform);
             }
             
-            if (_showDebug) DrawDebugSphere();
+            if (_showDebug && Application.isPlaying) DrawDebugSphere();
         }
         
         public void SpawnAtMousePosition()
