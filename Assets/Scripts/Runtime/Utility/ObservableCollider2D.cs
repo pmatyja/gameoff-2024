@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Runtime.Utility
 {
-    public class ObservableCollider : MonoBehaviour
+    public class ObservableCollider2D : MonoBehaviour
     {
         [Header("Filters")]
         [Tooltip("The layer mask to filter collisions.")]
@@ -15,40 +16,40 @@ namespace Runtime.Utility
         public List<string> CollisionTagFilter;
         
         [field: Header("Events")]
-        [field: SerializeField] public TriggerUnityEvents TriggerEvents { get; private set; }
-        [field: SerializeField] public CollisionUnityEvents CollisionEvents { get; private set; }
+        [field: SerializeField] public Trigger2DUnityEvents TriggerEvents { get; private set; }
+        [field: SerializeField] public Collision2DUnityEvents CollisionEvents { get; private set; }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnCollisionEnter2D(Collision2D other)
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
             CollisionEvents.OnCollisionEnterEvent?.Invoke(other);
         }
 
-        private void OnCollisionStay(Collision other)
+        private void OnCollisionStay2D(Collision2D other)
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
             CollisionEvents.OnCollisionStayEvent?.Invoke(other);
         }
 
-        private void OnCollisionExit(Collision other)
+        private void OnCollisionExit2D(Collision2D other)
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
             CollisionEvents.OnCollisionExitEvent?.Invoke(other);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
             TriggerEvents.OnTriggerEnterEvent?.Invoke(other);
         }
 
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerStay2D(Collider2D other)
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
             TriggerEvents.OnTriggerStayEvent?.Invoke(other);
         }
 
-        private void OnTriggerExit(Collider other)
+        private void OnTriggerExit2D(Collider2D other)
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
             TriggerEvents.OnTriggerExitEvent?.Invoke(other);
@@ -66,28 +67,28 @@ namespace Runtime.Utility
 
         private void Reset()
         {
-            if (TryGetComponent<Collider>(out _)) return;
+            if (TryGetComponent<Collider2D>(out _)) return;
             
-            Debug.LogWarning($"{nameof(ObservableCollider)} requires a {nameof(Collider)} component to function." +
-                             $"\n Adding a {nameof(BoxCollider)} as default.", this);
+            Debug.LogWarning($"{nameof(ObservableCollider)} requires a {nameof(Collider2D)} component to function." +
+                             $"\n Adding a {nameof(BoxCollider2D)} as default.", this);
                 
-            gameObject.AddComponent<BoxCollider>();
+            gameObject.AddComponent<BoxCollider2D>();
         }
         
         [Serializable]
-        public class TriggerUnityEvents
+        public class Trigger2DUnityEvents
         {
-            [field: SerializeField] public UnityEvent<Collider> OnTriggerEnterEvent {get; private set; }
-            [field: SerializeField] public UnityEvent<Collider> OnTriggerStayEvent {get; private set; }
-            [field: SerializeField] public UnityEvent<Collider> OnTriggerExitEvent {get; private set; }
+            [field: SerializeField] public UnityEvent<Collider2D> OnTriggerEnterEvent {get; private set; }
+            [field: SerializeField] public UnityEvent<Collider2D> OnTriggerStayEvent {get; private set; }
+            [field: SerializeField] public UnityEvent<Collider2D> OnTriggerExitEvent {get; private set; }
         }
         
         [Serializable]
-        public class CollisionUnityEvents
+        public class Collision2DUnityEvents
         {
-            [field: SerializeField] public UnityEvent<Collision> OnCollisionEnterEvent { get; private set; }
-            [field: SerializeField] public UnityEvent<Collision> OnCollisionStayEvent {get; private set; }
-            [field: SerializeField] public UnityEvent<Collision> OnCollisionExitEvent {get; private set; }
+            [field: SerializeField] public UnityEvent<Collision2D> OnCollisionEnterEvent { get; private set; }
+            [field: SerializeField] public UnityEvent<Collision2D> OnCollisionStayEvent {get; private set; }
+            [field: SerializeField] public UnityEvent<Collision2D> OnCollisionExitEvent {get; private set; }
         }
     }
 }
