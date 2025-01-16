@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 using Runtime.Utility;
 using UnityEditor;
 using UnityEngine;
@@ -30,8 +29,9 @@ namespace Editor
     [CustomPropertyDrawer(typeof(TagMaskAttribute))]
     public class TagMaskAttributeDrawer : PropertyDrawer
     {
-        private List<string> _tags = new List<string>();
-        private List<string> _allTags = new List<string>();
+        private readonly List<string> _tags = new List<string>();
+        private readonly List<string> _allTags = new List<string>();
+        private int _newTags;
         
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -42,12 +42,16 @@ namespace Editor
             }
             
             // Treat the property like a flags enum field, such that unique strings can be added or removed from a comma-separated string
-            _tags = property.stringValue.Split(',').ToList();
-            _allTags = UnityEditorInternal.InternalEditorUtility.tags.ToList();
-            var newTags = EditorGUI.MaskField(position, label, _tags.Select(tag => _allTags.IndexOf(tag)).Aggregate(0, (mask, index) => mask | 1 << index), _allTags.ToArray());
+            _tags.Clear();
+            _tags.AddRange(property.stringValue.Split(','));
+            
+            _allTags.Clear();
+            _allTags.AddRange(UnityEditorInternal.InternalEditorUtility.tags);
+            
+            _newTags = EditorGUI.MaskField(position, label, _tags.Select(tag => _allTags.IndexOf(tag)).Aggregate(0, (mask, index) => mask | 1 << index), _allTags.ToArray());
             
             _tags.Clear();
-            _tags.AddRange(_allTags.Where((t, i) => (newTags & 1 << i) != 0));
+            _tags.AddRange(_allTags.Where((t, i) => (_newTags & 1 << i) != 0));
 
             property.stringValue = string.Join(",", _tags);
         }
