@@ -134,6 +134,8 @@ namespace Runtime.UI
                 StopCoroutine(_showIconCoroutine);
             }
             
+            SetVisible(false);
+            
             _showIconCoroutine = StartCoroutine(Co_ShowIcon(icon));
         }
         
@@ -143,6 +145,8 @@ namespace Runtime.UI
             {
                 StopCoroutine(_showIconCoroutine);
             }
+            
+            SetVisible(false);
             
             _showIconCoroutine = StartCoroutine(Co_ShowMultipleIcons(icons));
         }
@@ -154,7 +158,19 @@ namespace Runtime.UI
                 StopCoroutine(_showIconCoroutine);
             }
             
+            SetVisible(false);
+            
             _showIconCoroutine = StartCoroutine(Co_ShowIconsSequence(icons));
+        }
+        
+        private void SetVisible(bool visible)
+        {
+            _singleIconImage.enabled = visible;
+            
+            foreach (var image in _multipleIconImages)
+            {
+                image.enabled = visible;
+            }
         }
         
         private IEnumerator Co_ShowIcon(Sprite icon)
