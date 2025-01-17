@@ -4,6 +4,7 @@ using OCSFX.FMOD;
 using Runtime.Utility;
 using UnityEngine;
 using OCSFX.Utility.Debug;
+using Runtime.UI;
 
 namespace Runtime.Collectables
 {
