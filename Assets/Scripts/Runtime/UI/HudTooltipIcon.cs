@@ -9,7 +9,8 @@ namespace Runtime.UI
 {
     public class HudTooltipIcon : MonoBehaviour
     {
-        [SerializeField] private Image _iconImage;
+        [SerializeField] private Image _singleIconImage;
+        [SerializeField] private Image[] _multipleIconImages;
         [SerializeField] private float _showIconFadeInDuration = 1f;
         [SerializeField] private float _showIconSustainDuration = 2f;
         [SerializeField] private float _showIconFadeOutDuration = 1f;
@@ -18,6 +19,7 @@ namespace Runtime.UI
         [SerializeField] private Sprite _cameraRotateDisabledIcon;
         
         [SerializeField] private Sprite _clickHintIcon;
+        [SerializeField] private Sprite _scrollHintIcon;
 
         private CinemachineCamera _gameplayFreeCamera;
         private bool _isGameplayFreeCameraActive;
@@ -26,7 +28,12 @@ namespace Runtime.UI
         
         private void Awake()
         {
-            _iconImage.enabled = false;
+            _singleIconImage.enabled = false;
+            
+            foreach (var image in _multipleIconImages)
+            {
+                image.enabled = false;
+            }
         }
 
         private void OnEnable()
@@ -43,6 +50,18 @@ namespace Runtime.UI
             GameOff2024CameraEventsHandler.OnCameraDeactivatedEvent -= OnCameraDeactivated;
             
             FtueUiController.OnMouseHoverClickable -= ShowClickHint;
+        }
+
+        [ContextMenu(nameof(TestSingle))]
+        private void TestSingle()
+        {
+            ShowIcon(_cameraRotateDisabledIcon);
+        }
+        
+        [ContextMenu(nameof(TestMultiple))]
+        private void TestMultiple()
+        {
+            ShowMultipleIcons(new []{ _cameraRotateEnabledIcon, _scrollHintIcon });
         }
 
         private void ShowClickHint()
@@ -88,7 +107,7 @@ namespace Runtime.UI
             {
                 Debug.Log($"Set icon to {nameof(_cameraRotateEnabledIcon)}", this);
                 
-                ShowIcon(_cameraRotateEnabledIcon);
+                ShowMultipleIcons(new []{ _cameraRotateEnabledIcon, _scrollHintIcon });
             }
             else
             {
@@ -118,11 +137,31 @@ namespace Runtime.UI
             _showIconCoroutine = StartCoroutine(Co_ShowIcon(icon));
         }
         
+        private void ShowMultipleIcons(Sprite[] icons)
+        {
+            if (_showIconCoroutine != null)
+            {
+                StopCoroutine(_showIconCoroutine);
+            }
+            
+            _showIconCoroutine = StartCoroutine(Co_ShowMultipleIcons(icons));
+        }
+        
+        private void ShowIconsSequence(Sprite[] icons)
+        {
+            if (_showIconCoroutine != null)
+            {
+                StopCoroutine(_showIconCoroutine);
+            }
+            
+            _showIconCoroutine = StartCoroutine(Co_ShowIconsSequence(icons));
+        }
+        
         private IEnumerator Co_ShowIcon(Sprite icon)
         {
-            _iconImage.enabled = true;
-            _iconImage.color = Color.clear;
-            _iconImage.sprite = icon;
+            _singleIconImage.enabled = true;
+            _singleIconImage.color = Color.clear;
+            _singleIconImage.sprite = icon;
             
             var timer = 0f;
             
@@ -131,7 +170,7 @@ namespace Runtime.UI
             while (timer < fadeDuration)
             {
                 timer += Time.deltaTime;
-                _iconImage.color = Color.Lerp(Color.clear, Color.white, timer / fadeDuration);
+                _singleIconImage.color = Color.Lerp(Color.clear, Color.white, timer / fadeDuration);
                 yield return null;
             }
             
@@ -150,12 +189,79 @@ namespace Runtime.UI
             while (timer < fadeDuration)
             {
                 timer += Time.deltaTime;
-                _iconImage.color = Color.Lerp(Color.white, Color.clear, timer / fadeDuration);
+                _singleIconImage.color = Color.Lerp(Color.white, Color.clear, timer / fadeDuration);
                 yield return null;
             }
             
-            _iconImage.color = Color.clear;
-            _iconImage.enabled = false;
+            _singleIconImage.color = Color.clear;
+            _singleIconImage.enabled = false;
+        }
+
+        private IEnumerator Co_ShowIconsSequence(Sprite[] icons)
+        {
+            foreach (var icon in icons)
+            {
+                yield return Co_ShowIcon(icon);
+            }
+        }
+        
+        private IEnumerator Co_ShowMultipleIcons(Sprite[] icons)
+        {
+            if (icons.Length == 1)
+            {
+                yield return Co_ShowIcon(icons[0]);
+                yield break;
+            }
+            
+            for (var i = 0; i < _multipleIconImages.Length; i++)
+            {
+                var image = _multipleIconImages[i];
+                image.enabled = true;
+                image.color = Color.clear;
+                image.sprite = icons[i];
+            }
+            
+            var timer = 0f;
+            
+            var fadeDuration = _showIconFadeInDuration;
+            
+            while (timer < fadeDuration)
+            {
+                timer += Time.deltaTime;
+                foreach (var image in _multipleIconImages)
+                {
+                    image.color = Color.Lerp(Color.clear, Color.white, timer / fadeDuration);
+                }
+                yield return null;
+            }
+            
+            timer = 0f;
+            fadeDuration = _showIconSustainDuration * icons.Length;
+            
+            while (timer < fadeDuration)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            
+            timer = 0f;
+            fadeDuration = _showIconFadeOutDuration;
+            
+            while (timer < fadeDuration)
+            {
+                timer += Time.deltaTime;
+                foreach (var image in _multipleIconImages)
+                {
+                    image.color = Color.Lerp(Color.white, Color.clear, timer / fadeDuration);
+                }
+                yield return null;
+            }
+            
+            foreach (var image in _multipleIconImages)
+            {
+                image.color = Color.clear;
+                image.enabled = false;
+            }
         }
     }
 }
