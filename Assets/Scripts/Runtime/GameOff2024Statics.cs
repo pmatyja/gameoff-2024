@@ -32,6 +32,7 @@ namespace Runtime
         private static Canvas _uguiCanvas;
         private static ItemInventory _itemInventory;
         private static ScoreUI _scoreUI;
+        private static FtueUiController _ftueUiController;
         
         private static readonly Dictionary<float, WaitForSeconds> _waitForSeconds = new Dictionary<float, WaitForSeconds>();
         
@@ -114,6 +115,7 @@ namespace Runtime
             TryDestroyGameObject(_uiHoverDetector);
             TryDestroyGameObject(_hudController);
             TryDestroyGameObject(_itemInventory);
+            TryDestroyGameObject(_ftueUiController);
         }
 
         private static void GetGameplayOnlySingletons()
@@ -125,6 +127,7 @@ namespace Runtime
             GetUIHoverDetector();
             GetHudController();
             GetItemInventory();
+            GetFtueUiController();
         }
         
         private static bool TryDestroyGameObject(Component component)
@@ -212,6 +215,9 @@ namespace Runtime
         
         public static ScoreUI GetScoreUI() => 
             GetOrCreateObject(ref _scoreUI, GameOff2024GameSettings.Get().ScoreUIPrefab);
+        
+        public static FtueUiController GetFtueUiController() => 
+            GetOrCreateObject(ref _ftueUiController, GameOff2024GameSettings.Get().FtueUiControllerPrefab);
         
         public static int GetOptionalCollectableTotal() => 
             GameOff2024GameSettings.Get().TotalOptionalCollectables;

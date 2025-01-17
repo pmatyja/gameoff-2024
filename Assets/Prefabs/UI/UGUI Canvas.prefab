@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 3432907419085056930}
   - component: {fileID: 4725378732539881961}
   - component: {fileID: 4651083507756750662}
+  - component: {fileID: 2250609628617178309}
   m_Layer: 5
   m_Name: HUDTooltipIcon
   m_TagString: Untagged
@@ -179,6 +180,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2250609628617178309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102375851108044494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2881c1dc15a8009418c3d2f85d3e9b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iconImage: {fileID: 4651083507756750662}
+  _cameraRotateEnabledIcon: {fileID: 0}
+  _cameraRotateDisabledIcon: {fileID: 0}
+  _cameraZoomEnabledIcon: {fileID: 0}
+  _cameraZoomDisabledIcon: {fileID: 0}
+  _clickHintIcon: {fileID: 0}
 --- !u!1 &6133398144630191960
 GameObject:
   m_ObjectHideFlags: 0

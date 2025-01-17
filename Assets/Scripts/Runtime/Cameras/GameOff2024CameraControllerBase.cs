@@ -20,6 +20,8 @@ namespace Runtime.Cameras
         [SerializeField, Range(0,2)] protected float _zoomSmoothTime = 0.2f;
 
         protected abstract Vector2 GetZoomRange();
+
+        public CinemachineCamera GetCinemachineCamera() => _cinemachineCamera;
         
         [Header("Debug")]
         [SerializeField] private bool _showDebug;
