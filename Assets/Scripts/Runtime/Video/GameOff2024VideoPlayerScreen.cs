@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,6 +18,8 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
 
     public static event Action OnScreenEnabled;
     public static event Action OnScreenDisabled;
+    
+    private Coroutine _endingBufferCoroutine;
 
     protected override void Awake()
     {
@@ -99,15 +103,28 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
 
     private void OnVideoComplete(GameOff2024VideoPlayer videoPlayer)
     {
-        if (videoPlayer.VideoPlayer.isPlaying)
+        SceneManager.sceneUnloaded += _ => Disable();
+        
+        if (videoPlayer.EndingBuffer > 0)
         {
-            videoPlayer.VideoPlayer.loopPointReached += _ => Disable();
-            SceneManager.sceneUnloaded += _ => Disable();
+            if (_endingBufferCoroutine != null)
+            {
+                StopCoroutine(_endingBufferCoroutine);
+            }
+            
+            _endingBufferCoroutine = StartCoroutine(Co_HandleEndingBuffer(videoPlayer));
         }
         else
         {
             Disable();
         }
+    }
+
+    private IEnumerator Co_HandleEndingBuffer(GameOff2024VideoPlayer videoPlayer)
+    {
+        yield return GameOff2024Statics.GetWaitForSeconds(videoPlayer.EndingBuffer);
+        
+        Disable();
     }
 
     private static void Enable()
