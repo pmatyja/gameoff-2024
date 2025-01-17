@@ -35,7 +35,7 @@ namespace Runtime
         [field: SerializeField, Expandable] public SceneLoadManager SceneLoadManagerPrefab { get; private set; }
         [field: SerializeField, Expandable] public ScreenFade ScreenFadePrefab { get; private set; }
         [field: SerializeField, Expandable] public ScoreUI ScoreUIPrefab { get; private set; }
-        [field: SerializeField, Expandable] public FtueUiController FtueUiControllerPrefab { get; private set; }
+        [field: SerializeField, Expandable] public HintManager HintManagerPrefab { get; private set; }
         
         [field: Header("Game")]
         [field: SerializeField, Expandable] public ItemInventory ItemInventoryPrefab { get; private set; }
@@ -105,7 +105,7 @@ namespace Runtime
                 (ScreenFadePrefab, nameof(ScreenFadePrefab)),
                 (ItemInventoryPrefab, nameof(ItemInventoryPrefab)),
                 (ScoreUIPrefab, nameof(ScoreUIPrefab)),
-                (FtueUiControllerPrefab, nameof(FtueUiControllerPrefab)),
+                (HintManagerPrefab, nameof(HintManagerPrefab)),
             };
 
             foreach (var (field, fieldName) in fields)

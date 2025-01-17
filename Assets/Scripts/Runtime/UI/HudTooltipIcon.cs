@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using Runtime.Cameras;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,20 +8,21 @@ namespace Runtime.UI
     {
         [SerializeField] private Image _singleIconImage;
         [SerializeField] private Image[] _multipleIconImages;
+        
+        [Header("Settings")]
         [SerializeField] private float _showIconFadeInDuration = 1f;
         [SerializeField] private float _showIconSustainDuration = 2f;
         [SerializeField] private float _showIconFadeOutDuration = 1f;
         
-        [SerializeField] private Sprite _cameraRotateEnabledIcon;
-        [SerializeField] private Sprite _cameraRotateDisabledIcon;
-        
+        [Header("Icons")]
         [SerializeField] private Sprite _clickHintIcon;
+        [SerializeField] private Sprite _rotateHintIcon;
         [SerializeField] private Sprite _scrollHintIcon;
-
-        private CinemachineCamera _gameplayFreeCamera;
-        private bool _isGameplayFreeCameraActive;
+        [SerializeField] private Sprite _cameraControlDisabledIcon;
         
         private Coroutine _showIconCoroutine;
+        
+        private Sprite[] _freeCameraHintIcons;
         
         private void Awake()
         {
@@ -34,101 +32,70 @@ namespace Runtime.UI
             {
                 image.enabled = false;
             }
+            
+            _freeCameraHintIcons = new[] { _rotateHintIcon, _scrollHintIcon };
         }
 
         private void OnEnable()
         {
-            GameOff2024CameraEventsHandler.OnCameraActivatedEvent += OnCameraActivated;
-            GameOff2024CameraEventsHandler.OnCameraDeactivatedEvent += OnCameraDeactivated;
-            
-            FtueUiController.OnMouseHoverClickable += ShowClickHint;
+            HintManager.OnHoverClickableEvent += OnHoverClickableHint;
+            HintManager.OnRotateCameraInputEvent += OnRotateCameraInputHint;
+            HintManager.OnZoomCameraInputEvent += OnZoomCameraInputHint;
+            HintManager.OnGameOff2024CameraStatusChangedEvent += OnGameOff2024CameraStatusChangedEvent;
         }
 
         private void OnDisable()
         {
-            GameOff2024CameraEventsHandler.OnCameraActivatedEvent -= OnCameraActivated;
-            GameOff2024CameraEventsHandler.OnCameraDeactivatedEvent -= OnCameraDeactivated;
+            HintManager.OnHoverClickableEvent -= OnHoverClickableHint;
+            HintManager.OnRotateCameraInputEvent -= OnRotateCameraInputHint;
+            HintManager.OnZoomCameraInputEvent -= OnZoomCameraInputHint;
+            HintManager.OnGameOff2024CameraStatusChangedEvent -= OnGameOff2024CameraStatusChangedEvent;
+        }
+
+        private void OnGameOff2024CameraStatusChangedEvent(bool activeStatus)
+        {
+            if (!activeStatus) return;
             
-            FtueUiController.OnMouseHoverClickable -= ShowClickHint;
+            ShowMultipleIcons(_freeCameraHintIcons);
         }
 
         [ContextMenu(nameof(TestSingle))]
         private void TestSingle()
         {
-            ShowIcon(_cameraRotateDisabledIcon);
+            ShowIcon(_cameraControlDisabledIcon);
         }
         
         [ContextMenu(nameof(TestMultiple))]
         private void TestMultiple()
         {
-            ShowMultipleIcons(new []{ _cameraRotateEnabledIcon, _scrollHintIcon });
+            ShowMultipleIcons(new []{ _rotateHintIcon, _scrollHintIcon });
         }
 
-        private void ShowClickHint()
+        private void OnHoverClickableHint()
         {
             Debug.Log($"Set icon to {nameof(_clickHintIcon)}", this);
             
             ShowIcon(_clickHintIcon);
         }
         
-        private CinemachineCamera GetGameplayFreeCamera()
+        private void OnRotateCameraInputHint()
         {
-            if (_gameplayFreeCamera) return _gameplayFreeCamera;
-
-            var gameOff2024Camera = FindFirstObjectByType<GameOff2024CameraControllerBase>();
-            if (!gameOff2024Camera) return null;
+            Debug.Log($"Set icon to {nameof(_cameraControlDisabledIcon)}", this);
             
-            _gameplayFreeCamera = gameOff2024Camera.GetCinemachineCamera();
-
-            return _gameplayFreeCamera;
+            ShowIcon(_cameraControlDisabledIcon);
         }
-        
-        private void OnCameraActivated(ICinemachineMixer cinemachineMixer, ICinemachineCamera cinemachineCamera)
+
+        private void OnZoomCameraInputHint()
         {
-            var cinemachineCam = (CinemachineCamera)cinemachineCamera;
-
-            if (!cinemachineCam)
-            {
-                Debug.LogError($"Failed to cast {nameof(ICinemachineCamera)} to {nameof(CinemachineCamera)}", this);
-                return;
-            }
-
-            var newCamIsFreeCam = IsGameplayFreeCamera(cinemachineCam);
+            Debug.Log($"Set icon to {nameof(_cameraControlDisabledIcon)}", this);
             
-            if (_isGameplayFreeCameraActive == newCamIsFreeCam) return;
-            
-            _isGameplayFreeCameraActive = newCamIsFreeCam;
-            OnFreeCamStatusChanged();
-        }
-
-        private void OnFreeCamStatusChanged()
-        {
-            if (_isGameplayFreeCameraActive)
-            {
-                Debug.Log($"Set icon to {nameof(_cameraRotateEnabledIcon)}", this);
-                
-                ShowMultipleIcons(new []{ _cameraRotateEnabledIcon, _scrollHintIcon });
-            }
-            else
-            {
-                Debug.Log($"Set icon to {nameof(_cameraRotateDisabledIcon)}", this);
-                
-                ShowIcon(_cameraRotateDisabledIcon);
-            }
-        }
-
-        private bool IsGameplayFreeCamera(CinemachineCamera other)
-        {
-            return other == GetGameplayFreeCamera();
-        }
-
-        private void OnCameraDeactivated(ICinemachineMixer cinemachineMixer, ICinemachineCamera cinemachineCamera)
-        {
-
+            ShowIcon(_cameraControlDisabledIcon);
         }
         
         private void ShowIcon(Sprite icon)
         {
+            if (IsSameDisplay(icon)) return;
+            
             if (_showIconCoroutine != null)
             {
                 StopCoroutine(_showIconCoroutine);
@@ -141,6 +108,8 @@ namespace Runtime.UI
         
         private void ShowMultipleIcons(Sprite[] icons)
         {
+            if (IsSameDisplay(icons)) return;
+            
             if (_showIconCoroutine != null)
             {
                 StopCoroutine(_showIconCoroutine);
@@ -153,6 +122,8 @@ namespace Runtime.UI
         
         private void ShowIconsSequence(Sprite[] icons)
         {
+            if (IsSameDisplay(icons)) return;
+            
             if (_showIconCoroutine != null)
             {
                 StopCoroutine(_showIconCoroutine);
@@ -170,6 +141,16 @@ namespace Runtime.UI
             foreach (var image in _multipleIconImages)
             {
                 image.enabled = visible;
+            }
+        }
+        
+        private void ClearIcons()
+        {
+            _singleIconImage.sprite = null;
+            
+            foreach (var image in _multipleIconImages)
+            {
+                image.sprite = null;
             }
         }
         
@@ -211,6 +192,8 @@ namespace Runtime.UI
             
             _singleIconImage.color = Color.clear;
             _singleIconImage.enabled = false;
+            
+            ClearIcons();
         }
 
         private IEnumerator Co_ShowIconsSequence(Sprite[] icons)
@@ -278,6 +261,25 @@ namespace Runtime.UI
                 image.color = Color.clear;
                 image.enabled = false;
             }
+            
+            ClearIcons();
+        }
+        
+        private bool IsSameDisplay(Sprite sprite)
+        {
+            return _singleIconImage.sprite == sprite;
+        }
+        
+        private bool IsSameDisplay(Sprite[] sprites)
+        {
+            if (sprites.Length != _multipleIconImages.Length) return false;
+            
+            for (var i = 0; i < sprites.Length; i++)
+            {
+                if (_multipleIconImages[i].sprite != sprites[i]) return false;
+            }
+
+            return true;
         }
     }
 }

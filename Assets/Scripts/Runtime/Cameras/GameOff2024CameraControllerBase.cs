@@ -57,11 +57,15 @@ namespace Runtime.Cameras
         
         protected virtual void OnGameplayDragCameraInput(bool pressed)
         {
+            if (!GameOff2024CameraEventsHandler.IsGameOff2024CameraActive) return;
+            
             _inputAxisController.enabled = pressed;
         }
 
         protected virtual void OnGameplayCameraZoomInput(float delta)
         {
+            if (!GameOff2024CameraEventsHandler.IsGameOff2024CameraActive) return;
+            
             var _zoomRange = GetZoomRange();
             
             delta *= _zoomDeltaMultiplier;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OCSFX.FMOD.Components;
+using Runtime.Cameras;
 using Runtime.Collectables;
 using Runtime.SceneLoading;
 using Runtime.UI;
@@ -32,7 +33,8 @@ namespace Runtime
         private static Canvas _uguiCanvas;
         private static ItemInventory _itemInventory;
         private static ScoreUI _scoreUI;
-        private static FtueUiController _ftueUiController;
+        private static HintManager _hintManager;
+        private static GameOff2024CameraControllerBase _gameOff2024Camera;
         
         private static readonly Dictionary<float, WaitForSeconds> _waitForSeconds = new Dictionary<float, WaitForSeconds>();
         
@@ -115,7 +117,7 @@ namespace Runtime
             TryDestroyGameObject(_uiHoverDetector);
             TryDestroyGameObject(_hudController);
             TryDestroyGameObject(_itemInventory);
-            TryDestroyGameObject(_ftueUiController);
+            TryDestroyGameObject(_hintManager);
         }
 
         private static void GetGameplayOnlySingletons()
@@ -127,7 +129,7 @@ namespace Runtime
             GetUIHoverDetector();
             GetHudController();
             GetItemInventory();
-            GetFtueUiController();
+            GetHintManager();
         }
         
         private static bool TryDestroyGameObject(Component component)
@@ -145,6 +147,19 @@ namespace Runtime
 
         public static ScreenFade GetScreenFade() => 
             GetOrCreateObject(ref _screenFade, GameOff2024GameSettings.Get().ScreenFadePrefab);
+        
+        
+        public static GameOff2024CameraControllerBase GetGameOff2024Camera()
+        {
+            if (_gameOff2024Camera) return _gameOff2024Camera;
+        
+            _gameOff2024Camera = Object.FindAnyObjectByType<GameOff2024CameraControllerBase>();
+
+            if (_gameOff2024Camera) return _gameOff2024Camera;
+        
+            Debug.LogError($"No instance of {nameof(_gameOff2024Camera)} found in the scene.");
+            return null;
+        }
 
         private static void InitializeOnNextSceneLoad(Scene scene, LoadSceneMode mode)
         {
@@ -216,8 +231,8 @@ namespace Runtime
         public static ScoreUI GetScoreUI() => 
             GetOrCreateObject(ref _scoreUI, GameOff2024GameSettings.Get().ScoreUIPrefab);
         
-        public static FtueUiController GetFtueUiController() => 
-            GetOrCreateObject(ref _ftueUiController, GameOff2024GameSettings.Get().FtueUiControllerPrefab);
+        public static HintManager GetHintManager() => 
+            GetOrCreateObject(ref _hintManager, GameOff2024GameSettings.Get().HintManagerPrefab);
         
         public static int GetOptionalCollectableTotal() => 
             GameOff2024GameSettings.Get().TotalOptionalCollectables;
