@@ -6,12 +6,11 @@ namespace Runtime.UI
 {
     public class FtueUiController : OCSFX.Generics.Singleton<FtueUiController>
     {
-        private int _usedHoverCount;
-
         public static event Action OnMouseHoverClickable;
         
         private bool _isHovered;
         private Camera _mainCamera;
+        private bool _hasClicked;
         
         private void OnEnable()
         {
@@ -25,11 +24,6 @@ namespace Runtime.UI
 
         private void Update()
         {
-            if (_usedHoverCount >= GameOff2024GameSettings.Get().FtueClickHintCount)
-            {
-                enabled = false;
-            }
-            
             var didHit = Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out var hit, 100f);
             if (!didHit)
             {
@@ -39,23 +33,34 @@ namespace Runtime.UI
 
             if (_isHovered)
             {
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (_hasClicked)
                 {
                     enabled = false;
+                    return;
                 }
+                
+                // TODO: Remove use of old input system
+                _hasClicked = Input.GetMouseButtonDown(0);
+                
                 return;
             }
             
-            if (!hit.collider.TryGetComponent(out PointerInteractable pointerInteractable)) return;
+            if (!hit.collider.TryGetComponent(out PointerInteractable pointerInteractable))
+            {
+                _isHovered = false;
+                return;
+            }
             
             var pointerInteractableParent =
                 pointerInteractable.GetComponentInParent<PointerInteractableParent>();
 
-            if (!pointerInteractableParent) return;
+            if (!pointerInteractableParent)
+            {
+                _isHovered = false;
+                return;
+            }
             
             _isHovered = true;
-            
-            _usedHoverCount++;
             OnMouseHoverClickable?.Invoke();
         }
     }

@@ -36,7 +36,6 @@ namespace Runtime
         [field: SerializeField, Expandable] public ScreenFade ScreenFadePrefab { get; private set; }
         [field: SerializeField, Expandable] public ScoreUI ScoreUIPrefab { get; private set; }
         [field: SerializeField, Expandable] public FtueUiController FtueUiControllerPrefab { get; private set; }
-        [field: SerializeField] public int FtueClickHintCount = 2;
         
         [field: Header("Game")]
         [field: SerializeField, Expandable] public ItemInventory ItemInventoryPrefab { get; private set; }
