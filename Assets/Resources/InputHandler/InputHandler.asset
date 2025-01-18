@@ -462,5 +462,32 @@ MonoBehaviour:
     <Confirm>k__BackingField: {fileID: 8657607582107703633, guid: 64a922b153190654682e9702dfa308b2, type: 3}
     <Cancel>k__BackingField: {fileID: 4813245679345705246, guid: 64a922b153190654682e9702dfa308b2, type: 3}
     <Move>k__BackingField: {fileID: -2480207443570793049, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+  <CutsceneActions>k__BackingField:
+    <ActionMapRef>k__BackingField:
+      _inputActionAsset: {fileID: -944628639613478452, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+      _name: Cutscene
+      _map:
+        m_Name: Cutscene
+        m_Id: a5fbe2e5-b029-4715-b55a-04862067cf86
+        m_Asset: {fileID: -944628639613478452, guid: 64a922b153190654682e9702dfa308b2, type: 3}
+        m_Actions:
+        - m_Name: Skip
+          m_Type: 1
+          m_ExpectedControlType: 
+          m_Id: 09f70b8d-36da-487f-9f83-e663538ad0af
+          m_Processors: 
+          m_Interactions: 
+          m_SingletonActionBindings: []
+          m_Flags: 0
+        m_Bindings:
+        - m_Name: 
+          m_Id: 701f6e87-22f7-4aa1-9255-9135bed42f0a
+          m_Path: <Keyboard>/space
+          m_Interactions: 
+          m_Processors: 
+          m_Groups: 
+          m_Action: Skip
+          m_Flags: 0
+    <Skip>k__BackingField: {fileID: 1585667036441806814, guid: 64a922b153190654682e9702dfa308b2, type: 3}
   <CameraZoomSensitivity>k__BackingField: 0.5
   _showDebug: 0

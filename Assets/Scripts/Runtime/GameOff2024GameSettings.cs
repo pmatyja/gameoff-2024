@@ -18,7 +18,7 @@ namespace Runtime
     {
         [field: Header("Player")]
         [field: SerializeField] public InputActionAsset InputActions { get; private set; }
-        [field: SerializeField, TagField] public string PlayerTag { get; private set; } = "Player";
+        [field: SerializeField, Tag] public string PlayerTag { get; private set; } = "Player";
         [field: SerializeField, Expandable] public PlayerCharacter PlayerCharacterPrefab { get; private set; }
         [field: SerializeField, Expandable] public GameOff2024CameraControllerBase PlayerCameraPrefab { get; private set; }
         

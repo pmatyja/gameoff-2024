@@ -52,6 +52,11 @@ public class GameOff2024VideoPlayer : MonoBehaviour
         _videoPlayer.started += OnVideoPlayerStarted;
         
         GameOff2024VideoPlayerScreen.RegisterVideoPlayer(this);
+        
+        var inputHandler = InputHandler.Get();
+        if (!inputHandler) return;
+        
+        inputHandler.OnCutsceneSkipInput += OnCutsceneSkipInput;
     }
 
     private void OnDisable()
@@ -59,6 +64,20 @@ public class GameOff2024VideoPlayer : MonoBehaviour
         _videoPlayer.started -= OnVideoPlayerStarted;
         
         GameOff2024VideoPlayerScreen.UnregisterVideoPlayer(this);
+        
+        var inputHandler = InputHandler.Get();
+        if (!inputHandler) return;
+        
+        inputHandler.OnCutsceneSkipInput -= OnCutsceneSkipInput;
+    }
+
+    private void OnCutsceneSkipInput()
+    {
+        if (!_videoPlayer.isPlaying && !_videoPlayer.isPaused) return;
+        if (!GameOff2024VideoPlayerScreen.CurrentVideoPlayer) return;
+        if (GameOff2024VideoPlayerScreen.CurrentVideoPlayer != this) return;
+        
+        Stop();
     }
 
     private void OnVideoPlayerStarted(VideoPlayer videoPlayer)

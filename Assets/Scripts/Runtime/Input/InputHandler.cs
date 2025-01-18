@@ -1,6 +1,4 @@
 using System;
-using System.Linq;
-using OCSFX.Attributes;
 using OCSFX.Generics;
 using OCSFX.Utility.Debug;
 using Runtime.UI;
@@ -22,6 +20,9 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     [field: Header("UI Actions")]
     [field: SerializeField] public GameplayUIInputActions GameplayUIActions { get; private set; }
     [field: SerializeField] public FrontEndUIInputActions FrontEndUIActions { get; private set; }
+    
+    [field: Header("Cutscene Actions")]
+    [field: SerializeField] public CutsceneInputActions CutsceneActions { get; private set; }
 
     [field: Header("Settings")]
     [field: SerializeField, Range(0.1f, 1f)] public float CameraZoomSensitivity { get; private set; } = 1f;
@@ -36,6 +37,7 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     public event Action<float> OnGameplayCameraZoomInput;
     public event Action OnGameplayInteractInput;
     public event Action OnGameplayPauseInput;
+    public event Action OnCutsceneSkipInput;
     
     public event Action OnUIGameplayResumeInput;
     public event Action OnUIGameplayMoveInput;
@@ -87,6 +89,9 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
             var gameplayUIActions = Get().GameplayUIActions;
             gameplayUIActions.Resume.action.performed += OnResumeInputPerformed;
             
+            var cutsceneActions = Get().CutsceneActions;
+            cutsceneActions.Skip.action.performed += OnCutsceneSkipInputPerformed;
+            
             EventBus.AddListener<PauseMenuController.UIEventParameters>(OnPauseMenuToggle);
 
             GameOff2024VideoPlayerScreen.OnScreenEnabled += OnVideoScreenEnabled;
@@ -108,6 +113,9 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
             var gameplayUIActions = Get().GameplayUIActions;
             gameplayUIActions.Resume.action.performed -= OnResumeInputPerformed;
             
+            var cutsceneActions = Get().CutsceneActions;
+            cutsceneActions.Skip.action.performed -= OnCutsceneSkipInputPerformed;
+            
             EventBus.RemoveListener<PauseMenuController.UIEventParameters>(OnPauseMenuToggle);
             
             GameOff2024VideoPlayerScreen.OnScreenEnabled -= OnVideoScreenEnabled;
@@ -117,9 +125,19 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         }
     }
 
-    private static void OnVideoScreenEnabled() => DisableInput();
+    private static void OnVideoScreenEnabled()
+    {
+        Get().SetCurrentActionMap(Get().CutsceneActions.ActionMap);
 
-    private static void OnVideoScreenDisabled() => EnableInput();
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] {nameof(OnVideoScreenEnabled)}", Get(), Get()._showDebug);
+    }
+
+    private static void OnVideoScreenDisabled()
+    {
+        Get().SetCurrentActionMap(Get().GameplayActions.ActionMap);
+        
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] {nameof(OnVideoScreenDisabled)}", Get(), Get()._showDebug);
+    }
 
     public static void DisableInput() => Get().InputActions.Disable();
 
@@ -189,6 +207,13 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         OCSFXLogger.Log($"[{nameof(InputHandler)}] Resume input performed", Get(), Get()._showDebug);
         
         Get().OnUIGameplayResumeInput?.Invoke();
+    }
+    
+    private static void OnCutsceneSkipInputPerformed(InputAction.CallbackContext context)
+    {
+        OCSFXLogger.Log($"[{nameof(InputHandler)}] Cutscene skip input performed", Get(), Get()._showDebug);
+        
+        Get().OnCutsceneSkipInput?.Invoke();
     }
     
     public void SetCurrentActionMap(InputActionMap actionMap)
@@ -269,6 +294,12 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         [field: SerializeField] public InputActionReference Confirm { get; private set; }
         [field: SerializeField] public InputActionReference Cancel { get; private set; }
         [field: SerializeField] public InputActionReference Move { get; private set; }
+    }
+    
+    [Serializable]
+    public class CutsceneInputActions : InputActionsCollection
+    {
+        [field: SerializeField] public InputActionReference Skip { get; private set; }
     }
 
     [Serializable]

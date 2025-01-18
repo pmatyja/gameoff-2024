@@ -20,6 +20,8 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
     public static event Action OnScreenDisabled;
     
     private Coroutine _endingBufferCoroutine;
+    
+    public static GameOff2024VideoPlayer CurrentVideoPlayer { get; private set; }
 
     protected override void Awake()
     {
@@ -27,6 +29,28 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
         base.Awake();
         
         if (!_canvasGroup) _canvasGroup = GetComponent<CanvasGroup>();
+    }
+    
+    private static void Enable()
+    {
+        if (!_instance) return;
+        
+        _instance._alpha = 1;
+        _instance._canvasGroup.alpha = Instance._alpha;
+        _instance._canvasGroup.blocksRaycasts = true;
+        
+        OnScreenEnabled?.Invoke();
+    }
+
+    private static void Disable()
+    {
+        if (!_instance) return;
+        
+        _instance._alpha = 0;
+        _instance._canvasGroup.alpha = Instance._alpha;
+        _instance._canvasGroup.blocksRaycasts = false;
+        
+        OnScreenDisabled?.Invoke();
     }
 
     private void Start()
@@ -93,11 +117,17 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
 
     private void OnVideoStart(GameOff2024VideoPlayer videoPlayer)
     {
+        CurrentVideoPlayer = videoPlayer;
         Enable();
     }
     
     private void OnVideoStop(GameOff2024VideoPlayer videoPlayer)
     {
+        if (CurrentVideoPlayer == videoPlayer)
+        {
+            CurrentVideoPlayer = null;
+        }
+
         Disable();
     }
 
@@ -125,27 +155,5 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
         yield return GameOff2024Statics.GetWaitForSeconds(videoPlayer.EndingBuffer);
         
         Disable();
-    }
-
-    private static void Enable()
-    {
-        if (!_instance) return;
-        
-        _instance._alpha = 1;
-        _instance._canvasGroup.alpha = Instance._alpha;
-        _instance._canvasGroup.blocksRaycasts = true;
-        
-        OnScreenEnabled?.Invoke();
-    }
-
-    private static void Disable()
-    {
-        if (!_instance) return;
-        
-        _instance._alpha = 0;
-        _instance._canvasGroup.alpha = Instance._alpha;
-        _instance._canvasGroup.blocksRaycasts = false;
-        
-        OnScreenDisabled?.Invoke();
     }
 }

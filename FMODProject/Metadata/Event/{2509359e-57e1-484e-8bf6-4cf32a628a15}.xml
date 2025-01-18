@@ -107,6 +107,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{e1b0c1ca-8a8c-4717-9f56-23ca49fc6e7c}">
+		<relationship name="modulators">
+			<destination>{d0fc7eb2-3b3a-4371-8f4e-a1fe0357671a}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{f636f69d-e161-48cf-9f1c-df2916f1c852}</destination>
 		</relationship>
@@ -124,6 +127,12 @@
 	</object>
 	<object class="MixerBusPanner" id="{d7397514-81be-4436-861a-8b74219b99c6}" />
 	<object class="SingleSound" id="{e1b1d54d-c615-426d-b062-3e7f12f32b92}">
+		<property name="isAsync">
+			<value>true</value>
+		</property>
+		<property name="isCutoff">
+			<value>true</value>
+		</property>
 		<property name="length">
 			<value>23.533333333333335</value>
 		</property>
@@ -176,6 +185,9 @@
 		</property>
 		<relationship name="modulators">
 			<destination>{bb7b27ae-93a2-45b7-9683-7de935e92f0a}</destination>
+		</relationship>
+		<relationship name="triggerConditions">
+			<destination>{7485a0ec-d088-49d7-aaff-5404113a08b9}</destination>
 		</relationship>
 		<relationship name="fadeInCurve">
 			<destination>{febb5785-904d-4b1c-bede-cef578690273}</destination>
@@ -271,6 +283,20 @@
 			<destination>{a6643243-6375-40fe-9b71-35e95b3a3dff}</destination>
 		</relationship>
 	</object>
+	<object class="ADSRModulator" id="{d0fc7eb2-3b3a-4371-8f4e-a1fe0357671a}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>0</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
 	<object class="MixerBusEffectChain" id="{f636f69d-e161-48cf-9f1c-df2916f1c852}">
 		<relationship name="effects">
 			<destination>{8d473bd9-fb73-48e8-9ac8-bf90faf1bf76}</destination>
@@ -292,6 +318,7 @@
 			<value>100</value>
 		</property>
 	</object>
+	<object class="EventCondition" id="{7485a0ec-d088-49d7-aaff-5404113a08b9}" />
 	<object class="FadeCurve" id="{febb5785-904d-4b1c-bede-cef578690273}">
 		<relationship name="startPoint">
 			<destination>{25c2a304-5544-4410-a7a8-2aa72d60d63d}</destination>
