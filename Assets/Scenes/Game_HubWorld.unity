@@ -3015,6 +3015,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 126853350264073494, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
   m_PrefabInstance: {fileID: 15014048}
   m_PrefabAsset: {fileID: 0}
+--- !u!328 &15014050 stripped
+VideoPlayer:
+  m_CorrespondingSourceObject: {fileID: 2315262585022273602, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
+  m_PrefabInstance: {fileID: 15014048}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &18875372
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10956,19 +10961,7 @@ MonoBehaviour:
   _fadeColor: {r: 1, g: 1, b: 1, a: 1}
   <OnFadeInComplete>k__BackingField:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1084447281}
-        m_TargetAssemblyTypeName: GameOff2024VideoPlayer, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   <OnFadeOutComplete>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
@@ -20736,7 +20729,6 @@ Transform:
   - {fileID: 1673122567}
   - {fileID: 156633236}
   - {fileID: 793948047}
-  - {fileID: 895392009}
   - {fileID: 507851720}
   - {fileID: 1097700580}
   m_Father: {fileID: 0}
@@ -21605,13 +21597,14 @@ GameObject:
   m_Component:
   - component: {fileID: 895392009}
   - component: {fileID: 895392010}
+  - component: {fileID: 895392011}
   m_Layer: 0
   m_Name: GameStartEvents
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &895392009
 Transform:
   m_ObjectHideFlags: 0
@@ -21628,7 +21621,7 @@ Transform:
   - {fileID: 291669594}
   - {fileID: 985732188}
   - {fileID: 15014049}
-  m_Father: {fileID: 830086776}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &895392010
 MonoBehaviour:
@@ -21642,8 +21635,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b70b805c5c8c2b44ae53644a0fdaa3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerOn: 12
-  _delay: 0
+  _triggerOn: 8
+  _delay: 0.5
   _doOnce: 1
   _event:
     m_PersistentCalls:
@@ -21670,6 +21663,36 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Cutscene
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &895392011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895392008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b70b805c5c8c2b44ae53644a0fdaa3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _triggerOn: 8
+  _delay: 2
+  _doOnce: 0
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 15014050}
+        m_TargetAssemblyTypeName: UnityEngine.Video.VideoPlayer, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!4 &897019852 stripped
@@ -22364,17 +22387,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5915865402572115010, guid: 91b74620df67e7b409f9a96857a5b958, type: 3}
   m_PrefabInstance: {fileID: 2616418595026536690}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1084447281 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
-  m_PrefabInstance: {fileID: 15014048}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a01a956368d31c45882b173a05c48d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1090636901 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5915865402572115010, guid: 91b74620df67e7b409f9a96857a5b958, type: 3}
@@ -43351,6 +43363,14 @@ PrefabInstance:
       propertyPath: _postProcessingVolume
       value: 
       objectReference: {fileID: 793948046}
+    - target: {fileID: 732960501598851460, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
+      propertyPath: _depthOfFieldFocalLengthRange.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 732960501598851460, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
+      propertyPath: _depthOfFieldFocalLengthRange.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalPosition.x
       value: 47.500305
@@ -75806,3 +75826,4 @@ SceneRoots:
   - {fileID: 1732120584}
   - {fileID: 49543900}
   - {fileID: 1826103618}
+  - {fileID: 895392009}
