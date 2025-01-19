@@ -9,7 +9,7 @@ namespace Runtime.SceneLoading
         [SerializeField, Min(0)] private float _sustainDuration = 1f;
         [SerializeField, Min(0)] private float _fadeOutDuration = 1f;
         [SerializeField] private Color _fadeColor = Color.black;
-        
+
         [field: SerializeField] public UnityEvent OnFadeInComplete { get; private set; }
         [field: SerializeField] public UnityEvent OnFadeOutComplete { get; private set; }
         

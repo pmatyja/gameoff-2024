@@ -1,4 +1,5 @@
 using System;
+using OCSFX.Utility.Debug;
 using Runtime;
 using Runtime.Cameras;
 using Unity.Cinemachine;
@@ -7,6 +8,9 @@ using UnityEngine;
 public class GameOff2024CameraEventsHandler : MonoBehaviour
 {
     [SerializeField] private CinemachineBrainEvents _cinemachineBrainEvents;
+
+    [Space]
+    [SerializeField] private bool _showDebug;
     
     public static event Action<ICinemachineMixer, ICinemachineCamera> OnCameraActivatedEvent;
     public static event Action<ICinemachineMixer, ICinemachineCamera> OnCameraDeactivatedEvent;
@@ -65,7 +69,7 @@ public class GameOff2024CameraEventsHandler : MonoBehaviour
 
     private void OnCameraActivated(ICinemachineMixer cinemachineMixer, ICinemachineCamera cinemachineCamera)
     {
-        Debug.Log($"{nameof(OnCameraActivated)}: {cinemachineCamera.Name}", this);
+        OCSFXLogger.Log($"{nameof(OnCameraActivated)}: {cinemachineCamera.Name}", this, _showDebug);
         
         UpdateGameOffCameraStatus(cinemachineCamera);
         
@@ -74,14 +78,14 @@ public class GameOff2024CameraEventsHandler : MonoBehaviour
 
     private void OnCameraDeactivated(ICinemachineMixer cinemachineMixer, ICinemachineCamera cinemachineCamera)
     {
-        Debug.Log($"{nameof(OnCameraDeactivated)}: {cinemachineCamera.Name}", this);
+        OCSFXLogger.Log($"{nameof(OnCameraDeactivated)}: {cinemachineCamera.Name}", this, _showDebug);
         
         OnCameraDeactivatedEvent?.Invoke(cinemachineMixer, cinemachineCamera);
     }
     
     private void OnCameraCut(ICinemachineMixer cinemachineMixer, ICinemachineCamera cinemachineCamera)
     {
-        Debug.Log($"{nameof(OnCameraCut)}: {cinemachineCamera.Name}", this);
+        OCSFXLogger.Log($"{nameof(OnCameraCut)}: {cinemachineCamera.Name}", this, _showDebug);
         
         OnCameraCutEvent?.Invoke(cinemachineMixer, cinemachineCamera);
     }
@@ -92,7 +96,7 @@ public class GameOff2024CameraEventsHandler : MonoBehaviour
         var destinationCamera = blendEventParams.Blend.CamB;
         UpdateGameOffCameraStatus(destinationCamera);
         
-        Debug.Log($"{nameof(OnBlendCreated)}: From [{startCamera.Name}] To [{destinationCamera.Name}]", this);
+        OCSFXLogger.Log($"{nameof(OnBlendCreated)}: From [{startCamera.Name}] To [{destinationCamera.Name}]", this, _showDebug);
         
         OnBlendCreatedEvent?.Invoke(blendEventParams);
     }
@@ -101,7 +105,7 @@ public class GameOff2024CameraEventsHandler : MonoBehaviour
     {
         UpdateGameOffCameraStatus(cinemachineCamera);
         
-        Debug.Log($"{nameof(OnBlendFinished)}: {cinemachineCamera.Name}", this);
+        OCSFXLogger.Log($"{nameof(OnBlendFinished)}: {cinemachineCamera.Name}", this, _showDebug);
         
         OnBlendFinishedEvent?.Invoke(cinemachineMixer, cinemachineCamera);
     }
@@ -119,6 +123,6 @@ public class GameOff2024CameraEventsHandler : MonoBehaviour
         
         OnGameOff2024CameraStatusChangedEvent?.Invoke(IsGameOff2024CameraActive);
         
-        Debug.Log($"{nameof(UpdateGameOffCameraStatus)}: {IsGameOff2024CameraActive}", this);
+        OCSFXLogger.Log($"{nameof(UpdateGameOffCameraStatus)}: {IsGameOff2024CameraActive}", this, _showDebug);
     }
 }

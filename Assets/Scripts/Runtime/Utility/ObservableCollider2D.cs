@@ -15,6 +15,9 @@ namespace Runtime.Utility
         [Tooltip("If empty, all tags are accepted."), Tag]
         public List<string> CollisionTagFilter;
         
+        [Header("Debug")]
+        [SerializeField] private bool _showDebug;
+        
         [field: Header("Events")]
         [field: SerializeField] public Trigger2DUnityEvents TriggerEvents { get; private set; }
         [field: SerializeField] public Collision2DUnityEvents CollisionEvents { get; private set; }
@@ -23,36 +26,48 @@ namespace Runtime.Utility
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
             CollisionEvents.OnCollisionEnterEvent?.Invoke(other);
+            
+            PrintDebug($"{nameof(OnCollisionEnter2D)}: {other.gameObject.name}", _showDebug);
         }
 
         private void OnCollisionStay2D(Collision2D other)
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
             CollisionEvents.OnCollisionStayEvent?.Invoke(other);
+            
+            PrintDebug($"{nameof(OnCollisionStay2D)}: {other.gameObject.name}", _showDebug);
         }
 
         private void OnCollisionExit2D(Collision2D other)
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
             CollisionEvents.OnCollisionExitEvent?.Invoke(other);
+            
+            PrintDebug($"{nameof(OnCollisionExit2D)}: {other.gameObject.name}", _showDebug);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
             TriggerEvents.OnTriggerEnterEvent?.Invoke(other);
+            
+            PrintDebug($"{nameof(OnTriggerEnter2D)}: {other.gameObject.name}", _showDebug);
         }
 
         private void OnTriggerStay2D(Collider2D other)
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
             TriggerEvents.OnTriggerStayEvent?.Invoke(other);
+            
+            PrintDebug($"{nameof(OnTriggerStay2D)}: {other.gameObject.name}", _showDebug);
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
             TriggerEvents.OnTriggerExitEvent?.Invoke(other);
+            
+            PrintDebug($"{nameof(OnTriggerExit2D)}: {other.gameObject.name}", _showDebug);
         }
         
         private bool IsCollisionObjectValid(GameObject other)
@@ -73,6 +88,13 @@ namespace Runtime.Utility
                              $"\n Adding a {nameof(BoxCollider2D)} as default.", this);
                 
             gameObject.AddComponent<BoxCollider2D>();
+        }
+        
+        private void PrintDebug(string message, bool condition)
+        {
+            if (!condition) return;
+            
+            Debug.Log(message, this);
         }
         
         [Serializable]
