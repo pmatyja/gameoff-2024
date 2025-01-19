@@ -6,11 +6,19 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
 
     public static T Instance;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    private static void RunOnStart()
+// BEGIN_DIVERGENCE | ocooper | 250118 | This method fails in WebGL builds. Use OnApplicationQuit instead
+
+    // [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    // private static void RunOnStart()
+    // {
+    //     Application.quitting += () => Instance = null;
+    // }
+    
+    private void OnApplicationQuit()
     {
-        Application.quitting += () => Instance = null;
+        Instance = null;
     }
+// END_DIVERGENCE | ocooper
 
     protected virtual void Awake()
     {
