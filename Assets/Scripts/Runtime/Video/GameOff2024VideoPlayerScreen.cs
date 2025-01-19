@@ -20,7 +20,9 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
     public static event Action OnScreenDisabled;
     
     private Coroutine _endingBufferCoroutine;
-    
+
+    public static bool IsEnabled { get; private set; }
+
     public static GameOff2024VideoPlayer CurrentVideoPlayer { get; private set; }
 
     protected override void Awake()
@@ -39,7 +41,10 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
         _instance._canvasGroup.alpha = Instance._alpha;
         _instance._canvasGroup.blocksRaycasts = true;
         
+        if (IsEnabled) return;
+        
         OnScreenEnabled?.Invoke();
+        IsEnabled = true;
     }
 
     private static void Disable()
@@ -50,7 +55,9 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
         _instance._canvasGroup.alpha = Instance._alpha;
         _instance._canvasGroup.blocksRaycasts = false;
         
+        if (!IsEnabled) return;
         OnScreenDisabled?.Invoke();
+        IsEnabled = false;
     }
 
     private void Start()
@@ -123,12 +130,12 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
     
     private void OnVideoStop(GameOff2024VideoPlayer videoPlayer)
     {
+        OnVideoComplete(videoPlayer);
+        
         if (CurrentVideoPlayer == videoPlayer)
         {
             CurrentVideoPlayer = null;
         }
-
-        Disable();
     }
 
     private void OnVideoComplete(GameOff2024VideoPlayer videoPlayer)
@@ -147,6 +154,11 @@ public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024
         else
         {
             Disable();
+        }
+        
+        if (CurrentVideoPlayer == videoPlayer)
+        {
+            CurrentVideoPlayer = null;
         }
     }
 

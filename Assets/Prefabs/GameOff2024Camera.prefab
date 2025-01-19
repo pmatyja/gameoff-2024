@@ -189,7 +189,7 @@ MonoBehaviour:
   Tilt: 0
   Pan: 0
   Dutch: 0
-  ZoomScale: 3.999999
+  ZoomScale: 3.999988
   FollowAttachment: 0.5
   LookAtAttachment: 1
 --- !u!114 &1722809263081321308
@@ -268,7 +268,7 @@ MonoBehaviour:
   _zoomRange: {x: 1.5, y: 4}
   _fov: 6
   _postProcessingVolume: {fileID: 0}
-  _depthOfFieldFocalLengthRange: {x: 0, y: 0}
+  _depthOfFieldFocalLengthRange: {x: 120, y: 280}
   _depthOfFieldFocalLength: 100
 --- !u!114 &8916386385562088168
 MonoBehaviour:

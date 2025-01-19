@@ -41,6 +41,8 @@ namespace Runtime.Cameras
 
         protected virtual void OnEnable()
         {
+            GameOff2024CameraEventsHandler.OnCameraDeactivatedEvent += OnGameOff2024CameraDeactivated;
+            
             InputHandler.Get().OnGameplayDragCameraInput += OnGameplayDragCameraInput;
             InputHandler.Get().OnGameplayCameraZoomInput += OnGameplayCameraZoomInput;
             
@@ -49,12 +51,14 @@ namespace Runtime.Cameras
 
         protected virtual void OnDisable()
         {
+            GameOff2024CameraEventsHandler.OnCameraDeactivatedEvent -= OnGameOff2024CameraDeactivated;
+            
             InputHandler.Get().OnGameplayDragCameraInput -= OnGameplayDragCameraInput;
             InputHandler.Get().OnGameplayCameraZoomInput -= OnGameplayCameraZoomInput;
             
             _inputAxisController.enabled = false;
         }
-        
+
         protected virtual void OnGameplayDragCameraInput(bool pressed)
         {
             if (!GameOff2024CameraEventsHandler.IsGameOff2024CameraActive) return;
@@ -71,6 +75,13 @@ namespace Runtime.Cameras
             delta *= _zoomDeltaMultiplier;
             
             _targetZoomValue = Mathf.Clamp(_targetZoomValue - delta, _zoomRange.x, _zoomRange.y);
+        }
+        
+        protected virtual void OnGameOff2024CameraDeactivated(ICinemachineMixer cinemachineMixer, ICinemachineCamera cinemachineCamera)
+        {
+            _targetZoomValue = GetZoomRange().y;
+            
+            _inputAxisController.enabled = false;
         }
 
         protected abstract void InitializeZoom();
