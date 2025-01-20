@@ -40,11 +40,11 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     public event Action OnCutsceneSkipInput;
     
     public event Action OnUIGameplayResumeInput;
-    public event Action OnUIGameplayMoveInput;
-    
-    public event Action OnFrontEndUIMoveInput;
-    public event Action OnFrontEndUIConfirmInput;
-    public event Action OnFrontEndUICancelInput;
+    // public event Action OnUIGameplayMoveInput;
+    //
+    // public event Action OnFrontEndUIMoveInput;
+    // public event Action OnFrontEndUIConfirmInput;
+    // public event Action OnFrontEndUICancelInput;
 
 #if UNITY_EDITOR
     [UnityEditor.InitializeOnLoadMethod]

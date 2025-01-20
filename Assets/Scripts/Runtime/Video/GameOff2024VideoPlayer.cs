@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using OCSFX.Attributes;
+using OCSFX.Utility.Debug;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Video;
@@ -27,9 +28,9 @@ public class GameOff2024VideoPlayer : MonoBehaviour
     [field: SerializeField] public UnityEvent<GameOff2024VideoPlayer> OnVideoComplete { get; private set; }
     
     private Coroutine _endingBufferCoroutine;
-    private Coroutine _playStatusCoroutine;
     
     [Header("Debug")]
+    [SerializeField] private bool _showDebug;
     [SerializeField, ReadOnly] private bool _isPlaying;
     [SerializeField, ReadOnly] private bool _isPaused;
     [SerializeField, ReadOnly] private float _videoLength;
@@ -39,12 +40,9 @@ public class GameOff2024VideoPlayer : MonoBehaviour
     private void Awake()
     {
         TryUpdateUrl();
-        _videoPlayer.Prepare();
+        // _videoPlayer.Prepare();
         
-        _videoPlayer.prepareCompleted += (_) =>
-        {
-            _videoLength = (float)_videoPlayer.length;
-        };
+        OCSFXLogger.Log($"Video player ({name}) Awake: [{_videoPlayer.url}]", this, _showDebug);
     }
 
     private void OnEnable()
@@ -82,7 +80,10 @@ public class GameOff2024VideoPlayer : MonoBehaviour
 
     private void OnVideoPlayerStarted(VideoPlayer videoPlayer)
     {
+        _videoLength = (float)videoPlayer.length;
         OnVideoStart?.Invoke(this);
+        
+        OCSFXLogger.Log($"Video player ({name}) started: [{videoPlayer.url}]", this, _showDebug);
     }
     
     private void HandleEndingBuffer(VideoPlayer videoPlayer)
@@ -97,30 +98,30 @@ public class GameOff2024VideoPlayer : MonoBehaviour
 
     private IEnumerator Co_HandleEndingBuffer(VideoPlayer videoPlayer)
     {
-        _isPlaying = _videoPlayer.isPlaying;
-        _isPaused = _videoPlayer.isPaused;
+        _isPlaying = videoPlayer.isPlaying;
+        _isPaused = videoPlayer.isPaused;
         
-        while (_videoPlayer.isPlaying || _videoPlayer.isPaused)
+        while (videoPlayer.isPlaying || videoPlayer.isPaused)
         {
-            if (_videoPlayer.time >= _videoPlayer.length - _endingBuffer)
+            if (videoPlayer.time >= videoPlayer.length - _endingBuffer)
             {
                 break;
             }
             yield return null;
         }
         
-        _isPlaying = _videoPlayer.isPlaying;
-        _isPaused = _videoPlayer.isPaused;
+        _isPlaying = videoPlayer.isPlaying;
+        _isPaused = videoPlayer.isPaused;
         
-        if (_videoPlayer.time < _videoPlayer.length - _endingBuffer)
+        if (videoPlayer.time < videoPlayer.length - _endingBuffer)
         {
             // In this case we can assume the video was stopped before it ended.
             OnVideoStop.Invoke(this);
             yield break;
         }
         
-        _isPlaying = _videoPlayer.isPlaying;
-        _isPaused = _videoPlayer.isPaused;
+        _isPlaying = videoPlayer.isPlaying;
+        _isPaused = videoPlayer.isPaused;
         
         OnVideoComplete.Invoke(this);
     }
@@ -139,18 +140,27 @@ public class GameOff2024VideoPlayer : MonoBehaviour
         TryUpdateUrl();
         if (!_videoPlayer.isPrepared)
         {
-            _videoPlayer.Prepare();        
-            _videoPlayer.prepareCompleted += (_)=> OnPlay();
+            _videoPlayer.Prepare();
+            _videoPlayer.prepareCompleted += OnVideoPrepareCompleted;
         }
         else
         {
             OnPlay();
         }
+        
+        OCSFXLogger.Log($"Video player ({name}) Play: [{_videoPlayer.url}]", this, _showDebug);
     }
 
     public void Stop()
     {
         OnStop();
+    }
+    
+    private void OnVideoPrepareCompleted(VideoPlayer videoPlayer)
+    {
+        _videoPlayer.prepareCompleted -= OnVideoPrepareCompleted;
+        _videoLength = (float)_videoPlayer.length;
+        OnPlay();
     }
 
     private void OnPlay()
@@ -168,24 +178,22 @@ public class GameOff2024VideoPlayer : MonoBehaviour
         
         OnVideoStop.Invoke(this);
         
-        StopCoroutine(_endingBufferCoroutine);
-        _endingBufferCoroutine = null;
+        if (_endingBufferCoroutine != null)
+        {
+            StopCoroutine(_endingBufferCoroutine);
+            _endingBufferCoroutine = null;
+        }
     }
 
     private string GetRelativeVideoPath()
     {
-        _streamingAssetsPath = Application.streamingAssetsPath;
+        _streamingAssetsPath = UnityEngine.Device.Application.streamingAssetsPath;
         
         var projectRelativeStreamingAssetsPath = _streamingAssetsPath.Replace(Application.dataPath, "Assets") + "/";
         
 #if UNITY_EDITOR
         _relativeVideoPath = _videoClip ? AssetDatabase.GetAssetPath(_videoClip) : string.Empty;
 #endif // UNITY_EDITOR
-        
-        // if (!_relativeVideoPath.Contains(projectRelativeStreamingAssetsPath))
-        // {
-        //     throw new Exception($"Video clip must be in {projectRelativeStreamingAssetsPath}");
-        // }
         
         _relativeVideoPath = _relativeVideoPath.Replace(projectRelativeStreamingAssetsPath, string.Empty);
 
@@ -217,11 +225,6 @@ public class GameOff2024VideoPlayer : MonoBehaviour
         
 #if UNITY_EDITOR
         EditorUtility.SetDirty(this);
-        //
-        // var currentScene = SceneManager.GetActiveScene();
-        // EditorSceneManager.MarkSceneDirty(currentScene);
 #endif //UNITY_EDITOR
-        
-        _videoPlayer.source = VideoSource.Url;
     }
 }

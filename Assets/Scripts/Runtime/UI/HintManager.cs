@@ -19,7 +19,8 @@ namespace Runtime.UI
         [SerializeField, ReadOnly] private bool _isGameOff2024CameraActive;
         [SerializeField, ReadOnly] private bool _isHovered;
         [SerializeField, ReadOnly] private bool _hasClicked;
-        [SerializeField, ReadOnly] private bool _hasZoomedOrRotated;
+        [SerializeField, ReadOnly] private bool _hasZoomed;
+        [SerializeField, ReadOnly] private bool _hasRotated;
         
         private void OnEnable()
         {
@@ -76,24 +77,40 @@ namespace Runtime.UI
         
         private void OnRotateCameraInput(bool status)
         {
-            if (_isGameOff2024CameraActive) return;
+            if (_isGameOff2024CameraActive)
+            {
+                _hasRotated = true;
+                return;
+            }
             
             OnRotateCameraInputEvent?.Invoke();
-            _hasZoomedOrRotated = true;
         }
         
         private void OnZoomCameraInput(float value)
         {
-            if (_isGameOff2024CameraActive) return;
+            if (_isGameOff2024CameraActive)
+            {
+                _hasZoomed = true;
+                return;
+            }
             
             OnZoomCameraInputEvent?.Invoke();
-            _hasZoomedOrRotated = true;
         }
 
         private bool DidClick()
         {
             // TODO: Remove use of old input system
             return Input.GetMouseButtonDown(0);
+        }
+        
+        private bool HasZoomedAndRotated()
+        {
+            return _hasZoomed && _hasRotated;
+        }
+        
+        private bool HasCompletedAllActions()
+        {
+            return _hasClicked && _hasZoomed && _hasRotated;
         }
         
         private bool IsValidHoveredObject(RaycastHit hit)
