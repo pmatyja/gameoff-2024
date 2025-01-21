@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using OCSFX.Utility.Debug;
 using UnityEngine;
 
@@ -28,6 +29,41 @@ namespace OCSFX.Utility
         public static T GetRandom<T>(this List<T> list)
         {
             return list[Random.Range(0, list.Count)];
+        }
+        
+        public static bool ContainsExactRange<T>(this IEnumerable<T> source, IEnumerable<T> range)
+        {
+            return ContainsExactRange(source, range, out _);
+        }
+
+        public static bool ContainsExactRange<T>(this IEnumerable<T> source, IEnumerable<T> range,
+            out int matchStartIndex)
+        {
+            var sourceList = source.ToList();
+            var rangeList = range.ToList();
+            
+            // Start with an invalid default index
+            matchStartIndex = -1;
+            
+            // If the source list is smaller than the range list, it can't contain the range
+            if (sourceList.Count < rangeList.Count) return false;
+            
+            // It's not possible for the range to start past this index due to its length
+            var lastPossibleIndex = sourceList.Count - rangeList.Count;
+            
+            for (var i = 0; i <= lastPossibleIndex; i++)
+            {
+                // If the source list from the current index to the range length matches the range list
+                if (sourceList.Skip(i).Take(rangeList.Count).SequenceEqual(rangeList))
+                {
+                    // Cache the start index of the match and return true
+                    matchStartIndex = i;
+                    return true;
+                }
+            }
+            
+            // No match was found
+            return false;
         }
         
         // Arrays
