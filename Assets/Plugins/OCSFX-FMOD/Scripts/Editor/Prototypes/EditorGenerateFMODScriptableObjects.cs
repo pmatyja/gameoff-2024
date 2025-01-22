@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using FMODUnity;
 using OCSFX.FMOD.Prototype;
+using OCSFX.Utility;
 using ParameterType = OCSFX.FMOD.Prototype.ParameterType;
 using UnityEditor;
 using Debug = UnityEngine.Debug;
@@ -26,6 +27,54 @@ namespace OCSFXEditor.FMOD.Prototype
         private static int _assetsCreated;
         private static int _assetsUpdated;
         private static int _assetsDeleted;
+        
+        private static List<FmodParameter> _fmodParameters;
+        private static List<FmodEvent> _fmodEvents;
+        private static List<FmodBank> _fmodBanks;
+        
+        private class EditorParamRefComparer : IEqualityComparer<EditorParamRef>
+        {
+            public bool Equals(EditorParamRef x, EditorParamRef y)
+            {
+                if (!string.IsNullOrEmpty(x.StudioPath) || !string.IsNullOrEmpty(y.StudioPath))
+                {
+                    return x.StudioPath.Equals(y.StudioPath);
+                }
+
+                return x.ID.Equals(y.ID);
+            }
+
+            public int GetHashCode(EditorParamRef obj)
+            {
+                return obj.Name.GetHashCode();
+            }
+        }
+        
+        private class EditorEventRefComparer : IEqualityComparer<EditorEventRef>
+        {
+            public bool Equals(EditorEventRef x, EditorEventRef y)
+            {
+                return x.Guid.Equals(y.Guid);
+            }
+
+            public int GetHashCode(EditorEventRef obj)
+            {
+                return obj.Guid.GetHashCode();
+            }
+        }
+        
+        private class EditorBankRefComparer : IEqualityComparer<EditorBankRef>
+        {
+            public bool Equals(EditorBankRef x, EditorBankRef y)
+            {
+                return x.Path.Equals(y.Path);
+            }
+
+            public int GetHashCode(EditorBankRef obj)
+            {
+                return obj.Path.GetHashCode();
+            }
+        }
 
         [MenuItem(_MENU_ITEM_DIRECTORY + nameof(CopyFMODCacheData))]
         public static void CopyFMODCacheData() 
@@ -39,12 +88,16 @@ namespace OCSFXEditor.FMOD.Prototype
                 return;
             }
 
-            _editorParamRefs = _fmodCacheSO.EditorParameters;
-            _editorBankRefs = _fmodCacheSO.EditorBanks;
-            _editorEventRefs = _fmodCacheSO.EditorEvents;
+            _editorParamRefs = AssetDatabase.LoadAllAssetsAtPath(_fmodCachePath).OfType<EditorParamRef>().ToList();
+            _editorParamRefs = _editorParamRefs.Distinct(new EditorParamRefComparer()).ToList();
+            
+            _editorBankRefs = AssetDatabase.LoadAllAssetsAtPath(_fmodCachePath).OfType<EditorBankRef>().ToList();
+            _editorBankRefs = _editorBankRefs.Distinct(new EditorBankRefComparer()).ToList();
+            
+            _editorEventRefs = AssetDatabase.LoadAllAssetsAtPath(_fmodCachePath).OfType<EditorEventRef>().ToList();
+            _editorEventRefs = _editorEventRefs.Distinct(new EditorEventRefComparer()).ToList();
 
             _assetsCreated = _assetsDeleted = _assetsUpdated = 0;
-
             
             // Create the FMOD folder if it doesn't exist
             EnsureOutputDirectory();
@@ -54,38 +107,49 @@ namespace OCSFXEditor.FMOD.Prototype
             var fmodBanks = new List<string>();
             foreach (var editorBankRef in _editorBankRefs)
             {
-                var formattedName = GetFormattedName(editorBankRef.StudioPath);
+                var formattedName = GetFormattedName(editorBankRef.name);
             
                 //Debug.Log(formattedName);
-                fmodBanks.Add(formattedName);
+                fmodBanks.AddUnique(formattedName);
                 GenerateBankAsset(formattedName, editorBankRef);
             }
             DeleteOldBankAssets(fmodBanks);
-            //
-            //
-            // // PARAMETERS
-            //
-            // var fmodParams = new List<string>();
-            // foreach (var editorParams in _editorParamRefs)
-            // {
-            //     var formattedName = GetFormattedName(editorParams.StudioPath);
-            //
-            //     //Debug.Log(formattedName);
-            //     fmodParams.Add(formattedName);
-            //     GenerateParameterAsset(formattedName, editorParams);
-            // }
-            // DeleteOldParameterAssets(fmodParams);
-
+            
+            
+            // PARAMETERS
+            
+            /* TODO: Need to find a way to get the parameter path when it is not global.
+             The object from the cache does not contain the Studio path, only the ID.
+             There must be some place that the EventCache is reading from in order to create the names of the
+             subobjects it contains. Possibly we can use that to get the studio path of the parameter.
+             */
+            
+            /* Remove global params wrapped into event usages. They are not needed since global params are already
+             accounted for via their StudioPath.
+             */
+            _editorParamRefs.RemoveAll(x => x.IsGlobal && string.IsNullOrEmpty(x.StudioPath));
+            
+            var fmodParams = new List<string>();
+            foreach (var editorParamRef in _editorParamRefs)
+            {
+                var formattedName = GetFormattedName(string.IsNullOrEmpty(editorParamRef.StudioPath) 
+                    ? editorParamRef.name : editorParamRef.StudioPath);
+                
+                fmodParams.AddUnique(formattedName);
+                GenerateParameterAsset(formattedName, editorParamRef);
+            }
+            DeleteOldParameterAssets(fmodParams);
+            
             
             // EVENTS
-
+            
             var fmodEvents = new List<string>();
             foreach (var editorEventRef in _editorEventRefs)
             {
-                var formattedName = GetFormattedName(editorEventRef.Path);
+                var formattedName = GetFormattedName(editorEventRef.name);
                 
                 //Debug.Log(formattedName);
-                fmodEvents.Add(formattedName);
+                fmodEvents.AddUnique(formattedName);
                 GenerateEventAsset(formattedName, editorEventRef);
             }
             DeleteOldEventAssets(fmodEvents);
@@ -121,63 +185,63 @@ namespace OCSFXEditor.FMOD.Prototype
             OCSFXEditorUtilities.GetOrAddFolder(OCSFXEditorUtilities.ASSET_OUTPUT_FOLDER_PATH, OCSFXEditorUtilities.ASSET_OUTPUT_FOLDER_NAME);
         }
 
-        private static string CreateFoldersFromRefAssetStudioPath(string refAssetStudioPath)
-        {
-            var path = refAssetStudioPath.Replace(":", "");
-            Debug.Log($"Path: {path}");
-            var subdirectories = path.Split('/').ToList();
-
-            var lastIndex = subdirectories.Count - 1;
-            Debug.Log($"Last index: {lastIndex}");
-
-            // Remove the object itself from subdirectories list. Rebuild the path.
-            subdirectories.RemoveAt(lastIndex);
-            path = string.Join('/', subdirectories);
-            Debug.Log($"Path: {path}");
-            
-            // Check all the subdirectories indices
-            Debug.Log($"Subdirectories: {subdirectories}");
-            for (int i = 0; i < subdirectories.Count; i++)
-            {
-                Debug.Log($"{i} : {subdirectories[i]}");      
-            }
-
-            string parentFolder = OCSFXEditorUtilities.ASSET_OUTPUT_FULL_PATH;
-            
-            // Make each folder in the path if it doesn't already exist
-            for (int i = 0; i < subdirectories.Count; i++)
-            {
-                var folderSubdirectories = new List<string>();
-                for (int j = 0; j <= i; j++)
-                {
-                    folderSubdirectories.Add(subdirectories[j]);
-                }
-
-                var folderPath = OCSFXEditorUtilities.ASSET_OUTPUT_FULL_PATH + string.Join('/', folderSubdirectories);
-                Debug.Log($"Folder path [{i}]: {folderPath}");
-
-                if (!AssetDatabase.IsValidFolder(folderPath))
-                {
-                    Debug.Log($"Create folder: {folderPath}");
-                    Debug.Log($"Folder name: {folderSubdirectories[^1]}");
-                    AssetDatabase.CreateFolder(parentFolder, folderSubdirectories[^1]);
-                }
-
-                parentFolder = folderPath;
-            }
-            
-            // Then move the generated asset into this folder.
-            return parentFolder;
-        }
+        // private static string CreateFoldersFromRefAssetStudioPath(string refAssetStudioPath)
+        // {
+        //     var path = refAssetStudioPath.Replace(":", "");
+        //     Debug.Log($"Path: {path}");
+        //     var subdirectories = path.Split('/').ToList();
+        //
+        //     var lastIndex = subdirectories.Count - 1;
+        //     Debug.Log($"Last index: {lastIndex}");
+        //
+        //     // Remove the object itself from subdirectories list. Rebuild the path.
+        //     subdirectories.RemoveAt(lastIndex);
+        //     path = string.Join('/', subdirectories);
+        //     Debug.Log($"Path: {path}");
+        //     
+        //     // Check all the subdirectories indices
+        //     Debug.Log($"Subdirectories: {subdirectories}");
+        //     for (int i = 0; i < subdirectories.Count; i++)
+        //     {
+        //         Debug.Log($"{i} : {subdirectories[i]}");      
+        //     }
+        //
+        //     string parentFolder = OCSFXEditorUtilities.ASSET_OUTPUT_FULL_PATH;
+        //     
+        //     // Make each folder in the path if it doesn't already exist
+        //     for (int i = 0; i < subdirectories.Count; i++)
+        //     {
+        //         var folderSubdirectories = new List<string>();
+        //         for (int j = 0; j <= i; j++)
+        //         {
+        //             folderSubdirectories.Add(subdirectories[j]);
+        //         }
+        //
+        //         var folderPath = OCSFXEditorUtilities.ASSET_OUTPUT_FULL_PATH + string.Join('/', folderSubdirectories);
+        //         Debug.Log($"Folder path [{i}]: {folderPath}");
+        //
+        //         if (!AssetDatabase.IsValidFolder(folderPath))
+        //         {
+        //             Debug.Log($"Create folder: {folderPath}");
+        //             Debug.Log($"Folder name: {folderSubdirectories[^1]}");
+        //             AssetDatabase.CreateFolder(parentFolder, folderSubdirectories[^1]);
+        //         }
+        //
+        //         parentFolder = folderPath;
+        //     }
+        //     
+        //     // Then move the generated asset into this folder.
+        //     return parentFolder;
+        // }
 
         private static void GenerateEventAsset(string formattedName, EditorEventRef editorEventRef, string directory = OCSFXEditorUtilities.ASSET_OUTPUT_FULL_PATH)
         {
-            Debug.Log($"Formatted name: {formattedName}");
-            Debug.Log($"Directory: {directory}");
-            var path = $"{directory}/{formattedName}.asset";
-            Debug.Log($"Path: {path}");
-            
             var fmodEvent = OCSFXEditorUtilities.GetOrCreateScriptableObjectAsset<FmodEvent>(directory, formattedName, out var createdNew);
+            if (!fmodEvent)
+            {
+                Debug.LogWarning($"[{nameof(EditorGenerateFMODScriptableObjects)} | {nameof(GenerateParameterAsset)}] Failed to create asset for {formattedName}");
+                return;
+            }
             
             if (!createdNew) _assetsUpdated++;
             else _assetsCreated++;
@@ -186,8 +250,6 @@ namespace OCSFXEditor.FMOD.Prototype
             var ocsfxFmodBanks = new List<FmodBank>();
             foreach (var bank in editorEventRef.Banks)
             {
-                //Debug.Log($"{fmodEvent} trying {bank}");
-                
                 var foundBank = existingBankObjects.Find(bankObject => bankObject.Name == bank.Name);
                 if (!foundBank) continue;
                 ocsfxFmodBanks.Add(foundBank);
@@ -214,6 +276,12 @@ namespace OCSFXEditor.FMOD.Prototype
         private static void GenerateBankAsset(string formattedName, EditorBankRef editorBankRef, string directory = OCSFXEditorUtilities.ASSET_OUTPUT_FULL_PATH)
         {
             var fmodBank = OCSFXEditorUtilities.GetOrCreateScriptableObjectAsset<FmodBank>(directory, formattedName, out var createdNew);
+            if (!fmodBank)
+            {
+                Debug.LogWarning($"[{nameof(EditorGenerateFMODScriptableObjects)} | {nameof(GenerateParameterAsset)}] Failed to create asset for {formattedName}");
+                return;
+            }
+            
             if (!createdNew) _assetsUpdated++;
             else _assetsCreated++;
             
@@ -229,23 +297,16 @@ namespace OCSFXEditor.FMOD.Prototype
         private static void GenerateParameterAsset(string formattedName, EditorParamRef editorParamRef, string directory = OCSFXEditorUtilities.ASSET_OUTPUT_FULL_PATH)
         {
             var fmodParameter = OCSFXEditorUtilities.GetOrCreateScriptableObjectAsset<FmodParameter>(directory, formattedName, out var createdNew);
+            if (!fmodParameter)
+            {
+                Debug.LogWarning($"[{nameof(EditorGenerateFMODScriptableObjects)} | {nameof(GenerateParameterAsset)}] Failed to create asset for {formattedName}");
+                return;
+            }
+            
             if (!createdNew) _assetsUpdated++;
             else _assetsCreated++;
             
-            fmodParameter.Init(
-                editorParamRef.Name,
-                editorParamRef.StudioPath,
-                editorParamRef.Min,
-                editorParamRef.Max,
-                editorParamRef.Default,
-                editorParamRef.ID,
-                (ParameterType)editorParamRef.Type,
-                editorParamRef.IsGlobal,
-                editorParamRef.Labels,
-                editorParamRef.Exists
-            );
-            
-            AssetDatabase.SaveAssetIfDirty(fmodParameter);
+            fmodParameter.EditorInit(editorParamRef);
         }
         
         private static void DeleteOldParameterAssets(List<string> assetNames, string directory = OCSFXEditorUtilities.ASSET_OUTPUT_FULL_PATH)

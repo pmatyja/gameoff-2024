@@ -80,6 +80,12 @@ namespace OCSFXEditor.FMOD.Prototype
         
         public static T GetOrCreateScriptableObjectAsset<T>(string path, string name, out bool createdNew) where T : ScriptableObject
         {
+            if (string.IsNullOrWhiteSpace(path) || string.IsNullOrWhiteSpace(name))
+            {
+                createdNew = false;
+                return null;
+            }
+            
             createdNew = false;
             
             var fullPath = $"{path}/{name}.asset";
@@ -106,8 +112,9 @@ namespace OCSFXEditor.FMOD.Prototype
             {
                 if (validAssetNames.Contains(existingAsset.name)) continue;
                 
-                UnityEditor.AssetDatabase.DeleteAsset(UnityEditor.AssetDatabase.GetAssetPath(existingAsset));
                 var assetPath = $"{path}/{existingAsset.name}.asset";
+                
+                UnityEditor.AssetDatabase.DeleteAsset(UnityEditor.AssetDatabase.GetAssetPath(existingAsset));
                 
                 Debug.Log($"[{typeof(OCSFXEditorUtilities)} | {nameof(DeleteInvalidScriptableObjectAssets)}] Deleted invalid asset at {assetPath}");
                 
