@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+using UnityEditor;
+#endif //UNITY_EDITOR
+
+using System.Collections.Generic;
 using System.Linq;
 using FMOD.Studio;
 using FMODUnity;
-using OCSFX.FMOD.Components;
 using GUID = FMOD.GUID;
 using UnityEngine;
 
@@ -19,7 +22,7 @@ namespace OCSFX.FMOD.Prototype
         [SerializeField] public bool IsStream;
         [SerializeField] public bool Is3D;
         [SerializeField] public bool IsOneShot;
-        [SerializeField] public List<FmodParameter> Parameters;
+        [SerializeField] public List<FmodParameter> Parameters = new List<FmodParameter>();
         [SerializeField] public float MinDistance;
         [SerializeField] public float MaxDistance;
         [SerializeField] public int Length;
@@ -47,7 +50,43 @@ namespace OCSFX.FMOD.Prototype
             MaxDistance = maxDistance;
             Length = length;
         }
+        
+#if UNITY_EDITOR
+        public void EditorInit(EditorEventRef editorEventRef, List<FmodBank> ocsfxBanks, List<FmodParameter> ocsfxParameters)
+        {
+            if (!AssetIsChanged(editorEventRef, ocsfxBanks, ocsfxParameters)) return;
+            
+            Path = editorEventRef.Path;
+            Guid = editorEventRef.Guid;
+            IsStream = editorEventRef.IsStream;
+            Is3D = editorEventRef.Is3D;
+            IsOneShot = editorEventRef.IsOneShot;
+            MinDistance = editorEventRef.MinDistance;
+            MaxDistance = editorEventRef.MaxDistance;
+            Length = editorEventRef.Length;
 
+            Banks = ocsfxBanks;
+            Parameters = ocsfxParameters;
+            
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssetIfDirty(this);
+        }       
+        
+        private bool AssetIsChanged(EditorEventRef editorEventRef, List<FmodBank> ocsfxBanks, List<FmodParameter> ocsfxParameters)
+        {
+            return Path != editorEventRef.Path ||
+                   Guid != editorEventRef.Guid ||
+                   IsStream != editorEventRef.IsStream ||
+                   Is3D != editorEventRef.Is3D ||
+                   IsOneShot != editorEventRef.IsOneShot ||
+                   !Mathf.Approximately(MinDistance, editorEventRef.MinDistance) ||
+                   !Mathf.Approximately(MaxDistance, editorEventRef.MaxDistance) ||
+                   Length != editorEventRef.Length ||
+                   !Banks.SequenceEqual(ocsfxBanks) ||
+                   !Parameters.SequenceEqual(ocsfxParameters);
+        }
+#endif //UNITY_EDITOR
+        
         public void PlayOneShot()
         {
             RuntimeManager.PlayOneShot(Path);
