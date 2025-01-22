@@ -33,11 +33,7 @@ namespace Runtime.Utility
 
         private void TriggerInternal(TriggerOn triggerType)
         {
-            if (_doOnce && _hasTriggered) return;
-
-            if (!isActiveAndEnabled && triggerType != TriggerOn.Disable && triggerType != TriggerOn.Destroy) return;
-
-            if (!_triggerOn.HasFlag(triggerType)) return;
+            if (!CanTrigger(triggerType)) return;
             
             if (_doOnce) _hasTriggered = true;
             
@@ -53,6 +49,13 @@ namespace Runtime.Utility
                 }
                 else StartCoroutine(Co_Delay());   
             }
+        }
+
+        private bool CanTrigger(TriggerOn triggerType)
+        {
+            return (!_doOnce || !_hasTriggered)
+                   && (isActiveAndEnabled || triggerType == TriggerOn.Disable || triggerType == TriggerOn.Destroy)
+                   && _triggerOn.HasFlag(triggerType);
         }
 
         private IEnumerator Co_Delay()

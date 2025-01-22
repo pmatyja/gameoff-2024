@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using FMOD.Studio;
 using OCSFX.Attributes;
+using OCSFX.Utility;
 using UnityEngine;
 
 namespace OCSFX.FMOD.Prototype
 {
     [Serializable]
-    internal struct FmodParameterObjectData
+    internal struct FmodParameterObjectData : IEquatable<FmodParameterObjectData>
     {
         [SerializeField, ReadOnly] private PARAMETER_ID _id;
         [SerializeField, ReadOnly] private bool _isGlobal;
@@ -74,16 +75,45 @@ namespace OCSFX.FMOD.Prototype
             return didChange;
         }
         
-        private bool SetAndCheckChange<T>(ref T field, T newValue)
+        private static bool SetAndCheckChange<T>(ref T field, T newValue)
         {
-            if (EqualityComparer<T>.Default.Equals(field, newValue)) return false;
+            if (field.Equals(newValue)) return false;
             field = newValue;
             return true;
         }
             
         public bool IsNull()
         {
-            return Equals(default(FmodParameterObjectData));
+            return Equals(default);
+        }
+
+        public bool Equals(FmodParameterObjectData other)
+        {
+            return IDsAreEqual(_id, other._id)
+                   && _isGlobal == other._isGlobal
+                   && _exists == other._exists
+                   && _type == other._type
+                   && _minValue.Equals(other._minValue)
+                   && _maxValue.Equals(other._maxValue)
+                   && _defaultValue.Equals(other._defaultValue)
+                   && LabelsAreEqual(_labels, other._labels);
+
+            bool LabelsAreEqual(string[] a, string[] b)
+            {
+                if (a.Length != b.Length) return false;
+
+                for (var i = 0; i < a.Length; i++)
+                {
+                    if (a[i] != b[i]) return false;
+                }
+
+                return true;
+            }
+
+            bool IDsAreEqual(PARAMETER_ID a, PARAMETER_ID b)
+            {
+                return a.data1 == b.data1 && a.data2 == b.data2;
+            }
         }
     }
 }

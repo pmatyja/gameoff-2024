@@ -86,6 +86,7 @@ namespace OCSFX.FMOD
                         editorParamRef.Default,
                         (ParameterType)editorParamRef.Type,
                         editorParamRef.Exists);
+                    
                 }
                 else
                 {
@@ -127,11 +128,20 @@ namespace OCSFX.FMOD
             Initialize();
 #if UNITY_EDITOR
             if (Application.isPlaying)
+            {
                 SetGlobalValue(_fmodParameter.Value);
-            
-            Application.quitting += () => SetGlobalValue(_data.DefaultValue);
+                Application.quitting += OnApplicationQuitting;
+            }
 #endif //UNITY_EDITOR
         }
+        
+#if UNITY_EDITOR
+        private void OnApplicationQuitting()
+        {
+            Application.quitting -= OnApplicationQuitting;
+            SetGlobalValue(_data.DefaultValue);
+        }
+#endif //UNITY_EDITOR
 
         private void OnValidate()
         {

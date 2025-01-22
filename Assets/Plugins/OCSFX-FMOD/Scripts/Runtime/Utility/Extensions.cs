@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using OCSFX.Utility.Debug;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ namespace OCSFX.Utility
             return ((1 << other.gameObject.layer) & layerMask) != 0;
         }
 
-        // Lists
+#region List
         public static void Flush<T>(this List<T> list) where T : Object
         {
             for (int i = 0; i < list.Count; i++)
@@ -31,42 +30,72 @@ namespace OCSFX.Utility
             return list[Random.Range(0, list.Count)];
         }
         
-        public static bool ContainsExactRange<T>(this IEnumerable<T> source, IEnumerable<T> range)
+        public static bool HasSameContentAs<T>(this List<T> list1, List<T> list2)
         {
-            return ContainsExactRange(source, range, out _);
-        }
+            if (list1.Count != list2.Count) return false;
+            
+            for (var i = 0; i < list1.Count; i++)
+            {
+                if (!list1[i].Equals(list2[i])) return false;
+            }
 
-        public static bool ContainsExactRange<T>(this IEnumerable<T> source, IEnumerable<T> range,
-            out int matchStartIndex)
+            return true;
+        }
+        
+        public static bool ContainsExactRange<T>(this List<T> source, List<T> range)
         {
-            var sourceList = source.ToList();
-            var rangeList = range.ToList();
-            
-            // Start with an invalid default index
-            matchStartIndex = -1;
-            
-            // If the source list is smaller than the range list, it can't contain the range
-            if (sourceList.Count < rangeList.Count) return false;
-            
-            // It's not possible for the range to start past this index due to its length
-            var lastPossibleIndex = sourceList.Count - rangeList.Count;
-            
+            if (source.Count < range.Count) return false;
+
+            var lastPossibleIndex = source.Count - range.Count;
+            var match = true;
+
             for (var i = 0; i <= lastPossibleIndex; i++)
             {
-                // If the source list from the current index to the range length matches the range list
-                if (sourceList.Skip(i).Take(rangeList.Count).SequenceEqual(rangeList))
+                for (var j = range.Count - 1; j >= 0; j--)
                 {
-                    // Cache the start index of the match and return true
-                    matchStartIndex = i;
-                    return true;
+                    if (source[i + j].Equals(range[j])) continue;
+                    
+                    // If the current index doesn't match, then the range doesn't match
+                    match = false;
+                    break;
                 }
             }
+
+            return match;
+        }
+
+        public static bool ContainsExactRange<T>(this List<T> source, List<T> range, out int matchStartIndex)
+        {
+            matchStartIndex = -1;
             
-            // No match was found
+            if (source.Count < range.Count) return false;
+
+            var lastPossibleIndex = source.Count - range.Count;
+            var match = true;
+
+            for (var i = 0; i <= lastPossibleIndex; i++)
+            {
+                for (var j = range.Count - 1; j >= 0; j--)
+                {
+                    if (source[i + j].Equals(range[j])) continue;
+                    
+                    // If the current index doesn't match, then the range doesn't match
+                    match = false;
+                    break;
+                }
+
+                if (!match) continue;
+                
+                matchStartIndex = i;
+                return true;
+            }
+
             return false;
         }
         
-        // Arrays
+#endregion List
+        
+#region Array
         public static T GetLooped<T>(this T[] array, int index)
         {
             return index < 0 ? array[array.Length] : array[index % array.Length];
@@ -84,7 +113,73 @@ namespace OCSFX.Utility
                 list.Add(item);
             }
         }
+        
+        public static bool HasSameContentAs<T>(this T[] array1, T[] array2)
+        {
+            if (array1.Length != array2.Length) return false;
+            
+            for (var i = 0; i < array1.Length; i++)
+            {
+                if (!array1[i].Equals(array2[i])) return false;
+            }
 
+            return true;
+        }
+        
+        public static bool ContainsExactRange<T>(this T[] source, T[] range)
+        {
+            if (source.Length < range.Length) return false;
+
+            var lastPossibleIndex = source.Length - range.Length;
+            var match = true;
+
+            for (var i = 0; i <= lastPossibleIndex; i++)
+            {
+                for (var j = range.Length - 1; j >= 0; j--)
+                {
+                    if (source[i + j].Equals(range[j])) continue;
+                    
+                    // If the current index doesn't match, then the range doesn't match
+                    match = false;
+                    break;
+                }
+            }
+
+            return match;
+        }
+        
+        public static bool ContainsExactRange<T>(this T[] source, T[] range, out int matchStartIndex)
+        {
+            matchStartIndex = -1;
+            
+            if (source.Length < range.Length) return false;
+
+            var lastPossibleIndex = source.Length - range.Length;
+            var match = true;
+
+            for (var i = 0; i <= lastPossibleIndex; i++)
+            {
+                for (var j = range.Length - 1; j >= 0; j--)
+                {
+                    if (source[i + j].Equals(range[j])) continue;
+                    
+                    // If the current index doesn't match, then the range doesn't match
+                    match = false;
+                    break;
+                }
+
+                if (!match) continue;
+                
+                matchStartIndex = i;
+                return true;
+            }
+
+            return false;
+        }
+        
+#endregion Array
+
+#region Float
         public static float Map(this float value, float fromMin, float fromMax, float toMin, float toMax)
         {
             // Ensure the value is within the original range
@@ -102,6 +197,9 @@ namespace OCSFX.Utility
             return Map(value, fromMin, fromMax, 0, 1);
         }
         
+#endregion Float
+        
+#region GameObject
         public static T GetOrAdd<T>(this GameObject attachGameObject) where T : Component
         {
             if (!attachGameObject.TryGetComponent<T>(out var component))
@@ -125,5 +223,41 @@ namespace OCSFX.Utility
             OCSFXLogger.LogError($"No {typeof(T).Name} found on " + gameObject.name, gameObject);
             return false;
         }
+#endregion GameObject
+
+        // public static bool ContainsExactRange<T>(this IEnumerable<T> source, IEnumerable<T> range)
+        // {
+        //     return ContainsExactRange(source, range, out _);
+        // }
+        //
+        // public static bool ContainsExactRange<T>(this IEnumerable<T> source, IEnumerable<T> range,
+        //     out int matchStartIndex)
+        // {
+        //     var sourceList = source.ToList();
+        //     var rangeList = range.ToList();
+        //     
+        //     // Start with an invalid default index
+        //     matchStartIndex = -1;
+        //     
+        //     // If the source list is smaller than the range list, it can't contain the range
+        //     if (sourceList.Count < rangeList.Count) return false;
+        //     
+        //     // It's not possible for the range to start past this index due to its length
+        //     var lastPossibleIndex = sourceList.Count - rangeList.Count;
+        //     
+        //     for (var i = 0; i <= lastPossibleIndex; i++)
+        //     {
+        //         // If the source list from the current index to the range length matches the range list
+        //         if (sourceList.Skip(i).Take(rangeList.Count).SequenceEqual(rangeList))
+        //         {
+        //             // Cache the start index of the match and return true
+        //             matchStartIndex = i;
+        //             return true;
+        //         }
+        //     }
+        //     
+        //     // No match was found
+        //     return false;
+        // }
     }
 }
