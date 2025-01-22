@@ -35,7 +35,6 @@ namespace OCSFX.FMOD
 
             _fmodParameter.Value = newValue;
             
-            // Debug.Log($"Set Param ({_fmodParameter.Parameter}) to {_fmodParameter.Value}");
             OCSFXAudioStatics.SetFMODParameterGlobal(_fmodParameter.Parameter, _fmodParameter.Value);
         }
 
@@ -63,64 +62,70 @@ namespace OCSFX.FMOD
         {
             _fmodParameter.Parameter = name;
             
-            var changed = false;
-            
 #if UNITY_EDITOR
             var editorParamRef = EventManager.Parameters.Find(editorParamRef => editorParamRef.Name == _fmodParameter.Parameter);
 
-            if (editorParamRef)
+            if (!editorParamRef)
             {
-                EditorUtils.System.getParameterDescriptionByName(_fmodParameter.Parameter, out var paramDesc);
-                var type = paramDesc.type;
+                Debug.LogWarning($"No parameter reference found for {_fmodParameter.Parameter}", this);
 
-                name = editorParamRef.Name;
-
-                if (!_data.IsNull())
-                {
-                    changed = _data.SetData(
-                        editorParamRef.ID,
-                        editorParamRef.IsGlobal,
-                        editorParamRef.Labels,
-                        editorParamRef.Min,
-                        editorParamRef.Max,
-                        editorParamRef.Default,
-                        (ParameterType)editorParamRef.Type,
-                        editorParamRef.Exists);
-                    
-                }
-                else
-                {
-                    _data = new FmodParameterObjectData(
-                        editorParamRef.ID,
-                        editorParamRef.IsGlobal,
-                        editorParamRef.Labels,
-                        editorParamRef.Min,
-                        editorParamRef.Max,
-                        editorParamRef.Default,
-                        (ParameterType)editorParamRef.Type,
-                        editorParamRef.Exists
-                    );
-
-                    changed = true;
-                }
-            }
-            else if (!_data.IsNull())
-            {
                 _data = default;
+                return;
+            }
+            
+            // EditorUtils.System.getParameterDescriptionByName(_fmodParameter.Parameter, out var paramDesc);
+            // var type = paramDesc.type;
+
+            name = editorParamRef.Name;
+
+            if (TryUpdateData(editorParamRef))
+            {
+                OnDataChanged();
+            }
+#endif //UNITY_EDITOR
+        }
+
+#if UNITY_EDITOR
+        private bool TryUpdateData(EditorParamRef editorParamRef)
+        {
+            bool changed;
+            
+            if (!_data.IsNull())
+            {
+                changed = _data.SetData(
+                    editorParamRef.ID,
+                    editorParamRef.IsGlobal,
+                    editorParamRef.Labels,
+                    editorParamRef.Min,
+                    editorParamRef.Max,
+                    editorParamRef.Default,
+                    (ParameterType)editorParamRef.Type,
+                    editorParamRef.Exists);
+            }
+            else
+            {
+                _data = new FmodParameterObjectData(
+                    editorParamRef.ID,
+                    editorParamRef.IsGlobal,
+                    editorParamRef.Labels,
+                    editorParamRef.Min,
+                    editorParamRef.Max,
+                    editorParamRef.Default,
+                    (ParameterType)editorParamRef.Type,
+                    editorParamRef.Exists
+                );
+
                 changed = true;
             }
 
-            if (changed)
-            { 
-                SetGlobalValue(_data.DefaultValue);
-            }
+            return changed;
+        }
+    #endif //UNITY_EDITOR
 
-#endif //UNITY_EDITOR
-            
-            if (changed)
-            {
-                Debug.Log($"{this} Initialized", this);
-            }
+        private void OnDataChanged()
+        {
+            Debug.Log($"{this} Initialized", this);
+            SetGlobalValue(_data.DefaultValue);
         }
 
         private void OnEnable()

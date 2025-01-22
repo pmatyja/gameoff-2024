@@ -10,15 +10,15 @@ namespace OCSFX.FMOD.Prototype
     [Serializable]
     internal struct FmodParameterObjectData : IEquatable<FmodParameterObjectData>
     {
-        [SerializeField, ReadOnly] private PARAMETER_ID _id;
-        [SerializeField, ReadOnly] private bool _isGlobal;
-        [SerializeField, ReadOnly] private bool _exists;
-        [SerializeField, ReadOnly] private ParameterType _type;
-        [Space]
-        [SerializeField, ReadOnly] private float _minValue;
-        [SerializeField, ReadOnly] private float _maxValue;
-        [SerializeField, ReadOnly] private float _defaultValue;
-        [SerializeField, ReadOnly] private string[] _labels;
+        [SerializeField] private FmodParameter.ParameterID _id;
+        [SerializeField] private bool _isGlobal;
+        [SerializeField] private bool _exists;
+        [SerializeField] private ParameterType _type;
+        [Space]        
+        [SerializeField] private float _minValue;
+        [SerializeField] private float _maxValue;
+        [SerializeField] private float _defaultValue;
+        [SerializeField] private string[] _labels;
         
         public PARAMETER_ID ID => _id;
         public bool IsGlobal => _isGlobal;
@@ -77,7 +77,16 @@ namespace OCSFX.FMOD.Prototype
         
         private static bool SetAndCheckChange<T>(ref T field, T newValue)
         {
-            if (field.Equals(newValue)) return false;
+            if (field is PARAMETER_ID id)
+            {
+                if (Helpers.IDsAreEqual(id, (PARAMETER_ID) (object) newValue)) return false;
+            }
+            else if (field is string[] labels)
+            {
+                if (Helpers.LabelsAreEqual(labels, (string[]) (object) newValue)) return false;
+            }
+            else if (field.Equals(newValue)) return false;
+            
             field = newValue;
             return true;
         }
@@ -89,31 +98,35 @@ namespace OCSFX.FMOD.Prototype
 
         public bool Equals(FmodParameterObjectData other)
         {
-            return IDsAreEqual(_id, other._id)
+            return Helpers.IDsAreEqual(_id, other._id)
                    && _isGlobal == other._isGlobal
                    && _exists == other._exists
                    && _type == other._type
                    && _minValue.Equals(other._minValue)
                    && _maxValue.Equals(other._maxValue)
                    && _defaultValue.Equals(other._defaultValue)
-                   && LabelsAreEqual(_labels, other._labels);
+                   && Helpers.LabelsAreEqual(_labels, other._labels);
+            
+        }
+    }
 
-            bool LabelsAreEqual(string[] a, string[] b)
+    public static class Helpers
+    {
+        public static bool IDsAreEqual(PARAMETER_ID a, PARAMETER_ID b)
+        {
+            return a.data1 == b.data1 && a.data2 == b.data2;
+        }
+        
+        public static bool LabelsAreEqual(ReadOnlySpan<string> a, ReadOnlySpan<string> b)
+        {
+            if (a.Length != b.Length) return false;
+
+            for (var i = 0; i < a.Length; i++)
             {
-                if (a.Length != b.Length) return false;
-
-                for (var i = 0; i < a.Length; i++)
-                {
-                    if (a[i] != b[i]) return false;
-                }
-
-                return true;
+                if (a[i] != b[i]) return false;
             }
 
-            bool IDsAreEqual(PARAMETER_ID a, PARAMETER_ID b)
-            {
-                return a.data1 == b.data1 && a.data2 == b.data2;
-            }
+            return true;
         }
     }
 }
