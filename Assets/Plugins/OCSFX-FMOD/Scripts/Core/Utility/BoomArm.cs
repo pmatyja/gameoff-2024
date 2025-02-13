@@ -156,22 +156,8 @@ namespace OCSFX.EZFMOD.Utility
             }
             else if (EditorApplication.isCompiling)
             {
-                if (_isEditorUpdateRegistered)
-                {
-                    UnregisterEditorUpdate();
-                    StartCoroutine(Co_ReregisterAfterCompileFinished());
-                }
+                RegisterEditorUpdate();
             }
-        }
-        
-        private System.Collections.IEnumerator Co_ReregisterAfterCompileFinished()
-        {
-            while (EditorApplication.isCompiling)
-            {
-                yield return null;
-            }
-
-            RegisterEditorUpdate();
         }
         
 #endif //UNITY_EDITOR
