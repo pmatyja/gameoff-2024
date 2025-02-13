@@ -35,7 +35,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
 
         private void OnEnable()
         {
-            Application.quitting += () => ResetAll();
+            if (_autoPlayAmbDefault) PlayDefaultAmbience();
         }
         
         private void OnDisable()
@@ -167,6 +167,8 @@ namespace OCSFX.EZFMOD.ScriptableObjects
 
         public void StopAllAmbience()
         {
+            if (!Application.isPlaying) return;
+            
             foreach (var ambEvent in _events)
             {
                 ambEvent.EventRef.StopGlobal();

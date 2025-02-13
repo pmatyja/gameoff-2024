@@ -56,7 +56,11 @@ namespace Editor
                 EditorGUI.PropertyField(nameRect, _name, GUIContent.none);
             }
 
+            if (_animator.objectReferenceValue) EditorGUI.BeginDisabledGroup(true);
+            
             EditorGUI.PropertyField(typeRect, _type, GUIContent.none);
+            
+            if (_animator.objectReferenceValue) EditorGUI.EndDisabledGroup();
 
             EditorGUI.indentLevel = indent;
             EditorGUI.EndProperty();

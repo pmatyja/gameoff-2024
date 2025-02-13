@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using FMOD.Studio;
 using FMODUnity;
@@ -5,6 +7,7 @@ using OCSFX.EZFMOD.Debug;
 using OCSFX.EZFMOD.Types;
 using UnityEngine;
 using GUID = FMOD.GUID;
+using Object = UnityEngine.Object;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 using PARAMETER_ID = FMOD.Studio.PARAMETER_ID;
 
@@ -12,16 +15,27 @@ namespace OCSFX.EZFMOD
 {
     public static class EZFMODExtensions
     {
+        private static bool IsRuntimeManagerInitialized(string attemptedAction)
+        {
+            var isInitialized = RuntimeManager.IsInitialized;
+            if (!isInitialized)
+            {
+                OCSFXLogger.LogError($"[{nameof(EZFMODExtensions)}] Tried to {attemptedAction} before FMOD {nameof(RuntimeManager)} was initialized.");
+            }
+            
+            return isInitialized;
+        }
+        
         public static void PlayOneShot(this EventReference eventRef, Vector3 position = default)
         {
-            if (!RuntimeManager.IsInitialized) return;
+            if (!IsRuntimeManagerInitialized($"{nameof(PlayOneShot)}")) return;
             
             RuntimeManager.PlayOneShot(eventRef, position);
         }
 
         public static void PlayOneShotAttached(this EventReference eventRef, GameObject soundSource)
         {
-            if (!RuntimeManager.IsInitialized) return;
+            if (!IsRuntimeManagerInitialized($"{nameof(PlayOneShotAttached)}")) return;
             
             RuntimeManager.PlayOneShotAttached(eventRef, soundSource);
         }
@@ -29,6 +43,8 @@ namespace OCSFX.EZFMOD
         public static EventInstance Play(this EventReference eventRef, GameObject sourceObject, 
             string parameter = null, float value = 0)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(Play)}")) return EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
+            
             if (!sourceObject) return EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
 
             if (!sourceObject.TryGetComponent<EZFMODGameObject>(out var fmodGameObject)) 
@@ -45,7 +61,7 @@ namespace OCSFX.EZFMOD
         public static EventInstance Play2D(this EventReference eventRef, 
             string parameter = null, float value = 0)
         {
-            if (!RuntimeManager.IsInitialized) return EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
+            if (!IsRuntimeManagerInitialized($"{nameof(Play2D)}")) return EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
             
             var newInstance = RuntimeManager.CreateInstance(eventRef);
 
@@ -73,6 +89,8 @@ namespace OCSFX.EZFMOD
         
         public static void Stop(this EventReference eventRef, GameObject sourceObject, bool allowFadeout = true)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(Stop)}")) return;
+            
             if (!sourceObject) return;
             
             if (!sourceObject.TryGetComponent<EZFMODGameObject>(out var fmodGameObject))
@@ -83,7 +101,7 @@ namespace OCSFX.EZFMOD
         
         public static void Stop2D(this EventReference eventRef, bool allowFadeout = true)
         {
-            if (!RuntimeManager.IsInitialized) return;
+            if (!IsRuntimeManagerInitialized($"{nameof(Stop2D)}")) return;
             
             var eventDesc = RuntimeManager.GetEventDescription(eventRef);
             
@@ -99,7 +117,7 @@ namespace OCSFX.EZFMOD
         
         public static void StopGlobal(this EventReference eventRef, bool allowFadeout = true)
         {
-            if (!RuntimeManager.IsInitialized) return;
+            if (!IsRuntimeManagerInitialized($"{nameof(StopGlobal)}")) return;
 
             if (eventRef.IsNull) return;
             
@@ -119,6 +137,8 @@ namespace OCSFX.EZFMOD
         
         public static string GetEventName(this EventReference eventReference)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(GetEventName)}")) return string.Empty;
+            
             var eventPath = eventReference.ToString();
 
             var segments = eventPath.Split("/");
@@ -129,7 +149,7 @@ namespace OCSFX.EZFMOD
         
         public static double GetDuration(this EventReference eventReference)
         {
-            if (!RuntimeManager.IsInitialized) return 0.0;
+            if (!IsRuntimeManagerInitialized($"{nameof(GetDuration)}")) return 0;
 
             var eventDesc = RuntimeManager.GetEventDescription(eventReference);
             
@@ -141,6 +161,8 @@ namespace OCSFX.EZFMOD
         
         public static double GetDuration(this EventInstance instance)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(GetDuration)}")) return 0;
+            
             instance.getDescription(out var eventDesc);
             eventDesc.getLength(out var durationInMS);
             var durationInSeconds = durationInMS / 1000.0;
@@ -150,6 +172,8 @@ namespace OCSFX.EZFMOD
         
         public static void Stop(this EventInstance instance, bool allowFadeout = true)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(Stop)}")) return;
+            
             if (!instance.isValid())
             {
                 OCSFXLogger.LogWarning(nameof(EZFMODExtensions) + " tried to stop an invalid event instance.");
@@ -163,6 +187,8 @@ namespace OCSFX.EZFMOD
 
         public static string GetEventName(this EventInstance eventInstance)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(GetEventName)}")) return string.Empty;
+            
             eventInstance.getDescription(out var eventDescription);
             eventDescription.getPath(out var eventPath);
 
@@ -174,6 +200,8 @@ namespace OCSFX.EZFMOD
         
         public static GUID GetEventGUID(this EventInstance eventInstance)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(GetEventGUID)}")) return default;
+            
             eventInstance.getDescription(out var eventDescription);
             eventDescription.getID(out var eventGUID);
             
@@ -182,12 +210,16 @@ namespace OCSFX.EZFMOD
         
         public static float GetEventVolume(this EventInstance eventInstance)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(GetEventVolume)}")) return 0;
+            
             eventInstance.getVolume(out var volume);
             return volume;
         }
 
         public static void SetEventVolume(this EventInstance eventInstance, float multiplier = 1)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(SetEventVolume)}")) return;
+            
             if (!eventInstance.isValid()) return;
             
             multiplier = Mathf.Clamp(multiplier, 0, 2);
@@ -198,6 +230,8 @@ namespace OCSFX.EZFMOD
         
         public static void SetParameter(this GameObject sourceObject, string parameterName, float value)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(SetParameter)}")) return;
+            
             if (!sourceObject) return;
 
             if (!sourceObject.TryGetComponent<EZFMODGameObject>(out var fmodGameObject))
@@ -210,45 +244,77 @@ namespace OCSFX.EZFMOD
         
         public static bool TryGetParameter(this List<FMODParameter> fmodParamStructs, string structName, out string parameter)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(TryGetParameter)}")) 
+            {
+                parameter = string.Empty;
+                return false;
+            }
+            
             parameter = fmodParamStructs.GetParameter(structName);
             return !string.IsNullOrWhiteSpace(parameter);
         }
 
         public static string GetParameter(this List<FMODParameter> fmodParamStructs, string structName)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(GetParameter)}")) return string.Empty;
+            
             return fmodParamStructs.Find(fmodParamStruct => fmodParamStruct.Parameter == structName).Parameter;
         }
         
         public static bool TryGetParameter(this List<FMODGlobalParameter> fmodParamStructs, string structName, out string parameter)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(TryGetParameter)}")) 
+            {
+                parameter = string.Empty;
+                return false;
+            }
+            
             parameter = fmodParamStructs.GetParameter(structName);
             return !string.IsNullOrWhiteSpace(parameter);
         }
 
         public static string GetParameter(this List<FMODGlobalParameter> fmodParamStructs, string structName)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(GetParameter)}")) return string.Empty;
+            
             return fmodParamStructs.Find(fmodParamStruct => fmodParamStruct.Parameter == structName).Parameter;
         }
         
         public static bool TryGetEventReference(this List<FMODEvent> fmodEventStructs, string structName, out EventReference eventReference)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(TryGetEventReference)}")) 
+            {
+                eventReference = default;
+                return false;
+            }
+            
             eventReference = fmodEventStructs.GetEventReference(structName);
             return !eventReference.IsNull;
         }
 
         public static EventReference GetEventReference(this List<FMODEvent> fmodEventStructs, string structName)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(GetEventReference)}")) return default;
+            
             return fmodEventStructs.Find(fmodEventStruct => fmodEventStruct.Name == structName).EventRef;
         }
         
         public static bool TryGetBank(this List<FMODBank> fmodBankStructs, string structName, out string bank)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(TryGetBank)}")) 
+            {
+                bank = string.Empty;
+                return false;
+            }
+            
             bank = fmodBankStructs.GetBank(structName);
             return !string.IsNullOrWhiteSpace(bank);
         }
         
         public static string GetBank(this List<FMODBank> fmodBankStructs, string structName)
         {
+            if (!IsRuntimeManagerInitialized($"{nameof(GetBank)}")) return string.Empty;
+            
             return fmodBankStructs.Find(fmodBankStruct => fmodBankStruct.Bank == structName).Bank;
         }
         

@@ -1,7 +1,8 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using FMODUnity;
 using OCSFX.EZFMOD.Components;
-using OCSFX.EZFMOD;
 using OCSFX.EZFMOD.Types;
 using OCSFX.EZFMOD.Debug;
 using UnityEngine;
@@ -196,6 +197,5 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         {
             if (!snapshot.IsNull) snapshot.StopGlobal();
         }
-        
     }
 }

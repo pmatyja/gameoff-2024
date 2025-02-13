@@ -3454,6 +3454,8 @@ MonoBehaviour:
   _ambEventName: EXT_Level_01
   _priority: 1
   _overlapCount: 0
+  _gizmoFillColor: {r: 0, g: 0, b: 0, a: 0}
+  _gizmoWireColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &382028734
 Transform:
   m_ObjectHideFlags: 0
@@ -7749,6 +7751,8 @@ MonoBehaviour:
   _ambEventName: INT_Structure_Large
   _priority: 2
   _overlapCount: 0
+  _gizmoFillColor: {r: 0, g: 0, b: 0, a: 0}
+  _gizmoWireColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!43 &1103629937
 Mesh:
   m_ObjectHideFlags: 0
@@ -11102,7 +11106,6 @@ Transform:
   - {fileID: 382028734}
   - {fileID: 1100744043}
   - {fileID: 1518621715}
-  - {fileID: 1896025011}
   m_Father: {fileID: 1710860982}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1382511596
@@ -12358,6 +12361,8 @@ MonoBehaviour:
   _ambEventName: INT_Structure_Large
   _priority: 2
   _overlapCount: 0
+  _gizmoFillColor: {r: 0, g: 0, b: 0, a: 0}
+  _gizmoWireColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!43 &1519427038
 Mesh:
   m_ObjectHideFlags: 0
@@ -17056,60 +17061,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1896025009
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1896025011}
-  - component: {fileID: 1896025010}
-  m_Layer: 0
-  m_Name: AudioAttenuationProbe
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1896025010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896025009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67ea430714b346ddb06440e908bf6fde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Source>k__BackingField: {fileID: 0}
-  <Target>k__BackingField: {fileID: 0}
-  TargetWeight: 0.9
-  TargetOffset: {x: 0, y: 1, z: 0}
-  _showDebug: 1
-  _debugSettings:
-    DrawSphereRadius: 0.1
-    ThisColor: {r: 0, g: 1, b: 1, a: 1}
-    TargetColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    LineColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!4 &1896025011
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896025009}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.001388274, y: -0.9909729, z: 0.13366012, w: 0.010292827}
-  m_LocalPosition: {x: -12.6281185, y: 8.637735, z: 12.489049}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1356108439}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1904678280
 Mesh:
   m_ObjectHideFlags: 0

@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dontDestroyOnLoad: 1
   _singletonBehavior: 0
+  _showDebug: 1
   _volumeSettings: {fileID: 11400000, guid: dc8bf32066040dc418705e8fae40b699, type: 2}
   _banksAudioData: {fileID: 11400000, guid: 6f40fbacbafa22c4cb47a5c11fef7c09, type: 2}
   _snapshotsAudioData: {fileID: 11400000, guid: 85caf7a70346caa4db68b7f2b6015596, type: 2}
@@ -65,7 +66,6 @@ MonoBehaviour:
       Data4: 77835046
     Path: event:/Debug/sx_debug_mixTest_pinkNoise
   _playTestEventOnStart: 0
-  _showDebug: 1
 --- !u!114 &4959973056717919816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,10 +173,10 @@ MonoBehaviour:
   _onBasicItemCollected:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 35bb8c7c31410144e91186eb880d7ab0, type: 2}
-        m_TargetAssemblyTypeName: OCSFX.FMOD.FmodParameterObject, OCSFX.FMOD
-        m_MethodName: SetGlobalValue
-        m_Mode: 4
+      - m_Target: {fileID: -3071787560732376945, guid: 52c248829580b1446ba97395604133ba, type: 2}
+        m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODParameterValue, OCSFX.EZFMODCore
+        m_MethodName: SetGlobal
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -188,10 +188,22 @@ MonoBehaviour:
   _onKeyItemCollected:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 74aecb90b505789439eef8cd94cecd0a, type: 2}
-        m_TargetAssemblyTypeName: OCSFX.FMOD.FmodParameterObject, OCSFX.FMOD
-        m_MethodName: SetGlobalValue
-        m_Mode: 4
+      - m_Target: {fileID: 1912370559746930536, guid: 2a3355ef8c69b5946b522a91386c2ff9, type: 2}
+        m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODParameterValue, OCSFX.EZFMODCore
+        m_MethodName: SetGlobal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4098997215800807778, guid: 9cba2fb16d96e7c47b887ed032a2e762, type: 2}
+        m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODParameterValue, OCSFX.EZFMODCore
+        m_MethodName: SetGlobal
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -203,8 +215,8 @@ MonoBehaviour:
   _onKeysCollectedChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 604159a3f1c284142be97f3a1217eb89, type: 2}
-        m_TargetAssemblyTypeName: OCSFX.FMOD.FmodParameterObject, OCSFX.FMOD
+      - m_Target: {fileID: 11400000, guid: 3affbe5efb7656645b33a382739b43a9, type: 2}
+        m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODParameter, OCSFX.EZFMODCore
         m_MethodName: SetGlobalValue
         m_Mode: 0
         m_Arguments:

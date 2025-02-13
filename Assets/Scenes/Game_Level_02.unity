@@ -2188,7 +2188,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1896025011}
   - {fileID: 382028734}
   - {fileID: 1877130833}
   - {fileID: 1989146060}
@@ -2431,6 +2430,8 @@ MonoBehaviour:
   _ambEventName: EXT_Level_02
   _priority: 1
   _overlapCount: 0
+  _gizmoFillColor: {r: 0, g: 0, b: 0, a: 0}
+  _gizmoWireColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &382028734
 Transform:
   m_ObjectHideFlags: 0
@@ -6251,6 +6252,7 @@ MonoBehaviour:
     m_Bits: 8
   CollisionTagFilter:
   - Player
+  _showDebug: 0
   <TriggerEvents>k__BackingField:
     <OnTriggerEnterEvent>k__BackingField:
       m_PersistentCalls:
@@ -17829,60 +17831,8 @@ MonoBehaviour:
   _ambEventName: INT_Structure_Large
   _priority: 2
   _overlapCount: 0
---- !u!1 &1896025009
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1896025011}
-  - component: {fileID: 1896025010}
-  m_Layer: 0
-  m_Name: AudioAttenuationProbe
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1896025010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896025009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67ea430714b346ddb06440e908bf6fde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Source>k__BackingField: {fileID: 0}
-  <Target>k__BackingField: {fileID: 0}
-  TargetWeight: 0.9
-  TargetOffset: {x: 0, y: 1, z: 0}
-  _showDebug: 1
-  _debugSettings:
-    DrawSphereRadius: 0.1
-    ThisColor: {r: 0, g: 1, b: 1, a: 1}
-    TargetColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    LineColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!4 &1896025011
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896025009}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.12349544, y: -0.63311195, z: 0.10326611, w: 0.7571355}
-  m_LocalPosition: {x: -4.9606633, y: 9.596014, z: 5.716623}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 265549678}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  _gizmoFillColor: {r: 0, g: 0, b: 0, a: 0}
+  _gizmoWireColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1899902056 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4511356290763117403, guid: 17bc96153cfd1794ab32e9f21bafd99b, type: 3}
@@ -18812,6 +18762,8 @@ MonoBehaviour:
   _ambEventName: INT_Structure_Large
   _priority: 2
   _overlapCount: 0
+  _gizmoFillColor: {r: 0, g: 0, b: 0, a: 0}
+  _gizmoWireColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!43 &1997783337
 Mesh:
   m_ObjectHideFlags: 0

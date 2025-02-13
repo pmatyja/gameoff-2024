@@ -46,6 +46,8 @@ namespace OCSFX.EZFMOD.Types
             
             EZFMODRuntimeStatics.SetGlobalParameter(ID, value);
         }
+        
+        public void SetGlobalValue(int value) => SetGlobalValue((float)value);
 
         public void SetGlobalDefaultValue()
         {
@@ -73,6 +75,8 @@ namespace OCSFX.EZFMOD.Types
             
             fmodGameObj.SetParameter(Name, value);
         }
+        
+        public void SetValue(int value, GameObject source) => SetValue((float)value, source);
 
         public void SetDefaultValue(GameObject source)
         {

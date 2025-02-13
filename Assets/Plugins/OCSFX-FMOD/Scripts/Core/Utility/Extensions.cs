@@ -10,6 +10,21 @@ namespace OCSFX.EZFMOD.Utility
         {
             return ((1 << other.gameObject.layer) & layerMask) != 0;
         }
+        
+        public static bool Contains(this LayerMask layerMask, int layer)
+        {
+            return ((1 << layer) & layerMask) != 0;
+        }
+        
+        public static bool ContainsAny(this LayerMask layerMask, LayerMask otherMask)
+        {
+            return (layerMask & otherMask) != 0;
+        }
+        
+        public static bool ContainsAll(this LayerMask layerMask, LayerMask otherMask)
+        {
+            return (layerMask & otherMask) == otherMask;
+        }
 
 #region List
         public static void Flush<T>(this List<T> list) where T : Object

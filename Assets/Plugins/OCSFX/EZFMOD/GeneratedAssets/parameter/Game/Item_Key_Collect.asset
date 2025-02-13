@@ -28,21 +28,7 @@ MonoBehaviour:
   <Type>k__BackingField: 1
   <IsGlobal>k__BackingField: 1
   <Labels>k__BackingField: []
---- !u!114 &1562465582141735446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
-  m_Name: Item_Key_Collect_0
-  m_EditorClassIdentifier: 
-  _parameter: {fileID: 11400000}
-  _value: 0
---- !u!114 &7872469577820366771
+--- !u!114 &1912370559746930536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,3 +42,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameter: {fileID: 11400000}
   _value: 1
+--- !u!114 &5961107280233272134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: Item_Key_Collect_0
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 0
