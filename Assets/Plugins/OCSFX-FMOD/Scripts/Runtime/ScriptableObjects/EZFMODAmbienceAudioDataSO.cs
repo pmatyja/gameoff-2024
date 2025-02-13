@@ -6,6 +6,7 @@ using OCSFX.EZFMOD;
 using OCSFX.EZFMOD.Attributes;
 using OCSFX.EZFMOD.Types;
 using OCSFX.EZFMOD.Debug;
+using OCSFX.EZFMOD.Utility.Generics;
 using UnityEngine;
 
 namespace OCSFX.EZFMOD.ScriptableObjects
@@ -14,21 +15,16 @@ namespace OCSFX.EZFMOD.ScriptableObjects
     public class EZFMODAmbienceAudioDataSO : EZFMODAudioDataSO
     {
         // Fields
-        [SerializeField] private EventReference _ambDefault;
+        [SerializeField] private EZFMODEvent _ambDefaultEvent;
         [SerializeField] private bool _autoPlayAmbDefault;
-        
-        [Header("Ambience Events")]
-        [SerializeField] private List<FMODEvent> _events = new List<FMODEvent>()
-        {
-            new FMODEvent("MainMenu", new EventReference()),
-            new FMODEvent("Level01", new EventReference())
-        };
+
+        [SerializeField] private List<SerializedKeyValuePair<string, EZFMODEvent>> _ambEvents = new();
 
         // private readonly List<EventReference> _eventHistory = new List<EventReference>();
         private readonly HashSet<EZFMODAmbientZoneBase> _ambientZoneSet = new HashSet<EZFMODAmbientZoneBase>();
         private readonly Stack<EventReference> _eventRefStack = new Stack<EventReference>();
         
-        public List<FMODEvent> Events => _events;
+        public List<SerializedKeyValuePair<string, EZFMODEvent>> AmbEvents => _ambEvents;
 
         private EventInstance _currentPlayingAmb;
         [SerializeField, ReadOnly] private EZFMODAmbientZoneBase _currentAmbientZone;
@@ -60,27 +56,21 @@ namespace OCSFX.EZFMOD.ScriptableObjects
 
         public void StartAmbience2D(string eventName)
         {
-            if (_events.Count < 1) return;
-            
-            var ambEvent = _events.Find(ambEvent => ambEvent.Name == eventName);
-            if (ambEvent.EventRef.IsNull) return;
+            if (!TryGetEvent(eventName, out var ambEvent)) return;
 
             OCSFXLogger.Log($"Start Amb: Name: {eventName}", this, _showDebug);
             
             if (_currentPlayingAmb.isValid())
                 _currentPlayingAmb.Stop();
             
-            _currentPlayingAmb = ambEvent.EventRef.Play2D();
+            ambEvent.Value.Play2D(out _currentPlayingAmb);
         }
 
         public void StopAmbience2D(string eventName)
         {
-            if (_events.Count < 1) return;
-            
-            var ambEvent = _events.Find(ambEvent => ambEvent.Name == eventName);
-            if (ambEvent.EventRef.IsNull) return;
+            if (!TryGetEvent(eventName, out var ambEvent)) return;
 
-            if (_currentPlayingAmb.isValid() && _currentPlayingAmb.GetEventName() == ambEvent.EventRef.GetEventName())
+            if (_currentPlayingAmb.isValid() && _currentPlayingAmb.GetEventName() == ambEvent.Value.Name)
                 _currentPlayingAmb.Stop();
             else return;
             
@@ -137,61 +127,62 @@ namespace OCSFX.EZFMOD.ScriptableObjects
 
         private void StartAmbientZone(EZFMODAmbientZoneBase ambientZone)
         {
-            if (_events.Count < 1) return;
-            
-            var ambEvent = _events.Find(ambEvent => ambEvent.Name == ambientZone.AmbEventName);
-            if (ambEvent.EventRef.IsNull) return;
+            if (!TryGetEvent(ambientZone.AmbEventName, out var ambEvent)) return;
 
             OCSFXLogger.Log($"Start Amb: Name: {ambientZone.AmbEventName}", this, _showDebug);
             
-            ambEvent.EventRef.Play2D();
+            ambEvent.Value.Play2D();
         }
         
         private void StopAmbientZone(EZFMODAmbientZoneBase ambientZone)
         {
-            if (_events.Count < 1) return;
+            if (!TryGetEvent(ambientZone.AmbEventName, out var ambEvent)) return;
             
-            var ambEvent = _events.Find(ambEvent => ambEvent.Name == ambientZone.AmbEventName);
-            if (ambEvent.EventRef.IsNull) return;
-            
-            ambEvent.EventRef.StopGlobal();
+            ambEvent.Value.StopAll(true);
         }
 
         public void PlayDefaultAmbience()
         {
-            if (_ambDefault.IsNull) return;
+            if (!_ambDefaultEvent) return;
             
-            OCSFXLogger.Log($"[{this}] Playing default amb event.", this);
-            _ambDefault.Play2D();
+            OCSFXLogger.Log($"[{this}] Playing default amb event ({_ambDefaultEvent.Name}).", this);
+            _ambDefaultEvent.Play2D();
         }
 
         public void StopAllAmbience()
         {
             if (!Application.isPlaying) return;
             
-            foreach (var ambEvent in _events)
+            foreach (var ambEvent in _ambEvents)
             {
-                ambEvent.EventRef.StopGlobal();
+                ambEvent?.Value?.StopAll();
             }
         }
         
-        public EventReference GetAmbEventRef(string ambName)
+        private bool TryGetEvent(string eventName, out SerializedKeyValuePair<string, EZFMODEvent> ambEvent)
         {
-            return _events.GetEventReference(ambName);
-        }
-        
-        public bool TryGetAmbEventRef(string ambName, out EventReference ambEventRef)
-        {
-            return _events.TryGetEventReference(ambName, out ambEventRef);
+            ambEvent = null;
+            if (_ambEvents.Count < 1) return false;
+            
+            ambEvent = _ambEvents.Find(
+                ambEvent => ambEvent.Key == eventName);
+            if (ambEvent == null) return false;
+            
+            if (ambEvent.Value) return true;
+            
+            OCSFXLogger.LogError($"Entry ({eventName}) found, but it has no {nameof(EZFMODEvent)} assigned.", this);
+            return false;
         }
 
         private void OnValidate()
         {
-            if (_ambDefault.IsNull) return;
-            if (_events.Count < 1) return;
+            if (!_ambDefaultEvent) return;
+            if (_ambEvents.Count < 1) return;
 
-            if (_events[0].EventRef.IsNull) _events[0] = 
-                new FMODEvent("Default", _ambDefault);
+            if (!_ambEvents[0].Value)
+            {
+                _ambEvents[0] = new SerializedKeyValuePair<string, EZFMODEvent>("Default", _ambDefaultEvent);
+            }
         }
     }
 }

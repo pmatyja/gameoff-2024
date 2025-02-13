@@ -23,7 +23,14 @@ namespace OCSFX.EZFMOD.Types
     {
         public List<EventInstance> EventInstances => EZFMODRuntimeStatics.GetEventInstancesFromStudioPath(StudioPath).ToList();
 
+        public EventReference GetEventReference() => RuntimeManager.PathToEventReference(StudioPath);
+
         public void PlayOneShot() => RuntimeManager.PlayOneShot(GUID);
+
+        public void Play2D() => GetEventReference().Play2D();
+        
+        public void Play2D(out EventInstance eventInstance) => eventInstance = GetEventReference().Play2D();
+        
         public void Play(GameObject sourceObject) => Play(sourceObject, out _);
 
         public void Play(GameObject sourceObject, out EventInstance eventInstance)

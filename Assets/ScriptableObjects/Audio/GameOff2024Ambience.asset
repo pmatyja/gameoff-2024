@@ -13,53 +13,17 @@ MonoBehaviour:
   m_Name: GameOff2024Ambience
   m_EditorClassIdentifier: 
   _showDebug: 0
-  _ambDefault:
-    Guid:
-      Data1: -1378094460
-      Data2: 1221297378
-      Data3: -464404818
-      Data4: 1790380397
-    Path: event:/SX/AMB/sx_amb_ext_base
+  _ambDefaultEvent: {fileID: 11400000, guid: 66668dd72f8073645b60b854c87b1196, type: 2}
   _autoPlayAmbDefault: 0
-  _events:
-  - _name: Default
-    _eventRef:
-      Guid:
-        Data1: -1378094460
-        Data2: 1221297378
-        Data3: -464404818
-        Data4: 1790380397
-      Path: event:/SX/AMB/sx_amb_ext_base
-  - _name: EXT_Level_01
-    _eventRef:
-      Guid:
-        Data1: -133819349
-        Data2: 1143180978
-        Data3: 1517526966
-        Data4: 1259571501
-      Path: event:/SX/AMB/sx_amb_ext_level_01
-  - _name: EXT_Level_02
-    _eventRef:
-      Guid:
-        Data1: 1806544611
-        Data2: 1297978249
-        Data3: 688827038
-        Data4: 1564147334
-      Path: event:/SX/AMB/sx_amb_ext_level_02
-  - _name: EXT_Level_03
-    _eventRef:
-      Guid:
-        Data1: 1669661686
-        Data2: 1341539678
-        Data3: 1478515642
-        Data4: -1373911890
-      Path: event:/SX/AMB/sx_amb_ext_level_03
-  - _name: INT_Structure_Large
-    _eventRef:
-      Guid:
-        Data1: 775236828
-        Data2: 1087964693
-        Data3: 533885623
-        Data4: -862509715
-      Path: event:/SX/AMB/sx_amb_int_structure_large
+  _ambEvents:
+  - _key: Default
+    _value: {fileID: 11400000, guid: 66668dd72f8073645b60b854c87b1196, type: 2}
+  - _key: EXT_Level_01
+    _value: {fileID: 11400000, guid: 1a5a7d836feaa824895ae85660750958, type: 2}
+  - _key: EXT_Level_02
+    _value: {fileID: 11400000, guid: 9c9d4efd55752954ab64cdcb62d65362, type: 2}
+  - _key: EXT_Level_03
+    _value: {fileID: 11400000, guid: 1bdc7eec3f61e3b48b17f848bab04948, type: 2}
+  - _key: INT_Structure_Large
+    _value: {fileID: 11400000, guid: 6961734e1e7d1ad439c9b50f95891c94, type: 2}
   _currentAmbientZone: {fileID: 0}
