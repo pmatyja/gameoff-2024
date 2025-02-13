@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using FMODUnity;
 using OCSFX.EZFMOD.Types;
+using OCSFX.EZFMOD.Utility.Generics;
 using UnityEngine;
 
 namespace OCSFX.EZFMOD.ScriptableObjects
@@ -9,23 +9,19 @@ namespace OCSFX.EZFMOD.ScriptableObjects
     public class EZFMODAnimationAudioDataSO : EZFMODAudioDataSO
     {
         [Header("Animation Events")]
-        [SerializeField] private List<FMODEvent> _events = new List<FMODEvent>()
+        [SerializeField] private List<SerializedKeyValuePair<string, EZFMODEvent>> _animEvents = new()
         {
-            new FMODEvent("Footstep", new EventReference()),
-            new FMODEvent("Jump", new EventReference()),
-            new FMODEvent("Land", new EventReference())
+            new SerializedKeyValuePair<string, EZFMODEvent>("Footstep", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("Jump", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("Land", null)
         };
         
-        public bool TryGetAnimEvent(string animEventName, out EventReference soundEvent)
+        public bool TryGetAnimEvent(string animEventName, out EZFMODEvent soundEvent)
         {
-            soundEvent = GetAnimEvent(animEventName);
-            return !soundEvent.IsNull;
-        }
-
-        public EventReference GetAnimEvent(string animEventName)
-        {
-            return _events.Find((fmodEventStruct) =>
-                fmodEventStruct.Name == animEventName).EventRef;
+            soundEvent = _animEvents.Find(animEvent 
+                => animEvent.Key == animEventName).Value;
+            
+            return soundEvent;
         }
     }
 }
