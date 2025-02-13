@@ -62,6 +62,19 @@ MonoBehaviour:
         Data3: 2107067016
         Data4: 972257868
       Path: snapshot:/Cutscene
+  _stateSnapshots:
+  - _key: None
+    _value: {fileID: 11400000, guid: c3d0ce6727cd1f342b539314b64dad82, type: 2}
+  - _key: Dialogue
+    _value: {fileID: 0}
+  - _key: PauseMenu
+    _value: {fileID: 11400000, guid: 72af6dd4a4e0bb8429e8af8b4468b7f7, type: 2}
+  - _key: MainMenu
+    _value: {fileID: 11400000, guid: a754e895feba34f4991a9127cbf3a25c, type: 2}
+  - _key: Cutscene
+    _value: {fileID: 11400000, guid: ed160be4edfed2d4fa98f0476de70617, type: 2}
+  - _key: Silence
+    _value: {fileID: 11400000, guid: 0a412ef276d5d144c990db660d0915b1, type: 2}
   _reverbs:
   - _name: None
     _eventRef:
@@ -111,3 +124,16 @@ MonoBehaviour:
         Data3: 0
         Data4: 0
       Path: 
+  _reverbSnapshots:
+  - _key: None
+    _value: {fileID: 0}
+  - _key: Interior_SmallRoom
+    _value: {fileID: 11400000, guid: 616928b7437853a469616ad2685e6975, type: 2}
+  - _key: Interior_MediumRoom
+    _value: {fileID: 11400000, guid: 4f18343ca518b804f9b645d6a29556f7, type: 2}
+  - _key: Interior_LargeRoom
+    _value: {fileID: 11400000, guid: fc46904c916abbd4b916d84ad61668aa, type: 2}
+  - _key: Interior_Hallway
+    _value: {fileID: 0}
+  - _key: Exterior
+    _value: {fileID: 11400000, guid: acde453a50dc46c4da65b3c73a9ce47e, type: 2}
