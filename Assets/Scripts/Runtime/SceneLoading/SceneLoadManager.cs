@@ -71,7 +71,11 @@ namespace Runtime.SceneLoading
     {
         if (_instance) return _instance;
 
+#if UNITY_6000_0_OR_NEWER
+        _instance = FindFirstObjectByType<SceneLoadManager>();
+#else
         _instance = FindObjectOfType<SceneLoadManager>();
+#endif
 
         return _instance;
     }
@@ -79,7 +83,7 @@ namespace Runtime.SceneLoading
     private void OnQuitPressed()
     {
 #if UNITY_EDITOR
-    UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif
