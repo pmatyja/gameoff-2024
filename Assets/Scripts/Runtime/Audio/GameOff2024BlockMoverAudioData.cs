@@ -1,5 +1,6 @@
 ﻿using FMODUnity;
 using OCSFX.EZFMOD;
+using OCSFX.EZFMOD.Types;
 using UnityEngine;
 
 namespace Runtime.Audio
@@ -7,35 +8,35 @@ namespace Runtime.Audio
     [CreateAssetMenu(menuName = GameOff2024Statics.MENU_ROOT + nameof(GameOff2024BlockMoverAudioData))]
     public class GameOff2024BlockMoverAudioData : ScriptableObject
     {
-        [field: SerializeField] public EventReference MoveBegin { get; private set; }
-        [field: SerializeField] public EventReference MoveEnd { get; private set; }
+        [field: SerializeField] public EZFMODEvent MoveBeginEvent { get; private set; }
+        [field: SerializeField] public EZFMODEvent MoveEndEvent { get; private set; }
         
         public void PlayBlockMoveBegin(GameObject blockObject)
         {
-            if (MoveBegin.IsNull) return;
+            if (!MoveBeginEvent) return;
             
-            MoveBegin.Play(blockObject);
+            MoveBeginEvent.Play(blockObject);
         }
         
         public void StopBlockMoveBegin(GameObject blockObject)
         {
-            if (MoveBegin.IsNull) return;
+            if (!MoveBeginEvent) return;
 
-            MoveBegin.Stop(blockObject);
+            MoveBeginEvent.Stop(blockObject);
         }
         
         public void PlayBlockMoveEnd(GameObject blockObject)
         {
-            if (MoveEnd.IsNull) return;
+            if (!MoveEndEvent) return;
             
-            MoveEnd.Play(blockObject);
+            MoveEndEvent.Play(blockObject);
         }
         
         public void StopBlockMoveEnd(GameObject blockObject)
         {
-            if (MoveEnd.IsNull) return;
+            if (!MoveEndEvent) return;
 
-            MoveEnd.Stop(blockObject);
+            MoveEndEvent.Stop(blockObject);
         }
     }
 }
