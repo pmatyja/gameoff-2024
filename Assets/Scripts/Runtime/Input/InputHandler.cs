@@ -314,7 +314,8 @@ public class InputHandler: ScriptableObject
     
     private static InputHandler GetOrCreate()
     {
-        var assetInstance = Resources.Load<InputHandler>(nameof(InputHandler));
+        var resourcePath = $"{nameof(InputHandler)}/{nameof(InputHandler)}";
+        var assetInstance = Resources.Load<InputHandler>(resourcePath);
         
 #if UNITY_EDITOR
         if (assetInstance) return assetInstance;

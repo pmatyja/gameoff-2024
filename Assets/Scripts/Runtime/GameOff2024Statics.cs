@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OCSFX.EZFMOD.Components;
+using OCSFX.EZFMOD.Debug;
 using Runtime.Cameras;
 using Runtime.Collectables;
 using Runtime.SceneLoading;
@@ -88,10 +89,13 @@ namespace Runtime
                 Application.quitting += Deinitialize;
                 SceneManager.sceneLoaded += OnSceneLoaded;
             }
+            
+            OCSFXLogger.Log($"[{nameof(GameOff2024Statics)}] Initialized.");
         }
         
         private static void Deinitialize()
         {
+            Application.quitting -= Deinitialize;
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 

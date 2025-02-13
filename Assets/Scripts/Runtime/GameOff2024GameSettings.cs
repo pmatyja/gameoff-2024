@@ -66,11 +66,15 @@ namespace Runtime
         [Header("Debug")]
         [SerializeField] private bool _showDebug;
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void RuntimeInit()
         {
             var instance = Get();
-            if (!instance) return;
+            if (!instance)
+            {
+                OCSFXLogger.LogError($"[{nameof(GameOff2024GameSettings)}] instance is null. Cannot validate fields.", instance);
+                return;
+            }
             
             instance._optionalCollectableIDs.Clear();
             
@@ -123,7 +127,8 @@ namespace Runtime
         }
         
             
-        protected static GameOff2024GameSettings _instance;
+        private static GameOff2024GameSettings _instance;
+        
         public static GameOff2024GameSettings Get()
         {
             if (!_instance)
@@ -136,7 +141,8 @@ namespace Runtime
         
         private static GameOff2024GameSettings GetOrCreate()
         {
-            var assetInstance = Resources.Load<GameOff2024GameSettings>(nameof(GameOff2024GameSettings));
+            var resourcePath = $"{nameof(GameOff2024GameSettings)}/{nameof(GameOff2024GameSettings)}";
+            var assetInstance = Resources.Load<GameOff2024GameSettings>(resourcePath);
             
 #if UNITY_EDITOR
             if (assetInstance) return assetInstance;
