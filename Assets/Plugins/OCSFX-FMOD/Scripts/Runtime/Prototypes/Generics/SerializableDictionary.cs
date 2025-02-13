@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OCSFX.FMOD.Prototype
+namespace OCSFX.EZFMOD.Prototypes.Generics
 {
     /// <summary>
     /// This script is a work in progress. Do not use.

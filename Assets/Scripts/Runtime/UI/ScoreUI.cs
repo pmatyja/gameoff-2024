@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Runtime.UI
 {
-    public class ScoreUI : OCSFX.Generics.Singleton<ScoreUI>
+    public class ScoreUI : OCSFX.EZFMOD.Utility.Generics.SingletonMonoBehaviour<ScoreUI>
     {
         [SerializeField] private TMP_Text _completionPercentageText;
         [SerializeField] private TMP_Text _gameplayTimeText;

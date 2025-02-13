@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using OCSFX.Utility.Debug;
+using OCSFX.EZFMOD.Debug;
 using Runtime.Collectables;
 using UnityEngine;
 

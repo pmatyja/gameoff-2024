@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using OCSFX.FMOD.Components;
+using OCSFX.EZFMOD.Components;
 using Runtime.Cameras;
 using Runtime.Collectables;
 using Runtime.SceneLoading;
@@ -22,7 +22,7 @@ namespace Runtime
         private static PlayerCharacter _playerCharacter;
         private static Camera _mainCamera;
         private static Volume _globalPostProcessingVolume;
-        private static AudioManager _audioManager;
+        private static EZFMODAudioManager _audioManager;
         private static PauseMenuController _pauseMenuController;
         private static UIHoverDetector _uiHoverDetector;
         private static HudController _hudController;
@@ -205,8 +205,8 @@ namespace Runtime
             return _mainCamera;
         }
 
-        public static AudioManager GetAudioManager() => 
-            GetOrCreateObject(ref _audioManager, GameOff2024GameSettings.Get().AudioManagerPrefab);
+        public static EZFMODAudioManager GetAudioManager() => 
+            GetOrCreateObject<EZFMODAudioManager>(ref _audioManager, GameOff2024GameSettings.Get().AudioManagerPrefab);
         
         public static Volume GetGlobalPostProcessingVolume() => 
             GetOrCreateObjectWithCondition(

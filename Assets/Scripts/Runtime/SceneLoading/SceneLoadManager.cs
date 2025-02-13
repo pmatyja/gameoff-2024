@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
-using OCSFX.Utility.Attributes;
+using OCSFX.EZFMOD.Attributes;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace Runtime.SceneLoading
 {
-    public class SceneLoadManager : OCSFX.Generics.Singleton<SceneLoadManager>
+    public class SceneLoadManager : OCSFX.EZFMOD.Utility.Generics.SingletonMonoBehaviour<SceneLoadManager>
 {
     [SerializeField, Min(0.1f)] private float _defaultLoadTime = 1.5f;
     [SerializeField] private float _fadeDuration = 2f;

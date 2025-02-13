@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(RawImage), typeof(CanvasGroup))]
-public class GameOff2024VideoPlayerScreen : OCSFX.Generics.Singleton<GameOff2024VideoPlayerScreen>
+public class GameOff2024VideoPlayerScreen : OCSFX.EZFMOD.Utility.Generics.SingletonMonoBehaviour<GameOff2024VideoPlayerScreen>
 {
     private CanvasGroup _canvasGroup;
     

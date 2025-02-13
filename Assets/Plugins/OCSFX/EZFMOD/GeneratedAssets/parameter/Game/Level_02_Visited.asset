@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7259381226085325976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: Level_02_Visited_1
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 1
+--- !u!114 &-6557154315726369954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: Level_02_Visited_0
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760fd8b8d46a9154f867dc9580affa6d, type: 3}
+  m_Name: Level_02_Visited
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Level_02_Visited
+  <StudioPath>k__BackingField: parameter:/Game/Level_02_Visited
+  <GUID>k__BackingField:
+    Data1: -690412141
+    Data2: 1245264781
+    Data3: -1022381917
+    Data4: -305640954
+  <Min>k__BackingField: 0
+  <Max>k__BackingField: 1
+  <Default>k__BackingField: 0
+  <ID>k__BackingField:
+    data1: 3847306532
+    data2: 1050372952
+  <Type>k__BackingField: 1
+  <IsGlobal>k__BackingField: 1
+  <Labels>k__BackingField: []

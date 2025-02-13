@@ -1,11 +1,11 @@
 using System;
-using OCSFX.Attributes;
 using Runtime.Interactions;
+using OCSFX.EZFMOD.Attributes;
 using UnityEngine;
 
 namespace Runtime.UI
 {
-    public class HintManager : OCSFX.Generics.Singleton<HintManager>
+    public class HintManager : OCSFX.EZFMOD.Utility.Generics.SingletonMonoBehaviour<HintManager>
     {
         public static event Action OnHoverClickableEvent;
         public static event Action OnRotateCameraInputEvent;

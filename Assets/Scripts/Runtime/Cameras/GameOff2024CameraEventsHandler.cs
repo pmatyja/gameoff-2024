@@ -1,5 +1,5 @@
 using System;
-using OCSFX.Utility.Debug;
+using OCSFX.EZFMOD.Debug;
 using Runtime;
 using Runtime.Cameras;
 using Unity.Cinemachine;

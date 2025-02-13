@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using OCSFX.EZFMOD.Debug;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OCSFX.FMOD.Prototype
+namespace OCSFX.EZFMOD.Prototypes.Components
 {
     public class CustomUnityEventTester : MonoBehaviour
     {
@@ -21,7 +22,7 @@ namespace OCSFX.FMOD.Prototype
 
         private void StringParameterValueMethod(StringParameterValueStruct theStruct)
         {
-            Debug.Log(
+            OCSFXLogger.Log(
                 $"{nameof(theStruct.Action)}: {theStruct.Action} | " +
                 $"{nameof(theStruct.Parameter)}: {theStruct.Parameter} | " +
                 $"{nameof(theStruct.Value)}: {theStruct.Value}");
@@ -42,7 +43,7 @@ namespace OCSFX.FMOD.Prototype
 
             if (string.IsNullOrWhiteSpace(foundUnityEvent.Name)) return;
             
-            Debug.Log($"UnityEvent: {foundUnityEvent.Name}");
+            OCSFXLogger.Log($"UnityEvent: {foundUnityEvent.Name}");
             foundUnityEvent.Event?.Invoke();
         }
     }

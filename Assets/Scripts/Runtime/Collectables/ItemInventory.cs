@@ -1,14 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using OCSFX.Utility.Debug;
+using OCSFX.EZFMOD.Debug;
 using Runtime.UI;
 using UnityEngine;
 using Utility.Generics;
 
 namespace Runtime.Collectables
 {
-    public class ItemInventory : OCSFX.Generics.Singleton<ItemInventory>, IList<IdentifiedItem>
+    public class ItemInventory : OCSFX.EZFMOD.Utility.Generics.SingletonMonoBehaviour<ItemInventory>, IList<IdentifiedItem>
     {
         /**
         Note that while the ObservableList serializes, it does not display in the inspector
@@ -16,8 +16,6 @@ namespace Runtime.Collectables
         or use an Editor-only copy of the list to display in the inspector 
         */
         [SerializeField] private ObservableList<IdentifiedItem> _items = new ObservableList<IdentifiedItem>();
-
-        [SerializeField] private bool _showDebug = true;
 
         public int KeyItemsCollected
         {
@@ -90,7 +88,7 @@ namespace Runtime.Collectables
         [RuntimeInitializeOnLoadMethod]
         private static void RuntimeInitialize()
         {
-            LazyLoadInstance();
+            LazyLoadInstance(out _);
             
             _instance._items.Clear();
         }

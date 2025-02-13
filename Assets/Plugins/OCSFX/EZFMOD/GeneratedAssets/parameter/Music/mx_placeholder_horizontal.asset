@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2021352015889017543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: mx_placeholder_horizontal_Int4
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 3
+--- !u!114 &-1799789009482949056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: mx_placeholder_horizontal_Int5_transition
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 5
+--- !u!114 &-1373841968292635432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: mx_placeholder_horizontal_Int2
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 1
+--- !u!114 &-168289282849875543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: mx_placeholder_horizontal_Int1
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 0
+--- !u!114 &-114129303913159038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: mx_placeholder_horizontal_Int5
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 4
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760fd8b8d46a9154f867dc9580affa6d, type: 3}
+  m_Name: mx_placeholder_horizontal
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: mx_placeholder_horizontal
+  <StudioPath>k__BackingField: parameter:/Music/mx_placeholder_horizontal
+  <GUID>k__BackingField:
+    Data1: 965474909
+    Data2: 1085832070
+    Data3: -2077689935
+    Data4: 984575597
+  <Min>k__BackingField: 0
+  <Max>k__BackingField: 5
+  <Default>k__BackingField: 4
+  <ID>k__BackingField:
+    data1: 942984118
+    data2: 939543124
+  <Type>k__BackingField: 2
+  <IsGlobal>k__BackingField: 1
+  <Labels>k__BackingField:
+  - Int1
+  - Int2
+  - Int3
+  - Int4
+  - Int5
+  - Int5_transition
+--- !u!114 &4962887375488601315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: mx_placeholder_horizontal_Int3
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 2

@@ -1,5 +1,6 @@
 using FMODUnity;
-using OCSFX.FMOD.Types;
+using OCSFX.EZFMOD;
+using OCSFX.EZFMOD.Types;
 using UnityEngine;
 
 namespace OCSFX.FMOD

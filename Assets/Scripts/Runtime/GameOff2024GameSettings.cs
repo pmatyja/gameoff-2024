@@ -1,20 +1,23 @@
 ﻿using System.Collections.Generic;
-using OCSFX.FMOD.Components;
-using OCSFX.Generics;
-using OCSFX.Utility.Debug;
 using Runtime.Cameras;
 using Runtime.Collectables;
 using Runtime.SceneLoading;
 using Runtime.UI;
 using Runtime.Utility;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using OCSFX.EZFMOD.Components;
+using OCSFX.EZFMOD.Debug;
+
+#if UNITY_EDITOR
+using UnityEditor;
+using System.IO;
+#endif //UNITY_EDITOR
 
 namespace Runtime
 {
-    public class GameOff2024GameSettings : SingletonScriptableObject<GameOff2024GameSettings>
+    public class GameOff2024GameSettings : ScriptableObject
     {
         [field: Header("Player")]
         [field: SerializeField] public InputActionAsset InputActions { get; private set; }
@@ -23,7 +26,7 @@ namespace Runtime
         [field: SerializeField, Expandable] public GameOff2024CameraControllerBase PlayerCameraPrefab { get; private set; }
         
         [field: Header("Effects")]
-        [field: SerializeField, Expandable] public AudioManager AudioManagerPrefab { get; private set; }
+        [field: SerializeField, Expandable] public EZFMODAudioManager AudioManagerPrefab { get; private set; }
         [field: SerializeField, Expandable] public Volume PostProcessingVolumePrefab { get; private set; }
         
         [field: Header("UI")]
@@ -62,11 +65,6 @@ namespace Runtime
         
         [Header("Debug")]
         [SerializeField] private bool _showDebug;
-
-#if UNITY_EDITOR
-        [UnityEditor.InitializeOnLoadMethod]
-        private static void Init() => UnityEditor.EditorApplication.delayCall += () => Get();
-#endif
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
         private static void RuntimeInit()
@@ -123,5 +121,83 @@ namespace Runtime
         {
             OCSFXLogger.LogWarning($"[{nameof(GameOff2024GameSettings)}] {fieldName} is unassigned. This may cause problems during the game.", this);
         }
+        
+            
+        protected static GameOff2024GameSettings _instance;
+        public static GameOff2024GameSettings Get()
+        {
+            if (!_instance)
+            {
+                _instance = GetOrCreate();
+            }
+
+            return _instance;
+        }
+        
+        private static GameOff2024GameSettings GetOrCreate()
+        {
+            var assetInstance = Resources.Load<GameOff2024GameSettings>(nameof(GameOff2024GameSettings));
+            
+#if UNITY_EDITOR
+            if (assetInstance) return assetInstance;
+            
+            var assetPath = $"Assets/Resources/{nameof(GameOff2024GameSettings)}";
+            
+            EnsureDirectoryExists(assetPath);
+
+            assetInstance = GetOrCreateScriptableObjectAsset<GameOff2024GameSettings>(
+                assetPath, nameof(GameOff2024GameSettings), out var createdNew);
+
+            if (createdNew)
+            {
+                OCSFXLogger.Log($"New instance of {nameof(GameOff2024GameSettings)} created at {assetPath}");
+            }
+#endif //UNITY_EDITOR
+
+            return assetInstance;
+        }
+        
+#if UNITY_EDITOR
+        [InitializeOnLoadMethod]
+        private static void Init() => EditorApplication.delayCall += () => Get();
+
+        private static void EnsureDirectoryExists(string directoryPath)
+        {
+            if (!directoryPath.EndsWith("/")) directoryPath += "/";
+
+            var directoryName = Path.GetDirectoryName(directoryPath);
+
+            if (Directory.Exists(directoryName)) return;
+
+            if (directoryName == null) return;
+
+            Directory.CreateDirectory(directoryName);
+            AssetDatabase.Refresh();
+        }
+
+        private static T GetOrCreateScriptableObjectAsset<T>(string assetPath, string assetName, out bool createdNew) where T : ScriptableObject
+        {
+            if (string.IsNullOrWhiteSpace(assetPath) || string.IsNullOrWhiteSpace(assetName))
+            {
+                createdNew = false;
+                return null;
+            }
+
+            createdNew = false;
+
+            var fullPath = $"{assetPath}/{assetName}.asset";
+            var asset = AssetDatabase.LoadAssetAtPath<T>(fullPath);
+
+            if (asset) return asset;
+
+            asset = ScriptableObject.CreateInstance<T>();
+            AssetDatabase.CreateAsset(asset, fullPath);
+            AssetDatabase.SaveAssetIfDirty(asset);
+
+            createdNew = true;
+
+            return asset;
+        }
+#endif //UNITY_EDITOR
     }
 }

@@ -1,4 +1,4 @@
-﻿using OCSFX.Utility.Debug;
+﻿using OCSFX.EZFMOD.Debug;
 using UnityEngine;
 
 namespace Runtime.Interactions

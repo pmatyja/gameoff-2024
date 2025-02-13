@@ -1,5 +1,5 @@
 ﻿using FMODUnity;
-using OCSFX.FMOD;
+using OCSFX.EZFMOD;
 using UnityEngine;
 
 namespace Runtime.Audio

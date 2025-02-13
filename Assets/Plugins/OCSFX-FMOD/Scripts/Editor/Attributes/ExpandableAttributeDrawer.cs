@@ -1,8 +1,8 @@
-﻿using OCSFX.Utility.Attributes;
+﻿using OCSFX.EZFMOD.Attributes;
 using UnityEditor;
 using UnityEngine;
 
-namespace OCSFXEditor.Attributes
+namespace OCSFX.EZFMODEditor.Attributes
 {
     [CustomPropertyDrawer(typeof(ExpandableAttribute))]
     public class ExpandableAttributeDrawer: PropertyDrawer

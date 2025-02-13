@@ -1,4 +1,4 @@
-using OCSFX.FMOD;
+using OCSFX.EZFMOD;
 using Runtime.Audio;
 using Runtime.Controllers;
 using UnityEngine;

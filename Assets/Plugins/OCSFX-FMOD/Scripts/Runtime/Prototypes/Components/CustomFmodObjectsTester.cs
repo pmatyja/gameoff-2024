@@ -1,17 +1,19 @@
 ﻿using FMODUnity;
+using OCSFX.EZFMOD;
+using OCSFX.EZFMOD.Types;
 using UnityEngine;
 
-namespace OCSFX.FMOD.Prototype
+namespace OCSFX.EZFMOD.Prototypes.Components
 {
     public class CustomFmodObjectsTester : MonoBehaviour
     {
-        [SerializeField] private FmodEvent _fmodEvent;
+        [SerializeField] private EZFMODEvent _ezfmodEvent;
         [SerializeField] private EventReference _eventRef;
 
         [ContextMenu(nameof(PlayOneShot))]
         public void PlayOneShot()
         {
-            if (_fmodEvent) _fmodEvent.PlayOneShot();
+            if (_ezfmodEvent) _ezfmodEvent.PlayOneShot();
         }
         
         [ContextMenu(nameof(PlayEventRef2D))]
@@ -23,13 +25,13 @@ namespace OCSFX.FMOD.Prototype
         [ContextMenu(nameof(Play))]
         public void Play()
         {
-            if (_fmodEvent) _fmodEvent.Play(gameObject);
+            if (_ezfmodEvent) _ezfmodEvent.Play(gameObject);
         }
 
         [ContextMenu(nameof(Stop))]
         public void Stop()
         {
-            if (_fmodEvent) _fmodEvent.Stop(gameObject);
+            if (_ezfmodEvent) _ezfmodEvent.Stop(gameObject);
         }
     }
 }

@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6751480586588448977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: MX_LastSectionPlayed_LoopPoint
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 0
+--- !u!114 &-5942452990528071850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: MX_LastSectionPlayed_Random E
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 5
+--- !u!114 &-5377221311849043845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: MX_LastSectionPlayed_Random D
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 4
+--- !u!114 &-2200987008989561441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: MX_LastSectionPlayed_Random H
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 8
+--- !u!114 &-840126029928726873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: MX_LastSectionPlayed_Random B
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 2
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760fd8b8d46a9154f867dc9580affa6d, type: 3}
+  m_Name: MX_LastSectionPlayed
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: MX_LastSectionPlayed
+  <StudioPath>k__BackingField: parameter:/Music/MX_LastSectionPlayed
+  <GUID>k__BackingField:
+    Data1: 1785232527
+    Data2: 1231416353
+    Data3: 1363458231
+    Data4: -834641431
+  <Min>k__BackingField: 0
+  <Max>k__BackingField: 8
+  <Default>k__BackingField: 0
+  <ID>k__BackingField:
+    data1: 767700891
+    data2: 4198303057
+  <Type>k__BackingField: 2
+  <IsGlobal>k__BackingField: 1
+  <Labels>k__BackingField:
+  - LoopPoint
+  - Random A
+  - Random B
+  - Random C
+  - Random D
+  - Random E
+  - Random F
+  - Random G
+  - Random H
+--- !u!114 &824096490414573269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: MX_LastSectionPlayed_Random G
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 7
+--- !u!114 &1535126609611076453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: MX_LastSectionPlayed_Random A
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 1
+--- !u!114 &4355395281722826399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: MX_LastSectionPlayed_Random C
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 3
+--- !u!114 &8974282870665796323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: MX_LastSectionPlayed_Random F
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 6

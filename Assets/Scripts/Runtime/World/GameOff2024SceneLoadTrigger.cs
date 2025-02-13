@@ -1,5 +1,5 @@
 using System.Collections;
-using OCSFX.Utility.Debug;
+using OCSFX.EZFMOD.Debug;
 using Runtime.Utility;
 using UnityEngine;
 using UnityEngine.SceneManagement;

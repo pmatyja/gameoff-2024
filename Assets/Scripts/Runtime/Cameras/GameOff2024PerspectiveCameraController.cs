@@ -1,6 +1,5 @@
-using OCSFX.Attributes;
-using OCSFX.Utility;
-using OCSFX.Utility.Attributes;
+using OCSFX.EZFMOD.Attributes;
+using OCSFX.EZFMOD.Utility;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -60,7 +59,7 @@ namespace Runtime.Cameras
 
         protected override bool ResolveDependencies()
         {
-            _recomposer = gameObject.GetOrAdd<CinemachineRecomposer>();
+            _recomposer = gameObject.GetOrAddComponent<CinemachineRecomposer>();
             
             return base.ResolveDependencies();
         }

@@ -1,7 +1,6 @@
-using System;
 using System.Collections;
-using OCSFX.Attributes;
-using OCSFX.Utility.Debug;
+using OCSFX.EZFMOD.Attributes;
+using OCSFX.EZFMOD.Debug;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Video;

@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
-using OCSFX.Attributes;
-using OCSFX.Utility;
-using OCSFX.Utility.Attributes;
+
+using OCSFX.EZFMOD.Attributes;
+using OCSFX.EZFMOD.Utility;
 using Runtime;
 using Runtime.Controllers;
 using Runtime.Utility;

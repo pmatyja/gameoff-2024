@@ -1,6 +1,5 @@
 using System;
-using OCSFX.Generics;
-using OCSFX.Utility.Debug;
+using OCSFX.EZFMOD.Debug;
 using Runtime.UI;
 using Runtime.Utility;
 using UnityEngine;
@@ -8,9 +7,10 @@ using UnityEngine.InputSystem;
 
 #if UNITY_EDITOR
 using UnityEditor;
+using System.IO;
 #endif
 
-public class InputHandler: SingletonScriptableObject<InputHandler>
+public class InputHandler: ScriptableObject
 {
     [field: SerializeField] public InputActionAsset InputActions { get; private set; }
     
@@ -45,14 +45,6 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
     // public event Action OnFrontEndUIMoveInput;
     // public event Action OnFrontEndUIConfirmInput;
     // public event Action OnFrontEndUICancelInput;
-
-#if UNITY_EDITOR
-    [UnityEditor.InitializeOnLoadMethod]
-    private static void Init()
-    {
-        UnityEditor.EditorApplication.delayCall += () => Get();
-    }
-#endif
     
     [RuntimeInitializeOnLoadMethod]
     private static void Initialize()
@@ -308,4 +300,82 @@ public class InputHandler: SingletonScriptableObject<InputHandler>
         [field: SerializeField] public InputActionMapRef ActionMapRef { get; private set; }
         public InputActionMap ActionMap => ActionMapRef.Map;
     }
+    
+    protected static InputHandler _instance;
+    public static InputHandler Get()
+    {
+        if (!_instance)
+        {
+            _instance = GetOrCreate();
+        }
+
+        return _instance;
+    }
+    
+    private static InputHandler GetOrCreate()
+    {
+        var assetInstance = Resources.Load<InputHandler>(nameof(InputHandler));
+        
+#if UNITY_EDITOR
+        if (assetInstance) return assetInstance;
+        
+        var assetPath = $"Assets/Resources/{nameof(InputHandler)}";
+        
+        EnsureDirectoryExists(assetPath);
+
+        assetInstance = GetOrCreateScriptableObjectAsset<InputHandler>(
+            assetPath, nameof(InputHandler), out var createdNew);
+
+        if (createdNew)
+        {
+            OCSFXLogger.Log($"New instance of {nameof(InputHandler)} created at {assetPath}");
+        }
+#endif //UNITY_EDITOR
+
+        return assetInstance;
+    }
+    
+#if UNITY_EDITOR
+    [InitializeOnLoadMethod]
+    private static void Init() => EditorApplication.delayCall += () => Get();
+
+    private static void EnsureDirectoryExists(string directoryPath)
+    {
+        if (!directoryPath.EndsWith("/")) directoryPath += "/";
+
+        var directoryName = Path.GetDirectoryName(directoryPath);
+
+        if (Directory.Exists(directoryName)) return;
+
+        if (directoryName == null) return;
+
+        Directory.CreateDirectory(directoryName);
+        AssetDatabase.Refresh();
+    }
+
+    private static T GetOrCreateScriptableObjectAsset<T>(string assetPath, string assetName, out bool createdNew) where T : ScriptableObject
+    {
+        if (string.IsNullOrWhiteSpace(assetPath) || string.IsNullOrWhiteSpace(assetName))
+        {
+            createdNew = false;
+            return null;
+        }
+
+        createdNew = false;
+
+        var fullPath = $"{assetPath}/{assetName}.asset";
+        var asset = AssetDatabase.LoadAssetAtPath<T>(fullPath);
+
+        if (asset) return asset;
+
+        asset = ScriptableObject.CreateInstance<T>();
+        AssetDatabase.CreateAsset(asset, fullPath);
+        AssetDatabase.SaveAssetIfDirty(asset);
+
+        createdNew = true;
+
+        return asset;
+    }
+#endif //UNITY_EDITOR
+
 }

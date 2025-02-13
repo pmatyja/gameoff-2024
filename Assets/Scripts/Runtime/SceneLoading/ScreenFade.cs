@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Runtime.SceneLoading
 {
-    public class ScreenFade : OCSFX.Generics.Singleton<ScreenFade>
+    public class ScreenFade : OCSFX.EZFMOD.Utility.Generics.SingletonMonoBehaviour<ScreenFade>
     {
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Image _image;

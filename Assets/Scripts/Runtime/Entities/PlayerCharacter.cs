@@ -1,5 +1,5 @@
 using UnityEngine;
 
-public class PlayerCharacter : OCSFX.Generics.Singleton<PlayerCharacter>
+public class PlayerCharacter : OCSFX.EZFMOD.Utility.Generics.SingletonMonoBehaviour<PlayerCharacter>
 {
 }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Runtime.SceneLoading
 {
-    public class LoadingScreen : OCSFX.Generics.Singleton<LoadingScreen>
+    public class LoadingScreen : OCSFX.EZFMOD.Utility.Generics.SingletonMonoBehaviour<LoadingScreen>
     {
         [SerializeField, Range(0f, 1f)] private float _alpha = 1;
         [SerializeField] private CanvasGroup _canvasGroup;

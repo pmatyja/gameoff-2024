@@ -1,7 +1,6 @@
 ﻿using System;
-using OCSFX.Attributes;
-using OCSFX.Utility.Attributes;
 using UnityEngine;
+using OCSFX.EZFMOD.Attributes;
 
 namespace Runtime.Utility
 {

@@ -1,8 +1,8 @@
 ﻿using System;
-using OCSFX.FMOD.Types;
+using OCSFX.EZFMOD.Types;
 using UnityEngine;
 
-namespace OCSFX.FMOD.Prototype
+namespace OCSFX.EZFMOD.Prototypes.Components
 {
     public class AudioSurfaceCollision2D: MonoBehaviour
     {

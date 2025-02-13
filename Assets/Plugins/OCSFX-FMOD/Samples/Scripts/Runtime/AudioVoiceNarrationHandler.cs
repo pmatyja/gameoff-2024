@@ -1,14 +1,15 @@
 ﻿using FMOD.Studio;
 using FMODUnity;
-using OCSFX.FMOD.AudioData;
+using OCSFX.EZFMOD;
+using OCSFX.EZFMOD.ScriptableObjects;
 using UnityEngine;
 
 namespace OCSFX.FMOD
 {
     public class AudioVoiceNarrationHandler: MonoBehaviour
     {
-        [SerializeField] private DialogueAudioDataSO _dialogueAudioData;
-        [SerializeField] private SnapshotsAudioDataSO _snapshotsAudioData;
+        [SerializeField] private EZFMODDialogueAudioDataSO _dialogueAudioData;
+        [SerializeField] private EZFMODSnapshotsAudioDataSO _snapshotsAudioData;
         [SerializeField] private string _dialogSnapshotName;
 
         private EventInstance _currentNarrationInstance;

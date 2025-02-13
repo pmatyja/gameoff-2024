@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853510589275859205}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09586321, y: -0.6906367, z: 0.09315145, w: 0.71074194}
+  m_LocalRotation: {x: 0.09586245, y: -0.6906362, z: 0.09315058, w: 0.7107426}
   m_LocalPosition: {x: 13.791817, y: 10.850979, z: -15.596854}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15.363, y: -88.356, z: 0}
 --- !u!114 &5596354947378511325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41,16 +41,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 853510589275859205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67ea430714b346ddb06440e908bf6fde, type: 3}
+  m_Script: {fileID: 11500000, guid: c18596bd7e54419fa4fb9a27e876c302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Source>k__BackingField: {fileID: 0}
   <Target>k__BackingField: {fileID: 0}
-  TargetWeight: 0.98
-  TargetOffset: {x: 0, y: 0.5, z: 0}
+  TargetWeight: 1
+  Easing: 0
+  Offsets:
+    SourceOffset: {x: 0, y: 0, z: 0}
+    TargetOffset: {x: 0, y: 1, z: -1}
   _showDebug: 1
   _debugSettings:
-    DrawSphereRadius: 0.1
+    DrawStep: 0
+    DrawSphereRadius: 0.5
     ThisColor: {r: 0, g: 1, b: 1, a: 1}
     TargetColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    LineColor: {r: 1, g: 0, b: 0, a: 1}
+    LerpLineColor: {r: 1, g: 0, b: 0, a: 1}
+    SourceToTargetLineColor: {r: 0, g: 1, b: 0, a: 1}

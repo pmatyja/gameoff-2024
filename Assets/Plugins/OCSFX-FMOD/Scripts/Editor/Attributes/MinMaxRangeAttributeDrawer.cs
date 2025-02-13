@@ -1,9 +1,9 @@
 using System;
-using UnityEngine;
+using OCSFX.EZFMOD.Attributes;
 using UnityEditor;
-using OCSFX.Utility.Attributes;
+using UnityEngine;
 
-namespace OCSFXEditor.Attributes
+namespace OCSFX.EZFMODEditor.Attributes
 {
     [CustomPropertyDrawer(typeof(MinMaxRangeAttribute))]
     public class MinMaxRangeAttributeDrawer : PropertyDrawer

@@ -1,9 +1,9 @@
-using System;
 using FMODUnity;
-using OCSFX.FMOD;
+using OCSFX.EZFMOD;
+using OCSFX.EZFMOD.Debug;
+using OCSFX.EZFMOD.Types;
 using Runtime.Utility;
 using UnityEngine;
-using OCSFX.Utility.Debug;
 using Runtime.UI;
 
 namespace Runtime.Collectables
@@ -93,7 +93,7 @@ namespace Runtime.Collectables
                 LoopSfx.Stop(collectableTransform.gameObject);
             }
             
-            if (collectableTransform.TryGetComponent<FMODGameObject>(out var fmodGameObject))
+            if (collectableTransform.TryGetComponent<EZFMODGameObject>(out var fmodGameObject))
             {
                 fmodGameObject.Stop(true);
             }

@@ -1,4 +1,4 @@
-using OCSFX.Utility;
+using OCSFX.EZFMOD.Utility;
 using Unity.Cinemachine;
 using UnityEngine;
 
