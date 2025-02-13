@@ -39,7 +39,7 @@ namespace OCSFX.EZFMOD.Components
 
             if (_musicAudioData)
             {
-                if (_resetParametersOnEnable) _musicAudioData.ResetGlobalParameters();
+                if (_resetParametersOnEnable) _musicAudioData.ResetParameters();
             }
         }
     
@@ -51,7 +51,7 @@ namespace OCSFX.EZFMOD.Components
             
             if (_musicAudioData)
             {
-                if (_resetParametersOnEnable) _musicAudioData.ResetGlobalParameters();
+                if (_resetParametersOnEnable) _musicAudioData.ResetParameters();
             }
         }
 

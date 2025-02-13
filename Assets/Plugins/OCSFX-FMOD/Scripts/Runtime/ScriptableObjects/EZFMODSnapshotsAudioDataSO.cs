@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using FMODUnity;
 using OCSFX.EZFMOD.Components;
 using OCSFX.EZFMOD.Types;
 using OCSFX.EZFMOD.Debug;

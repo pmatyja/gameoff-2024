@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using FMOD.Studio;
 using FMODUnity;
-using OCSFX.EZFMOD;
 using OCSFX.EZFMOD.Types;
 using OCSFX.EZFMOD.Debug;
+using OCSFX.EZFMOD.Utility.Generics;
 using UnityEngine;
 
 namespace OCSFX.EZFMOD.ScriptableObjects
@@ -13,50 +13,46 @@ namespace OCSFX.EZFMOD.ScriptableObjects
     [CreateAssetMenu(menuName = _CREATE_ASSET_MENU_BASE + "Music", fileName = nameof(EZFMODMusicAudioDataSO))]
     public class EZFMODMusicAudioDataSO : EZFMODAudioDataSO
     {
-        [Header("Music Events")]
-        [SerializeField] private List<FMODEvent> _events = new List<FMODEvent>()
+        [SerializeField] private List<SerializedKeyValuePair<string, EZFMODEvent>> _musicEvents = new()
         {
-            new FMODEvent("MainMenu", new EventReference()),
-            new FMODEvent("Gameplay", new EventReference()),
-            new FMODEvent("PauseMenu", new EventReference()),
-            new FMODEvent("GameOver", new EventReference()),
+            new SerializedKeyValuePair<string, EZFMODEvent>("MainMenu", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("Gameplay", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("PauseMenu", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("GameOver", null),
         };
-
-        [Header("Music Global Parameters")]
-        [SerializeField] private List<FMODGlobalParameter> _globalParameters = new List<FMODGlobalParameter>()
+        
+        [SerializeField] private List<SerializedKeyValuePair<string, EZFMODParameter>> _musicParameters = new()
         {
-            new FMODGlobalParameter("MusicParamVertical", 0),
-            new FMODGlobalParameter("MusicParamHorizontal", 0) 
+            new SerializedKeyValuePair<string, EZFMODParameter>("MusicParamVertical", null),
+            new SerializedKeyValuePair<string, EZFMODParameter>("MusicParamHorizontal", null)
         };
 
         private readonly Dictionary<Guid, EventInstance> _instances = new Dictionary<Guid, EventInstance>();
         private EventInstance _currentInstance;
-        private EventReference _currentEventRef;
+        private EZFMODEvent _currentEvent;
 
         // Properties
-        public List<FMODEvent> Events => _events;
-        public List<FMODGlobalParameter> GlobalParameters => _globalParameters;
+        public List<SerializedKeyValuePair<string, EZFMODEvent>> Events => _musicEvents;
+        public List<SerializedKeyValuePair<string, EZFMODParameter>> Parameters => _musicParameters;
         public EventInstance CurrentInstance => _currentInstance;
 
         // Methods
 
-        private bool TryGetMusicEvent(string musicEventName, out EventReference musicEventRef)
+        private bool TryGetMusicEvent(string musicEventName, out EZFMODEvent musicEvent)
         {
-            musicEventRef = GetMusicEvent(musicEventName);
-            return !musicEventRef.IsNull;
+            musicEvent = GetMusicEventByName(musicEventName);
+            return musicEvent;
         }
         
-        private EventReference GetMusicEvent(string musicEventName)
+        private EZFMODEvent GetMusicEventByName(string musicEventName)
         {
-            var found = _events.Find(fmodEventStruct =>
-                fmodEventStruct.Name == musicEventName).EventRef;
-
-            return found;
+            return _musicEvents.FirstOrDefault(musicEvent 
+                => musicEvent.Key == musicEventName)?.Value;
         }
 
         public void CurrentMusicEventPlay()
         {
-            if (_currentEventRef.IsNull)
+            if (!_currentEvent)
             {
                 OCSFXLogger.LogWarning($"[{this}] No Current Music Event has been set.", this, _showDebug);
                 return;
@@ -85,7 +81,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
 
             if (!canPlay) return;
             
-            PlayMusic(_currentEventRef);
+            PlayMusic(_currentEvent);
         }
 
         public void MusicEventPlay(string musicEventName)
@@ -110,17 +106,17 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             StopMusic(foundMusicEvent);
         }
         
-        private void PlayMusic(EventReference eventRef)
+        private void PlayMusic(EZFMODEvent musicEvent)
         {
-            var eventRefID = eventRef.Guid;
+            var eventID = musicEvent.GUID;
 
             if (_currentInstance.isValid())
             {
                 var currentInstanceID = _currentInstance.GetEventGUID();
 
-                if (eventRefID == currentInstanceID)
+                if (eventID == currentInstanceID)
                 {
-                    OCSFXLogger.LogWarning($"[{this}] {eventRef.GetEventName()} music is already playing.", this, _showDebug);
+                    OCSFXLogger.LogWarning($"[{this}] {musicEvent.Name} music is already playing.", this, _showDebug);
                     return;
                 }
 
@@ -131,33 +127,33 @@ namespace OCSFX.EZFMOD.ScriptableObjects
                 }
             }
 
-            _currentEventRef = eventRef;
-            _currentInstance = eventRef.Play2D();
+            _currentEvent = musicEvent;
+            musicEvent.Play2D(out _currentInstance);
             
             // Add or set
-            if (!_instances.TryAdd(eventRefID, _currentInstance))
+            if (!_instances.TryAdd(eventID, _currentInstance))
             {
-                _instances[eventRefID] = _currentInstance;
+                _instances[eventID] = _currentInstance;
             }
 
             if (!_currentInstance.isValid())
             {
-                OCSFXLogger.LogWarning($"[{this}] failed to play music {eventRef.GetEventName()}", this, _showDebug);
+                OCSFXLogger.LogWarning($"[{this}] failed to play music {musicEvent.Name}", this, _showDebug);
                 return;
             }
 
-            OCSFXLogger.Log("Play Music: " + eventRef.GetEventName(), this, _showDebug);
+            OCSFXLogger.Log("Play Music: " + musicEvent.Name, this, _showDebug);
         }
 
-        private void StopMusic(EventReference eventRef)
+        private void StopMusic(EZFMODEvent musicEvent)
         {
-            var eventRefID = eventRef.Guid;
-            if (!_instances.TryGetValue(eventRefID, out var instance)) return;
+            var eventID = musicEvent.GUID;
+            if (!_instances.TryGetValue(eventID, out var instance)) return;
 
             instance.Stop();
-            _instances.Remove(eventRefID);
+            _instances.Remove(eventID);
             
-            OCSFXLogger.Log("Stop Music: " + eventRef.GetEventName(), this, _showDebug);
+            OCSFXLogger.Log("Stop Music: " + musicEvent.Name, this, _showDebug);
         }
         
         public void StopAllMusic()
@@ -180,35 +176,33 @@ namespace OCSFX.EZFMOD.ScriptableObjects
 
         public void SetGlobalParameter(string parameterName, float value)
         {
-            if (!_globalParameters.TryGetParameter(parameterName, out var parameter))
+            if (!TryGetMusicParameter(parameterName, out var parameter))
             {
-                OCSFXLogger.LogError($"{this}: {parameterName} was not found in GlobalParameters.", this, _showDebug);
+                OCSFXLogger.LogWarning($"{this}: {parameterName} was not found in MusicParameters.", this, _showDebug);
                 return;
             }
             
-            EZFMODRuntimeStatics.SetGlobalParameter(parameter, value);
-        }
-
-        public void ResetGlobalParameters()
-        {
-            foreach (var entry in _globalParameters)
-            {
-                EZFMODRuntimeStatics.SetGlobalParameter(entry.Parameter, default);
-            }
+            parameter.SetGlobalValue(value);
         }
         
-        private void ApplyGlobalParameters()
+        private bool TryGetMusicParameter(string parameterName, out EZFMODParameter musicParameter)
         {
-            foreach (var param in _globalParameters
-                         .Where(param => !string.IsNullOrWhiteSpace(param.Parameter)))
-            {
-                EZFMODRuntimeStatics.SetGlobalParameter(param.Parameter, param.Value);
-            }
+            musicParameter = GetMusicParameterByName(parameterName);
+            return musicParameter;
+        }
+        
+        private EZFMODParameter GetMusicParameterByName(string parameterName)
+        {
+            return _musicParameters.FirstOrDefault(param 
+                => param.Key == parameterName)?.Value;
         }
 
-        protected void OnValidate()
+        public void ResetParameters()
         {
-            ApplyGlobalParameters();
+            foreach (var param in _musicParameters)
+            {
+                param?.Value?.SetGlobalDefaultValue();
+            }
         }
     }
 }

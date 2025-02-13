@@ -13,61 +13,19 @@ MonoBehaviour:
   m_Name: GameOff2024Music
   m_EditorClassIdentifier: 
   _showDebug: 1
-  _events:
-  - _name: MainMenu
-    _eventRef:
-      Guid:
-        Data1: 120926487
-        Data2: 1246973705
-        Data3: -1316532328
-        Data4: 327882184
-      Path: event:/MX/mx_frontend_menu_base
-  - _name: Game_Level_01
-    _eventRef:
-      Guid:
-        Data1: 760368772
-        Data2: 1117863706
-        Data3: 1187395518
-        Data4: 863309997
-      Path: event:/MX/mx_gameplay_level_01
-  - _name: Game_Level_02
-    _eventRef:
-      Guid:
-        Data1: 165376082
-        Data2: 1313528641
-        Data3: 1471050144
-        Data4: 1132218843
-      Path: event:/MX/mx_gameplay_level_02
-  - _name: Game_Level_03
-    _eventRef:
-      Guid:
-        Data1: 1163475427
-        Data2: 1238637143
-        Data3: -1337696119
-        Data4: 1210374693
-      Path: event:/MX/mx_gameplay_level_03
-  - _name: GameOver
-    _eventRef:
-      Guid:
-        Data1: -1495909537
-        Data2: 1247795339
-        Data3: -1361749571
-        Data4: 1536257240
-      Path: event:/MX/mx_gameplay_hubWorld
-  - _name: Ending
-    _eventRef:
-      Guid:
-        Data1: -1495909537
-        Data2: 1247795339
-        Data3: -1361749571
-        Data4: 1536257240
-      Path: event:/MX/mx_gameplay_hubWorld
-  - _name: Game_HubWorld
-    _eventRef:
-      Guid:
-        Data1: -1495909537
-        Data2: 1247795339
-        Data3: -1361749571
-        Data4: 1536257240
-      Path: event:/MX/mx_gameplay_hubWorld
-  _globalParameters: []
+  _musicEvents:
+  - _key: MainMenu
+    _value: {fileID: 11400000, guid: fd21ca99bc77a374bbd603248a09b7cc, type: 2}
+  - _key: Game_HubWorld
+    _value: {fileID: 11400000, guid: 823f0fb55c3c17b49826fd57bdd1bc35, type: 2}
+  - _key: Level_01
+    _value: {fileID: 11400000, guid: 8f1d1da9ca6dd2b47a24c65069ff17ef, type: 2}
+  - _key: Level_02
+    _value: {fileID: 11400000, guid: 5d898594ece84cb4682716ebbffa7e3f, type: 2}
+  - _key: Level_03
+    _value: {fileID: 11400000, guid: c5e70bc2990de8d45a9412a2173ae983, type: 2}
+  - _key: GameOver
+    _value: {fileID: 11400000, guid: 823f0fb55c3c17b49826fd57bdd1bc35, type: 2}
+  - _key: Ending
+    _value: {fileID: 11400000, guid: 823f0fb55c3c17b49826fd57bdd1bc35, type: 2}
+  _musicParameters: []
