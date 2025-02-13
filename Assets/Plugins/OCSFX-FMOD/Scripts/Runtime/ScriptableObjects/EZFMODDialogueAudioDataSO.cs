@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using FMODUnity;
-using OCSFX.EZFMOD;
 using OCSFX.EZFMOD.Types;
 using OCSFX.EZFMOD.Debug;
+using OCSFX.EZFMOD.Utility.Generics;
 using UnityEngine;
 
 namespace OCSFX.EZFMOD.ScriptableObjects
@@ -11,11 +11,11 @@ namespace OCSFX.EZFMOD.ScriptableObjects
     public class EZFMODDialogueAudioDataSO : EZFMODAudioDataSO
     {
         [Header("Dialogue Events")]
-        [SerializeField] private List<FMODEvent> _events = new List<FMODEvent>();
+        [SerializeField] private List<SerializedKeyValuePair<string, EZFMODEvent>> _events = new ();
 
         public void DialogueEventPlay(string eventName)
         {
-            if (!TryGetDialogueEvent(eventName, out var foundEvent))
+            if (!TryGetDialogueEventByName(eventName, out var foundEvent))
             {
                 OCSFXLogger.LogWarning($"{this}: {eventName} was not found in Events.", this, _showDebug);
                 return;
@@ -26,28 +26,34 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         
         public void DialogueEventStop(string eventName)
         {
-            if (!TryGetDialogueEvent(eventName, out var foundEvent))
+            if (!TryGetDialogueEventByName(eventName, out var foundEvent))
             {
                 OCSFXLogger.LogWarning($"{this}: {eventName} was not found in Events.", this, _showDebug);
                 return;
             }
 
-            foundEvent.Stop2D();
+            foundEvent.StopAll(true);
         }
         
-        public EventReference GetDialogueEventByIndex(int index)
+        public EZFMODEvent GetDialogueEventByIndex(int index)
         {
-            return _events[index].EventRef;
+            return _events[index].Value;
         }
 
-        public EventReference GetDialogueEvent(string lineName)
+        public EZFMODEvent GetDialogueEvent(string lineName)
         {
-            return _events.GetEventReference(lineName);
+            return GetDialogueEventByName(lineName);
         }
         
-        public bool TryGetDialogueEvent(string lineName, out EventReference eventRef)
+        private bool TryGetDialogueEventByName(string lineName, out EZFMODEvent foundEvent)
         {
-            return _events.TryGetEventReference(lineName, out eventRef);
+            foundEvent = GetDialogueEventByName(lineName);
+            return foundEvent;
+        }
+        
+        private EZFMODEvent GetDialogueEventByName(string lineName)
+        {
+            return _events.Find(dialogueEvent => dialogueEvent.Key == lineName)?.Value;
         }
     }
 }

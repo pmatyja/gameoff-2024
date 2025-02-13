@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using FMODUnity;
-using OCSFX.EZFMOD;
 using OCSFX.EZFMOD.Types;
 using OCSFX.EZFMOD.Debug;
+using OCSFX.EZFMOD.Utility.Generics;
 using UnityEngine;
 
 namespace OCSFX.EZFMOD.ScriptableObjects
@@ -11,41 +10,55 @@ namespace OCSFX.EZFMOD.ScriptableObjects
     public class EZFMODUiAudioDataSO : EZFMODAudioDataSO
     {
         [Header("UI Events")]
-        [SerializeField] private List<FMODEvent> _events = new List<FMODEvent>()
+        [SerializeField] private List<SerializedKeyValuePair<string, EZFMODEvent>> _uiEvents = new()
         {
-            new FMODEvent("None", new EventReference()),
-            new FMODEvent("PlayButtonPress", new EventReference()),
-            new FMODEvent("QuitButtonPress", new EventReference()),
-            new FMODEvent("BackButtonPress", new EventReference()),
-            new FMODEvent("ButtonPress", new EventReference()),
-            new FMODEvent("Focus", new EventReference()),
-            new FMODEvent("Unfocus", new EventReference()),
-            new FMODEvent("MenuOpen", new EventReference()),
-            new FMODEvent("MenuClose", new EventReference()),
-            new FMODEvent("PauseMenuOpen", new EventReference()),
-            new FMODEvent("PauseMenuClose", new EventReference())
+            new SerializedKeyValuePair<string, EZFMODEvent>("None", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("PlayButtonPress", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("QuitButtonPress", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("BackButtonPress", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("ButtonPress", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("Focus", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("Unfocus", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("MenuOpen", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("MenuClose", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("PauseMenuOpen", null),
+            new SerializedKeyValuePair<string, EZFMODEvent>("PauseMenuClose", null)
         };
         
         public void UiEventPlay(string uiEventName)
         {
-            if (!_events.TryGetEventReference(uiEventName, out var eventRef))
+            if (!TryGetUiEventByName(uiEventName, out var eventRef))
             {
-                OCSFXLogger.LogWarning($"{uiEventName} was not found in {_events}. Check {this}.", this, _showDebug);
+                OCSFXLogger.LogWarning($"{uiEventName} was not found in {_uiEvents}. Check {this}.", this, _showDebug);
                 return;
             }
 
-            eventRef.Play2D();
+            eventRef.PlayOneShot();;
         }
         
         public void UiEventStop(string uiEventName)
         {
-            if (!_events.TryGetEventReference(uiEventName, out var eventRef))
+            if (!TryGetUiEventByName(uiEventName, out var eventRef))
             {
-                OCSFXLogger.LogWarning($"{uiEventName} was not found in {_events}. Check {this}.", this, _showDebug);
+                OCSFXLogger.LogWarning($"{uiEventName} was not found in {_uiEvents}. Check {this}.", this, _showDebug);
                 return;
             }
 
-            eventRef.Stop2D();
+            eventRef.StopAll(true);
+        }
+        
+        private bool TryGetUiEventByName(string eventName, out EZFMODEvent eventRef)
+        {
+            eventRef = GetUiEventByName(eventName);
+
+            return eventRef;
+        }
+        
+        private EZFMODEvent GetUiEventByName(string uiEventName)
+        {
+            var uiEvent = _uiEvents.Find(entry => entry.Key == uiEventName)?.Value;
+
+            return uiEvent;
         }
     }
 }

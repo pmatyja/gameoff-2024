@@ -102,3 +102,26 @@ MonoBehaviour:
         Data3: 0
         Data4: 0
       Path: 
+  _uiEvents:
+  - _key: None
+    _value: {fileID: 0}
+  - _key: PlayButtonPress
+    _value: {fileID: 11400000, guid: a9fb0bc1281a91c46a066b7fed405751, type: 2}
+  - _key: QuitButtonPress
+    _value: {fileID: 0}
+  - _key: BackButtonPress
+    _value: {fileID: 11400000, guid: 01ce9ea8b6aca0c4daf76630a8be7869, type: 2}
+  - _key: ButtonPress
+    _value: {fileID: 11400000, guid: c30a96555aaee5f48b2c92446c06876c, type: 2}
+  - _key: Focus
+    _value: {fileID: 0}
+  - _key: Unfocus
+    _value: {fileID: 0}
+  - _key: MenuOpen
+    _value: {fileID: 0}
+  - _key: MenuClose
+    _value: {fileID: 0}
+  - _key: PauseMenuOpen
+    _value: {fileID: 0}
+  - _key: PauseMenuClose
+    _value: {fileID: 0}

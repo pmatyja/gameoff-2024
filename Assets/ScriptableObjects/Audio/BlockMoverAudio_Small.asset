@@ -12,17 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4247e242204a4096d1140a940721b8, type: 3}
   m_Name: BlockMoverAudio_Small
   m_EditorClassIdentifier: 
-  <MoveBegin>k__BackingField:
-    Guid:
-      Data1: 1077019051
-      Data2: 1300162711
-      Data3: -270157423
-      Data4: -1450142490
-    Path: event:/SX/INT/Structure/sx_int_structure_small_move_begin
-  <MoveEnd>k__BackingField:
-    Guid:
-      Data1: 756888753
-      Data2: 1090106674
-      Data3: 632611984
-      Data4: -703688948
-    Path: event:/SX/INT/Structure/sx_int_structure_small_move_end
+  <MoveBeginEvent>k__BackingField: {fileID: 11400000, guid: f2f748764a94b9949aa5f2512cb245fa, type: 2}
+  <MoveEndEvent>k__BackingField: {fileID: 11400000, guid: c856929c38eac6c4484ad0508faa23f6, type: 2}

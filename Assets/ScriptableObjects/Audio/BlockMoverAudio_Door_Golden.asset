@@ -12,17 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4247e242204a4096d1140a940721b8, type: 3}
   m_Name: BlockMoverAudio_Door_Golden
   m_EditorClassIdentifier: 
-  <MoveBegin>k__BackingField:
-    Guid:
-      Data1: -1334180458
-      Data2: 1330665740
-      Data3: -221525333
-      Data4: 247838917
-    Path: event:/SX/INT/Door/sx_int_door_golden_open_begin
-  <MoveEnd>k__BackingField:
-    Guid:
-      Data1: 784985421
-      Data2: 1206717528
-      Data3: 1878600894
-      Data4: 290986097
-    Path: event:/SX/INT/Door/sx_int_door_golden_open_end
+  <MoveBeginEvent>k__BackingField: {fileID: 11400000, guid: 3692ee1cffcd4114ea0329ce1cf4a50a, type: 2}
+  <MoveEndEvent>k__BackingField: {fileID: 11400000, guid: 4ea12d0b484a81845a4165efbb492141, type: 2}

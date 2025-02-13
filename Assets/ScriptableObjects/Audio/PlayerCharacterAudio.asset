@@ -12,31 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b24f8a8eba247e280567eec4fb7da72, type: 3}
   m_Name: PlayerCharacterAudio
   m_EditorClassIdentifier: 
-  <Footstep>k__BackingField:
-    Guid:
-      Data1: -550437163
-      Data2: 1105194321
-      Data3: -886046048
-      Data4: 568832082
-    Path: event:/SX/CHAR/Player/sx_char_player_fs
-  <Jump>k__BackingField:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  <Land>k__BackingField:
-    Guid:
-      Data1: -550437163
-      Data2: 1105194321
-      Data3: -886046048
-      Data4: 568832082
-    Path: event:/SX/CHAR/Player/sx_char_player_fs
-  <FoleyOneShot>k__BackingField:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+  <Footstep>k__BackingField: {fileID: 11400000, guid: f5858ff3f17a556479965ea572282ebc, type: 2}
+  <Jump>k__BackingField: {fileID: 0}
+  <Land>k__BackingField: {fileID: 11400000, guid: f5858ff3f17a556479965ea572282ebc, type: 2}
+  <FoleyOneShot>k__BackingField: {fileID: 0}
