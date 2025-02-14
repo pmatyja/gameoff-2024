@@ -26,13 +26,9 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         [Space]
         [SerializeField] private AudioPlayerPrefs _audioPlayerPrefs = new AudioPlayerPrefs();
 
-        private static MuteCaches _muteCaches;
-
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        private static void Initialize()
-        {
-            _muteCaches ??= new MuteCaches();
-        }
+        [Space]
+        [SerializeField]
+        private MuteCaches _muteCaches;
 
         public void SetMuteCaches()
         {
@@ -203,6 +199,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         {
             [SerializeField] private bool _showDebug;
             
+            [field: SerializeField]
             public List<FMODGlobalParameter> Entries { get; private set; }
                 = new List<FMODGlobalParameter>();
 
