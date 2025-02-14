@@ -50,7 +50,7 @@ namespace OCSFX.EZFMOD.Types
             }
         }
         
-        public void SetNewValue(float value, bool applyGlobal = false)
+        public void SetValue(float value, bool applyGlobal)
         {
             _value = value;
             
@@ -58,6 +58,17 @@ namespace OCSFX.EZFMOD.Types
             {
                 SetGlobal();
             }
+        }
+        
+        public void SetValue(float value, GameObject applyToTarget)
+        {
+            _value = value;
+            Set(applyToTarget);
+        }
+
+        public void SetValue(float value)
+        {
+            _value = value;
         }
         
         public void Set(GameObject source)

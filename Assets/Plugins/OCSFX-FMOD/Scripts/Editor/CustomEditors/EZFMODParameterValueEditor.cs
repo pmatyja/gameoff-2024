@@ -1,4 +1,5 @@
-﻿using OCSFX.EZFMOD.Types;
+﻿using OCSFX.EZFMOD.Debug;
+using OCSFX.EZFMOD.Types;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,19 +22,27 @@ namespace OCSFX.EZFMODEditor.CustomEditors
             }
             
             DrawScriptField();
+            
+            // EnsureCorrectParentParameter();
 
             BeginReadOnlyInspector();
             
             EditorGUILayout.Space();
             
             _parameter = serializedObject.FindProperty(nameof(_parameter));
-            _parameter.objectReferenceValue = EditorGUILayout.ObjectField("Parameter", _parameter.objectReferenceValue, typeof(EZFMODParameter), false);
+            EditorGUILayout.ObjectField("Parameter", _parameter.objectReferenceValue, typeof(EZFMODParameter), false);
 
             EndReadOnlyInspector();
-            if (_parameter.objectReferenceValue == null)
+            
+            if (!_parameter.objectReferenceValue)
             {
-                EditorGUILayout.HelpBox("Parameter is required.", MessageType.Error);
-                return;
+                EnsureCorrectParentParameter();
+                
+                if (!_parameter.objectReferenceValue)
+                {
+                    EditorGUILayout.HelpBox("Parameter is required.", MessageType.Error);
+                    return;
+                }
             }
 
             var parameter = (EZFMODParameter)_parameter.objectReferenceValue;
@@ -82,7 +91,7 @@ namespace OCSFX.EZFMODEditor.CustomEditors
 
             if (GUILayout.Button("Reset to Default"))
             {
-                _value.floatValue = (float)parameter.Default;
+                _value.floatValue = parameter.Default;
             }
 
             EditorGUILayout.Space();
@@ -132,6 +141,33 @@ namespace OCSFX.EZFMODEditor.CustomEditors
             EditorGUI.BeginDisabledGroup(true);
             EditorGUILayout.ObjectField("Script", MonoScript.FromScriptableObject((EZFMODParameterValue)target), typeof(MonoScript), false);
             EditorGUI.EndDisabledGroup();
+        }
+        
+        private void EnsureCorrectParentParameter()
+        {
+            var parameterValue = (EZFMODParameterValue)serializedObject.targetObject;
+            if (!parameterValue)
+            {
+                return;
+            }
+            
+            var paramValueAssetPath = AssetDatabase.LoadAssetAtPath<EZFMODParameter>(AssetDatabase.GetAssetPath(parameterValue));
+            var parentAsset = AssetDatabase.LoadAssetAtPath<EZFMODParameter>(AssetDatabase.GetAssetPath(paramValueAssetPath));
+
+            if (!parentAsset)
+            {
+                OCSFXLogger.LogError($"[{nameof(EZFMODParameterValue)}] Parent asset not found.", this);
+                return;
+            }
+            
+            if (parentAsset == parameterValue.Parameter)
+            {
+                return;
+            }
+            
+            parameterValue.Init(parentAsset, parameterValue.Value);
+            EditorUtility.SetDirty(parameterValue);
+            AssetDatabase.SaveAssetIfDirty(parentAsset);
         }
     }
 }

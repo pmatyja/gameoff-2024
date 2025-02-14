@@ -16,7 +16,7 @@ namespace OCSFX.EZFMODEditor.CustomEditors
             base.OnInspectorGUI();
             DrawParameterID();
             DrawParameterType();
-            DrawMinMax();
+            DrawValues();
             DrawLabels();
         }
         
@@ -35,11 +35,12 @@ namespace OCSFX.EZFMODEditor.CustomEditors
             EditorGUI.EndDisabledGroup();
         }
         
-        private void DrawMinMax()
+        private void DrawValues()
         {
             EditorGUI.BeginDisabledGroup(true);
             EditorGUILayout.FloatField("Min", _asset.Min);
             EditorGUILayout.FloatField("Max", _asset.Max);
+            EditorGUILayout.FloatField("Default", _asset.Default);
             EditorGUI.EndDisabledGroup();
         }
 
