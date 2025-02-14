@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using OCSFX.EZFMOD.Components;
 using OCSFX.EZFMOD.Types;
 using OCSFX.EZFMOD.Debug;
@@ -158,38 +161,46 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         {
             if (!TryGetStateSnapshot(eventKey, out var snapshot)) return;
 
-            snapshot.Play2D();
+            StartSnapshot(snapshot);
         }
 
         public void StopStateSnapshot(string eventKey)
         {
             if (!TryGetStateSnapshot(eventKey, out var snapshot)) return;
 
-            snapshot.StopAll(true);
+            StopSnapshot(snapshot);
         }
         
         private void StartReverbSnapshot(string eventKey)
         {
             if (!TryGetReverbSnapshot(eventKey, out var snapshot)) return;
             
-            snapshot.Play2D();
+            StartSnapshot(snapshot);
         }
 
         private void StopReverbSnapshot(string eventKey)
         {
             if (!TryGetReverbSnapshot(eventKey, out var snapshot)) return;
             
-            snapshot.StopAll(true);
+            StopSnapshot(snapshot);
         }
         
         private static void StartSnapshot(EZFMODSnapshot snapshot)
         {
-            snapshot?.Play2D();
+            if (RuntimeManager.IsInitialized)
+            {
+                snapshot?.Play2D();
+            }
+            else RunWhenRuntimeManagerIsReady(snapshot.Play2D);
         }
 
         private static void StopSnapshot(EZFMODSnapshot snapshot)
         {
-            snapshot?.StopAll(true);
+            if (RuntimeManager.IsInitialized)
+            {
+                snapshot?.StopAll(true);
+            }
+            else RunWhenRuntimeManagerIsReady(snapshot.StopAll);
         }
         
         private bool TryGetStateSnapshot(string stateName, out EZFMODSnapshot snapshot)
@@ -212,6 +223,32 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         private EZFMODSnapshot GetReverbSnapshot(string reverbName)
         {
             return _reverbSnapshots.Find(match => match.Key == reverbName)?.Value;
+        }
+        
+        private static void RunWhenRuntimeManagerIsReady(Action callback)
+        {
+            if (RuntimeManager.IsInitialized && !RuntimeManager.AnySampleDataLoading())
+            {
+                callback?.Invoke();
+                return;
+            }
+            
+            EZFMODRuntimeStatics.RunCoroutine(Co_RunWhenRuntimeManagerIsReady(callback));
+        }
+        
+        private static IEnumerator Co_RunWhenRuntimeManagerIsReady(Action callback)
+        {
+            yield return Co_YieldUntilRuntimeManagerIsReady();
+            callback?.Invoke();
+        }
+        
+        private static readonly WaitForSeconds _runtimeManagerReadyBuffer = new(0.2f);
+        
+        private static IEnumerator Co_YieldUntilRuntimeManagerIsReady()
+        {
+            while (!RuntimeManager.IsInitialized || RuntimeManager.AnySampleDataLoading()) yield return null;
+            // Wait a bit longer to ensure the damn thing is actually ready.
+            yield return _runtimeManagerReadyBuffer;
         }
     }
 }

@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b516b5735b38bc941a718c072aa2d38b, type: 3}
   m_Name: GameOff2024VolumeSettings
   m_EditorClassIdentifier: 
-  _showDebug: 1
+  _showDebug: 0
   _autoFillPlayerPrefsData: 1
   _volumeParameterValues:
   - _key: {fileID: 11400000, guid: 5b56eada14d3ce1488584f63ee8ebe1b, type: 2}
-    _value: 0.9
+    _value: 0.912
   - _key: {fileID: 11400000, guid: 98791833f194f2d479fcd5d14f3f68fa, type: 2}
     _value: 1
   - _key: {fileID: 11400000, guid: 91c89a7fd30233a4aa2176050c8bef4e, type: 2}
-    _value: 1
+    _value: 0.878
   - _key: {fileID: 11400000, guid: 35448d2c9845e2d46a04ee06da088361, type: 2}
     _value: 1
   - _key: {fileID: 11400000, guid: 37c79ea490a17b143b2b93469d7a8a1e, type: 2}
@@ -29,15 +29,30 @@ MonoBehaviour:
     _value: 1
   _audioPlayerPrefs:
     <Entries>k__BackingField:
-    - _parameter: Volume_Master
-      _value: 0.9
-    - _parameter: Volume_SX
+    - _key: Volume_Master
+      _value: 0.912
+    - _key: Volume_SX
       _value: 1
-    - _parameter: Volume_MX
+    - _key: Volume_MX
+      _value: 0.878
+    - _key: Volume_AMB
       _value: 1
-    - _parameter: Volume_AMB
-      _value: 0
-    - _parameter: Volume_UI
-      _value: 0
-    - _parameter: Volume_VX
-      _value: 0
+    - _key: Volume_UI
+      _value: 1
+    - _key: Volume_VX
+      _value: 1
+  _muteCaches:
+    _showDebug: 0
+    <Entries>k__BackingField:
+    - _key: Volume_MX
+      _value: 1
+    - _key: Volume_Master
+      _value: 1
+    - _key: Volume_SX
+      _value: 1
+    - _key: Volume_AMB
+      _value: 1
+    - _key: Volume_UI
+      _value: 1
+    - _key: Volume_VX
+      _value: 1
