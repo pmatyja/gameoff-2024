@@ -25,12 +25,5 @@ namespace OCSFX.EZFMOD.Components
             
             Source.SetAttenuationObject(gameObject);
         }
-
-        protected override void OnValidate()
-        {
-            base.OnValidate();
-            
-            if (!Source) Source = FindFirstObjectByType<StudioListener>();
-        }
     }
 }
