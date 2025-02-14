@@ -63,6 +63,8 @@ namespace OCSFX.EZFMODEditor.CustomEditors
                     break;
             }
 
+            if (!parameterValue) return;
+            
             serializedObject.ApplyModifiedProperties();
         }
 
@@ -80,7 +82,7 @@ namespace OCSFX.EZFMODEditor.CustomEditors
         private void HandleContinuousParameter(EZFMODParameter parameter)
         {
             Undo.RecordObject(serializedObject.targetObject, "Edit Continuous Parameter Value");
-            _value.floatValue = EditorGUILayout.Slider("User-Defined Value", _value.floatValue, (float)parameter.Min, (float)parameter.Max);
+            _value.floatValue = EditorGUILayout.Slider("User-Defined Value", _value.floatValue, parameter.Min, parameter.Max);
 
             EditorGUILayout.Space();
             EditorGUILayout.Space();

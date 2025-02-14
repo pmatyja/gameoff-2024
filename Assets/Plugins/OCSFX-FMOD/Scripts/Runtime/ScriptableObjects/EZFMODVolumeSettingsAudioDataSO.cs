@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using OCSFX.EZFMOD.Types;
 using OCSFX.EZFMOD.Debug;
-using OCSFX.EZFMOD.Utility.Generics;
 using UnityEngine;
 
 namespace OCSFX.EZFMOD.ScriptableObjects
@@ -10,232 +9,283 @@ namespace OCSFX.EZFMOD.ScriptableObjects
     [CreateAssetMenu(menuName = _CREATE_ASSET_MENU_BASE + "Volume Settings", fileName = nameof(EZFMODVolumeSettingsAudioDataSO))]
     public class EZFMODVolumeSettingsAudioDataSO : EZFMODAudioDataSO
     {
-        private const float _DEFAULT_VALUE = 1.0f;
-        private const float _DEFAULT_MASTER_VALUE = 0.9f;
+        [field: SerializeField] public float DefaultValue { get; private set; } = 1.0f;
+        [field: SerializeField] public float DefaultMasterValue { get; private set; } = 0.9f;
+
+        [Space]
+        [SerializeField] private bool _autoSyncPlayerPrefsData = true;
         
-        [SerializeField] private bool _autoFillPlayerPrefsData = true;
-
-        [SerializeField] private List<SerializedKeyValuePair<EZFMODParameter, float>> _volumeParameterValues
-            = new List<SerializedKeyValuePair<EZFMODParameter, float>>()
-            {
-                new SerializedKeyValuePair<EZFMODParameter, float>(null, _DEFAULT_MASTER_VALUE),
-                new SerializedKeyValuePair<EZFMODParameter, float>(null, _DEFAULT_VALUE),
-                new SerializedKeyValuePair<EZFMODParameter, float>(null, _DEFAULT_VALUE)
-            };
+        [Space]
+        [SerializeField] private EZFMODParameterValue _masterVolumeParameterValue;
+        [SerializeField] private List<EZFMODParameterValue> _volumeParameterValues
+            = new();
 
         [Space]
-        [SerializeField] private AudioPlayerPrefs _audioPlayerPrefs = new AudioPlayerPrefs();
+        [SerializeField] private AudioPlayerPrefs _audioPlayerPrefs;
 
-        [Space]
-        [SerializeField]
-        private MuteCaches _muteCaches;
-
-        public void SetMuteCaches()
+        private void OnEnable()
         {
-            if (_muteCaches == null)
+            Application.quitting += OnApplicationQuit;
+        }
+
+        private void OnApplicationQuit()
+        {
+            Application.quitting -= OnApplicationQuit;
+            // Reset to default values when exiting play mode.
+            
+            if (Application.isEditor)
             {
-                _muteCaches = new MuteCaches();
-                foreach (var entry in _volumeParameterValues)
-                {
-                    _muteCaches.Set(entry.Key.Name, entry.Value);
-                }
+                ResetDefaults();
             }
-            else
+        }
+
+        private void ResetDefaults()
+        {
+            foreach (var entry in _volumeParameterValues)
             {
-                foreach (var entry in _volumeParameterValues)
-                {
-                    SetVolume(entry.Key.Name, _muteCaches.Get(entry.Key.Name));
-                }
+                if (!entry) continue;
+                    
+                var settingName = entry.Parameter?.Name;
+                var defaultValue = entry == _masterVolumeParameterValue
+                    ? DefaultMasterValue
+                    : DefaultValue;
+
+                    
+                OCSFXLogger.Log($"Set {settingName} to {defaultValue}", this, _showDebug);
+                SetVolume(settingName, defaultValue);
+                SetMute(settingName, false);
             }
         }
 
         public void LoadFromPlayerPrefs()
         {
-            SetMuteCaches();
-            
             foreach (var entry in _volumeParameterValues)
             {
-                if (entry.Key == null) continue;
+                if (!entry) continue;
                 
-                var paramName = entry.Key?.Name;
+                var settingName = entry.Parameter?.Name;
                 
-                OCSFXLogger.Log($"Set {paramName} to {_audioPlayerPrefs.GetValue(paramName)}", this, _showDebug);
-                SetVolume(paramName, _audioPlayerPrefs.GetValue(paramName));
+                OCSFXLogger.Log($"Set {settingName} to {_audioPlayerPrefs.GetValue(settingName)}", this, _showDebug);
+                SetVolume(settingName, _audioPlayerPrefs.GetValue(settingName));
+                SetMute(settingName, _audioPlayerPrefs.IsMuted(settingName));
             }
         }
 
         public void SetVolume(string parameterName, float value)
         {
             var result =
-                _volumeParameterValues.Find(result => result.Key.Name == parameterName);
+                _volumeParameterValues.Find(result => result?.Parameter.Name == parameterName);
 
-            if (result == null)
+            if (!result || string.IsNullOrWhiteSpace(result.Parameter.Name))
             {
                 OCSFXLogger.LogWarning($"{parameterName} was not found in {this}.{nameof(_volumeParameterValues)}", this, _showDebug);
                 return;
             }
             
-            var paramName = result.Key?.Name;
+            var paramName = result.Parameter.Name;
             
             if (string.IsNullOrWhiteSpace(paramName)) return;
             
-            result.Value = value;
+            result.SetValue(value, true);
             
             _audioPlayerPrefs.SetValue(parameterName, result.Value);
             
             OCSFXLogger.Log($"Set {parameterName} to {result.Value}", this, _showDebug);
 
-            EZFMODRuntimeStatics.SetGlobalParameter(paramName, result.Value);
+            result.SetValue(value, true);
         }
 
         public float GetVolume(string parameterName)
         {
             var result =
-                _volumeParameterValues.Find(result => result.Key.Name == parameterName);
+                _volumeParameterValues.Find(result => result?.Parameter.Name == parameterName);
 
-            var paramName = result.Key?.Name;
+            var paramName = result?.Parameter.Name;
             
             if (string.IsNullOrWhiteSpace(paramName))
             {
                 OCSFXLogger.LogWarning($"{parameterName} was not found in {this}.{nameof(_volumeParameterValues)}", this, _showDebug);
 
-                return _DEFAULT_VALUE;
+                return DefaultValue;
             }
-
-            result.Value = _audioPlayerPrefs.GetValue(parameterName);
 
             return result.Value;
         }
 
-        public void SetMute(string key, bool mute)
+        public void SetMute(string settingName, bool mute)
         {
-            _muteCaches ??= new MuteCaches();
+            var result =
+                _volumeParameterValues.Find(result => result?.Parameter.Name == settingName);
+
+            if (!result || string.IsNullOrWhiteSpace(result.Parameter.Name))
+            {
+                OCSFXLogger.LogWarning($"{settingName} was not found in {this}.{nameof(_volumeParameterValues)}", this, _showDebug);
+                return;
+            }
             
-            var newValue = mute ? 0f : _muteCaches.Get(key) > 0f ? _muteCaches.Get(key) : 1;
-
-            SetVolume(key, newValue);
-
-            if (!mute) _muteCaches.Set(key, GetVolume(key));
+            result.SetValue(mute ? 0 : _audioPlayerPrefs.GetValue(settingName), true);
+            
+            _audioPlayerPrefs.SetMute(settingName, mute);
         }
 
-        public bool IsMuted(string key)
+        public bool IsMuted(string settingName)
         {
-            return GetVolume(key) <= 0.001f;
+            var result =
+                _volumeParameterValues.Find(result => result?.Parameter.Name == settingName);
+
+            if (!result || string.IsNullOrWhiteSpace(result.Parameter.Name))
+            {
+                OCSFXLogger.LogWarning($"{settingName} was not found in {this}.{nameof(_volumeParameterValues)}", this, _showDebug);
+                return false;
+            }
+
+            return _audioPlayerPrefs.IsMuted(settingName);
         }
 
         private void OnValidate()
         {
             if (_volumeParameterValues == null || _volumeParameterValues.Count < 1) return;
-            if (_autoFillPlayerPrefsData)
-            {
-                _audioPlayerPrefs ??= new AudioPlayerPrefs();
-                _audioPlayerPrefs.Entries ??= new List<SerializedKeyValuePair<string, float>>();
-
-                if (_audioPlayerPrefs.Entries.Count > _volumeParameterValues.Count)
-                {
-                    var difference = _audioPlayerPrefs.Entries.Count - _volumeParameterValues.Count;
-                    _audioPlayerPrefs.Entries.RemoveRange(_volumeParameterValues.Count, difference);
-                }
-
-                for (var i = 0; i < _volumeParameterValues.Count; i++)
-                {
-                    if (i < _audioPlayerPrefs.Entries.Count)
-                    {
-                        _audioPlayerPrefs.Entries[i].Key = _volumeParameterValues[i].Key?.Name;
-                        _audioPlayerPrefs.Entries[i].Value = _volumeParameterValues[i].Value;
-                    }
-                    else{
-                        _audioPlayerPrefs.Entries.Add(
-                        new SerializedKeyValuePair<string, float>(
-                            _volumeParameterValues[i].Key?.Name, 
-                            _volumeParameterValues[i].Value)
-                        );
-                        
-                    }
-                }
-            }
+            
+            _audioPlayerPrefs ??= new AudioPlayerPrefs(DefaultValue, DefaultMasterValue);
+            
+            if (_autoSyncPlayerPrefsData) SyncPlayerPrefs();
             
             if (!EZFMODRuntimeStatics.MasterBanksLoaded) return;
             
             foreach (var entry in _volumeParameterValues)
             {
-                SetVolume(entry.Key.Name, entry.Value);
+                SetVolume(entry.Parameter.Name, entry.Value);
+            }
+        }
+
+        private void SyncPlayerPrefs()
+        {
+            _audioPlayerPrefs.Entries ??= new List<AudioVolumeSetting>();
+
+            if (_audioPlayerPrefs.Entries.Count > _volumeParameterValues.Count)
+            {
+                var difference = _audioPlayerPrefs.Entries.Count - _volumeParameterValues.Count;
+                _audioPlayerPrefs.Entries.RemoveRange(_volumeParameterValues.Count, difference);
+            }
+
+            for (var i = 0; i < _volumeParameterValues.Count; i++)
+            {
+                if (i < _audioPlayerPrefs.Entries.Count)
+                {
+                    _audioPlayerPrefs.Entries[i].Name = _volumeParameterValues[i]?.Parameter.Name;
+
+                    var setValue = _audioPlayerPrefs.Entries[i] != null
+                        ? _audioPlayerPrefs.Entries[i].Name == _masterVolumeParameterValue.Parameter.Name
+                        ? DefaultMasterValue
+                        : DefaultValue
+                        : DefaultValue;
+                    
+                    _volumeParameterValues[i].SetValue(setValue, true);
+                }
+                else
+                {
+                    _audioPlayerPrefs.Entries.Add
+                    (
+                        new AudioVolumeSetting(
+                            _volumeParameterValues[i]?.Parameter.Name, 
+                            _volumeParameterValues[i] ? _volumeParameterValues[i].Value : DefaultValue)
+                    );
+                }
             }
         }
 
         [Serializable]
         private class AudioPlayerPrefs
         {
+            private float _defaultValue = 1.0f;
+            private float _defaultMasterValue = 0.9f;
+            
+            public AudioPlayerPrefs()
+            {
+                Entries =
+                    new List<AudioVolumeSetting>
+                    {
+                        new AudioVolumeSetting("Volume_Master", _defaultMasterValue),
+                        new AudioVolumeSetting("Volume_Music", _defaultValue),
+                        new AudioVolumeSetting("Volume_SFX", _defaultValue),
+                    };
+            }
+            
+            public AudioPlayerPrefs(float defaultValue, float defaultMasterValue)
+            {
+                _defaultValue = defaultValue;
+                _defaultMasterValue = defaultMasterValue;
+                
+                Entries =
+                    new List<AudioVolumeSetting>
+                    {
+                        new AudioVolumeSetting("Volume_Master", _defaultMasterValue),
+                        new AudioVolumeSetting("Volume_Music", _defaultValue),
+                        new AudioVolumeSetting("Volume_SFX", _defaultValue),
+                    };
+            }
+            
             [field: SerializeField]
-            public List<SerializedKeyValuePair<string, float>> Entries { get; set; } =
-                new List<SerializedKeyValuePair<string, float>> ()
-                {
-                    new SerializedKeyValuePair<string, float>("Master", _DEFAULT_MASTER_VALUE),
-                    new SerializedKeyValuePair<string, float>("Music", _DEFAULT_VALUE),
-                    new SerializedKeyValuePair<string, float>("SFX", _DEFAULT_VALUE)
-                };
+            public List<AudioVolumeSetting> Entries { get; set; }
 
-            public void SetValue(string key, float value)
+            public void SetValue(string name, float value)
             {
                 var entry =
-                    Entries.Find(entry => entry?.Key == key);
-                if (string.IsNullOrWhiteSpace(entry?.Key)) return;
+                    Entries.Find(entry => entry?.Name == name);
+                if (string.IsNullOrWhiteSpace(entry?.Name)) return;
 
                 entry.Value = value;
-                PlayerPrefs.SetFloat(entry.Key, entry.Value);
+                PlayerPrefs.SetFloat(entry.Name, entry.Value);
             }
 
-            public float GetValue(string key)
+            public float GetValue(string name)
             {
                 var entry =
-                    Entries.Find(entry => entry?.Key == key);
+                    Entries.Find(entry => entry?.Name == name);
 
-                if (string.IsNullOrEmpty(entry?.Key)) return 0;
+                if (string.IsNullOrEmpty(entry?.Name)) return 1;
                 
-                return PlayerPrefs.GetFloat(entry.Key, _DEFAULT_VALUE);
+                return PlayerPrefs.GetFloat(entry.Name, _defaultValue);
+            }
+            
+            public void SetMute(string name, bool mute)
+            {
+                var entry =
+                    Entries.Find(entry => entry?.Name == name);
+                if (string.IsNullOrWhiteSpace(entry?.Name)) return;
+
+                entry.IsMuted = mute;
+                PlayerPrefs.SetInt($"{entry.Name}_mute", entry.IsMuted ? 0 : 1);
+            }
+            
+            public bool IsMuted(string name)
+            {
+                var entry =
+                    Entries.Find(entry => entry?.Name == name);
+                if (string.IsNullOrWhiteSpace(entry?.Name)) return false;
+
+                return PlayerPrefs.GetInt($"{entry.Name}_mute", 1) == 0;
             }
         }
 
         [Serializable]
-        private class MuteCaches
+        private class AudioVolumeSetting
         {
-            [SerializeField] private bool _showDebug;
+            public string Name = "";
+            public float Value = 1;
+            public float DefaultValue = 1;
+            public bool IsMuted = false;
             
-            [field: SerializeField]
-            public List<SerializedKeyValuePair<string, float>> Entries { get; private set; } =
-                new List<SerializedKeyValuePair<string, float>>();
-
-            public void Set(string key, float value)
+            public AudioVolumeSetting(string name, float value, float defaultValue = 1, bool isMuted = false)
             {
-                var result =
-                    Entries.Find(result => result?.Key == key);
-
-                if (result == null || string.IsNullOrWhiteSpace(result.Key))
-                {
-                    result = new SerializedKeyValuePair<string, float>(key, _DEFAULT_VALUE);
-                    Entries.Add(result);
-                }
-
-                result.Value = value;
+                Name = name;
+                Value = value;
+                DefaultValue = !Mathf.Approximately(defaultValue, value) ? defaultValue : value;
+                IsMuted = isMuted;
             }
 
-            public float Get(string key)
+            public AudioVolumeSetting()
             {
-                var result = Entries.Find(result => result?.Key == key) 
-                             ?? new SerializedKeyValuePair<string, float>(key, _DEFAULT_VALUE);
-
-                if (string.IsNullOrWhiteSpace(result.Key))
-                {
-                    OCSFXLogger.LogWarning($"{key} was not found in {this}.{nameof(Entries)}. Using default value: {_DEFAULT_VALUE}", _showDebug);
-                    result.Value = _DEFAULT_VALUE;
-                }
-
-                if (!Entries.Contains(result))
-                {
-                    Entries.Add(result);
-                }
-
-                return result.Value;
             }
         }
     }

@@ -23,7 +23,8 @@ namespace OCSFX.EZFMOD.Types
             switch (parameter.Type)
             {
                 case ParameterType.Continuous:
-                    generatedName += $"_Continuous";
+                    // In this case we call it the asset name, since it is user-defined.
+                    generatedName = name;
                     break;
                 case ParameterType.Discrete:
                     generatedName += $"_{Mathf.RoundToInt(value)}";

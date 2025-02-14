@@ -126,10 +126,11 @@ namespace OCSFX.EZFMOD.Components
         private void OnMasterBanksLoaded()
         {
             _onStartupBanksLoaded?.Invoke();
-            
-            if (_volumeSettings.IsMuted(_musicVolumeParamName) == _mute) return;
-            
-            SetMute(_mute);
+
+            if (_volumeSettings.IsMuted(_musicVolumeParamName) != _mute)
+            {
+                SetMute(_mute);
+            }
         }
 
         public void SetMute(bool mute)
