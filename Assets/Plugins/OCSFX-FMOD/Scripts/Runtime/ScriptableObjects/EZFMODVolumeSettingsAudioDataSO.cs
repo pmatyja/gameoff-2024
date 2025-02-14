@@ -129,7 +129,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             if (_autoFillPlayerPrefsData)
             {
                 _audioPlayerPrefs ??= new AudioPlayerPrefs();
-                _audioPlayerPrefs.Entries ??= new List<FMODGlobalParameter>();
+                _audioPlayerPrefs.Entries ??= new List<SerializedKeyValuePair<string, float>>();
 
                 if (_audioPlayerPrefs.Entries.Count > _volumeParameterValues.Count)
                 {
@@ -141,14 +141,14 @@ namespace OCSFX.EZFMOD.ScriptableObjects
                 {
                     if (i < _audioPlayerPrefs.Entries.Count)
                     {
-                        _audioPlayerPrefs.Entries[i].Parameter = _volumeParameterValues[i].Key?.Name;
+                        _audioPlayerPrefs.Entries[i].Key = _volumeParameterValues[i].Key?.Name;
+                        _audioPlayerPrefs.Entries[i].Value = _volumeParameterValues[i].Value;
                     }
                     else{
                         _audioPlayerPrefs.Entries.Add(
-                        new FMODGlobalParameter
-                            (
-                                _volumeParameterValues[i].Key.Name, _volumeParameterValues[i].Value
-                            )
+                        new SerializedKeyValuePair<string, float>(
+                            _volumeParameterValues[i].Key?.Name, 
+                            _volumeParameterValues[i].Value)
                         );
                         
                     }
@@ -167,30 +167,32 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         private class AudioPlayerPrefs
         {
             [field: SerializeField]
-            public List<FMODGlobalParameter> Entries { get; set; } =
-                new List<FMODGlobalParameter>()
+            public List<SerializedKeyValuePair<string, float>> Entries { get; set; } =
+                new List<SerializedKeyValuePair<string, float>> ()
                 {
-                    new FMODGlobalParameter("VolumeMaster", _DEFAULT_MASTER_VALUE),
-                    new FMODGlobalParameter("VolumeSfx", _DEFAULT_VALUE),
-                    new FMODGlobalParameter("VolumeMusic", _DEFAULT_VALUE)
+                    new SerializedKeyValuePair<string, float>("Master", _DEFAULT_MASTER_VALUE),
+                    new SerializedKeyValuePair<string, float>("Music", _DEFAULT_VALUE),
+                    new SerializedKeyValuePair<string, float>("SFX", _DEFAULT_VALUE)
                 };
 
             public void SetValue(string key, float value)
             {
                 var entry =
-                    Entries.Find(entry => entry.Parameter == key);
-                if (string.IsNullOrWhiteSpace(entry.Parameter)) return;
+                    Entries.Find(entry => entry?.Key == key);
+                if (string.IsNullOrWhiteSpace(entry?.Key)) return;
 
                 entry.Value = value;
-                PlayerPrefs.SetFloat(entry.Parameter, entry.Value);
+                PlayerPrefs.SetFloat(entry.Key, entry.Value);
             }
 
             public float GetValue(string key)
             {
                 var entry =
-                    Entries.Find(entry => entry.Parameter == key);
+                    Entries.Find(entry => entry?.Key == key);
 
-                return PlayerPrefs.GetFloat(entry.Parameter, _DEFAULT_VALUE);
+                if (string.IsNullOrEmpty(entry?.Key)) return 0;
+                
+                return PlayerPrefs.GetFloat(entry.Key, _DEFAULT_VALUE);
             }
         }
 
@@ -200,17 +202,17 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             [SerializeField] private bool _showDebug;
             
             [field: SerializeField]
-            public List<FMODGlobalParameter> Entries { get; private set; }
-                = new List<FMODGlobalParameter>();
+            public List<SerializedKeyValuePair<string, float>> Entries { get; private set; } =
+                new List<SerializedKeyValuePair<string, float>>();
 
             public void Set(string key, float value)
             {
                 var result =
-                    Entries.Find(result => result.Parameter == key);
+                    Entries.Find(result => result?.Key == key);
 
-                if (string.IsNullOrWhiteSpace(result.Parameter))
+                if (result == null || string.IsNullOrWhiteSpace(result.Key))
                 {
-                    result = new FMODGlobalParameter(key, value);
+                    result = new SerializedKeyValuePair<string, float>(key, _DEFAULT_VALUE);
                     Entries.Add(result);
                 }
 
@@ -219,10 +221,10 @@ namespace OCSFX.EZFMOD.ScriptableObjects
 
             public float Get(string key)
             {
-                var result = Entries.Find(result => result.Parameter == key) 
-                             ?? new FMODGlobalParameter(key, _DEFAULT_VALUE);
+                var result = Entries.Find(result => result?.Key == key) 
+                             ?? new SerializedKeyValuePair<string, float>(key, _DEFAULT_VALUE);
 
-                if (string.IsNullOrWhiteSpace(result.Parameter))
+                if (string.IsNullOrWhiteSpace(result.Key))
                 {
                     OCSFXLogger.LogWarning($"{key} was not found in {this}.{nameof(Entries)}. Using default value: {_DEFAULT_VALUE}", _showDebug);
                     result.Value = _DEFAULT_VALUE;

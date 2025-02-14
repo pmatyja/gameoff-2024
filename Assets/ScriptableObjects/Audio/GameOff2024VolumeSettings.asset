@@ -16,28 +16,28 @@ MonoBehaviour:
   _autoFillPlayerPrefsData: 1
   _volumeParameterValues:
   - _key: {fileID: 11400000, guid: 5b56eada14d3ce1488584f63ee8ebe1b, type: 2}
-    _value: 0.891
-  - _key: {fileID: 11400000, guid: 91c89a7fd30233a4aa2176050c8bef4e, type: 2}
-    _value: 1
+    _value: 0.9
   - _key: {fileID: 11400000, guid: 98791833f194f2d479fcd5d14f3f68fa, type: 2}
     _value: 1
-  - _key: {fileID: 11400000, guid: 37c79ea490a17b143b2b93469d7a8a1e, type: 2}
+  - _key: {fileID: 11400000, guid: 91c89a7fd30233a4aa2176050c8bef4e, type: 2}
     _value: 1
   - _key: {fileID: 11400000, guid: 35448d2c9845e2d46a04ee06da088361, type: 2}
+    _value: 1
+  - _key: {fileID: 11400000, guid: 37c79ea490a17b143b2b93469d7a8a1e, type: 2}
     _value: 1
   - _key: {fileID: 11400000, guid: 98fed943284c30a4a875aa9ae09a4ca9, type: 2}
     _value: 1
   _audioPlayerPrefs:
     <Entries>k__BackingField:
     - _parameter: Volume_Master
-      _value: 0.891
-    - _parameter: Volume_MX
-      _value: 1
+      _value: 0.9
     - _parameter: Volume_SX
       _value: 1
-    - _parameter: Volume_UI
+    - _parameter: Volume_MX
       _value: 1
     - _parameter: Volume_AMB
-      _value: 1
+      _value: 0
+    - _parameter: Volume_UI
+      _value: 0
     - _parameter: Volume_VX
-      _value: 1
+      _value: 0
