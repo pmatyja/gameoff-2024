@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using OCSFX.EZFMOD;
 using OCSFX.EZFMOD.Types;
 using OCSFX.EZFMOD.Debug;
+using OCSFX.EZFMOD.Utility.Generics;
 using UnityEngine;
 
 namespace OCSFX.EZFMOD.ScriptableObjects
@@ -14,13 +14,13 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         private const float _DEFAULT_MASTER_VALUE = 0.9f;
         
         [SerializeField] private bool _autoFillPlayerPrefsData = true;
-        
-        [SerializeField] private List<FMODGlobalParameter> _volumeSettingParameters =
-            new List<FMODGlobalParameter>()
+
+        [SerializeField] private List<SerializedKeyValuePair<EZFMODParameter, float>> _volumeParameterValues
+            = new List<SerializedKeyValuePair<EZFMODParameter, float>>()
             {
-                new FMODGlobalParameter("VolumeMaster", _DEFAULT_MASTER_VALUE),
-                new FMODGlobalParameter("VolumeSfx", _DEFAULT_VALUE),
-                new FMODGlobalParameter("VolumeMusic", _DEFAULT_VALUE)
+                new SerializedKeyValuePair<EZFMODParameter, float>(null, _DEFAULT_MASTER_VALUE),
+                new SerializedKeyValuePair<EZFMODParameter, float>(null, _DEFAULT_VALUE),
+                new SerializedKeyValuePair<EZFMODParameter, float>(null, _DEFAULT_VALUE)
             };
 
         [Space]
@@ -39,16 +39,16 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             if (_muteCaches == null)
             {
                 _muteCaches = new MuteCaches();
-                foreach (var entry in _volumeSettingParameters)
+                foreach (var entry in _volumeParameterValues)
                 {
-                    _muteCaches.Set(entry.Parameter, entry.Value);
+                    _muteCaches.Set(entry.Key.Name, entry.Value);
                 }
             }
             else
             {
-                foreach (var entry in _volumeSettingParameters)
+                foreach (var entry in _volumeParameterValues)
                 {
-                    SetVolume(entry.Parameter, _muteCaches.Get(entry.Parameter));
+                    SetVolume(entry.Key.Name, _muteCaches.Get(entry.Key.Name));
                 }
             }
         }
@@ -57,48 +57,56 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         {
             SetMuteCaches();
             
-            foreach (var entry in _volumeSettingParameters)
+            foreach (var entry in _volumeParameterValues)
             {
-                OCSFXLogger.Log($"Set {entry.Parameter} to {_audioPlayerPrefs.GetValue(entry.Parameter)}", this, _showDebug);
-                SetVolume(entry.Parameter, _audioPlayerPrefs.GetValue(entry.Parameter));
+                if (entry.Key == null) continue;
+                
+                var paramName = entry.Key?.Name;
+                
+                OCSFXLogger.Log($"Set {paramName} to {_audioPlayerPrefs.GetValue(paramName)}", this, _showDebug);
+                SetVolume(paramName, _audioPlayerPrefs.GetValue(paramName));
             }
         }
 
-        public void SetVolume(string key, float value)
+        public void SetVolume(string parameterName, float value)
         {
             var result =
-                _volumeSettingParameters.Find(result => result.Parameter == key);
+                _volumeParameterValues.Find(result => result.Key.Name == parameterName);
 
             if (result == null)
             {
-                OCSFXLogger.LogWarning($"{key} was not found in {this}.{nameof(_volumeSettingParameters)}", this, _showDebug);
+                OCSFXLogger.LogWarning($"{parameterName} was not found in {this}.{nameof(_volumeParameterValues)}", this, _showDebug);
                 return;
             }
             
-            if (string.IsNullOrWhiteSpace(result.Parameter)) return;
+            var paramName = result.Key?.Name;
+            
+            if (string.IsNullOrWhiteSpace(paramName)) return;
             
             result.Value = value;
             
-            _audioPlayerPrefs.SetValue(key, result.Value);
+            _audioPlayerPrefs.SetValue(parameterName, result.Value);
             
-            OCSFXLogger.Log($"Set {key} to {result.Value}", this, _showDebug);
+            OCSFXLogger.Log($"Set {parameterName} to {result.Value}", this, _showDebug);
 
-            EZFMODRuntimeStatics.SetGlobalParameter(result.Parameter, result.Value);
+            EZFMODRuntimeStatics.SetGlobalParameter(paramName, result.Value);
         }
 
-        public float GetVolume(string key)
+        public float GetVolume(string parameterName)
         {
             var result =
-                _volumeSettingParameters.Find(result => result.Parameter == key);
+                _volumeParameterValues.Find(result => result.Key.Name == parameterName);
 
-            if (result == null || string.IsNullOrWhiteSpace(result.Parameter))
+            var paramName = result.Key?.Name;
+            
+            if (string.IsNullOrWhiteSpace(paramName))
             {
-                OCSFXLogger.LogWarning($"{key} was not found in {this}.{nameof(_volumeSettingParameters)}", this, _showDebug);
+                OCSFXLogger.LogWarning($"{parameterName} was not found in {this}.{nameof(_volumeParameterValues)}", this, _showDebug);
 
                 return _DEFAULT_VALUE;
             }
 
-            result.Value = _audioPlayerPrefs.GetValue(key);
+            result.Value = _audioPlayerPrefs.GetValue(parameterName);
 
             return result.Value;
         }
@@ -121,29 +129,29 @@ namespace OCSFX.EZFMOD.ScriptableObjects
 
         private void OnValidate()
         {
-            if (_volumeSettingParameters == null || _volumeSettingParameters.Count < 1) return;
+            if (_volumeParameterValues == null || _volumeParameterValues.Count < 1) return;
             if (_autoFillPlayerPrefsData)
             {
                 _audioPlayerPrefs ??= new AudioPlayerPrefs();
                 _audioPlayerPrefs.Entries ??= new List<FMODGlobalParameter>();
 
-                if (_audioPlayerPrefs.Entries.Count > _volumeSettingParameters.Count)
+                if (_audioPlayerPrefs.Entries.Count > _volumeParameterValues.Count)
                 {
-                    var difference = _audioPlayerPrefs.Entries.Count - _volumeSettingParameters.Count;
-                    _audioPlayerPrefs.Entries.RemoveRange(_volumeSettingParameters.Count, difference);
+                    var difference = _audioPlayerPrefs.Entries.Count - _volumeParameterValues.Count;
+                    _audioPlayerPrefs.Entries.RemoveRange(_volumeParameterValues.Count, difference);
                 }
 
-                for (var i = 0; i < _volumeSettingParameters.Count; i++)
+                for (var i = 0; i < _volumeParameterValues.Count; i++)
                 {
                     if (i < _audioPlayerPrefs.Entries.Count)
                     {
-                        _audioPlayerPrefs.Entries[i].Parameter = _volumeSettingParameters[i].Parameter;
+                        _audioPlayerPrefs.Entries[i].Parameter = _volumeParameterValues[i].Key?.Name;
                     }
                     else{
                         _audioPlayerPrefs.Entries.Add(
                         new FMODGlobalParameter
                             (
-                            _volumeSettingParameters[i].Parameter, _volumeSettingParameters[i].Value
+                                _volumeParameterValues[i].Key.Name, _volumeParameterValues[i].Value
                             )
                         );
                         
@@ -153,9 +161,9 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             
             if (!EZFMODRuntimeStatics.MasterBanksLoaded) return;
             
-            foreach (var entry in _volumeSettingParameters)
+            foreach (var entry in _volumeParameterValues)
             {
-                SetVolume(entry.Parameter, entry.Value);
+                SetVolume(entry.Key.Name, entry.Value);
             }
         }
 

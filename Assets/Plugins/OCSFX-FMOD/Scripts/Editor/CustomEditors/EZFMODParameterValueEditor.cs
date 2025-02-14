@@ -5,6 +5,7 @@ using UnityEngine;
 namespace OCSFX.EZFMODEditor.CustomEditors
 {
     [CustomEditor(typeof(EZFMODParameterValue), true)]
+    [CanEditMultipleObjects]
     public class EZFMODParameterValueEditor : UnityEditor.Editor
     {
         private bool _cachedGuiState;
@@ -18,9 +19,13 @@ namespace OCSFX.EZFMODEditor.CustomEditors
             {
                 return;
             }
+            
+            DrawScriptField();
 
             BeginReadOnlyInspector();
-
+            
+            EditorGUILayout.Space();
+            
             _parameter = serializedObject.FindProperty(nameof(_parameter));
             _parameter.objectReferenceValue = EditorGUILayout.ObjectField("Parameter", _parameter.objectReferenceValue, typeof(EZFMODParameter), false);
 
@@ -120,6 +125,13 @@ namespace OCSFX.EZFMODEditor.CustomEditors
             var index = EditorGUILayout.Popup("Labeled Value", (int)_value.floatValue, parameter.Labels);
             _value.floatValue = index;
             EndReadOnlyInspector();
+        }
+        
+        private void DrawScriptField()
+        {
+            EditorGUI.BeginDisabledGroup(true);
+            EditorGUILayout.ObjectField("Script", MonoScript.FromScriptableObject((EZFMODParameterValue)target), typeof(MonoScript), false);
+            EditorGUI.EndDisabledGroup();
         }
     }
 }

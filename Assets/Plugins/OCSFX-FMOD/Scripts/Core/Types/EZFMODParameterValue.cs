@@ -50,6 +50,16 @@ namespace OCSFX.EZFMOD.Types
             }
         }
         
+        public void SetNewValue(float value, bool applyGlobal = false)
+        {
+            _value = value;
+            
+            if (applyGlobal)
+            {
+                SetGlobal();
+            }
+        }
+        
         public void Set(GameObject source)
         {
             if (!source) return;
