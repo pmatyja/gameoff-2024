@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7011063476094992024}
   - component: {fileID: 4959973056717919816}
   - component: {fileID: 6233545731813333708}
-  - component: {fileID: 3611736060481146422}
   m_Layer: 0
   m_Name: GameOff2024AudioManager
   m_TagString: Untagged
@@ -103,9 +102,9 @@ MonoBehaviour:
             m_StringArgument: MainMenu
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 3611736060481146422}
-          m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-          m_MethodName: Play
+        - m_Target: {fileID: 11400000, guid: 06f656151918c5e49af49ddd4101371f, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODEventBase, OCSFX.EZFMODCore
+          m_MethodName: PlayOneShot
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -338,34 +337,3 @@ MonoBehaviour:
             m_StringArgument: BackButtonPress
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &3611736060481146422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5097742136684402603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4319c3ea42a4db4499da34b0751e73b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 202120952
-      Data2: 1287570423
-      Data3: 594753971
-      Data4: -1019866253
-    Path: event:/GLOBAL/global_resetGlobalParameters
-  Event: 
-  EventPlayTrigger: 0
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
