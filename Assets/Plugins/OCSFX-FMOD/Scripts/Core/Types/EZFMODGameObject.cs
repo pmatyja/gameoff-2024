@@ -39,13 +39,13 @@ namespace OCSFX.EZFMOD.Types
 
         private void StartWhenBanksReady()
         {
-            if (EZFMODRuntimeStatics.MasterBanksLoaded) PlayEventAtStart();
-            else EZFMODRuntimeStatics.OnMasterBanksLoaded += OnMasterBanksLoaded;
+            if (EZFMODRuntimeStatics.StartupBanksLoaded) PlayEventAtStart();
+            else EZFMODRuntimeStatics.OnStartupBanksLoaded += OnMasterBanksLoaded;
         }
         
         private void OnMasterBanksLoaded()
         {
-            EZFMODRuntimeStatics.OnMasterBanksLoaded -= StartWhenBanksReady;
+            EZFMODRuntimeStatics.OnStartupBanksLoaded -= StartWhenBanksReady;
             PlayEventAtStart();
         }
         

@@ -35,8 +35,8 @@ namespace OCSFX.EZFMOD.Components
             if (!_slider) TryGetComponent(out _slider);
             _playerPrefName = _overrides.OverrideName ? _overrides.OverridePlayerPrefName : _fmodParameter;
             
-            if (!EZFMODRuntimeStatics.MasterBanksLoaded)
-                EZFMODRuntimeStatics.OnMasterBanksLoaded += OnMasterBanksLoaded;
+            if (!EZFMODRuntimeStatics.StartupBanksLoaded)
+                EZFMODRuntimeStatics.OnStartupBanksLoaded += OnMasterBanksLoaded;
             else LoadValue();
             
             _slider.onValueChanged.AddListener(SaveValue);
@@ -50,7 +50,7 @@ namespace OCSFX.EZFMOD.Components
         private void OnMasterBanksLoaded()
         {
             LoadValue();
-            EZFMODRuntimeStatics.OnMasterBanksLoaded -= OnMasterBanksLoaded;
+            EZFMODRuntimeStatics.OnStartupBanksLoaded -= OnMasterBanksLoaded;
         }
     
         private void OnValidate()

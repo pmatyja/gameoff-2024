@@ -1,6 +1,5 @@
 using FMOD.Studio;
 using FMODUnity;
-using OCSFX.EZFMOD;
 using OCSFX.EZFMOD.Attributes;
 using OCSFX.EZFMOD.Utility.Generics;
 using OCSFX.EZFMOD.ScriptableObjects;
@@ -62,12 +61,6 @@ namespace OCSFX.EZFMOD.Components
             _instance._testEventInstance.Stop();
         }
 
-        private void Start()
-        {
-            var currentScene = SceneManager.GetActiveScene();
-            OnSceneLoaded(currentScene, LoadSceneMode.Single);
-        }
-
         private void OnMasterBanksLoaded()
         {
             if (_playTestEventOnStart && !_testEventRef.IsNull)
@@ -78,10 +71,9 @@ namespace OCSFX.EZFMOD.Components
 
         protected virtual void OnSceneLoaded(Scene scene, LoadSceneMode sceneLoadMode)
         {
-            if (_snapshotsAudioData)
-            {
-                _snapshotsAudioData.ClearAllSnapshots();   
-            }
+            if (!_snapshotsAudioData) return;
+            
+            RunOnStartupBanksLoaded(()=> _snapshotsAudioData.ClearAllSnapshots());
         }
 
         protected virtual void OnSceneUnloaded(Scene scene)
@@ -91,7 +83,7 @@ namespace OCSFX.EZFMOD.Components
         // Helpers
         protected virtual void SubscribeEvents()
         {
-            EZFMODRuntimeStatics.OnMasterBanksLoaded += OnMasterBanksLoaded;
+            EZFMODRuntimeStatics.OnStartupBanksLoaded += OnMasterBanksLoaded;
 
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded += OnSceneUnloaded;
@@ -99,7 +91,7 @@ namespace OCSFX.EZFMOD.Components
 
         protected virtual void UnsubscribeEvents()
         {
-            EZFMODRuntimeStatics.OnMasterBanksLoaded -= OnMasterBanksLoaded;
+            EZFMODRuntimeStatics.OnStartupBanksLoaded -= OnMasterBanksLoaded;
 
             SceneManager.sceneLoaded -= OnSceneLoaded;
             SceneManager.sceneUnloaded -= OnSceneUnloaded;

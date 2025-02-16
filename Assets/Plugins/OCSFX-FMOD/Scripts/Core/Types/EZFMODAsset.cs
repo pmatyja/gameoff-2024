@@ -21,9 +21,13 @@ namespace OCSFX.EZFMOD.Types
 
     public abstract class EZFMODEventBase : EZFMODAsset, IEZFMODInstantiable
     {
-        public List<EventInstance> EventInstances => EZFMODRuntimeStatics.GetEventInstancesFromStudioPath(StudioPath).ToList();
+        public List<EventInstance> EventInstances => RuntimeManager.IsInitialized
+            ? EZFMODRuntimeStatics.GetEventInstancesFromGUID(GUID).ToList()
+            : new List<EventInstance>();
 
-        public EventReference GetEventReference() => RuntimeManager.PathToEventReference(StudioPath);
+        public EventReference GetEventReference() => RuntimeManager.IsInitialized
+            ? RuntimeManager.PathToEventReference(StudioPath)
+            : EZFMODRuntimeStatics.INVALID_EVENT_REFERENCE;
 
         public void PlayOneShot() => RuntimeManager.PlayOneShot(GUID);
 

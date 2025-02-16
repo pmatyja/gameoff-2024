@@ -32,7 +32,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
 
         private IEnumerator Co_LoadStartupBanks(float postLoadBuffer = 0f)
         {
-            if (EZFMODRuntimeStatics.MasterBanksLoaded) yield break;
+            if (EZFMODRuntimeStatics.StartupBanksLoaded) yield break;
             
             var startupBankLoadStartTime = Time.realtimeSinceStartup;
             
@@ -66,7 +66,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             var startupLoadTime = startupLoadFinishTime - startupBankLoadStartTime;
             
             OCSFXLogger.Log($"[{this}] Startup Banks finished loading after {startupLoadTime} seconds", this, _showDebug);
-            EZFMODRuntimeStatics.OnMasterBanksLoaded?.Invoke();
+            EZFMODRuntimeStatics.OnStartupBanksLoaded?.Invoke();
         }
 
         private IEnumerator Co_LoadRuntimeBank(string bank)

@@ -150,7 +150,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             
             if (_autoSyncPlayerPrefsData) SyncPlayerPrefs();
             
-            if (!EZFMODRuntimeStatics.MasterBanksLoaded) return;
+            if (!EZFMODRuntimeStatics.StartupBanksLoaded) return;
             
             foreach (var entry in _volumeParameterValues)
             {

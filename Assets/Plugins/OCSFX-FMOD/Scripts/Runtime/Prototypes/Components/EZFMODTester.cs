@@ -47,7 +47,7 @@ namespace OCSFX.EZFMOD.Prototypes.Components
         {
             if (_playEventOnStart && AllBanksLoaded())
             {
-                while(!EZFMODRuntimeStatics.MasterBanksLoaded)
+                while(!EZFMODRuntimeStatics.StartupBanksLoaded)
                 {
                     yield return null;
                 }

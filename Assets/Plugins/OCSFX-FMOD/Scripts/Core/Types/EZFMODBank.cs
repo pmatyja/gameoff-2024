@@ -19,13 +19,13 @@ namespace OCSFX.EZFMOD.Types
             IsMasterBank = isMasterBank;
         }
 
-        public void Load() => RunCoroutine(Co_LoadBankWhenRuntimeManagerIsInitialized());
+        public void Load() => RuntimeManager.LoadBank(Name);
         
-        public void Load(Action<EZFMODBank> callback) => RunCoroutine(Co_LoadBankWhenRuntimeManagerIsInitialized(false, callback));
+        public void Load(Action<EZFMODBank> callback) => RunCoroutine(Co_LoadWithCallback(callback, false));
 
-        public void LoadWithSampleData() => RunCoroutine(Co_LoadBankWhenRuntimeManagerIsInitialized(true));
+        public void LoadWithSampleData() => RuntimeManager.LoadBank(Name, true);
         
-        public void LoadWithSampleData(Action<EZFMODBank> callback) => RunCoroutine(Co_LoadBankWhenRuntimeManagerIsInitialized(true, callback));
+        public void LoadWithSampleData(Action<EZFMODBank> callback) => RunCoroutine(Co_LoadWithCallback(callback, true));
         
         public void Unload() => RuntimeManager.UnloadBank(Name);
 
@@ -42,27 +42,6 @@ namespace OCSFX.EZFMOD.Types
             callback?.Invoke(this);
         }
         
-        private void RunCoroutine(IEnumerator coroutine) => EZFMODRuntimeStatics.RunCoroutine(coroutine);
-        
-        private IEnumerator Co_LoadBankWhenRuntimeManagerIsInitialized(bool loadSamples = false, Action<EZFMODBank> callback = null)
-        {
-            yield return Co_YieldForRuntimeManager();
-            if (loadSamples)
-            {
-                LoadWithSampleData(callback);
-            }
-            else
-            {
-                Load(callback);
-            }
-        }
-
-        private IEnumerator Co_YieldForRuntimeManager()
-        {
-            while (!RuntimeManager.IsInitialized)
-            {
-                yield return null;
-            }
-        }
+        private void RunCoroutine(IEnumerator enumerator) => EZFMODRuntimeStatics.RunCoroutine(enumerator);
     }
 }

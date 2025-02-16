@@ -33,7 +33,11 @@ namespace OCSFX.EZFMOD
         [field: SerializeField, ReadOnly] public EZFMODBank MasterBank { get; private set; }
         [field: SerializeField] public bool LoadMasterBankOnGameStart{ get; private set; } = true;
 
-        [field: SerializeField] public float MasterBanksPostLoadBuffer { get; private set; }
+        [field: Tooltip("Optional buffer to delay the signaling that StartupBanks have been loaded.")]
+        [field: SerializeField] public float StartupBanksPostLoadBuffer { get; private set; }
+        
+        [field: Space]
+        [field: Tooltip("Any other banks in addition to the Master bank that should be loaded at game start.")]
         [field: SerializeField] public EZFMODBank[] StartupBanks { get; private set; }
         
         // [field: Space]

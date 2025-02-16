@@ -14,8 +14,8 @@ namespace OCSFX.EZFMOD.Components
     {
         protected override void HandleGameEvent(EmitterGameEvent gameEvent)
         {
-            if (!EZFMODRuntimeStatics.MasterBanksLoaded)
-                EZFMODRuntimeStatics.OnMasterBanksLoaded += () => base.HandleGameEvent(gameEvent);
+            if (!EZFMODRuntimeStatics.StartupBanksLoaded)
+                EZFMODRuntimeStatics.OnStartupBanksLoaded += () => base.HandleGameEvent(gameEvent);
             
             else base.HandleGameEvent(gameEvent);
         }

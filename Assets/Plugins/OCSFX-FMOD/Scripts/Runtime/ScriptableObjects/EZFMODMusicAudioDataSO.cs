@@ -50,40 +50,6 @@ namespace OCSFX.EZFMOD.ScriptableObjects
                 => musicEvent.Key == musicEventName)?.Value;
         }
 
-        public void CurrentMusicEventPlay()
-        {
-            if (!_currentEvent)
-            {
-                OCSFXLogger.LogWarning($"[{this}] No Current Music Event has been set.", this, _showDebug);
-                return;
-            }
-
-            var canPlay = false;
-
-            if (!_currentInstance.isValid()) canPlay = true;
-            else
-            {
-                _currentInstance.getPlaybackState(out var playbackState);
-
-                switch (playbackState)
-                {
-                    default:
-                    case PLAYBACK_STATE.STOPPED: 
-                    case PLAYBACK_STATE.STOPPING:
-                        canPlay = true;
-                        break;
-                    case PLAYBACK_STATE.PLAYING:
-                    case PLAYBACK_STATE.SUSTAINING:
-                    case PLAYBACK_STATE.STARTING:
-                        break;
-                }   
-            }
-
-            if (!canPlay) return;
-            
-            PlayMusic(_currentEvent);
-        }
-
         public void MusicEventPlay(string musicEventName)
         {
             if (!TryGetMusicEvent(musicEventName, out var foundMusicEvent))

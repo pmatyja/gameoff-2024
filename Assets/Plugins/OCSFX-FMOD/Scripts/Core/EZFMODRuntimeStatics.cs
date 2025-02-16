@@ -13,21 +13,22 @@ namespace OCSFX.EZFMOD
 {
     public static class EZFMODRuntimeStatics
     {
-        public static bool MasterBanksLoaded { get; private set; } = false;
-        public static Action OnMasterBanksLoaded;
+        public static bool StartupBanksLoaded { get; private set; } = false;
+        public static Action OnStartupBanksLoaded;
 
         private const string DEV_NAME = "OCSFX";
         private const string PACKAGE_NAME = "EZFMOD";
         public const string MENU_ITEM_ROOT = DEV_NAME + "/" + PACKAGE_NAME;
         public const string PLUGIN_FOLDER_PATH = "Assets/Plugins/" + MENU_ITEM_ROOT;
         public const string CREATE_COMPONENT_MENU_BASE = MENU_ITEM_ROOT + "/";
-        
+
         public static EventInstance INVALID_EVENT_INSTANCE = default;
+        public static EventReference INVALID_EVENT_REFERENCE = default;
         public static PARAMETER_ID INVALID_PARAMETER_ID = default;
         public static GUID INVALID_GUID = default;
         
         private static CoroutineRunner _coroutineRunner;
-        private static Coroutine _loadMasterBanksCoroutine;
+        private static Coroutine _loadStartupBanksCoroutine;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void Initialize()
@@ -42,7 +43,7 @@ namespace OCSFX.EZFMOD
             
             OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] Initialized.");
             
-            LoadMasterBanks();
+            LoadStartupBanks();
         }
 
         private static void OnApplicationQuit()
@@ -90,6 +91,10 @@ namespace OCSFX.EZFMOD
         
         public static EventInstance[] GetEventInstancesFromGUID(GUID guid)
         {
+            if (guid == INVALID_GUID) return null;
+            if (!RuntimeManager.IsInitialized) return null;
+            if (!RuntimeManager.StudioSystem.isValid()) return null;
+            
             var eventDescResult = RuntimeManager.StudioSystem.getEventByID(guid, out var eventDescription);
             if (eventDescResult != RESULT.OK)
             {
@@ -163,19 +168,19 @@ namespace OCSFX.EZFMOD
             return EZFMODSettings.Get().MasterBank;
         }
         
-        public static void LoadMasterBanks()
+        public static void LoadStartupBanks()
         {
-            if (_loadMasterBanksCoroutine != null) return;
+            // if (_loadStartupBanksCoroutine != null) return;
             
-            _loadMasterBanksCoroutine = RunCoroutine(Co_LoadMasterBanks());
+            _loadStartupBanksCoroutine = RunCoroutine(Co_LoadStartupBanks());
         }
         
-        private static IEnumerator Co_LoadMasterBanks()
+        private static IEnumerator Co_LoadStartupBanks()
         {
-            if (MasterBanksLoaded) yield break;
+            // if (StartupBanksLoaded) yield break;
             
             var startLoadBanksTime = Time.realtimeSinceStartup;
-            OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] {nameof(LoadMasterBanks)} : process started at {startLoadBanksTime} seconds");
+            OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] {nameof(LoadStartupBanks)} : process started at {startLoadBanksTime} seconds");
 
             var printedWaitingMessage = false;
             
@@ -184,7 +189,7 @@ namespace OCSFX.EZFMOD
                 if (!printedWaitingMessage)
                 {
                     printedWaitingMessage = true;
-                    OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] {nameof(LoadMasterBanks)} : Waiting for RuntimeManager to initialize...");
+                    OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] {nameof(LoadStartupBanks)} : Waiting for FMOD RuntimeManager to initialize...");
                 }
                 yield return null;
             }
@@ -201,29 +206,75 @@ namespace OCSFX.EZFMOD
             {
                 yield return null;   
             }
-
-            if (masterBank && ezfmodSettings.LoadMasterBankOnGameStart)
+            
+            // Now load the master banks as defined in the FMOD settings
+            var fmodSettingsMasterBanks = FMODUnity.Settings.Instance.MasterBanks;
+            var fmodMasterBanksMessage = fmodSettingsMasterBanks != null ? string.Join(", ", fmodSettingsMasterBanks) : "None";
+            
+            if (fmodSettingsMasterBanks != null)
             {
-                RuntimeManager.LoadBank(masterBank.Name, true);
+                OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] Loading FMOD Master banks ({fmodMasterBanksMessage})...");
                 
-                while (!RuntimeManager.HasBankLoaded(masterBank.Name) || RuntimeManager.AnySampleDataLoading())
+                foreach (var fmodMasterBank in fmodSettingsMasterBanks)
+                {
+                    RuntimeManager.LoadBank(fmodMasterBank);
+                }
+                
+                foreach (var fmodMasterBank in fmodSettingsMasterBanks)
+                {
+                    while (!RuntimeManager.HasBankLoaded(fmodMasterBank))
+                    {
+                        yield return null;
+                    }
+                }
+            }
+            
+            // Load the EZFMOD Master bank if it exists and the setting is enabled, and if it hasn't been loaded yet
+            if (masterBank && ezfmodSettings.LoadMasterBankOnGameStart && !RuntimeManager.HasBankLoaded(masterBank.Name))
+            {
+                OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] Loading {nameof(EZFMOD)} Master bank ({masterBank.Name})...");
+                
+                RuntimeManager.LoadBank(masterBank.Name);
+                
+                while (!RuntimeManager.HasBankLoaded(masterBank.Name))
                 {
                     yield return null;
                 }
             }
             
-            // Now load the master banks as defined in the FMOD settings
-            OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] Loading Master banks...");
-            var fmodSettingsMasterBanks = FMODUnity.Settings.Instance.MasterBanks;
-            
-            if (fmodSettingsMasterBanks is { Count: > 0 })
+            // Now load the startup banks as defined in the EZFMOD settings, if they haven't been loaded yet
+            var startupBanks = ezfmodSettings.StartupBanks;
+            if (startupBanks != null)
             {
-                foreach (var bank in fmodSettingsMasterBanks)
+                var bankNames = new string[startupBanks.Length];
+                for (var i = 0; i < startupBanks.Length; i++)
                 {
-                    RuntimeManager.LoadBank(bank, true);
+                    if (!startupBanks[i]) continue;
+                    if (RuntimeManager.HasBankLoaded(startupBanks[i].Name)) continue;
+                    bankNames[i] = startupBanks[i].Name;
                 }
+
+                if (bankNames.Length > 0)
+                {
+                    var bankNamesMessage = string.Join(", ", bankNames);
                 
-                while (!RuntimeManager.HaveMasterBanksLoaded) yield return null;
+                    OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] Loading {nameof(EZFMOD)} Startup banks ({bankNamesMessage})...");
+                
+                    foreach (var bank in startupBanks)
+                    {
+                        if (!bank) continue;
+                        if (RuntimeManager.HasBankLoaded(bank.Name)) continue;
+                        bank.Load();
+                    }
+
+                    foreach (var bankName in bankNames)
+                    {
+                        while (!RuntimeManager.HasBankLoaded(bankName))
+                        {
+                            yield return null;
+                        }
+                    }
+                }
             }
 
             if (RuntimeManager.AnySampleDataLoading())
@@ -232,29 +283,29 @@ namespace OCSFX.EZFMOD
             }
             while (RuntimeManager.AnySampleDataLoading()) yield return null;
             
-            OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] Master Banks ready.");
+            OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] Startup Banks ready.");
 
-            var postLoadBuffer = ezfmodSettings.MasterBanksPostLoadBuffer;
+            var postLoadBuffer = ezfmodSettings.StartupBanksPostLoadBuffer;
             
             if (postLoadBuffer > 0)
             {
-                OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] {nameof(LoadMasterBanks)} : Waiting for Post-load buffer of {postLoadBuffer} seconds...");
+                OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] {nameof(LoadStartupBanks)} : Waiting for Post-load buffer of {postLoadBuffer} seconds...");
                 yield return new WaitForSeconds(postLoadBuffer);
             }
 
             var startupLoadFinishTime = Time.realtimeSinceStartup;
             var totalTime = startupLoadFinishTime - startLoadBanksTime;
             
-            OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] {nameof(LoadMasterBanks)} : Finished after {Math.Round(totalTime, 2)} seconds");
+            OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] {nameof(LoadStartupBanks)} : Finished after {Math.Round(totalTime, 2)} seconds");
             
-            OnMasterBanksLoadComplete();
+            OnStartupBanksLoadComplete();
         }
 
-        private static void OnMasterBanksLoadComplete()
+        private static void OnStartupBanksLoadComplete()
         {
-            OnMasterBanksLoaded?.Invoke();
-            MasterBanksLoaded = true;
-            _loadMasterBanksCoroutine = null;
+            OnStartupBanksLoaded?.Invoke();
+            StartupBanksLoaded = true;
+            _loadStartupBanksCoroutine = null;
         }
         
         private static CoroutineRunner GetCoroutineRunner()
@@ -275,10 +326,31 @@ namespace OCSFX.EZFMOD
             return GetCoroutineRunner().Run(routine, false);
         }
         
+        public static void RunOnStartupBanksLoaded(Action action)
+        {
+            if (StartupBanksLoaded)
+            {
+                action?.Invoke();
+                return;
+            }
+            
+            RunCoroutine(Co_RunOnStartupBanksLoaded(action));
+        }
+        
+        private static IEnumerator Co_RunOnStartupBanksLoaded(Action action)
+        {
+            while (!StartupBanksLoaded)
+            {
+                yield return null;
+            }
+            
+            action?.Invoke();
+        }
+        
         private static void Shutdown()
         {
-            OnMasterBanksLoaded = null;
-            MasterBanksLoaded = false;
+            OnStartupBanksLoaded = null;
+            StartupBanksLoaded = false;
             
             if (_coroutineRunner)
             {

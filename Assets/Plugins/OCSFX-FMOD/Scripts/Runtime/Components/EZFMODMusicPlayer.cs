@@ -32,7 +32,7 @@ namespace OCSFX.EZFMOD.Components
         
         protected virtual void OnEnable()
         {
-            EZFMODRuntimeStatics.OnMasterBanksLoaded += OnMasterBanksLoaded;
+            EZFMODRuntimeStatics.OnStartupBanksLoaded += OnMasterBanksLoaded;
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded += OnSceneUnloaded;
 
@@ -44,7 +44,7 @@ namespace OCSFX.EZFMOD.Components
     
         protected virtual void OnDisable()
         {
-            EZFMODRuntimeStatics.OnMasterBanksLoaded -= OnMasterBanksLoaded;
+            EZFMODRuntimeStatics.OnStartupBanksLoaded -= OnMasterBanksLoaded;
             SceneManager.sceneLoaded -= OnSceneLoaded;
             SceneManager.sceneUnloaded -= OnSceneUnloaded;
             
@@ -63,43 +63,23 @@ namespace OCSFX.EZFMOD.Components
         // Callbacks
         protected virtual void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (!EZFMODRuntimeStatics.MasterBanksLoaded)
-            {
-                EZFMODRuntimeStatics.OnMasterBanksLoaded += () =>
-                {
-                    InvokeSceneLoadedUnityEvents(scene, mode);
-                };
-                return;
-            }
-            
-            InvokeSceneLoadedUnityEvents(scene, mode);
+            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(() => InvokeSceneLoadedUnityEvents(scene, mode));
         }
         
         protected virtual void OnSceneUnloaded(Scene scene)
         {
-            if (!EZFMODRuntimeStatics.MasterBanksLoaded)
-            {
-                EZFMODRuntimeStatics.OnMasterBanksLoaded += () =>
-                {
-                    InvokeSceneUnloadedUnityEvents(scene);
-                };
-                return;
-            }
-            
-            InvokeSceneUnloadedUnityEvents(scene);
+            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(() => InvokeSceneUnloadedUnityEvents(scene));
         }
 
         private void InvokeSceneLoadedUnityEvents(Scene scene, LoadSceneMode mode)
         {
-            bool result = false;
+            var result = false;
             
             foreach (var entry in _sceneUnityEvents)
             {
-                if (scene.name.Contains(entry.SceneName))
-                {
-                    result = true;
-                    entry.OnSceneLoaded?.Invoke();
-                }
+                if (scene.name != entry.SceneName) continue;
+                result = true;
+                entry.OnSceneLoaded?.Invoke();
             }
             
             if (!result) OCSFXLogger.LogWarning($"[{this}] {scene.name} was not found in {nameof(_sceneUnityEvents)}", this, _showDebug);
@@ -143,30 +123,16 @@ namespace OCSFX.EZFMOD.Components
         
         public void MusicEventPlay(string musicEventName)
         {
-            if (EZFMODRuntimeStatics.MasterBanksLoaded)
-            {
-                _musicAudioData.MusicEventPlay(musicEventName);
-                return;
-            }
+            if (!_musicAudioData) return;
             
-            EZFMODRuntimeStatics.OnMasterBanksLoaded += () =>
-            {
-                _musicAudioData.MusicEventPlay(musicEventName);
-            };
+            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(()=> _musicAudioData.MusicEventPlay(musicEventName));
         }
         
         public void MusicEventStop(string musicEventName)
         {
-            if (EZFMODRuntimeStatics.MasterBanksLoaded)
-            {
-                _musicAudioData.MusicEventStop(musicEventName);
-                return;
-            }
+            if (!_musicAudioData) return;
             
-            EZFMODRuntimeStatics.OnMasterBanksLoaded += () =>
-            {
-                _musicAudioData.MusicEventStop(musicEventName);
-            };
+            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(()=> _musicAudioData.MusicEventStop(musicEventName));
         }
 
         protected virtual void OnValidate()
