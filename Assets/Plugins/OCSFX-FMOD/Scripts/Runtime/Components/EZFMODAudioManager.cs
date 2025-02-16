@@ -18,7 +18,6 @@ namespace OCSFX.EZFMOD.Components
         [SerializeField, Expandable] private EZFMODVolumeSettingsAudioDataSO _volumeSettings;
 
         [Header("Audio Data")]
-        [SerializeField, Expandable] protected EZFMODBanksAudioDataSO _banksAudioData;
         [SerializeField, Expandable] protected EZFMODSnapshotsAudioDataSO _snapshotsAudioData;
         [SerializeField, Expandable] protected EZFMODAmbienceAudioDataSO _ambienceAudioData;
         [SerializeField, Expandable] protected EZFMODMusicAudioDataSO _musicAudioData;
@@ -44,7 +43,6 @@ namespace OCSFX.EZFMOD.Components
             
             if (!Application.isPlaying) return;
             
-            _banksAudioData.LoadStartupBanks();
             _volumeSettings.LoadFromPlayerPrefs();
         }
 
