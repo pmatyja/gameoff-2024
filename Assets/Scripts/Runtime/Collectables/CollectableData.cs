@@ -27,9 +27,9 @@ namespace Runtime.Collectables
         [field: Header("Effects")]
         [field: SerializeField] public GameObject OnCollectVfx { get; private set; }
         [field: SerializeField] public float OnCollectVfxLifetime { get; private set; } = 2f;
-        [field: SerializeField] public EventReference OnCollectSfx { get; private set; }
-        [field: SerializeField] public EventReference LoopSfx { get; private set; }
-        [field: SerializeField] public EventReference OnUseKeySfx { get; private set; }
+        [field: SerializeField] public EZFMODEvent OnCollectSfxEvent { get; private set; }
+        [field: SerializeField] public EZFMODEvent LoopSfxEvent { get; private set; }
+        [field: SerializeField] public EZFMODEvent OnUseKeySfxEvent { get; private set; }
         
         [Header("Debug")]
         [SerializeField] private bool _showDebug;
@@ -59,9 +59,9 @@ namespace Runtime.Collectables
                 }
             }
             
-            if (!LoopSfx.IsNull)
+            if (LoopSfxEvent)
             {
-                LoopSfx.Play(spawnTransform.gameObject);
+                LoopSfxEvent.Play(spawnTransform.gameObject);
             }
         }
 
@@ -88,19 +88,14 @@ namespace Runtime.Collectables
 
         private void HandleSoundOnCollect(Transform collectableTransform)
         {
-            if (!LoopSfx.IsNull)
-            {
-                LoopSfx.Stop(collectableTransform.gameObject);
-            }
-            
             if (collectableTransform.TryGetComponent<EZFMODGameObject>(out var fmodGameObject))
             {
                 fmodGameObject.Stop(true);
             }
             
-            if (!OnCollectSfx.IsNull)
+            if (OnCollectSfxEvent)
             {
-                OnCollectSfx.PlayOneShot(collectableTransform.position);
+                OnCollectSfxEvent.Play(collectableTransform.gameObject);
             }
         }
 
@@ -124,9 +119,9 @@ namespace Runtime.Collectables
         
         private void HandleSoundOnUseKey(Transform keyTransform)
         {
-            if (!OnUseKeySfx.IsNull)
+            if (OnUseKeySfxEvent)
             {
-                OnUseKeySfx.Play(keyTransform.gameObject);
+                OnUseKeySfxEvent.Play(keyTransform.gameObject);
             }
         }
 

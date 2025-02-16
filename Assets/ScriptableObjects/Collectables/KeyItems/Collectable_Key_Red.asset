@@ -23,25 +23,7 @@ MonoBehaviour:
   <IsTransient>k__BackingField: 0
   <OnCollectVfx>k__BackingField: {fileID: 7308132404632923821, guid: caf9b7102b297dd4db4d659ee78b794a, type: 3}
   <OnCollectVfxLifetime>k__BackingField: 2
-  <OnCollectSfx>k__BackingField:
-    Guid:
-      Data1: 1553563557
-      Data2: 1145531813
-      Data3: 78888600
-      Data4: 434184757
-    Path: event:/SX/INT/Collectable/sx_int_collectable_key_pickup
-  <LoopSfx>k__BackingField:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  <OnUseKeySfx>k__BackingField:
-    Guid:
-      Data1: 1553563557
-      Data2: 1145531813
-      Data3: 78888600
-      Data4: 434184757
-    Path: event:/SX/INT/Collectable/sx_int_collectable_key_pickup
+  <OnCollectSfxEvent>k__BackingField: {fileID: 11400000, guid: 2386d68c72653e54b982e11355f6c1d1, type: 2}
+  <LoopSfxEvent>k__BackingField: {fileID: 0}
+  <OnUseKeySfxEvent>k__BackingField: {fileID: 11400000, guid: 2386d68c72653e54b982e11355f6c1d1, type: 2}
   _showDebug: 0

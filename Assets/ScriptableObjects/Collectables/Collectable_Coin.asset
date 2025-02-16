@@ -14,25 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Collectable Test
   <Description>k__BackingField: Test for Collectable Data
+  <CubeType>k__BackingField: 0
   <Prefab>k__BackingField: {fileID: 0}
-  <Icon>k__BackingField: {fileID: 0}
+  <NonInteractablePrefab>k__BackingField: {fileID: 0}
+  <Sprite>k__BackingField: {fileID: 0}
   <Material>k__BackingField: {fileID: 0}
   <IsUnique>k__BackingField: 0
   <IsTransient>k__BackingField: 0
   <OnCollectVfx>k__BackingField: {fileID: 7308132404632923821, guid: caf9b7102b297dd4db4d659ee78b794a, type: 3}
   <OnCollectVfxLifetime>k__BackingField: 2
-  <OnCollectSfx>k__BackingField:
-    Guid:
-      Data1: -19838650
-      Data2: 1238833539
-      Data3: -1376593735
-      Data4: -898565107
-    Path: event:/SX/INT/Collectable/sx_int_collectable_optional_pickup
-  <LoopSfx>k__BackingField:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+  <OnCollectSfxEvent>k__BackingField: {fileID: 11400000, guid: b98746e49c8e0554398285658639f6b1, type: 2}
+  <LoopSfxEvent>k__BackingField: {fileID: 0}
+  <OnUseKeySfxEvent>k__BackingField: {fileID: 0}
   _showDebug: 1

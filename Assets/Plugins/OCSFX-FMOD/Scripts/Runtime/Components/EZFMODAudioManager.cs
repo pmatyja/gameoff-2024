@@ -3,6 +3,7 @@ using FMODUnity;
 using OCSFX.EZFMOD.Attributes;
 using OCSFX.EZFMOD.Utility.Generics;
 using OCSFX.EZFMOD.ScriptableObjects;
+using OCSFX.EZFMOD.Types;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static OCSFX.EZFMOD.EZFMODRuntimeStatics;
@@ -27,7 +28,7 @@ namespace OCSFX.EZFMOD.Components
         [Header("Testing/Debugging")]
         [SerializeField] private GameObject _testGameObject;
         [Space]
-        [SerializeField] private EventReference _testEventRef;
+        [SerializeField] private EZFMODEventBase _testEvent;
         [SerializeField] private bool _playTestEventOnStart;
         
         private EventInstance _testEventInstance;
@@ -52,7 +53,7 @@ namespace OCSFX.EZFMOD.Components
 
         public static void StartTestEvent()
         {
-            Instance._testEventInstance =  Instance._testEventRef.Play(Instance._testGameObject);
+            Instance._testEvent.Play(Instance._testGameObject, out Instance._testEventInstance);
         }
 
         public static void StopTestEvent()
@@ -63,7 +64,7 @@ namespace OCSFX.EZFMOD.Components
 
         private void OnMasterBanksLoaded()
         {
-            if (_playTestEventOnStart && !_testEventRef.IsNull)
+            if (_playTestEventOnStart && _testEvent)
             {
                 StartTestEvent();   
             }

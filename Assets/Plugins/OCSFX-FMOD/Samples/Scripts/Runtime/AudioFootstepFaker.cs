@@ -1,9 +1,8 @@
 using FMODUnity;
-using OCSFX.EZFMOD;
 using OCSFX.EZFMOD.Types;
 using UnityEngine;
 
-namespace OCSFX.FMOD
+namespace OCSFX.EZFMOD
 {
     public class AudioFootstepFaker : MonoBehaviour
     {
@@ -13,13 +12,11 @@ namespace OCSFX.FMOD
         [SerializeField] [Range(.2f, 2f)] private float _interval = 0.5f;
         private float _footstepIntervalTimer;
 
-        [Header("FMOD")] [SerializeField] private EventReference _footstepEventRef;
+        [Header("FMOD")] [SerializeField] private EZFMODEvent _footstepEvent;
 
-        [SerializeField] [ParamRef] private string _surfaceParameter;
+        [SerializeField] private EZFMODParameter _surfaceParameter;
         [Space(5)]
         [SerializeField] private AudioSurface _surface;
-        
-        private Rigidbody _sourceRigidbody;
 
         public bool ShouldPlay
         {
@@ -29,19 +26,6 @@ namespace OCSFX.FMOD
 
         private void Update()
         {
-            if (_sourceObject)
-            {
-                if (!_sourceRigidbody)
-                {
-                    if (!_sourceObject.TryGetComponent(out _sourceRigidbody))
-                    {
-                        return;
-                    }
-                }
-                
-                _shouldPlay = _sourceRigidbody.linearVelocity.sqrMagnitude > 0.1f;
-            }
-            
             if (!_shouldPlay) return;
 
             if (_footstepIntervalTimer < _interval)
@@ -59,7 +43,8 @@ namespace OCSFX.FMOD
 
         private void PlayFootstep()
         {
-            _footstepEventRef.Play(_sourceObject, _surfaceParameter, (int)_surface);
+            _surfaceParameter.SetValue((int)_surface, _sourceObject);
+            _footstepEvent.Play(_sourceObject);
         }
 
         private void OnValidate()
