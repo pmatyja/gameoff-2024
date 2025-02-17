@@ -95,7 +95,7 @@ namespace Runtime.Collectables
             
             if (OnCollectSfxEvent)
             {
-                OnCollectSfxEvent.Play(collectableTransform.gameObject);
+                OnCollectSfxEvent.PlayOneShot();
             }
         }
 
