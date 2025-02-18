@@ -77,33 +77,6 @@ namespace OCSFX.EZFMOD.Types
         }
 
 #region Play Events via EZFMODEvent
-        public EventInstance PlayEvent(EZFMODEvent ezfmodEvent, string parameter, float value)
-        {
-            var eventInstance = EZFMODEventInstanceBuilder.Create(ezfmodEvent.GUID)
-                .AttachTo(gameObject)
-                .SetParametersByNames(_parameters)
-                .SetParameterByName(parameter, value)
-                .BuildAndStart();
-            
-            AddToActiveInstances(eventInstance);
-            SetParameter(parameter, value);
-            
-            return eventInstance;
-        }
-
-        public EventInstance PlayEvent(EZFMODEvent ezfmodEvent, PARAMETER_ID parameter, float value)
-        {
-            var eventInstance = EZFMODEventInstanceBuilder.Create(ezfmodEvent.GUID)
-                .AttachTo(gameObject)
-                .SetParametersByNames(_parameters)
-                .SetParameterByID(parameter, value)
-                .BuildAndStart();
-            
-            AddToActiveInstances(eventInstance);
-            SetParameter(parameter, value);
-            
-            return eventInstance;
-        }
         
         public void PlayEvent(EZFMODEventBase ezfmodEvent, out EventInstance eventInstance)
         {
@@ -122,33 +95,6 @@ namespace OCSFX.EZFMOD.Types
 #endregion
 
 #region Play Events via GUID
-        public EventInstance PlayEvent(GUID eventGUID, string parameter, float value)
-        {
-            var eventInstance = EZFMODEventInstanceBuilder.Create(eventGUID)
-                .SetParametersByNames(_parameters)
-                .SetParameterByName(parameter, value)
-                .AttachTo(gameObject)
-                .BuildAndStart();
-            
-            AddToActiveInstances(eventInstance);
-            SetParameter(parameter, value);
-            
-            return eventInstance;
-        }
-        
-        public EventInstance PlayEvent(GUID eventGUID, PARAMETER_ID parameter, float value)
-        {
-            var eventInstance = EZFMODEventInstanceBuilder.Create(eventGUID)
-                .SetParametersByNames(_parameters)
-                .SetParameterByID(parameter, value)
-                .AttachTo(gameObject)
-                .BuildAndStart();
-            
-            AddToActiveInstances(eventInstance);
-            SetParameter(parameter, value);
-            
-            return eventInstance;
-        }
         
         public void PlayEvent(GUID eventGUID, out EventInstance eventInstance)
         {
@@ -167,33 +113,6 @@ namespace OCSFX.EZFMOD.Types
 #endregion
 
 #region Play Events via EventReference
-        public EventInstance PlayEvent(EventReference eventRef, string parameter, float value)
-        {
-            var eventInstance = EZFMODEventInstanceBuilder.Create(eventRef)
-                .SetParametersByNames(_parameters)
-                .SetParameterByName(parameter, value)
-                .AttachTo(gameObject)
-                .Build();
-                    
-            AddToActiveInstances(eventInstance);
-            SetParameter(parameter, value);
-                    
-            return eventInstance;
-        }
-                
-        public EventInstance PlayEvent(EventReference eventRef, PARAMETER_ID parameterID, float value)
-        {
-            var eventInstance = EZFMODEventInstanceBuilder.Create(eventRef)
-                .SetParametersByNames(_parameters)
-                .SetParameterByID(parameterID, value)
-                .AttachTo(gameObject)
-                .BuildAndStart();
-                    
-            AddToActiveInstances(eventInstance);
-            SetParameter(parameterID, value);
-                    
-            return eventInstance;
-        }
 
         public void PlayEvent(EventReference eventRef, out EventInstance eventInstance)
         {
@@ -212,33 +131,6 @@ namespace OCSFX.EZFMOD.Types
 #endregion
 
 #region Play Events via StudioPath
-        public EventInstance PlayEvent(string eventPath, string parameter , float value)
-        {
-            var eventInstance = EZFMODEventInstanceBuilder.Create(eventPath)
-                .SetParametersByNames(_parameters)
-                .SetParameterByName(parameter, value)
-                .AttachTo(gameObject)
-                .BuildAndStart();
-                    
-            AddToActiveInstances(eventInstance);
-            SetParameter(parameter, value);
-                    
-            return eventInstance;
-        }
-                
-        public EventInstance PlayEvent(string eventPath, PARAMETER_ID parameterID, float value)
-        {
-            var newEventInstance = EZFMODEventInstanceBuilder.Create(eventPath)
-                .SetParametersByNames(_parameters)
-                .SetParameterByID(parameterID, value)
-                .AttachTo(gameObject)
-                .BuildAndStart();
-                    
-            AddToActiveInstances(newEventInstance);
-            SetParameter(parameterID, value);
-                    
-            return newEventInstance;
-        }
 
         public void PlayEvent(string eventPath, out EventInstance eventInstance)
         {

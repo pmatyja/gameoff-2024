@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using OCSFX.EZFMOD.Attributes;
 using OCSFX.EZFMOD.Debug;
 using OCSFX.EZFMOD.Types;
-using OCSFX.EZFMOD.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -66,6 +64,7 @@ namespace OCSFX.EZFMOD.Prototypes.Components
         {
             if (!_event) return;
             
+            ApplyParameter();
             _event.Play(gameObject);
             _started = true;
         }
@@ -116,7 +115,6 @@ namespace OCSFX.EZFMOD.Prototypes.Components
             
             OCSFXLogger.Log($"[{name}] Playing event ({_event.Name})!", this);
             
-            ApplyParameter();
             Play();
         }
 
@@ -145,7 +143,6 @@ namespace OCSFX.EZFMOD.Prototypes.Components
         {
             if (!_parameter) return;
             fmodParameterValue = Mathf.Clamp(fmodParameterValue, _parameter.Min, _parameter.Max);
-            ApplyParameter();
         }
     }
 }

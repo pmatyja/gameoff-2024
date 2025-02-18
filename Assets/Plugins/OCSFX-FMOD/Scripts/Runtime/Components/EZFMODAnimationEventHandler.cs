@@ -28,18 +28,6 @@ namespace OCSFX.EZFMOD.Components
             fmodEventRef.Play(_soundSource);
         }
 
-        public void PlaySoundEvent(string eventName, string parameter, float parameterValue)
-        {
-            if (!_audioData.TryGetAnimEvent(eventName, out var fmodEventRef))
-            {
-                OCSFXLogger.LogError(
-                    $"'{eventName}' was not found in {this}'s {nameof(EZFMODAnimationAudioDataSO)} events.", this);
-                return;
-            }
-
-            fmodEventRef.Play(_soundSource, parameter, parameterValue);
-        }
-
         public void StopSoundEvent(string eventName)
         {
             if (!_audioData.TryGetAnimEvent(eventName, out var fmodEventRef))

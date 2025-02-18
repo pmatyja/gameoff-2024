@@ -454,7 +454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5243903764309279802}
-  - component: {fileID: 8638439427205087313}
+  - component: {fileID: 6140391860442295147}
   m_Layer: 0
   m_Name: KeyInsert
   m_TagString: Untagged
@@ -477,7 +477,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2968444128378937558}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8638439427205087313
+--- !u!114 &6140391860442295147
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -486,28 +486,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2303527611861721902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4319c3ea42a4db4499da34b0751e73b1, type: 3}
+  m_Script: {fileID: 11500000, guid: e4335fc79b4ed984d85ca69faca2533b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 2078388489
-      Data2: 1144422177
-      Data3: 2038662810
-      Data4: 1838965923
-    Path: event:/SX/INT/Door/sx_int_door_golden_key_insert
-  Event: 
-  EventPlayTrigger: 0
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  Event: {fileID: 11400000, guid: 75923fa986cdf7b49889e5099ddec7fc, type: 2}
+  PlayOnStart: 0
+  StopOnDestroy: 1
 --- !u!1 &2308279108248733941
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,7 +565,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8075601275916918110}
-  - component: {fileID: 4108522162015066643}
+  - component: {fileID: 3675304115901700709}
   m_Layer: 0
   m_Name: StarComplete
   m_TagString: Untagged
@@ -604,7 +588,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2968444128378937558}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4108522162015066643
+--- !u!114 &3675304115901700709
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -613,28 +597,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2735986499450391662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4319c3ea42a4db4499da34b0751e73b1, type: 3}
+  m_Script: {fileID: 11500000, guid: e4335fc79b4ed984d85ca69faca2533b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -450945699
-      Data2: 1270718224
-      Data3: -1461970023
-      Data4: 1689673568
-    Path: event:/SX/INT/Door/sx_int_door_golden_star_complete
-  Event: 
-  EventPlayTrigger: 0
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  Event: {fileID: 11400000, guid: 7b384d251016337418df9aede61995ce, type: 2}
+  PlayOnStart: 0
+  StopOnDestroy: 1
 --- !u!1 &2937977437836928859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1559,10 +1527,10 @@ MonoBehaviour:
   <OnKeyInsertedEvent>k__BackingField:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 470764f6e899f8b4ba15a34bd3a9cb38, type: 2}
-        m_TargetAssemblyTypeName: OCSFX.FMOD.FmodParameterObject, OCSFX.FMOD
-        m_MethodName: SetGlobalValue
-        m_Mode: 3
+      - m_Target: {fileID: -2641183608936917767, guid: f0fc850aafc40f041a6210bf0e52d9aa, type: 2}
+        m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODParameterValue, OCSFX.EZFMODCore
+        m_MethodName: SetGlobal
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1571,9 +1539,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8638439427205087313}
-        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-        m_MethodName: Play
+      - m_Target: {fileID: 6140391860442295147}
+        m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODGameObject, OCSFX.EZFMODCore
+        m_MethodName: PlayAssignedEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1598,9 +1566,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4108522162015066643}
-        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-        m_MethodName: Play
+      - m_Target: {fileID: 3675304115901700709}
+        m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODGameObject, OCSFX.EZFMODCore
+        m_MethodName: PlayAssignedEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

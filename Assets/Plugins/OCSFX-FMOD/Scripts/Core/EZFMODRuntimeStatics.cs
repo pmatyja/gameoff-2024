@@ -269,6 +269,8 @@ namespace OCSFX.EZFMOD
 
                     foreach (var bankName in bankNames)
                     {
+                        if (string.IsNullOrEmpty(bankName)) continue;
+                        
                         while (!RuntimeManager.HasBankLoaded(bankName))
                         {
                             yield return null;

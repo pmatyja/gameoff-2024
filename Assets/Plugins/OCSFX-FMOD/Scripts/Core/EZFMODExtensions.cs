@@ -40,8 +40,7 @@ namespace OCSFX.EZFMOD
             RuntimeManager.PlayOneShotAttached(eventRef, soundSource);
         }
 
-        public static EventInstance Play(this EventReference eventRef, GameObject sourceObject, 
-            string parameter = null, float value = 0)
+        public static EventInstance Play(this EventReference eventRef, GameObject sourceObject)
         {
             if (!IsRuntimeManagerInitialized($"{nameof(Play)}")) return EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
             
@@ -49,9 +48,6 @@ namespace OCSFX.EZFMOD
 
             if (!sourceObject.TryGetComponent<EZFMODGameObject>(out var fmodGameObject)) 
                 fmodGameObject = sourceObject.AddComponent<EZFMODGameObject>();
-            
-            if (parameter != null)
-                return fmodGameObject.PlayEvent(eventRef, parameter, value);
             
             fmodGameObject.PlayEvent(eventRef, out var eventInstance);
 
