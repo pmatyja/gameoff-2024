@@ -29,9 +29,11 @@ namespace OCSFX.EZFMOD.Types
             ? RuntimeManager.PathToEventReference(StudioPath)
             : EZFMODRuntimeStatics.INVALID_EVENT_REFERENCE;
 
-        public void PlayOneShot() => RuntimeManager.PlayOneShot(GUID);
+        public void PlayOneShot() => 
+            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(()=>RuntimeManager.PlayOneShot(GUID));
 
-        public void Play2D() => GetEventReference().Play2D();
+        public void Play2D() => 
+            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(()=>GetEventReference().Play2D());
         
         public void Play2D(out EventInstance eventInstance) => eventInstance = GetEventReference().Play2D();
         
@@ -62,13 +64,23 @@ namespace OCSFX.EZFMOD.Types
         
         public void StopAll(bool allowFadeOut)
         {
+            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(() => StopAllEventInstances(allowFadeOut));
+        }
+
+        public void StopAll()
+        {
+            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(StopAllEventInstances);
+        }
+        
+        private void StopAllEventInstances(bool allowFadeOut)
+        {
             foreach (var eventInstance in EventInstances)
             {
                 eventInstance.stop(allowFadeOut ? STOP_MODE.ALLOWFADEOUT : STOP_MODE.IMMEDIATE);
             }
         }
-
-        public void StopAll()
+        
+        private void StopAllEventInstances()
         {
             foreach (var eventInstance in EventInstances)
             {

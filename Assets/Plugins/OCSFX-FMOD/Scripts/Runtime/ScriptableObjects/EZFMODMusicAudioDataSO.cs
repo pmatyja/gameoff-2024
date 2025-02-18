@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FMOD;
 using FMOD.Studio;
 using FMODUnity;
 using OCSFX.EZFMOD.Types;
@@ -27,14 +28,12 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             new SerializedKeyValuePair<string, EZFMODParameter>("MusicParamHorizontal", null)
         };
 
-        private readonly Dictionary<Guid, EventInstance> _instances = new Dictionary<Guid, EventInstance>();
-        private EventInstance _currentInstance;
-        private EZFMODEvent _currentEvent;
+        // private readonly HashSet<GUID> _eventGuids = new HashSet<GUID>();
+        private EZFMODEvent _currentPlayingEvent;
 
         // Properties
         public List<SerializedKeyValuePair<string, EZFMODEvent>> Events => _musicEvents;
         public List<SerializedKeyValuePair<string, EZFMODParameter>> Parameters => _musicParameters;
-        public EventInstance CurrentInstance => _currentInstance;
 
         // Methods
 
@@ -50,7 +49,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
                 => musicEvent.Key == musicEventName)?.Value;
         }
 
-        public void MusicEventPlay(string musicEventName)
+        public void PlayMusicByKey(string musicEventName)
         {
             if (!TryGetMusicEvent(musicEventName, out var foundMusicEvent))
             {
@@ -61,83 +60,39 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             PlayMusic(foundMusicEvent);
         }
         
-        public void MusicEventStop(string musicEventName)
+        public void StopCurrentMusic()
         {
-            if (!TryGetMusicEvent(musicEventName, out var foundMusicEvent))
-            {
-                OCSFXLogger.LogWarning($"{this}: {musicEventName} was not found in MusicEvents.", this, _showDebug);
-                return;
-            }
-            
-            StopMusic(foundMusicEvent);
+            StopMusic();
         }
         
         private void PlayMusic(EZFMODEvent musicEvent)
         {
-            var eventID = musicEvent.GUID;
-
-            if (_currentInstance.isValid())
+            if (musicEvent == _currentPlayingEvent)
             {
-                var currentInstanceID = _currentInstance.GetEventGUID();
-
-                if (eventID == currentInstanceID)
-                {
-                    OCSFXLogger.LogWarning($"[{this}] {musicEvent.Name} music is already playing.", this, _showDebug);
-                    return;
-                }
-
-                if (_instances.TryGetValue(currentInstanceID, out var currentInstance))
-                {
-                    currentInstance.Stop();
-                    _instances.Remove(currentInstanceID);
-                }
-            }
-
-            _currentEvent = musicEvent;
-            musicEvent.Play2D(out _currentInstance);
-            
-            // Add or set
-            if (!_instances.TryAdd(eventID, _currentInstance))
-            {
-                _instances[eventID] = _currentInstance;
-            }
-
-            if (!_currentInstance.isValid())
-            {
-                OCSFXLogger.LogWarning($"[{this}] failed to play music {musicEvent.Name}", this, _showDebug);
+                OCSFXLogger.LogWarning($"[{this}] {musicEvent.Name} music is already playing.", this, _showDebug);
                 return;
             }
 
             OCSFXLogger.Log("Play Music: " + musicEvent.Name, this, _showDebug);
-        }
-
-        private void StopMusic(EZFMODEvent musicEvent)
-        {
-            var eventID = musicEvent.GUID;
-            if (!_instances.TryGetValue(eventID, out var instance)) return;
-
-            instance.Stop();
-            _instances.Remove(eventID);
             
-            OCSFXLogger.Log("Stop Music: " + musicEvent.Name, this, _showDebug);
-        }
-        
-        public void StopAllMusic()
-        {
-            foreach (var entry in _instances) entry.Value.Stop();
-            _instances.Clear();
+            _currentPlayingEvent?.StopAll(true);
+            
+            musicEvent.Play2D();
+            
+            _currentPlayingEvent = musicEvent;
         }
 
-        public void SetLocalParameter(EventReference musicEventRef, string parameterName, float parameterValue)
+        private void StopMusic()
         {
-            if (!_instances.TryGetValue(musicEventRef.Guid, out var instance))
+            if (!_currentPlayingEvent)
             {
-                OCSFXLogger.LogError($"{musicEventRef.GetEventName()} not found in {this} instances.", this, _showDebug);
+                OCSFXLogger.LogWarning($"[{this}] No music is currently playing.", this, _showDebug);
                 return;
             }
             
-            OCSFXLogger.Log($"Set {musicEventRef.GetEventName()} parameter {parameterName} value to {parameterValue}.", this, _showDebug);
-            instance.setParameterByName(parameterName, parameterValue);
+            OCSFXLogger.Log("Stop Music: " + _currentPlayingEvent.Name, this, _showDebug);
+            
+            _currentPlayingEvent.StopAll(true);
         }
 
         public void SetGlobalParameter(string parameterName, float value)

@@ -137,7 +137,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         private void StopAmbientZone(EZFMODAmbientZoneBase ambientZone)
         {
             if (!TryGetEvent(ambientZone.AmbEventName, out var ambEvent)) return;
-            
+
             ambEvent.Value.StopAll(true);
         }
 
@@ -155,7 +155,9 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             
             foreach (var ambEvent in _ambEvents)
             {
-                ambEvent?.Value?.StopAll();
+                if (!ambEvent.Value) continue;
+                
+                ambEvent.Value.StopAll(true);
             }
         }
         

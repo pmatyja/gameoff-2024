@@ -186,10 +186,17 @@ namespace OCSFX.EZFMOD.ScriptableObjects
                 {
                     _audioPlayerPrefs.Entries.Add
                     (
-                        new AudioVolumeSetting(
-                            _volumeParameterValues[i]?.Parameter.Name, 
-                            _volumeParameterValues[i] ? _volumeParameterValues[i].Value : DefaultValue)
+                        new AudioVolumeSetting(_volumeParameterValues[i]?.Parameter.Name)
                     );
+                    
+                    var defaultValue = _volumeParameterValues[i] == _masterVolumeParameterValue
+                        ? DefaultMasterValue
+                        : DefaultValue;
+                    
+                    _audioPlayerPrefs.Entries[i].Value = defaultValue;
+                    _audioPlayerPrefs.Entries[i].DefaultValue = defaultValue;
+                    
+                    _volumeParameterValues[i].SetValue(defaultValue, true);
                 }
             }
         }
@@ -276,7 +283,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             public float DefaultValue = 1;
             public bool IsMuted = false;
             
-            public AudioVolumeSetting(string name, float value, float defaultValue = 1, bool isMuted = false)
+            public AudioVolumeSetting(string name, float value = 1, float defaultValue = 1, bool isMuted = false)
             {
                 Name = name;
                 Value = value;

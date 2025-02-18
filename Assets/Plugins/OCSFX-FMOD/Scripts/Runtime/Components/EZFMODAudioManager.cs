@@ -72,7 +72,7 @@ namespace OCSFX.EZFMOD.Components
         {
             if (!_snapshotsAudioData) return;
             
-            RunOnStartupBanksLoaded(()=> _snapshotsAudioData.ClearAllSnapshots());
+            _snapshotsAudioData.ClearAllSnapshots();
         }
 
         protected virtual void OnSceneUnloaded(Scene scene)

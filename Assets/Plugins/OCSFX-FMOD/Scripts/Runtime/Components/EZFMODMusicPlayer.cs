@@ -63,12 +63,12 @@ namespace OCSFX.EZFMOD.Components
         // Callbacks
         protected virtual void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(() => InvokeSceneLoadedUnityEvents(scene, mode));
+            InvokeSceneLoadedUnityEvents(scene, mode);
         }
         
         protected virtual void OnSceneUnloaded(Scene scene)
         {
-            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(() => InvokeSceneUnloadedUnityEvents(scene));
+            InvokeSceneUnloadedUnityEvents(scene);
         }
 
         private void InvokeSceneLoadedUnityEvents(Scene scene, LoadSceneMode mode)
@@ -121,18 +121,18 @@ namespace OCSFX.EZFMOD.Components
             _volumeSettings.SetMute(_musicVolumeParamName, _mute);
         }
         
-        public void MusicEventPlay(string musicEventName)
+        public void PlayMusic(string musicEventName)
         {
             if (!_musicAudioData) return;
             
-            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(()=> _musicAudioData.MusicEventPlay(musicEventName));
+            _musicAudioData.PlayMusicByKey(musicEventName);
         }
         
-        public void MusicEventStop(string musicEventName)
+        public void StopMusic()
         {
             if (!_musicAudioData) return;
             
-            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(()=> _musicAudioData.MusicEventStop(musicEventName));
+            _musicAudioData.StopCurrentMusic();
         }
 
         protected virtual void OnValidate()
