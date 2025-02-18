@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using FMOD;
-using FMOD.Studio;
-using FMODUnity;
 using OCSFX.EZFMOD.Types;
 using OCSFX.EZFMOD.Debug;
 using OCSFX.EZFMOD.Utility.Generics;
@@ -35,6 +31,16 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         public List<SerializedKeyValuePair<string, EZFMODEvent>> Events => _musicEvents;
         public List<SerializedKeyValuePair<string, EZFMODParameter>> Parameters => _musicParameters;
 
+        private void OnEnable()
+        {
+            Application.quitting += StopMusic;
+        }
+
+        private void OnDisable()
+        {
+            Application.quitting -= StopMusic;
+        }
+
         // Methods
 
         private bool TryGetMusicEvent(string musicEventName, out EZFMODEvent musicEvent)
@@ -53,7 +59,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         {
             if (!TryGetMusicEvent(musicEventName, out var foundMusicEvent))
             {
-                OCSFXLogger.LogWarning($"{this}: {musicEventName} was not found in MusicEvents.", this, _showDebug);
+                OCSFXLogger.LogWarning($"[{nameof(EZFMODMusicAudioDataSO)}] {musicEventName} was not found in MusicEvents.", this, _showDebug);
                 return;
             }
             
@@ -69,13 +75,18 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         {
             if (musicEvent == _currentPlayingEvent)
             {
-                OCSFXLogger.LogWarning($"[{this}] {musicEvent.Name} music is already playing.", this, _showDebug);
+                OCSFXLogger.LogWarning($"[{nameof(EZFMODMusicAudioDataSO)}] {musicEvent.Name} music is already playing.", this, _showDebug);
                 return;
             }
-
-            OCSFXLogger.Log("Play Music: " + musicEvent.Name, this, _showDebug);
             
-            _currentPlayingEvent?.StopAll(true);
+            if (_currentPlayingEvent)
+            {
+                OCSFXLogger.Log($"[{nameof(EZFMODMusicAudioDataSO)}] Stopping current music ({_currentPlayingEvent.Name})", this, _showDebug);
+                
+                _currentPlayingEvent?.StopAll(true);
+            }
+
+            OCSFXLogger.Log($"[{nameof(EZFMODMusicAudioDataSO)}] Play Music: " + musicEvent.Name, this, _showDebug);
             
             musicEvent.Play2D();
             
@@ -86,20 +97,22 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         {
             if (!_currentPlayingEvent)
             {
-                OCSFXLogger.LogWarning($"[{this}] No music is currently playing.", this, _showDebug);
+                OCSFXLogger.LogWarning($"[{nameof(EZFMODMusicAudioDataSO)}] No music is currently playing.", this, _showDebug);
                 return;
             }
             
-            OCSFXLogger.Log("Stop Music: " + _currentPlayingEvent.Name, this, _showDebug);
+            OCSFXLogger.Log($"[{nameof(EZFMODMusicAudioDataSO)}] Stop Music: " + _currentPlayingEvent.Name, this, _showDebug);
             
             _currentPlayingEvent.StopAll(true);
+            
+            _currentPlayingEvent = null;
         }
 
         public void SetGlobalParameter(string parameterName, float value)
         {
             if (!TryGetMusicParameter(parameterName, out var parameter))
             {
-                OCSFXLogger.LogWarning($"{this}: {parameterName} was not found in MusicParameters.", this, _showDebug);
+                OCSFXLogger.LogWarning($"[{nameof(EZFMODMusicAudioDataSO)}] {parameterName} was not found in MusicParameters.", this, _showDebug);
                 return;
             }
             

@@ -339,13 +339,52 @@ namespace OCSFX.EZFMOD
         
         private static IEnumerator Co_RunOnStartupBanksLoaded(Action action)
         {
-            while (!StartupBanksLoaded)
-            {
-                yield return null;
-            }
+            yield return _yieldForStartupBanksLoaded;
             
             action?.Invoke();
         }
+
+        private static readonly YieldForStartupBanksLoaded _yieldForStartupBanksLoaded = new YieldForStartupBanksLoaded();
+        
+        private class YieldForStartupBanksLoaded : CustomYieldInstruction
+        {
+            public override bool keepWaiting => !StartupBanksLoaded;
+        }
+        
+        // internal static void GetDeferredRuntimeInstance(GUID eventGUID, ref EventInstance instance)
+        // {
+        //     RunCoroutine(Co_GetDeferredRuntimeInstance(eventGUID, instance => instance = OnDeferredRuntimeInstanceReady(eventGUID)));
+        // }
+        //
+        // private static IEnumerator Co_GetDeferredRuntimeInstance(GUID eventGUID, Action<EventInstance> callback)
+        // {
+        //     yield return _yieldForStartupBanksLoaded;
+        //     
+        //     var eventDescResult = RuntimeManager.StudioSystem.getEventByID(eventGUID, out var eventDescription);
+        //     if (eventDescResult != RESULT.OK)
+        //     {
+        //         OCSFXLogger.LogError($"Failed to get event description from GUID: {eventGUID} | {eventDescResult}");
+        //         yield break;
+        //     }
+        //     
+        //     eventDescription.createInstance(out var eventInstance);
+        //     
+        //     callback?.Invoke(eventInstance);
+        // }
+        //
+        // private static EventInstance OnDeferredRuntimeInstanceReady(GUID eventGUID)
+        // {
+        //     var eventDescResult = RuntimeManager.StudioSystem.getEventByID(eventGUID, out var eventDescription);
+        //     if (eventDescResult != RESULT.OK)
+        //     {
+        //         OCSFXLogger.LogError($"Failed to get event description from GUID: {eventGUID} | {eventDescResult}");
+        //         return INVALID_EVENT_INSTANCE;
+        //     }
+        //     
+        //     eventDescription.createInstance(out var eventInstance);
+        //
+        //     return eventInstance;
+        // }
         
         private static void Shutdown()
         {

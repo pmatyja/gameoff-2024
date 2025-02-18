@@ -135,6 +135,13 @@ namespace OCSFX.EZFMOD
             }
         }
         
+        public static string GetEventStudioPath(this EventReference eventReference)
+        {
+            if (!IsRuntimeManagerInitialized($"{nameof(GetEventStudioPath)}")) return string.Empty;
+            
+            return eventReference.ToString();
+        }
+        
         public static string GetEventName(this EventReference eventReference)
         {
             if (!IsRuntimeManagerInitialized($"{nameof(GetEventName)}")) return string.Empty;

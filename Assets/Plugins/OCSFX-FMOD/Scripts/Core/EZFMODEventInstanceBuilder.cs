@@ -11,48 +11,65 @@ namespace OCSFX.EZFMOD
     internal class EZFMODEventInstanceBuilder
     {
         private EventInstance _eventInstance;
+        private readonly GUID _eventGuid;
+        private readonly string _eventPath;
         
         public bool EventInstanceIsValid => _eventInstance.isValid();
+
+        private readonly Queue<EZFMODEventInstanceBuilderCommand> _commands;
         
         private EZFMODEventInstanceBuilder(GUID eventGuid)
         {
-            var eventDescription = RuntimeManager.GetEventDescription(eventGuid);
-            if (!eventDescription.isValid())
-            {
-                OCSFXLogger.LogError($"Event description is not valid for GUID: {eventGuid}");
-                _eventInstance = EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
-                return;
-            }
+            _eventGuid = eventGuid;
+
+            _commands = new Queue<EZFMODEventInstanceBuilderCommand>();
             
-            _eventInstance = GetEventInstanceFromDescription(eventDescription);
+            var command = new EZFMODEventInstanceCreateInstanceCommand(this);
+            _commands.Enqueue(command);
         }
         
         private EZFMODEventInstanceBuilder(EventReference eventReference)
         {
-            var eventDescription = RuntimeManager.GetEventDescription(eventReference);
-            if (!eventDescription.isValid())
-            {
-                OCSFXLogger.LogError($"Event description is not valid for reference: {eventReference}");
-                _eventInstance = EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
-                return;
-            }
+            _eventPath = eventReference.ToString();
+            _eventGuid = eventReference.Guid;
             
-            _eventInstance = GetEventInstanceFromDescription(eventDescription);
+            _commands = new Queue<EZFMODEventInstanceBuilderCommand>();
+            
+            var command = new EZFMODEventInstanceCreateInstanceCommand(this);
+            _commands.Enqueue(command);
         }
         private EZFMODEventInstanceBuilder(string eventStudioPath)
         {
-            var eventDescription = RuntimeManager.GetEventDescription(eventStudioPath);
-            if (!eventDescription.isValid())
+            _eventPath = eventStudioPath;
+            
+            _commands = new Queue<EZFMODEventInstanceBuilderCommand>();
+            
+            var command = new EZFMODEventInstanceCreateInstanceCommand(this);
+            _commands.Enqueue(command);
+        }
+        
+        internal void CreateEventInstance()
+        {
+            EventDescription eventDescription;
+            
+            if (_eventGuid != EZFMODRuntimeStatics.INVALID_GUID)
             {
-                OCSFXLogger.LogError($"Event description is not valid for path: {eventStudioPath}");
-                _eventInstance = EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
+                eventDescription = RuntimeManager.GetEventDescription(_eventGuid);
+            }
+            else if (!string.IsNullOrWhiteSpace(_eventPath))
+            {
+                eventDescription = RuntimeManager.GetEventDescription(_eventPath);
+            }
+            else
+            {
+                OCSFXLogger.LogError($"[{nameof(EZFMODEventInstanceBuilder)}] Event GUID and Event Path are both invalid.");
                 return;
             }
             
             _eventInstance = GetEventInstanceFromDescription(eventDescription);
         }
         
-        private EventInstance GetEventInstanceFromDescription(EventDescription eventDescription)
+        private static EventInstance GetEventInstanceFromDescription(EventDescription eventDescription)
         {
             var result = eventDescription.createInstance(out var eventInstance);
             if (result != RESULT.OK)
@@ -69,59 +86,53 @@ namespace OCSFX.EZFMOD
         
         public EZFMODEventInstanceBuilder SetParameterByID(PARAMETER_ID parameterID, float value)
         {
-            if (!parameterID.IsValid()) return this;
-            if (!_eventInstance.isValid()) return this;
-            
-            _eventInstance.setParameterByID(parameterID, value);
+            var command = new EZFMODEventInstanceSetParameterByIDCommand(this, parameterID, value);
+            _commands.Enqueue(command);
             return this;
         }
         
         public EZFMODEventInstanceBuilder SetParametersByIDs(KeyValuePair<PARAMETER_ID, float>[] parameterIdValuePairs)
         {
-            if (!_eventInstance.isValid()) return this;
-            
-            foreach (var pair in parameterIdValuePairs)
-            {
-                SetParameterByID(pair.Key, pair.Value);
-            }
-            
+            var command = new EZFMODEventInstanceSetParametersByIDsCommand(this, parameterIdValuePairs);
+            _commands.Enqueue(command);
             return this;
         }
         
         public EZFMODEventInstanceBuilder SetParameterByName(string parameterName, float value)
         {
-            if (!_eventInstance.isValid()) return this;
-            if (string.IsNullOrWhiteSpace(parameterName)) return this;
-            
-            _eventInstance.setParameterByName(parameterName, value);
+            var command = new EZFMODEventInstanceSetParameterByNameCommand(this, parameterName, value);
+            _commands.Enqueue(command);
             return this;
         }
         
         public EZFMODEventInstanceBuilder SetParametersByNames(KeyValuePair<string, float>[] parameterNameValuePairs)
         {
-            if (!_eventInstance.isValid()) return this;
-            foreach (var pair in parameterNameValuePairs)
-            {
-                SetParameterByName(pair.Key, pair.Value);
-            }
+            var command = new EZFMODEventInstanceSetParametersByNamesCommand(this, parameterNameValuePairs);
+            _commands.Enqueue(command);
             return this;
         }
         
         public EZFMODEventInstanceBuilder SetParametersByNames(Dictionary<string, float> parameterNameValuePairs)
         {
-            if (!_eventInstance.isValid()) return this;
-            foreach (var pair in parameterNameValuePairs)
-            {
-                SetParameterByName(pair.Key, pair.Value);
-            }
+            var command = new EZFMODEventInstanceSetParametersByNamesCommand(this, parameterNameValuePairs);
+            _commands.Enqueue(command);
             return this;
         }
         
         public EZFMODEventInstanceBuilder AttachTo(GameObject attachObject)
         {
-            if (!_eventInstance.isValid()) return this;
-            RuntimeManager.AttachInstanceToGameObject(_eventInstance, attachObject.transform);
+            var command = new EZFMODEventInstanceAttachToCommand(this, attachObject);
+            _commands.Enqueue(command);
             return this;
+        }
+        
+        private void ExecuteCommands()
+        {
+            while (_commands.Count > 0)
+            {
+                var command = _commands.Dequeue();
+                command.Execute();
+            }
         }
         
         /* <summary>
@@ -131,12 +142,16 @@ namespace OCSFX.EZFMOD
          */
         public EventInstance Build()
         {
+            ExecuteCommands();
+            
             if (!_eventInstance.isValid())
             {
                 OCSFXLogger.LogError($"[{nameof(EZFMODEventInstanceBuilder)}] Event instance is not valid.");
+                _eventInstance.release();
+                return EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
             }
             
-            return EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
+            return _eventInstance;
         }
         
         /* <summary>
@@ -148,17 +163,29 @@ namespace OCSFX.EZFMOD
          */
         public EventInstance BuildAndStart(bool keepPersistent = false)
         {
+            ExecuteCommands();
+            
             if (!_eventInstance.isValid())
             {
                 OCSFXLogger.LogError($"[{nameof(EZFMODEventInstanceBuilder)}] Event instance is not valid.");
                 _eventInstance.release();
                 return EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
             }
-
-            _eventInstance.start();
-            if (!keepPersistent) _eventInstance.release();   
             
-            return _eventInstance;
+            if (keepPersistent) return _eventInstance;
+            
+            var result = _eventInstance.start();
+            if (result != RESULT.OK)
+            {
+                OCSFXLogger.LogError($"[{nameof(EZFMODEventInstanceBuilder)}] Failed to start event instance with result: {result}");
+                _eventInstance.release();
+                return EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
+            }
+            
+            _eventInstance.release();
+            return EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
         }
+        
+        internal EventInstance EventInstance => _eventInstance;
     }
 }
