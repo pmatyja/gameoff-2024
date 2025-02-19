@@ -281,6 +281,7 @@ namespace OCSFX.EZFMODEditor
                     var newAssetPath = Path.Join(directoryFromStudioPath, data.Name + ".asset");
                     if (existingAssetPath != newAssetPath)
                     {
+                        AssetDatabase.MakeEditable(existingAssetPath);
                         AssetDatabase.MoveAsset(existingAssetPath, newAssetPath);
                         AssetDatabase.SaveAssetIfDirty(matchingGuidAsset);
                     }
