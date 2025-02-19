@@ -1,12 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FMOD;
-using FMOD.Studio;
-using FMODUnity;
+﻿using FMOD;
 using OCSFX.EZFMOD.Attributes;
-using OCSFX.EZFMOD.Utility;
 using UnityEngine;
-using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 namespace OCSFX.EZFMOD.Types
 {
@@ -17,78 +11,5 @@ namespace OCSFX.EZFMOD.Types
         [field: SerializeField, ReadOnly] public string StudioPath { get; protected set; }
 
         [field: SerializeField, ReadOnly] public GUID GUID { get; protected set; }
-    }
-
-    public abstract class EZFMODEventBase : EZFMODAsset, IEZFMODInstantiable
-    {
-        public List<EventInstance> EventInstances => RuntimeManager.IsInitialized
-            ? EZFMODRuntimeStatics.GetEventInstancesFromGUID(GUID).ToList()
-            : new List<EventInstance>();
-
-        public EventReference GetEventReference() => RuntimeManager.IsInitialized
-            ? RuntimeManager.PathToEventReference(StudioPath)
-            : EZFMODRuntimeStatics.INVALID_EVENT_REFERENCE;
-
-        public void PlayOneShot() => 
-            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(()=>RuntimeManager.PlayOneShot(GUID));
-        
-        public void PlayOneShot(Vector3 position) => 
-            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(()=>RuntimeManager.PlayOneShot(GUID, position));
-
-        public void Play2D() => 
-            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(()=>GetEventReference().Play2D());
-        
-        public void Play2D(out EventInstance eventInstance) => eventInstance = GetEventReference().Play2D();
-        
-        public void Play(GameObject sourceObject) => Play(sourceObject, out _);
-
-        public void Play(GameObject sourceObject, out EventInstance eventInstance)
-        {
-            eventInstance = EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
-            if (!sourceObject) return;
-
-            var fmodGameObj = sourceObject.GetOrAddComponent<EZFMODGameObject>();
-            
-            fmodGameObj.PlayEvent(StudioPath, out eventInstance);
-        }
-
-        public void Stop(GameObject sourceObject, bool allowFadeOut)
-        {
-            if (!sourceObject) return;
-            
-            if (!sourceObject.TryGetComponent<EZFMODGameObject>(out var fmodGameObject))
-                fmodGameObject = sourceObject.AddComponent<EZFMODGameObject>();
-            
-            fmodGameObject.StopEvent(GUID, allowFadeOut);
-        }
-        
-        public void Stop(GameObject sourceObject)
-            => Stop(sourceObject, true);
-        
-        public void StopAll(bool allowFadeOut)
-        {
-            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(() => StopAllEventInstances(allowFadeOut));
-        }
-
-        public void StopAll()
-        {
-            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(StopAllEventInstances);
-        }
-        
-        private void StopAllEventInstances(bool allowFadeOut)
-        {
-            foreach (var eventInstance in EventInstances)
-            {
-                eventInstance.stop(allowFadeOut ? STOP_MODE.ALLOWFADEOUT : STOP_MODE.IMMEDIATE);
-            }
-        }
-        
-        private void StopAllEventInstances()
-        {
-            foreach (var eventInstance in EventInstances)
-            {
-                eventInstance.stop(STOP_MODE.IMMEDIATE);
-            }
-        }
     }
 }
