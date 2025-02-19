@@ -31,6 +31,9 @@ namespace OCSFX.EZFMOD.Types
 
         public void PlayOneShot() => 
             EZFMODRuntimeStatics.RunOnStartupBanksLoaded(()=>RuntimeManager.PlayOneShot(GUID));
+        
+        public void PlayOneShot(Vector3 position) => 
+            EZFMODRuntimeStatics.RunOnStartupBanksLoaded(()=>RuntimeManager.PlayOneShot(GUID, position));
 
         public void Play2D() => 
             EZFMODRuntimeStatics.RunOnStartupBanksLoaded(()=>GetEventReference().Play2D());
