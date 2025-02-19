@@ -182,6 +182,12 @@ namespace OCSFX.EZFMODEditor
             EZFMODMetadataDeserializer.DeserializeFMODProjectMetadata();
         }
 
+        [MenuItem(MENU_ITEM_ROOT + "/Settings")]
+        public static void SelectSettingsAsset()
+        {
+            Selection.activeObject = EZFMODSettings.Get();
+        }
+
         [MenuItem(MENU_ITEM_ROOT + "/Setup FMOD Listener(s)")]
         public static void SetFmodAudioListeners()
         {
