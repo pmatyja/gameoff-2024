@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using OCSFX.EZFMOD.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -73,8 +74,7 @@ namespace Runtime.Utility
         {
             if (!other) return false;
             if (CollisionLayerMask == 0) return false;
-            if (!((CollisionLayerMask & (1 << other.layer)) > 0)) return false; 
-            if (CollisionTagFilter is not { Count: > 0 }) return true;
+            if (!CollisionLayerMask.ContainsLayer(other.layer)) return false;
 
             return CollisionTagFilter.Count <= 0 || CollisionTagFilter.Contains(other.tag);
         }
