@@ -183,7 +183,7 @@ namespace OCSFX.EZFMOD
             }
             
             _eventInstance.release();
-            return EZFMODRuntimeStatics.INVALID_EVENT_INSTANCE;
+            return _eventInstance;
         }
         
         internal EventInstance EventInstance => _eventInstance;
