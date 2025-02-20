@@ -30,14 +30,6 @@ namespace Runtime.Utility
             PrintDebug($"{nameof(OnCollisionEnter2D)}: {other.gameObject.name}", _showDebug);
         }
 
-        private void OnCollisionStay2D(Collision2D other)
-        {
-            if (!IsCollisionObjectValid(other.gameObject)) return;
-            CollisionEvents.OnCollisionStayEvent?.Invoke(other);
-            
-            PrintDebug($"{nameof(OnCollisionStay2D)}: {other.gameObject.name}", _showDebug);
-        }
-
         private void OnCollisionExit2D(Collision2D other)
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
@@ -52,14 +44,6 @@ namespace Runtime.Utility
             TriggerEvents.OnTriggerEnterEvent?.Invoke(other);
             
             PrintDebug($"{nameof(OnTriggerEnter2D)}: {other.gameObject.name}", _showDebug);
-        }
-
-        private void OnTriggerStay2D(Collider2D other)
-        {
-            if (!IsCollisionObjectValid(other.gameObject)) return;
-            TriggerEvents.OnTriggerStayEvent?.Invoke(other);
-            
-            PrintDebug($"{nameof(OnTriggerStay2D)}: {other.gameObject.name}", _showDebug);
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -101,7 +85,6 @@ namespace Runtime.Utility
         public class Trigger2DUnityEvents
         {
             [field: SerializeField] public UnityEvent<Collider2D> OnTriggerEnterEvent {get; private set; }
-            [field: SerializeField] public UnityEvent<Collider2D> OnTriggerStayEvent {get; private set; }
             [field: SerializeField] public UnityEvent<Collider2D> OnTriggerExitEvent {get; private set; }
         }
         
@@ -109,7 +92,6 @@ namespace Runtime.Utility
         public class Collision2DUnityEvents
         {
             [field: SerializeField] public UnityEvent<Collision2D> OnCollisionEnterEvent { get; private set; }
-            [field: SerializeField] public UnityEvent<Collision2D> OnCollisionStayEvent {get; private set; }
             [field: SerializeField] public UnityEvent<Collision2D> OnCollisionExitEvent {get; private set; }
         }
     }

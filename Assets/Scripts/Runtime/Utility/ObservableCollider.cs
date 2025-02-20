@@ -30,14 +30,6 @@ namespace Runtime.Utility
             PrintDebug($"{nameof(OnCollisionEnter)}: {other.gameObject.name}", _showDebug);
         }
 
-        private void OnCollisionStay(Collision other)
-        {
-            if (!IsCollisionObjectValid(other.gameObject)) return;
-            CollisionEvents.OnCollisionStayEvent?.Invoke(other);
-            
-            PrintDebug($"{nameof(OnCollisionStay)}: {other.gameObject.name}", _showDebug);
-        }
-
         private void OnCollisionExit(Collision other)
         {
             if (!IsCollisionObjectValid(other.gameObject)) return;
@@ -52,14 +44,6 @@ namespace Runtime.Utility
             TriggerEvents.OnTriggerEnterEvent?.Invoke(other);
             
             PrintDebug($"{nameof(OnTriggerEnter)}: {other.gameObject.name}", _showDebug);
-        }
-
-        private void OnTriggerStay(Collider other)
-        {
-            if (!IsCollisionObjectValid(other.gameObject)) return;
-            TriggerEvents.OnTriggerStayEvent?.Invoke(other);
-            
-            PrintDebug($"{nameof(OnTriggerStay)}: {other.gameObject.name}", _showDebug);
         }
 
         private void OnTriggerExit(Collider other)
@@ -100,7 +84,6 @@ namespace Runtime.Utility
         public class TriggerUnityEvents
         {
             [field: SerializeField] public UnityEvent<Collider> OnTriggerEnterEvent {get; private set; }
-            [field: SerializeField] public UnityEvent<Collider> OnTriggerStayEvent {get; private set; }
             [field: SerializeField] public UnityEvent<Collider> OnTriggerExitEvent {get; private set; }
         }
         
@@ -108,7 +91,6 @@ namespace Runtime.Utility
         public class CollisionUnityEvents
         {
             [field: SerializeField] public UnityEvent<Collision> OnCollisionEnterEvent { get; private set; }
-            [field: SerializeField] public UnityEvent<Collision> OnCollisionStayEvent {get; private set; }
             [field: SerializeField] public UnityEvent<Collision> OnCollisionExitEvent {get; private set; }
         }
     }
