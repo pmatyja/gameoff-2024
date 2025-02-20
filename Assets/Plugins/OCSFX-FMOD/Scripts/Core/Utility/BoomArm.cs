@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -28,27 +29,31 @@ namespace OCSFX.EZFMOD.Utility
         public void SetTargetOffset(Vector3 offset) => Offsets.TargetOffset = offset;
         public Vector3 GetSourceOffset() => Offsets.SourceOffset;
         public Vector3 GetTargetOffset() => Offsets.TargetOffset;
-        
+
+        protected void Start()
+        {
+            UpdateTransform(false);
+        }
+
         private void LateUpdate() => UpdateTransform();
         
-        private void UpdateTransform()
+        private void UpdateTransform(bool useInterpolation = true)
         {
             if (!Source || !Target) return;
             
             var newPosition = Vector3.Lerp(GetSourcePosition(), GetTargetPosition(), TargetWeight);
             var newRotation = Source.transform.rotation;
             
-            if (Easing > 0)
-            {
-                var interpValue = 3 * (1.1f - Easing) * Time.deltaTime;
-                
-                transform.position = Vector3.Lerp(transform.position, newPosition, interpValue);
-                transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, interpValue);
-            }
-            else
+            if (!useInterpolation)
             {
                 transform.SetPositionAndRotation(newPosition, newRotation);
+                return;
             }
+            
+            var interpValue = 3 * (1.1f - Easing) * Time.deltaTime;
+            
+            transform.position = Vector3.Lerp(transform.position, newPosition, interpValue);
+            transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, interpValue);
         }
         
         public Vector3 GetSourcePosition() => Source ? Source.transform.position + GetOffsetRelativeToSourceDirection() : Vector3.zero;
@@ -147,7 +152,7 @@ namespace OCSFX.EZFMOD.Utility
         {
             if (Source && Target)
             {
-                UpdateTransform();
+                UpdateTransform(false);
             }
 
             if (Application.isPlaying)
