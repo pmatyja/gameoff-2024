@@ -27,11 +27,13 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         public List<SerializedKeyValuePair<string, EZFMODEvent>> AmbEvents => _ambEvents;
 
         private EventInstance _currentPlayingAmb;
-        [SerializeField, ReadOnly] private EZFMODAmbientZoneBase _currentAmbientZone;
+        private EZFMODAmbientZoneBase _currentAmbientZone;
 
         private void OnEnable()
         {
             if (_autoPlayAmbDefault) PlayDefaultAmbience();
+            
+            Application.quitting += ResetAll;
         }
         
         private void OnDisable()
@@ -41,6 +43,8 @@ namespace OCSFX.EZFMOD.ScriptableObjects
 
         private void ResetAll()
         {
+            Application.quitting -= ResetAll;
+            
             StopAllAmbience();
             
             if (_currentAmbientZone)

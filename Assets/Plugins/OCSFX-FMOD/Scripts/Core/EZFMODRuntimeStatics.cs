@@ -325,11 +325,15 @@ namespace OCSFX.EZFMOD
         
         public static Coroutine RunCoroutine(IEnumerator routine)
         {
+            if (!Application.isPlaying) return null;
+            
             return GetCoroutineRunner().Run(routine, false);
         }
         
         public static void RunOnStartupBanksLoaded(Action action)
         {
+            if (!Application.isPlaying) return;
+            
             if (StartupBanksLoaded)
             {
                 action?.Invoke();
