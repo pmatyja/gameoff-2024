@@ -2358,6 +2358,68 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &350604399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 350604400}
+  - component: {fileID: 350604401}
+  m_Layer: 0
+  m_Name: MusicStinger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &350604400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350604399}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2118802317}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &350604401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350604399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b70b805c5c8c2b44ae53644a0fdaa3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _triggerOn: 2
+  _delay: 0.1
+  _doOnce: 1
+  _event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2073825566029379888, guid: 2508fef594f97dc4ca76760cc6f3429a, type: 2}
+        m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODParameterValue, OCSFX.EZFMODCore
+        m_MethodName: SetGlobal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!134 &360109249
 PhysicsMaterial:
   m_ObjectHideFlags: 0
@@ -13773,6 +13835,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9215693936054939450, guid: aec5ba5078797114e9a8dc99bda1a40f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 566825876}
+    - targetCorrespondingSourceObject: {fileID: 9215693936054939450, guid: aec5ba5078797114e9a8dc99bda1a40f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 350604400}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4347618446127646782, guid: aec5ba5078797114e9a8dc99bda1a40f, type: 3}
       insertIndex: -1
@@ -15617,7 +15682,7 @@ MonoBehaviour:
         m_MethodName: PlayEvent
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 5f34214155ada8a4fb79bffd1a1a390b, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: 5cc209a5f67bcd74e823954388820a3c, type: 2}
           m_ObjectArgumentAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODEventBase, OCSFX.EZFMODCore
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -15637,6 +15702,18 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1520492729}
+        m_TargetAssemblyTypeName: Runtime.Utility.DelayedUnityEvent, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 350604401}
         m_TargetAssemblyTypeName: Runtime.Utility.DelayedUnityEvent, Assembly-CSharp
         m_MethodName: Trigger
         m_Mode: 1
@@ -19938,7 +20015,7 @@ MonoBehaviour:
           m_MethodName: PlayEvent
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: a040442ea841ba44f92705276ac8c207, type: 2}
+            m_ObjectArgument: {fileID: 11400000, guid: 128d436b0df889c44b209f9b37c81a4d, type: 2}
             m_ObjectArgumentAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODEventBase,
               OCSFX.EZFMODCore
             m_IntArgument: 0
