@@ -46,14 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Source>k__BackingField: {fileID: 0}
   <Target>k__BackingField: {fileID: 0}
-  TargetWeight: 0.99
-  Easing: 0
+  TargetWeight: 0.95
+  Easing: 0.1
   Offsets:
     SourceOffset: {x: 0, y: 0, z: 0}
     TargetOffset: {x: 0, y: 1, z: -0.5}
   _showDebug: 1
   _debugSettings:
-    DrawStep: 0
+    DrawStep: 1
     DrawSphereRadius: 0.5
     ThisColor: {r: 0, g: 1, b: 1, a: 1}
     TargetColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
