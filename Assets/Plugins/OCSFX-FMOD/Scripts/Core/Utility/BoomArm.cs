@@ -40,7 +40,7 @@ namespace OCSFX.EZFMOD.Utility
             
             if (Easing > 0)
             {
-                var interpValue = 20 * (1.1f - Easing) * Time.deltaTime;
+                var interpValue = 3 * (1.1f - Easing) * Time.deltaTime;
                 
                 transform.position = Vector3.Lerp(transform.position, newPosition, interpValue);
                 transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, interpValue);
