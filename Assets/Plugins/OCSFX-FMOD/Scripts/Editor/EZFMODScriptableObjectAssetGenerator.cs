@@ -83,7 +83,7 @@ namespace OCSFX.EZFMODEditor
             var deletedAssetsMessage = $"Deleted: {_deletedAssets}";
 
             Debug.Log(
-                $"Reconcile finished in {elapsedTimeMessage}: {generatedAssetsMessage} | {modifiedAssetsMessage} | {deletedAssetsMessage}");
+                $"[{nameof(EZFMOD)}] Reconcile finished in {elapsedTimeMessage}: {generatedAssetsMessage} | {modifiedAssetsMessage} | {deletedAssetsMessage}");
         }
 
         private void GenerateSnapshotScriptableObjects()
