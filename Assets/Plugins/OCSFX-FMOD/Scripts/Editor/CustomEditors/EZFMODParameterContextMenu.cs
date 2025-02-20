@@ -43,7 +43,10 @@ namespace OCSFX.EZFMODEditor.CustomEditors
                     var newSubobject = ScriptableObject.CreateInstance<EZFMODParameterValue>();
                     newSubobject.Init(ezfmodParameter, ezfmodParameter.Default);
                     newSubobject.name = newName;
+                    AssetDatabase.MakeEditable(AssetDatabase.GetAssetPath(ezfmodParameter));
+                    EditorUtility.SetDirty(newSubobject);
                     AssetDatabase.AddObjectToAsset(newSubobject, ezfmodParameter);
+                    EditorUtility.SetDirty(ezfmodParameter);
                     AssetDatabase.SaveAssets();
                     AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(ezfmodParameter),
                         ImportAssetOptions.ForceUpdate);
