@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7011063476094992024}
   - component: {fileID: 4959973056717919816}
   - component: {fileID: 6233545731813333708}
+  - component: {fileID: 4824207711837802854}
   m_Layer: 0
   m_Name: GameOff2024AudioManager
   m_TagString: Untagged
@@ -328,3 +329,17 @@ MonoBehaviour:
             m_StringArgument: BackButtonPress
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4824207711837802854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5097742136684402603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95c7fda3b0ba421eb144e077933c80ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volumeSettingsAudioData: {fileID: 11400000, guid: dc8bf32066040dc418705e8fae40b699, type: 2}
+  _gameOff2024EventResponder: {fileID: 6233545731813333708}
