@@ -278,6 +278,46 @@ namespace OCSFX.EZFMOD
                     }
                 }
             }
+            
+            // If editor, load the Editor-only banks as defined in the EZFMOD settings
+            if (Application.isEditor)
+            {
+                var editorBanks = ezfmodSettings.EditorOnlyBanks;
+                if (editorBanks != null)
+                {
+                    var bankNames = new string[editorBanks.Length];
+                    for (var i = 0; i < editorBanks.Length; i++)
+                    {
+                        if (!editorBanks[i]) continue;
+                        if (RuntimeManager.HasBankLoaded(editorBanks[i].Name)) continue;
+                        bankNames[i] = editorBanks[i].Name;
+                    }
+
+                    if (bankNames.Length > 0)
+                    {
+                        var bankNamesMessage = string.Join(", ", bankNames);
+                
+                        OCSFXLogger.Log($"[{nameof(EZFMODRuntimeStatics)}] Loading {nameof(EZFMOD)} Editor banks ({bankNamesMessage})...");
+                
+                        foreach (var bank in editorBanks)
+                        {
+                            if (!bank) continue;
+                            if (RuntimeManager.HasBankLoaded(bank.Name)) continue;
+                            bank.Load();
+                        }
+
+                        foreach (var bankName in bankNames)
+                        {
+                            if (string.IsNullOrEmpty(bankName)) continue;
+                        
+                            while (!RuntimeManager.HasBankLoaded(bankName))
+                            {
+                                yield return null;
+                            }
+                        }
+                    }
+                }
+            }
 
             if (RuntimeManager.AnySampleDataLoading())
             {

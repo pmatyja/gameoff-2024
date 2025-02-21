@@ -50,14 +50,13 @@ MonoBehaviour:
   _singletonBehavior: 0
   _showDebug: 1
   _volumeSettings: {fileID: 11400000, guid: dc8bf32066040dc418705e8fae40b699, type: 2}
-  _banksAudioData: {fileID: 11400000, guid: 6f40fbacbafa22c4cb47a5c11fef7c09, type: 2}
   _snapshotsAudioData: {fileID: 11400000, guid: 85caf7a70346caa4db68b7f2b6015596, type: 2}
   _ambienceAudioData: {fileID: 11400000, guid: ee09a63c17990924f9dbb61d1416d0a9, type: 2}
   _musicAudioData: {fileID: 11400000, guid: c0b8c3c6d2c59c641abe0325d5801cf2, type: 2}
   _dialogueAudioData: {fileID: 11400000, guid: ddbd7765d0063c847b78968fe8bb79f1, type: 2}
   _uiAudioData: {fileID: 11400000, guid: 1a8b0729a368c1d43a1a9e3e36b82e4e, type: 2}
   _testGameObject: {fileID: 5097742136684402603}
-  _testEvent: {fileID: 11400000, guid: 10073aa739431514b8f6f435921c98fd, type: 2}
+  _testEvent: {fileID: 0}
   _playTestEventOnStart: 0
 --- !u!114 &4959973056717919816
 MonoBehaviour:
@@ -166,7 +165,7 @@ MonoBehaviour:
   _onBasicItemCollected:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -3071787560732376945, guid: 52c248829580b1446ba97395604133ba, type: 2}
+      - m_Target: {fileID: -2667043258891948586, guid: 52c248829580b1446ba97395604133ba, type: 2}
         m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODParameterValue, OCSFX.EZFMODCore
         m_MethodName: SetGlobal
         m_Mode: 1
@@ -181,7 +180,7 @@ MonoBehaviour:
   _onKeyItemCollected:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1912370559746930536, guid: 2a3355ef8c69b5946b522a91386c2ff9, type: 2}
+      - m_Target: {fileID: 4280462052289633066, guid: 2a3355ef8c69b5946b522a91386c2ff9, type: 2}
         m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODParameterValue, OCSFX.EZFMODCore
         m_MethodName: SetGlobal
         m_Mode: 1
@@ -193,7 +192,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4098997215800807778, guid: 9cba2fb16d96e7c47b887ed032a2e762, type: 2}
+      - m_Target: {fileID: 1569194106199236242, guid: 9cba2fb16d96e7c47b887ed032a2e762, type: 2}
         m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODParameterValue, OCSFX.EZFMODCore
         m_MethodName: SetGlobal
         m_Mode: 1
@@ -239,7 +238,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _audioSettingIdConversions:
+  <AudioSettingIdConversions>k__BackingField:
   - GameSettingsId: Master
     VolumeSettingsId: Volume_Master
   - GameSettingsId: Sfx
@@ -250,8 +249,6 @@ MonoBehaviour:
     VolumeSettingsId: Volume_AMB
   - GameSettingsId: Voice
     VolumeSettingsId: Volume_VX
-  - GameSettingsId: Ui
-    VolumeSettingsId: Volume_UI
   _onPauseMenuOpen:
     m_PersistentCalls:
       m_Calls:

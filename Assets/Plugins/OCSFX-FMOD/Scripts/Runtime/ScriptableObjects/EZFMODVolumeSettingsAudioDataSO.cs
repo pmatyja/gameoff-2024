@@ -23,6 +23,9 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         [Space]
         [SerializeField] private AudioPlayerPrefs _audioPlayerPrefs;
 
+        public bool AudioPlayerPrefsLoaded { get; private set; }
+        public event Action<AudioPlayerPrefs> OnAudioPlayerPrefsLoaded;
+
         private void OnEnable()
         {
             Application.quitting += OnApplicationQuit;
@@ -35,8 +38,11 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             
             if (Application.isEditor)
             {
-                ResetDefaults();
+                ResetDefaultsOnScriptableObjects();
             }
+            
+            AudioPlayerPrefsLoaded = false;
+            OnAudioPlayerPrefsLoaded = null;
         }
 
         private void ResetDefaults()
@@ -57,6 +63,20 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             }
         }
 
+        private void ResetDefaultsOnScriptableObjects()
+        {
+            foreach (var entry in _volumeParameterValues)
+            {
+                if (!entry) continue;
+                
+                var defaultValue = entry == _masterVolumeParameterValue
+                    ? DefaultMasterValue
+                    : DefaultValue;
+
+                entry.SetValue(defaultValue, true);
+            }
+        }
+
         public void LoadFromPlayerPrefs()
         {
             foreach (var entry in _volumeParameterValues)
@@ -66,13 +86,21 @@ namespace OCSFX.EZFMOD.ScriptableObjects
                 var settingName = entry.Parameter?.Name;
                 
                 OCSFXLogger.Log($"Set {settingName} to {_audioPlayerPrefs.GetValue(settingName)}", this, _showDebug);
-                SetVolume(settingName, _audioPlayerPrefs.GetValue(settingName));
-                SetMute(settingName, _audioPlayerPrefs.IsMuted(settingName));
+                SetVolumeInternal(settingName, _audioPlayerPrefs.GetValue(settingName));
+                SetMuteInternal(settingName, _audioPlayerPrefs.IsMuted(settingName));
+            }
+            
+            if (!AudioPlayerPrefsLoaded)
+            {
+                AudioPlayerPrefsLoaded = true;
+                OnAudioPlayerPrefsLoaded?.Invoke(_audioPlayerPrefs);
             }
         }
 
         public void SetVolume(string parameterName, float value)
         {
+            if (!AudioPlayerPrefsLoaded) return;
+            
             var result =
                 _volumeParameterValues.Find(result => result?.Parameter.Name == parameterName);
 
@@ -86,14 +114,15 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             
             if (string.IsNullOrWhiteSpace(paramName)) return;
             
-            result.SetValue(value, true);
-            
             _audioPlayerPrefs.SetValue(parameterName, result.Value);
             
             OCSFXLogger.Log($"Set {parameterName} to {result.Value}", this, _showDebug);
 
             result.SetValue(value, true);
         }
+
+        private void SetVolumeInternal(string parameterName, float value) => SetVolume(parameterName, value);
+        private void SetMuteInternal(string parameterName, bool mute) => SetMute(parameterName, mute);
 
         public float GetVolume(string parameterName)
         {
@@ -202,7 +231,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         }
 
         [Serializable]
-        private class AudioPlayerPrefs
+        public class AudioPlayerPrefs
         {
             private float _defaultValue = 1.0f;
             private float _defaultMasterValue = 0.9f;
@@ -276,7 +305,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
         }
 
         [Serializable]
-        private class AudioVolumeSetting
+        public class AudioVolumeSetting
         {
             public string Name = "";
             public float Value = 1;

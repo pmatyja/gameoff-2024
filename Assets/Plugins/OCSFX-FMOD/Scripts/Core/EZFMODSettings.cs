@@ -40,6 +40,9 @@ namespace OCSFX.EZFMOD
         [field: Tooltip("Any other banks in addition to the Master bank that should be loaded at game start.")]
         [field: SerializeField] public EZFMODBank[] StartupBanks { get; private set; }
         
+        [field: Space]
+        [field: SerializeField] public EZFMODBank[] EditorOnlyBanks { get; private set; }
+        
         // [field: Space]
         // [field: SerializeField] public Color AmbientZoneGizmoFillColor = Color.cyan * new Color(1, 1, 1, 0.25f);
         // [field: SerializeField] public Color AmbientZoneGizmoOutlineColor = Color.blue * new Color(1, 1, 1, 0.5f);

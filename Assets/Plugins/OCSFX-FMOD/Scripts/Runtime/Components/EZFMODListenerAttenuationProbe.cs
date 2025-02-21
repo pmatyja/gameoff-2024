@@ -6,7 +6,7 @@ namespace OCSFX.EZFMOD.Components
 {
     public class EZFMODListenerAttenuationProbe : BoomArm<StudioListener>
     {
-        private void Start()
+        protected override void Start()
         {
             if (!Source) Source = FindFirstObjectByType<StudioListener>();
         

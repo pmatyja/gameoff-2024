@@ -30,7 +30,7 @@ namespace OCSFX.EZFMOD.Utility
         public Vector3 GetSourceOffset() => Offsets.SourceOffset;
         public Vector3 GetTargetOffset() => Offsets.TargetOffset;
 
-        protected void Start()
+        protected virtual void Start()
         {
             UpdateTransform(false);
         }

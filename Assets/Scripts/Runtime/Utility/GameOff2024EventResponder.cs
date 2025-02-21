@@ -17,7 +17,17 @@ namespace Runtime.Utility
         [SerializeField] private UnityEvent<int> _onKeysCollectedChanged;
         [SerializeField] private UnityEvent _onGameSettingsChanged;
         [SerializeField] private UnityEvent<string, float> _onGameSettingsAudioValueChanged;
-        [SerializeField] private AudioSettingIdConversion[] _audioSettingIdConversions;
+
+        [field: SerializeField]
+        public AudioSettingIdConversion[] AudioSettingIdConversions { get; private set; } =
+        {
+            new AudioSettingIdConversion("Master", ""),
+            new AudioSettingIdConversion("Sfx", ""),
+            new AudioSettingIdConversion("Music", ""),
+            new AudioSettingIdConversion("Ambient", ""),
+            new AudioSettingIdConversion("Voice", ""),
+        };
+
         [Space]
         [SerializeField] private UnityEvent _onPauseMenuOpen;
         [SerializeField] private UnityEvent _onPauseMenuClose;
@@ -141,11 +151,11 @@ namespace Runtime.Utility
                     _onPauseMenuClose?.Invoke();
                     break;
             }
-        }
+        }   
         
-        private string GetVolumeSettingsId(string gameSettingsId)
+        public string GetVolumeSettingsId(string gameSettingsId)
         {
-            foreach (var conversion in _audioSettingIdConversions)
+            foreach (var conversion in AudioSettingIdConversions)
             {
                 var volumeSettingsId = conversion.GetVolumeSettingsId(gameSettingsId);
                 if (volumeSettingsId != null)
@@ -158,7 +168,7 @@ namespace Runtime.Utility
         }
 
         [Serializable]
-        private class AudioSettingIdConversion
+        public class AudioSettingIdConversion
         {
             public string GameSettingsId;
             [ParamRef] public string VolumeSettingsId;

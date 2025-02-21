@@ -40,15 +40,23 @@ namespace OCSFX.EZFMOD.Components
             base.Awake();
             
             ValidateListener();
-            
-            if (!Application.isPlaying) return;
-            
-            _volumeSettings.LoadFromPlayerPrefs();
         }
 
         private void OnEnable() => SubscribeEvents();
         private void OnDisable() => UnsubscribeEvents();
 
+        private void OnMasterBanksLoaded()
+        {
+            if (!Application.isPlaying) return;
+            
+            _volumeSettings?.LoadFromPlayerPrefs();
+            
+            if (_playTestEventOnStart && _testEvent)
+            {
+                StartTestEvent();   
+            }
+        }
+        
         public static void StartTestEvent()
         {
             Instance._testEvent.Play(Instance._testGameObject, out Instance._testEventInstance);
@@ -58,14 +66,6 @@ namespace OCSFX.EZFMOD.Components
         {
             if (!_instance || !_instance._testEventInstance.isValid()) return;
             _instance._testEventInstance.Stop();
-        }
-
-        private void OnMasterBanksLoaded()
-        {
-            if (_playTestEventOnStart && _testEvent)
-            {
-                StartTestEvent();   
-            }
         }
 
         protected virtual void OnSceneLoaded(Scene scene, LoadSceneMode sceneLoadMode)
