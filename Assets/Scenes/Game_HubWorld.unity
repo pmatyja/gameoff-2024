@@ -4686,6 +4686,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 919132761}
     m_Modifications:
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
+      propertyPath: BlendHint
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Lens.FieldOfView
       value: 16
       objectReference: {fileID: 0}
@@ -8397,6 +8401,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1480976057}
     m_Modifications:
+    - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
+      propertyPath: BlendHint
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Lens.FieldOfView
       value: 24
@@ -15980,6 +15988,10 @@ PrefabInstance:
       value: 1375
       objectReference: {fileID: 0}
     - target: {fileID: 2215557487239392263, guid: a4da693b249b64b478b43f3698aaf202, type: 3}
+      propertyPath: BlendHint
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215557487239392263, guid: a4da693b249b64b478b43f3698aaf202, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 453927795}
@@ -19516,6 +19528,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 214479173}
     m_Modifications:
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
+      propertyPath: BlendHint
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Lens.FieldOfView
       value: 24
       objectReference: {fileID: 0}
@@ -19927,6 +19943,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 550221493}
     m_Modifications:
+    - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
+      propertyPath: BlendHint
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Lens.FieldOfView
       value: 24
@@ -26426,6 +26446,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2107414125}
     m_Modifications:
+    - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
+      propertyPath: BlendHint
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Lens.FieldOfView
       value: 16
@@ -59085,6 +59109,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 766630431}
     - target: {fileID: 1278138222653944408, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
+      propertyPath: BlendHint
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278138222653944408, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 453927795}
@@ -59992,6 +60020,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1496109617}
+    - target: {fileID: 7685514270401222499, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
+      propertyPath: BlendHint
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7685514270401222499, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
@@ -67470,6 +67502,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1768639342}
     - target: {fileID: 237898851648878907, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
+      propertyPath: BlendHint
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 237898851648878907, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 453927795}
@@ -67685,6 +67721,34 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 829795585}
+    - target: {fileID: 4151492473205160562, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.884087
+      objectReference: {fileID: 0}
+    - target: {fileID: 4151492473205160562, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.367251
+      objectReference: {fileID: 0}
+    - target: {fileID: 4151492473205160562, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.6617699
+      objectReference: {fileID: 0}
+    - target: {fileID: 4151492473205160562, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7460119
+      objectReference: {fileID: 0}
+    - target: {fileID: 4151492473205160562, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.44329315
+      objectReference: {fileID: 0}
+    - target: {fileID: 4151492473205160562, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.4272156
+      objectReference: {fileID: 0}
+    - target: {fileID: 4151492473205160562, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.2538589
+      objectReference: {fileID: 0}
     - target: {fileID: 4196419170787038965, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -76541,6 +76605,10 @@ PrefabInstance:
     - target: {fileID: 902094041884574473, guid: fb0326bd4ca5df14982c1e02aea992fa, type: 3}
       propertyPath: m_VersionIndex
       value: 1168
+      objectReference: {fileID: 0}
+    - target: {fileID: 1030998257820437930, guid: fb0326bd4ca5df14982c1e02aea992fa, type: 3}
+      propertyPath: BlendHint
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1030998257820437930, guid: fb0326bd4ca5df14982c1e02aea992fa, type: 3}
       propertyPath: Target.TrackingTarget
