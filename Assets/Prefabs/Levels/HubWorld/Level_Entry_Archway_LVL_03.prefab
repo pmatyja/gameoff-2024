@@ -828,15 +828,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1595649340614362359, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.857761
+      value: 21.060715
       objectReference: {fileID: 0}
     - target: {fileID: 1595649340614362359, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.358509
+      value: 11.7840805
       objectReference: {fileID: 0}
     - target: {fileID: 1595649340614362359, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.671706
+      value: 3.274806
       objectReference: {fileID: 0}
     - target: {fileID: 1595649340614362359, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
       propertyPath: m_LocalRotation.w
@@ -905,6 +905,10 @@ PrefabInstance:
     - target: {fileID: 3024448895965343204, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
       propertyPath: m_VersionIndex
       value: 1199
+      objectReference: {fileID: 0}
+    - target: {fileID: 3239457339425621950, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: Lens.FieldOfView
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3332360237512837405, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
       propertyPath: m_VersionIndex
@@ -1077,6 +1081,10 @@ PrefabInstance:
     - target: {fileID: 7715885279457431345, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
       propertyPath: m_Center.z
       value: -0.0000019073486
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859221897320736839, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: Composition.ScreenPosition.y
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 7901459949187012641, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
       propertyPath: m_VersionIndex

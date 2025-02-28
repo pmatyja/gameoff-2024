@@ -14,12 +14,12 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.65999866, g: 0.87999177, b: 0.9999928, a: 1}
-  m_FogMode: 3
+  m_FogMode: 1
   m_FogDensity: 0.035
-  m_LinearFogStart: 0
-  m_LinearFogEnd: 300
+  m_LinearFogStart: 64
+  m_LinearFogEnd: 90
   m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.22157983, g: 0.21711464, b: 0.38679248, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -6329,7 +6329,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 885808196}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ceb36d9e2864655a0731c67dddd0a8c, type: 3}
   m_Name: 
@@ -6414,17 +6414,11 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    <OnTriggerStayEvent>k__BackingField:
-      m_PersistentCalls:
-        m_Calls: []
     <OnTriggerExitEvent>k__BackingField:
       m_PersistentCalls:
         m_Calls: []
   <CollisionEvents>k__BackingField:
     <OnCollisionEnterEvent>k__BackingField:
-      m_PersistentCalls:
-        m_Calls: []
-    <OnCollisionStayEvent>k__BackingField:
       m_PersistentCalls:
         m_Calls: []
     <OnCollisionExitEvent>k__BackingField:
@@ -20060,9 +20054,6 @@ MonoBehaviour:
     <OnTriggerEnterEvent>k__BackingField:
       m_PersistentCalls:
         m_Calls: []
-    <OnTriggerStayEvent>k__BackingField:
-      m_PersistentCalls:
-        m_Calls: []
     <OnTriggerExitEvent>k__BackingField:
       m_PersistentCalls:
         m_Calls: []
@@ -20107,9 +20098,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    <OnCollisionStayEvent>k__BackingField:
-      m_PersistentCalls:
-        m_Calls: []
     <OnCollisionExitEvent>k__BackingField:
       m_PersistentCalls:
         m_Calls: []
@@ -21557,6 +21545,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1760976341}
+    - target: {fileID: 8476504328262460940, guid: f9a4980250c4af141abf00207cd5dd02, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8727877657475807012, guid: f9a4980250c4af141abf00207cd5dd02, type: 3}
       propertyPath: m_Mesh
       value: 
