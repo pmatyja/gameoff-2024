@@ -31,8 +31,143 @@ Transform:
   m_Children:
   - {fileID: 4537775445546800450}
   - {fileID: 8573282978626217481}
+  - {fileID: 6231160111433514406}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &526763640332248680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6231160111433514406}
+  m_Layer: 0
+  m_Name: LightProbes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6231160111433514406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526763640332248680}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0000021457672, y: 0, z: -0.002020955}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4573449107131958079}
+  m_Father: {fileID: 97126286208368945}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &623081218478652747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4573449107131958079}
+  - component: {fileID: 8206980854477504392}
+  m_Layer: 0
+  m_Name: Exit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4573449107131958079
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623081218478652747}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.999995, y: 6.5, z: 5.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6231160111433514406}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!220 &8206980854477504392
+LightProbeGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623081218478652747}
+  m_Enabled: 1
+  m_SourcePositions:
+  - {x: 17, y: 1, z: 0.9999981}
+  - {x: 17, y: 1, z: -1.0000019}
+  - {x: 17, y: -1, z: 0.9999981}
+  - {x: 17, y: -1, z: -1.0000019}
+  - {x: -11.000002, y: 5, z: 1.0000038}
+  - {x: -11.000002, y: 5, z: -0.9999962}
+  - {x: -11.000002, y: 3, z: 1.0000038}
+  - {x: -11.000002, y: 3, z: -0.9999962}
+  - {x: -1, y: 3, z: 1}
+  - {x: -1, y: 3, z: -1}
+  - {x: -1, y: 1, z: 1}
+  - {x: -1, y: 1, z: -1}
+  - {x: -3, y: 5, z: 1}
+  - {x: -3, y: 5, z: -1}
+  - {x: -3, y: 3, z: 1}
+  - {x: -3, y: 3, z: -1}
+  - {x: -5, y: 5, z: 1}
+  - {x: -5, y: 5, z: -1}
+  - {x: -5, y: 3, z: 1}
+  - {x: -5, y: 3, z: -1}
+  - {x: -7, y: 5, z: 0.9999981}
+  - {x: -7, y: 5, z: -1.0000019}
+  - {x: -7, y: 3, z: 0.9999981}
+  - {x: -7, y: 3, z: -1.0000019}
+  - {x: -9, y: 5, z: 1}
+  - {x: -9, y: 5, z: -1}
+  - {x: -9, y: 3, z: 1}
+  - {x: -9, y: 3, z: -1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1, y: 1, z: -1}
+  - {x: 1, y: -1, z: 1}
+  - {x: 1, y: -1, z: -1}
+  - {x: 3, y: 1, z: 1}
+  - {x: 3, y: 1, z: -1}
+  - {x: 3, y: -1, z: 1}
+  - {x: 3, y: -1, z: -1}
+  - {x: 5, y: 1, z: 0.99999905}
+  - {x: 5, y: 1, z: -1.000001}
+  - {x: 5, y: -1, z: 0.99999905}
+  - {x: 5, y: -1, z: -1.000001}
+  - {x: 7, y: 1, z: 0.99999905}
+  - {x: 7, y: 1, z: -1.000001}
+  - {x: 7, y: -1, z: 0.99999905}
+  - {x: 7, y: -1, z: -1.000001}
+  - {x: 9, y: 1, z: 0.99999905}
+  - {x: 9, y: 1, z: -1.000001}
+  - {x: 9, y: -1, z: 0.99999905}
+  - {x: 9, y: -1, z: -1.000001}
+  - {x: 11, y: 1, z: 0.99999905}
+  - {x: 11, y: 1, z: -1.000001}
+  - {x: 11, y: -1, z: 0.99999905}
+  - {x: 11, y: -1, z: -1.000001}
+  - {x: 13.000001, y: 1, z: 0.99999857}
+  - {x: 13.000001, y: 1, z: -1.0000014}
+  - {x: 13.000001, y: -1, z: 0.99999857}
+  - {x: 13.000001, y: -1, z: -1.0000014}
+  - {x: 15.000001, y: 1, z: 0.99999857}
+  - {x: 15.000001, y: 1, z: -1.0000014}
+  - {x: 15.000001, y: -1, z: 0.99999857}
+  - {x: 15.000001, y: -1, z: -1.0000014}
+  m_Dering: 1
 --- !u!1 &5004762107373127736
 GameObject:
   m_ObjectHideFlags: 0

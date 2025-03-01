@@ -15,17 +15,17 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.65999866, g: 0.87999177, b: 0.9999928, a: 1}
+  m_FogColor: {r: 0.3529412, g: 0.4745098, b: 0.63529414, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.035
   m_LinearFogStart: 64
-  m_LinearFogEnd: 90
+  m_LinearFogEnd: 80
   m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.22157983, g: 0.21711464, b: 0.38679248, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.1
-  m_AmbientMode: 1
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.27058825, g: 0.2901961, b: 0.42352942, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 0fe849609eb87414a9f0299c40ce8187, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -632,11 +632,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_SelectedEdges.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_SelectedFaces.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_Tangents.Array.data[0].z
@@ -1100,7 +1100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_SelectedVertices.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_SelectedEdges.Array.data[0].a
@@ -2473,11 +2473,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_SelectedEdges.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_SelectedFaces.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_Tangents.Array.data[0].z
@@ -2737,7 +2737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_SelectedVertices.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_SelectedEdges.Array.data[0].a
@@ -9763,6 +9763,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Collectable_KeyItem_Blue
       objectReference: {fileID: 0}
+    - target: {fileID: 6525529386450828124, guid: d8381af2042597e47a316e78a0a5cb9d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15883,7 +15887,7 @@ PrefabInstance:
     - target: {fileID: 5162864099956923418, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 766781093}
+      objectReference: {fileID: 202371016}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18335,11 +18339,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_SelectedEdges.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_SelectedFaces.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_Tangents.Array.data[0].z
@@ -18783,7 +18787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_SelectedVertices.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8504077551199028, guid: e4469dd40354ff548af5700204abedcc, type: 3}
       propertyPath: m_SelectedEdges.Array.data[0].a

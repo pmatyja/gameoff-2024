@@ -13,8 +13,9 @@ Material:
   m_ModifiedSerializedProperties: 2
   m_ValidKeywords:
   - _EMISSION
+  - _RECEIVE_SHADOWS_OFF
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -27,7 +28,8 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _ReceiveShadows: 0
     m_Colors:
     - _BaseColor: {r: 0.95294124, g: 0.04705883, b: 0.5137255, a: 1}
     - _Color: {r: 0.95294124, g: 0.0470588, b: 0.5137254, a: 1}

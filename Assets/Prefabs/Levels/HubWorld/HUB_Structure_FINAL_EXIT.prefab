@@ -536,17 +536,11 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    <OnTriggerStayEvent>k__BackingField:
-      m_PersistentCalls:
-        m_Calls: []
     <OnTriggerExitEvent>k__BackingField:
       m_PersistentCalls:
         m_Calls: []
   <CollisionEvents>k__BackingField:
     <OnCollisionEnterEvent>k__BackingField:
-      m_PersistentCalls:
-        m_Calls: []
-    <OnCollisionStayEvent>k__BackingField:
       m_PersistentCalls:
         m_Calls: []
     <OnCollisionExitEvent>k__BackingField:
@@ -1375,9 +1369,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-    <OnTriggerStayEvent>k__BackingField:
-      m_PersistentCalls:
-        m_Calls: []
     <OnTriggerExitEvent>k__BackingField:
       m_PersistentCalls:
         m_Calls:
@@ -1395,9 +1386,6 @@ MonoBehaviour:
           m_CallState: 2
   <CollisionEvents>k__BackingField:
     <OnCollisionEnterEvent>k__BackingField:
-      m_PersistentCalls:
-        m_Calls: []
-    <OnCollisionStayEvent>k__BackingField:
       m_PersistentCalls:
         m_Calls: []
     <OnCollisionExitEvent>k__BackingField:
@@ -29600,7 +29588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
       propertyPath: <OnVideoStart>k__BackingField.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
       propertyPath: <OnVideoComplete>k__BackingField.m_PersistentCalls.m_Calls.Array.size
@@ -29611,9 +29599,13 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
-      propertyPath: <OnVideoStart>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: <OnVideoStart>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
+      propertyPath: <OnVideoStart>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1444755951629434728}
+      objectReference: {fileID: 7530126896492692230}
     - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
       propertyPath: <OnVideoComplete>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -29635,8 +29627,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
+      propertyPath: <OnVideoStart>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
       propertyPath: <OnVideoStart>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
+      propertyPath: <OnVideoStart>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayAssignedEvent
       objectReference: {fileID: 0}
     - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
       propertyPath: <OnVideoComplete>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -29659,6 +29659,10 @@ PrefabInstance:
       value: FMODUnity.StudioEventEmitter, FMODUnity
       objectReference: {fileID: 0}
     - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
+      propertyPath: <OnVideoStart>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: OCSFX.EZFMOD.Types.EZFMODGameObject, OCSFX.EZFMODCore
+      objectReference: {fileID: 0}
+    - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
       propertyPath: <OnVideoComplete>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Runtime.SceneLoading.ScreenFader, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -29668,6 +29672,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
       propertyPath: <OnVideoStart>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
+      propertyPath: <OnVideoStart>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
@@ -29692,14 +29700,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7546961868311250491, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1444755951629434728}
+      addedObject: {fileID: 7530126896492692230}
   m_SourcePrefab: {fileID: 100100000, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
 --- !u!1 &704482344305843522 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7546961868311250491, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
   m_PrefabInstance: {fileID: 7024176298721155961}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1444755951629434728
+--- !u!114 &7530126896492692230
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29708,28 +29716,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 704482344305843522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4319c3ea42a4db4499da34b0751e73b1, type: 3}
+  m_Script: {fileID: 11500000, guid: e4335fc79b4ed984d85ca69faca2533b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 621360542
-      Data2: 1213093857
-      Data3: -213059957
-      Data4: 361390634
-    Path: event:/MX/mx_cutscene_ending
-  Event: 
-  EventPlayTrigger: 0
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  Event: {fileID: 11400000, guid: b65557b67d8859d448ed93f9965e89e9, type: 2}
+  PlayOnStart: 0
+  StopOnDestroy: 1
 --- !u!114 &6471570804833976241 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4086243134807532744, guid: 89a5e1549888625489b05e7264f3d65d, type: 3}
