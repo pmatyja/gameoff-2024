@@ -12,6 +12,9 @@ namespace Runtime.World
         [field: SerializeField, Readonly] 
         public GameOff2024LevelSceneBase LevelSceneBase { get; private set; }
         
+        [SerializeField, Tooltip("How long to wait after initial load before disabling.")]
+        private float _delayedDisableTime = 2.0f;
+        
         private void OnEnable()
         {
             GameOff2024LevelSceneBase.OnStart += OnLevelBaseStart;
@@ -26,12 +29,12 @@ namespace Runtime.World
         {
             if (levelSceneBase.LevelIndex != this.LevelIndex) return;
             LevelSceneBase = levelSceneBase;
-            StartCoroutine(Co_OnEndOfFrame());
+            StartCoroutine(Co_DelayedDisable());
         }
         
-        private IEnumerator Co_OnEndOfFrame()
+        private IEnumerator Co_DelayedDisable()
         {
-            yield return new WaitForEndOfFrame();
+            yield return GameOff2024Statics.GetWaitForSeconds(_delayedDisableTime);
             LevelSceneBase.gameObject.SetActive(false);
         }
 
