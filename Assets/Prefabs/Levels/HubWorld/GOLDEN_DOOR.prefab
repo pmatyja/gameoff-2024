@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &983834305844122371
 Transform:
@@ -460,7 +460,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5243903764309279802
 Transform:
@@ -506,7 +506,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2798536861443016257
 Transform:
@@ -571,7 +571,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8075601275916918110
 Transform:
@@ -619,7 +619,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4085265022109757733
 Transform:
@@ -1138,7 +1138,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8672386595330308676
 Transform:
@@ -1527,7 +1527,7 @@ MonoBehaviour:
   <OnKeyInsertedEvent>k__BackingField:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -2641183608936917767, guid: f0fc850aafc40f041a6210bf0e52d9aa, type: 2}
+      - m_Target: {fileID: 5024601232409983524, guid: f0fc850aafc40f041a6210bf0e52d9aa, type: 2}
         m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODParameterValue, OCSFX.EZFMODCore
         m_MethodName: SetGlobal
         m_Mode: 1
@@ -1948,7 +1948,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7309790960707977432
 Transform:
@@ -1983,7 +1983,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6503695555174635345
 Transform:
@@ -2067,7 +2067,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2968444128378937558
 Transform:
@@ -2136,7 +2136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7103011533050667637, guid: f6d04c6aa7f163b47866119b24070a5d, type: 3}
       propertyPath: m_VersionIndex
-      value: 1007
+      value: 1094
       objectReference: {fileID: 0}
     - target: {fileID: 7103011533050667637, guid: f6d04c6aa7f163b47866119b24070a5d, type: 3}
       propertyPath: m_SelectedEdges.Array.size
@@ -2850,7 +2850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7103011533050667637, guid: f6d04c6aa7f163b47866119b24070a5d, type: 3}
       propertyPath: m_VersionIndex
-      value: 392
+      value: 89
       objectReference: {fileID: 0}
     - target: {fileID: 7103011533050667637, guid: f6d04c6aa7f163b47866119b24070a5d, type: 3}
       propertyPath: m_SelectedEdges.Array.size

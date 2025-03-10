@@ -1911,8 +1911,40 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 929856409625660923, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: <TriggerEvents>k__BackingField.<OnTriggerExitEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 929856409625660923, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: <TriggerEvents>k__BackingField.<OnTriggerExitEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 929856409625660923, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: <TriggerEvents>k__BackingField.<OnTriggerExitEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: -6686682824206879557, guid: e2a59086d99bc6c41bb2212b65623dd4, type: 2}
+    - target: {fileID: 929856409625660923, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: <TriggerEvents>k__BackingField.<OnTriggerExitEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 929856409625660923, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: <TriggerEvents>k__BackingField.<OnTriggerExitEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetGlobal
+      objectReference: {fileID: 0}
+    - target: {fileID: 929856409625660923, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: <TriggerEvents>k__BackingField.<OnTriggerExitEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: OCSFX.EZFMOD.Types.EZFMODParameterValue, OCSFX.EZFMODCore
+      objectReference: {fileID: 0}
+    - target: {fileID: 929856409625660923, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: <TriggerEvents>k__BackingField.<OnTriggerExitEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: Game_HubWorld
+      objectReference: {fileID: 0}
+    - target: {fileID: 929856409625660923, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
       propertyPath: <TriggerEvents>k__BackingField.<OnTriggerEnterEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Game_Level_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 929856409625660923, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
+      propertyPath: <TriggerEvents>k__BackingField.<OnTriggerExitEvent>k__BackingField.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 987983136421515347, guid: 1b7f08c28ccced74b9c9017c8cbf5e96, type: 3}
       propertyPath: m_Enabled

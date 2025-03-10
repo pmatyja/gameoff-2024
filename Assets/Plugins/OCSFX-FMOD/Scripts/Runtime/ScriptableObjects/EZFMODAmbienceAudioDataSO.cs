@@ -28,6 +28,9 @@ namespace OCSFX.EZFMOD.ScriptableObjects
 
         private EventInstance _currentPlayingAmb;
         private EZFMODAmbientZoneBase _currentAmbientZone;
+        
+        [Header("Debug")]
+        [SerializeField, ReadOnly] private string _currentAmbientZoneName;
 
         private void OnEnable()
         {
@@ -88,6 +91,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             if (!_currentAmbientZone)
             {
                 _currentAmbientZone = enteredAmbientZone;
+                _currentAmbientZoneName = enteredAmbientZone.name;
                 StartAmbientZone(enteredAmbientZone);
                 return;
             }
@@ -96,6 +100,7 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             
             if (_currentAmbientZone) StopAmbientZone(_currentAmbientZone);
             _currentAmbientZone = enteredAmbientZone;
+            _currentAmbientZoneName = enteredAmbientZone.name;
             StartAmbientZone(enteredAmbientZone);
         }
 
@@ -124,9 +129,14 @@ namespace OCSFX.EZFMOD.ScriptableObjects
             }
 
             _currentAmbientZone = highestPriorityZone;
-            if (!_currentAmbientZone) return;
+            if (!_currentAmbientZone)
+            {
+                _currentAmbientZoneName = "None";
+                return;
+            }
             
             StartAmbientZone(_currentAmbientZone);
+            _currentAmbientZoneName = _currentAmbientZone.name;
         }
 
         private void StartAmbientZone(EZFMODAmbientZoneBase ambientZone)

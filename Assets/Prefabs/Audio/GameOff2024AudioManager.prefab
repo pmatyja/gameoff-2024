@@ -127,6 +127,30 @@ MonoBehaviour:
             m_StringArgument: Ending
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: 06f656151918c5e49af49ddd4101371f, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODEventBase, OCSFX.EZFMODCore
+          m_MethodName: PlayOneShot
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Ending
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: c3d0ce6727cd1f342b539314b64dad82, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODEventBase, OCSFX.EZFMODCore
+          m_MethodName: PlayOneShot
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Ending
+            m_BoolArgument: 0
+          m_CallState: 2
     _onSceneUnloaded:
       m_PersistentCalls:
         m_Calls: []
@@ -167,6 +191,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -2667043258891948586, guid: 52c248829580b1446ba97395604133ba, type: 2}
+        m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODParameterValue, OCSFX.EZFMODCore
+        m_MethodName: SetGlobal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1569194106199236242, guid: 9cba2fb16d96e7c47b887ed032a2e762, type: 2}
         m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODParameterValue, OCSFX.EZFMODCore
         m_MethodName: SetGlobal
         m_Mode: 1
