@@ -4687,6 +4687,10 @@ PrefabInstance:
       value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
+      propertyPath: Lens.NearClipPlane
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 453927795}
@@ -8404,7 +8408,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Lens.FarClipPlane
-      value: 70
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
+      propertyPath: Lens.NearClipPlane
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Target.TrackingTarget
@@ -16009,7 +16017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1111202849642362603, guid: a4da693b249b64b478b43f3698aaf202, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1179758756847674632, guid: a4da693b249b64b478b43f3698aaf202, type: 3}
       propertyPath: m_Mesh
@@ -16025,7 +16033,7 @@ PrefabInstance:
       objectReference: {fileID: 140109986}
     - target: {fileID: 1270383487793464902, guid: a4da693b249b64b478b43f3698aaf202, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1329782312422149692, guid: a4da693b249b64b478b43f3698aaf202, type: 3}
       propertyPath: m_Mesh
@@ -20206,7 +20214,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Lens.FarClipPlane
-      value: 70
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
+      propertyPath: Lens.NearClipPlane
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Target.TrackingTarget
@@ -20630,7 +20642,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Lens.FarClipPlane
-      value: 70
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
+      propertyPath: Lens.NearClipPlane
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Target.TrackingTarget
@@ -27267,7 +27283,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Lens.FarClipPlane
-      value: 60
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
+      propertyPath: Lens.NearClipPlane
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2007269548282267413, guid: a5b1815fa955f1f4493ac583225311b3, type: 3}
       propertyPath: Target.TrackingTarget
@@ -61013,6 +61033,10 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1278138222653944408, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
+      propertyPath: Lens.NearClipPlane
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278138222653944408, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 453927795}
@@ -61198,19 +61222,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3566524803456611441, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.69193894
+      value: -0.69193906
       objectReference: {fileID: 0}
     - target: {fileID: 3566524803456611441, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.15057637
+      value: -0.15057634
       objectReference: {fileID: 0}
     - target: {fileID: 3566524803456611441, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6899315
+      value: 0.6899314
       objectReference: {fileID: 0}
     - target: {fileID: 3566524803456611441, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.15013951
+      value: -0.15013947
       objectReference: {fileID: 0}
     - target: {fileID: 3726077199425530415, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_Mesh
@@ -61732,6 +61756,22 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5935015395094437043, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
+      propertyPath: m_FarClip
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935015395094437043, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
+      propertyPath: m_BoxSize.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935015395094437043, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
+      propertyPath: m_Resolution
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935015395094437043, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
+      propertyPath: m_BoxOffset.x
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6180333507331940825, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -61891,6 +61931,10 @@ PrefabInstance:
     - target: {fileID: 7685514270401222499, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: Lens.FarClipPlane
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7685514270401222499, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
+      propertyPath: Lens.NearClipPlane
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7685514270401222499, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: Target.TrackingTarget
@@ -69497,7 +69541,7 @@ PrefabInstance:
       objectReference: {fileID: 1425893733}
     - target: {fileID: 888156322190513018, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 934077157033915030, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
       propertyPath: m_Mesh
@@ -69529,7 +69573,7 @@ PrefabInstance:
       objectReference: {fileID: 1558327352}
     - target: {fileID: 1340343637011653591, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1466433471863210905, guid: f11305ef359c5ef4c9de512749c49c14, type: 3}
       propertyPath: m_Mesh
@@ -79038,7 +79082,7 @@ PrefabInstance:
       objectReference: {fileID: 1278257207}
     - target: {fileID: 94757789271910379, guid: fb0326bd4ca5df14982c1e02aea992fa, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 141154154033579527, guid: fb0326bd4ca5df14982c1e02aea992fa, type: 3}
       propertyPath: m_Mesh
@@ -79246,7 +79290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2277171742451881798, guid: fb0326bd4ca5df14982c1e02aea992fa, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2888009347632404500, guid: fb0326bd4ca5df14982c1e02aea992fa, type: 3}
       propertyPath: m_Enabled
