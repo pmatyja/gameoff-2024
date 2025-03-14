@@ -9389,49 +9389,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1208475253
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1208475254}
-  - component: {fileID: 1208475255}
-  m_Layer: 0
-  m_Name: OcclusionArea_Level_01
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1208475254
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208475253}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: -0.24999619, y: 4.25, z: 1.2500021}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1678469238}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!192 &1208475255
-OcclusionArea:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208475253}
-  serializedVersion: 2
-  m_Size: {x: 15.75, y: 13, z: 14}
-  m_Center: {x: 3.124999, y: 2.25, z: 1.25}
-  m_IsViewVolume: 1
 --- !u!1001 &1224092876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15197,7 +15154,6 @@ Transform:
   m_Children:
   - {fileID: 1750492001}
   - {fileID: 371916136}
-  - {fileID: 1208475254}
   m_Father: {fileID: 1710860982}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1688909613
