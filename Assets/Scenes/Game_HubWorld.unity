@@ -5,7 +5,7 @@ OcclusionCullingSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_OcclusionBakeSettings:
-    smallestOccluder: 2
+    smallestOccluder: 4
     smallestHole: 0.25
     backfaceThreshold: 10
   m_SceneGUID: 9d53a32a88e96294d80c0ceadb23569c
@@ -6575,7 +6575,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155786402}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.095935866, y: -0.69008183, z: 0.09307661, w: 0.7112807}
+  m_LocalRotation: {x: 0.0959357, y: -0.6900829, z: 0.09307675, w: 0.7112796}
   m_LocalPosition: {x: 47.500305, y: 18.335697, z: 5.03137}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -44272,19 +44272,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.71128076
+      value: 0.7112795
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.09593586
+      value: 0.095935695
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6900818
+      value: -0.69008297
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.093076594
+      value: 0.093076766
       objectReference: {fileID: 0}
     - target: {fileID: 4116035884288233599, guid: 8cf15434ac1da234cacb21a7e6692422, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -61930,7 +61930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7685514270401222499, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: Lens.FarClipPlane
-      value: 60
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 7685514270401222499, guid: 06f812b2be7a6ad41ba826f7d940337d, type: 3}
       propertyPath: Lens.NearClipPlane
@@ -74880,19 +74880,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1157197423798469240, guid: 9faa34b49232e274a851bd18e75c45fb, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7112807
+      value: 0.7112796
       objectReference: {fileID: 0}
     - target: {fileID: 1157197423798469240, guid: 9faa34b49232e274a851bd18e75c45fb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.095935866
+      value: 0.0959357
       objectReference: {fileID: 0}
     - target: {fileID: 1157197423798469240, guid: 9faa34b49232e274a851bd18e75c45fb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.69008183
+      value: -0.6900829
       objectReference: {fileID: 0}
     - target: {fileID: 1157197423798469240, guid: 9faa34b49232e274a851bd18e75c45fb, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.09307661
+      value: 0.09307675
       objectReference: {fileID: 0}
     - target: {fileID: 1157197423798469240, guid: 9faa34b49232e274a851bd18e75c45fb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
