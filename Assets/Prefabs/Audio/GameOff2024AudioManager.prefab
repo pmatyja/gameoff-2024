@@ -127,6 +127,19 @@ MonoBehaviour:
             m_StringArgument: Ending
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: 85caf7a70346caa4db68b7f2b6015596, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.EZFMOD.ScriptableObjects.EZFMODSnapshotsAudioDataSO,
+            OCSFX.EZFMOD
+          m_MethodName: ClearAllSnapshots
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Ending
+            m_BoolArgument: 1
+          m_CallState: 2
         - m_Target: {fileID: 11400000, guid: 06f656151918c5e49af49ddd4101371f, type: 2}
           m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODEventBase, OCSFX.EZFMODCore
           m_MethodName: PlayOneShot
@@ -150,6 +163,18 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: Ending
             m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: ed160be4edfed2d4fa98f0476de70617, type: 2}
+          m_TargetAssemblyTypeName: OCSFX.EZFMOD.Types.EZFMODEventBase, OCSFX.EZFMODCore
+          m_MethodName: StopAll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Ending
+            m_BoolArgument: 1
           m_CallState: 2
     _onSceneUnloaded:
       m_PersistentCalls:
