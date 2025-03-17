@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MX_LastSectionPlayed_Random A
   m_EditorClassIdentifier: 
   _parameter: {fileID: 11400000}
-  _value: 1
+  _value: 2
 --- !u!114 &-6846816094286090460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   m_Name: MX_LastSectionPlayed_Random G
   m_EditorClassIdentifier: 
   _parameter: {fileID: 11400000}
-  _value: 7
+  _value: 8
 --- !u!114 &-5627837052649167639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_Name: MX_LastSectionPlayed_Random B
   m_EditorClassIdentifier: 
   _parameter: {fileID: 11400000}
-  _value: 2
+  _value: 3
 --- !u!114 &-4551940979271681542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Name: MX_LastSectionPlayed_Random F
   m_EditorClassIdentifier: 
   _parameter: {fileID: 11400000}
-  _value: 6
+  _value: 7
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
     Data3: 1363458231
     Data4: -834641431
   <Min>k__BackingField: 0
-  <Max>k__BackingField: 8
+  <Max>k__BackingField: 9
   <Default>k__BackingField: 0
   <ID>k__BackingField:
     data1: 767700891
@@ -84,6 +84,7 @@ MonoBehaviour:
   <Type>k__BackingField: 2
   <IsGlobal>k__BackingField: 1
   <Labels>k__BackingField:
+  - Entry
   - LoopPoint
   - Random A
   - Random B
@@ -106,7 +107,7 @@ MonoBehaviour:
   m_Name: MX_LastSectionPlayed_Random C
   m_EditorClassIdentifier: 
   _parameter: {fileID: 11400000}
-  _value: 3
+  _value: 4
 --- !u!114 &1927904039467470697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +118,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
-  m_Name: MX_LastSectionPlayed_LoopPoint
+  m_Name: MX_LastSectionPlayed_Entry
   m_EditorClassIdentifier: 
   _parameter: {fileID: 11400000}
   _value: 0
@@ -134,7 +135,21 @@ MonoBehaviour:
   m_Name: MX_LastSectionPlayed_Random D
   m_EditorClassIdentifier: 
   _parameter: {fileID: 11400000}
-  _value: 4
+  _value: 5
+--- !u!114 &5793147750744830201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f7fb42f250440cb5300892f1f5ccb1, type: 3}
+  m_Name: MX_LastSectionPlayed_LoopPoint
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: 11400000}
+  _value: 1
 --- !u!114 &7444211190535591914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +163,7 @@ MonoBehaviour:
   m_Name: MX_LastSectionPlayed_Random H
   m_EditorClassIdentifier: 
   _parameter: {fileID: 11400000}
-  _value: 8
+  _value: 9
 --- !u!114 &7937188770863729093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,4 +177,4 @@ MonoBehaviour:
   m_Name: MX_LastSectionPlayed_Random E
   m_EditorClassIdentifier: 
   _parameter: {fileID: 11400000}
-  _value: 5
+  _value: 6
