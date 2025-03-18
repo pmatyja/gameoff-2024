@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Runtime.SceneLoading;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -158,15 +159,19 @@ namespace Runtime.UI
             {
                 close.OnClick(evt =>this.Close());
             }
-
+            
             if (this.root.TryGet<VisualElement>("MainMenu", out var mainMenu, true))
             {
                 mainMenu.OnClick(evt =>
                 {
                     this.Close();
-                    // add going back to main menu
+                    // ocooper: Load the main menu scene
+                    SceneLoadManager.LoadScene(GameOff2024GameSettings.Get().MainMenuSceneName);
                 });
-            }
+            }   
+
+            // ocooper: Instant close at start so the pause menu isn't open for gameplay, but it can still be visible for working on the UI document
+            Fade(target, 0);
         }
     
         private void Fade(int fadeTarget, float duration)
