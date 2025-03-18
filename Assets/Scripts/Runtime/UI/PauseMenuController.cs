@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Runtime.SceneLoading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace Runtime.UI
@@ -88,16 +89,16 @@ namespace Runtime.UI
 
         private void OnEnable()
         {
-            InputHandler.Get().OnGameplayPauseInput += this.Open;
-            InputHandler.Get().OnUIGameplayResumeInput += this.Close;
+            InputHandler.Get().OnGameplayPauseInput += this.OnGameplayPauseInput;
+            InputHandler.Get().OnUIGameplayResumeInput += this.OnGameplayResumeInput;
 
             EventBus.AddListener<OpenPauseMenuEventsParameters>(this.OnOpenEvent);
         }
 
         private void OnDisable()
         {
-            InputHandler.Get().OnGameplayPauseInput -= this.Open;   
-            InputHandler.Get().OnUIGameplayResumeInput -= this.Close;
+            InputHandler.Get().OnGameplayPauseInput -= this.OnGameplayPauseInput;   
+            InputHandler.Get().OnUIGameplayResumeInput -= this.OnGameplayResumeInput;
 
             EventBus.RemoveListener<OpenPauseMenuEventsParameters>(this.OnOpenEvent);
         }
@@ -165,13 +166,17 @@ namespace Runtime.UI
                 mainMenu.OnClick(evt =>
                 {
                     this.Close();
-                    // ocooper: Load the main menu scene
+// BEGIN ocooper: Load the main menu scene
                     SceneLoadManager.LoadScene(GameOff2024GameSettings.Get().MainMenuSceneName);
+// END ocooper
                 });
             }   
 
-            // ocooper: Instant close at start so the pause menu isn't open for gameplay, but it can still be visible for working on the UI document
-            Fade(target, 0);
+// BEGIN ocooper: Instant close at start so the pause menu isn't open for gameplay, but it can still be visible for working on the UI document
+// Also it needs to be opened first because otherwise it stupidly blocks other UI interactions
+            Open();
+            Close();
+// END ocooper
         }
     
         private void Fade(int fadeTarget, float duration)
@@ -250,6 +255,30 @@ namespace Runtime.UI
         private void OnOpenEvent(object sender, OpenPauseMenuEventsParameters parameters)
         {
             this.Open();
+        }
+        
+// BEGIN ocooper: Guard against opening the pause menu in the front end
+        private void OnGameplayPauseInput()
+        {
+            if (!IsGameplayScene())
+            {
+                return;
+            }
+
+            Open();
+        }
+
+        private void OnGameplayResumeInput()
+        {
+            Close();
+        }
+// END ocooper
+
+        private static bool IsGameplayScene()
+        {
+            var activeSceneName = SceneManager.GetActiveScene().name;
+            return activeSceneName != GameOff2024GameSettings.Get().MainMenuSceneName 
+                   && activeSceneName != GameOff2024GameSettings.Get().EndingSceneName;
         }
 
         [Serializable]
