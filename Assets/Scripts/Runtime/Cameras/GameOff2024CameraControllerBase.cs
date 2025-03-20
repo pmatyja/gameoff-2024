@@ -88,7 +88,7 @@ namespace Runtime.Cameras
 
         protected abstract void UpdateZoom();
 
-        protected virtual void Update()
+        protected virtual void FixedUpdate()
         {
             UpdateZoom();
         }
